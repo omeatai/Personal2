@@ -592,7 +592,7 @@ LIMIT
 
 # Filter Data - Adding Customised Columns using IF THEN Logic with CASE
 
-## WSDA Music Sales Goal:
+## 1. WSDA Music Sales Goal:
 
 - They want as many customers as possible to spend between $7.00 and $15.00.
 
@@ -638,6 +638,45 @@ LIMIT
 ```
 
 <img width="1414" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/0fe3fe64-1e0d-42b0-9b0f-0d38063f99f9">
+
+
+## 2. Code Challenge: Categorize tracks by price
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b266d087-55c3-41d4-b500-314e7a7ed68c)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/4c5bbb82-ad47-4875-ab42-24422c288e46)
+
+```sql
+/*
+CREATED BY: IFEANYI OMEATA
+CREATE DATE: 05/25/2024
+Description: This query selects track names, composers,
+unit prices, and categorizes each track based on its price.
+*/
+
+SELECT 
+    Name AS "Track Name",
+    Composer,
+    UnitPrice AS Price,
+    CASE
+        WHEN UnitPrice < 1.00 THEN 'Budget' 
+        WHEN UnitPrice BETWEEN 1.00 AND 1.49 THEN 'Regular'
+        WHEN UnitPrice BETWEEN 1.50 AND 1.99 THEN 'Premium'
+        ELSE 'Exclusive'
+		/*
+		WHEN UnitPrice < 0.99 THEN "Budget'
+		WHEN UnitPrice > 0.99 AND UnitPrice < 1.49 THEN 'Regular'
+		WHEN UnitPrice > 1.49 AND UnitPrice < 1.99 THEN "Premium"
+		ELSE 'Exclusive'
+		*/
+    END AS PriceCategory
+FROM 
+    Track
+ORDER BY
+    UnitPrice ASC;
+
+```
+
+<img width="1414" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/78921320-c04d-441f-a390-1838ef7c9c59">
 
 
 # #END </details>
