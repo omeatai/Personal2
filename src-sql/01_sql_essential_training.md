@@ -588,9 +588,9 @@ LIMIT
 # #END </details>
 
 <details>
-<summary>19. Filter Data - Using IF THEN Logic with CASE  </summary>
+<summary>19. Filter Data - Adding Customised Columns using IF THEN Logic with CASE  </summary>
 
-# Filter Data - Using IF THEN Logic with CASE
+# Filter Data - Adding Customised Columns using IF THEN Logic with CASE
 
 ## WSDA Music Sales Goal:
 
