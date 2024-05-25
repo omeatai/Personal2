@@ -16,7 +16,6 @@
 <img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/41a516b7-c96b-4a36-9988-71f40af9b873">
 <img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/d35faea5-4387-4e1a-8d60-2148e8f43638">
 
-
 # #END
 
 </details>
@@ -51,11 +50,11 @@ DESCRIPTION: THIS IS THE STRUCTURE OF A BASIC QUERY
 <details>
 <summary>3. High-level questions for the composition of a Query </summary>
 
-# High-level questions for the composition of a Query: 
+# High-level questions for the composition of a Query:
 
 - What table within the database are we requesting data from?
 - What fields within that table are we interested in?
-- Do we want to exclude any data or filter or omit any range or time period? 
+- Do we want to exclude any data or filter or omit any range or time period?
 - What does our query do?
 
 # #END </details>
@@ -72,11 +71,11 @@ CREATE DATE: 05/21/2024
 DESCRIPTION: This query displays all customers first names, last names and email addresses
 */
 
-SELECT 
-	FirstName, 
-	LastName, 
-	Email 
-FROM 
+SELECT
+	FirstName,
+	LastName,
+	Email
+FROM
 	Customer
 ```
 
@@ -97,11 +96,11 @@ CREATE DATE: 05/21/2024
 DESCRIPTION: This query displays all customers first names, last names and email addresses
 */
 
-SELECT 
-	FirstName AS [Customer First Name], 
-	LastName AS "Customer Last Name", 
+SELECT
+	FirstName AS [Customer First Name],
+	LastName AS "Customer Last Name",
 	Email AS EMAIL
-FROM 
+FROM
 	Customer
 ```
 
@@ -123,15 +122,15 @@ CREATE DATE: 05/21/2024
 DESCRIPTION: This query displays all customers first names, last names and email addresses
 */
 
-SELECT 
-	FirstName AS [Customer First Name], 
-	LastName AS "Customer Last Name", 
+SELECT
+	FirstName AS [Customer First Name],
+	LastName AS "Customer Last Name",
 	Email AS EMAIL
-FROM 
+FROM
 	Customer
 ORDER BY
 	LastName
-DESC	
+DESC
 ```
 
 <img width="1283" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/98e468ec-d0fa-4a9b-88ea-f28b02100528">
@@ -145,15 +144,15 @@ CREATE DATE: 05/21/2024
 DESCRIPTION: This query displays all customers first names, last names and email addresses
 */
 
-SELECT 
-	FirstName AS [Customer First Name], 
-	LastName AS "Customer Last Name", 
+SELECT
+	FirstName AS [Customer First Name],
+	LastName AS "Customer Last Name",
 	Email AS EMAIL
-FROM 
+FROM
 	Customer
 ORDER BY
 	LastName
-ASC	
+ASC
 ```
 
 <img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/eb077893-57a4-4a2a-b52a-c87e399eb5af">
@@ -167,16 +166,16 @@ CREATE DATE: 05/21/2024
 DESCRIPTION: This query displays all customers first names, last names and email addresses
 */
 
-SELECT 
-	FirstName AS [Customer First Name], 
-	LastName AS "Customer Last Name", 
+SELECT
+	FirstName AS [Customer First Name],
+	LastName AS "Customer Last Name",
 	Email AS EMAIL
-FROM 
+FROM
 	Customer
 ORDER BY
-	FirstName ASC,	 
-	LastName DESC	 
-	
+	FirstName ASC,
+	LastName DESC
+
 ```
 
 <img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/538a47f7-8d0e-4f42-8e80-605139f81f40">
@@ -195,21 +194,20 @@ CREATE DATE: 05/21/2024
 DESCRIPTION: This query displays all customers first names, last names and email addresses
 */
 
-SELECT 
-	FirstName AS [Customer First Name], 
-	LastName AS "Customer Last Name", 
+SELECT
+	FirstName AS [Customer First Name],
+	LastName AS "Customer Last Name",
 	Email AS EMAIL
-FROM 
+FROM
 	Customer
 ORDER BY
-	FirstName ASC,	 
-	LastName DESC	 
+	FirstName ASC,
+	LastName DESC
 LIMIT
 	5
 ```
 
 <img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/d687979f-9bf4-4872-af98-752bb4bbb09b">
-
 
 # #END </details>
 
@@ -229,15 +227,15 @@ CREATE DATE: 05/21/2024
 DESCRIPTION: This query displays all customers first names, last names and email addresses
 */
 
-SELECT 
+SELECT
 	CustomerId,
 	InvoiceDate,
 	BillingAddress,
 	BillingCity,
 	Total
-FROM 
+FROM
 	Invoice
-WHERE 
+WHERE
 	Total = 1.98
 ORDER BY
 	CustomerId ASC
@@ -267,15 +265,15 @@ CREATE DATE: 05/21/2024
 DESCRIPTION: This query displays all customers first names, last names and email addresses
 */
 
-SELECT 
+SELECT
 	CustomerId,
 	InvoiceDate,
 	BillingAddress,
 	BillingCity,
 	Total
-FROM 
+FROM
 	Invoice
-WHERE 
+WHERE
 	Total BETWEEN 1.98 AND 5.00
 ORDER BY
 	CustomerId ASC
@@ -285,7 +283,6 @@ LIMIT
 ```
 
 <img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/913089fa-c9c0-4ccf-b6e9-ea09e766ce12">
-
 
 # #END </details>
 
@@ -301,15 +298,15 @@ CREATE DATE: 05/21/2024
 DESCRIPTION: This query displays all customers first names, last names and email addresses
 */
 
-SELECT 
+SELECT
 	CustomerId,
 	InvoiceDate,
 	BillingAddress,
 	BillingCity,
 	Total
-FROM 
+FROM
 	Invoice
-WHERE 
+WHERE
 	Total IN (1.98, 3.96)
 ORDER BY
 	CustomerId ASC
@@ -334,15 +331,15 @@ CREATE DATE: 05/21/2024
 DESCRIPTION: This query displays all customers info per query instance
 */
 
-SELECT 
+SELECT
 	CustomerId,
 	InvoiceDate,
 	BillingAddress,
 	BillingCity,
 	Total
-FROM 
+FROM
 	Invoice
-WHERE 
+WHERE
 	BillingCity = 'Brussels'
 ORDER BY
 	CustomerId ASC
@@ -368,15 +365,15 @@ CREATE DATE: 05/21/2024
 DESCRIPTION: This query displays all customers info per query instance
 */
 
-SELECT 
+SELECT
 	CustomerId,
 	InvoiceDate,
 	BillingAddress,
 	BillingCity,
 	Total
-FROM 
+FROM
 	Invoice
-WHERE 
+WHERE
 	BillingCity IN ('Brussels', 'Orlando', 'Paris')
 ORDER BY
 	CustomerId ASC
@@ -401,15 +398,15 @@ CREATE DATE: 05/21/2024
 DESCRIPTION: This query displays all customers info per query instance
 */
 
-SELECT 
+SELECT
 	CustomerId,
 	InvoiceDate,
 	BillingAddress,
 	BillingCity,
 	Total
-FROM 
+FROM
 	Invoice
-WHERE 
+WHERE
 	BillingCity LIKE 'B%'
 ORDER BY
 	CustomerId ASC
@@ -425,7 +422,7 @@ LIMIT
 <details>
 <summary>14. Filter Data - How many invoices were billed in cities that have a B anywhere in its name?  </summary>
 
-# Filter Data - How many invoices were billed in cities that have a B anywhere in its name? 
+# Filter Data - How many invoices were billed in cities that have a B anywhere in its name?
 
 ```sql
 /*
@@ -434,15 +431,15 @@ CREATE DATE: 05/21/2024
 DESCRIPTION: This query displays all customers info per query instance
 */
 
-SELECT 
+SELECT
 	CustomerId,
 	InvoiceDate,
 	BillingAddress,
 	BillingCity,
 	Total
-FROM 
+FROM
 	Invoice
-WHERE 
+WHERE
 	BillingCity LIKE '%B%'
 ORDER BY
 	CustomerId ASC
@@ -458,7 +455,7 @@ LIMIT
 <details>
 <summary>15. Filter Data - How many invoices were billed on May 22, 2010 (2010-05-22 00:00:00)?  </summary>
 
-# Filter Data - How many invoices were billed on May 22, 2010 (2010-05-22 00:00:00)? 
+# Filter Data - How many invoices were billed on May 22, 2010 (2010-05-22 00:00:00)?
 
 ```sql
 /*
@@ -467,15 +464,15 @@ CREATE DATE: 05/21/2024
 DESCRIPTION: This query displays all customers info per query instance
 */
 
-SELECT 
+SELECT
 	CustomerId,
 	InvoiceDate,
 	BillingAddress,
 	BillingCity,
 	Total
-FROM 
+FROM
 	Invoice
-WHERE 
+WHERE
 	Date(InvoiceDate) =  '2010-05-22'
 	-- DateTime(InvoiceDate) =  '2010-05-22 00:00:00'
 	-- InvoiceDate = '2010-05-22 00:00:00'
@@ -503,15 +500,15 @@ CREATE DATE: 05/21/2024
 DESCRIPTION: This query displays all customers info per query instance
 */
 
-SELECT 
+SELECT
 	CustomerId,
 	InvoiceDate,
 	BillingAddress,
 	BillingCity,
 	Total
-FROM 
+FROM
 	Invoice
-WHERE 
+WHERE
 	Date(InvoiceDate) >  '2010-05-22' AND Total < 3.00
 ORDER BY
 	InvoiceDate ASC
@@ -527,7 +524,7 @@ LIMIT
 <details>
 <summary>17. Filter Data - How many invoices whose billing city starts with P or the billing city starts with D?  </summary>
 
-# Filter Data - How many invoices whose billing city starts with P or the billing city starts with D? 
+# Filter Data - How many invoices whose billing city starts with P or the billing city starts with D?
 
 ```sql
 /*
@@ -536,15 +533,15 @@ CREATE DATE: 05/21/2024
 DESCRIPTION: This query displays all customers info per query instance
 */
 
-SELECT 
+SELECT
 	CustomerId,
 	InvoiceDate,
 	BillingAddress,
 	BillingCity,
 	Total
-FROM 
+FROM
 	Invoice
-WHERE 
+WHERE
 	BillingCity LIKE  'P%'  OR BillingCity LIKE 'D%'
 ORDER BY
 	InvoiceDate ASC
@@ -569,15 +566,15 @@ CREATE DATE: 05/21/2024
 DESCRIPTION: This query displays all customers info per query instance
 */
 
-SELECT 
+SELECT
 	CustomerId,
 	InvoiceDate,
 	BillingAddress,
 	BillingCity,
 	Total
-FROM 
+FROM
 	Invoice
-WHERE 
+WHERE
 	Total > 1.98 AND (BillingCity LIKE 'P%' OR BillingCity LIKE 'D%')
 ORDER BY
 	InvoiceDate ASC
@@ -595,9 +592,9 @@ LIMIT
 
 # Filter Data - Using IF THEN Logic with CASE
 
-## WSDA Music Sales Goal: 
+## WSDA Music Sales Goal:
 
-- They want as many customers as possible to spend between $7.00 and $15.00. 
+- They want as many customers as possible to spend between $7.00 and $15.00.
 
 ## Sales Categories:
 
@@ -613,15 +610,15 @@ CREATE DATE: 05/21/2024
 DESCRIPTION: This query displays all customers info per query instance
 */
 
-SELECT 
+SELECT
 	CustomerId,
 	InvoiceDate,
 	BillingAddress,
 	BillingCity,
 	Total
-FROM 
+FROM
 	Invoice
-WHERE 
+WHERE
 	Total > 1.98 AND (BillingCity LIKE 'P%' OR BillingCity LIKE 'D%')
 ORDER BY
 	InvoiceDate ASC
