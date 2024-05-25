@@ -3,4 +3,4 @@
 
 # SQL TUTORIAL
 
-<details>
+</details>
