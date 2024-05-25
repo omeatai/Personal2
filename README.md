@@ -2,6 +2,8 @@
 
 AI-Software Tutorial
 
-## [Python](https://github.com/omeatai/src-AI-Software/tree/main/src-python-django)
+## [Django](https://github.com/omeatai/src-AI-Software/tree/main/src-django)
+
+## [Python](https://github.com/omeatai/src-AI-Software/tree/main/src-python)
 
 ## [SQL](https://github.com/omeatai/src-AI-Software/tree/main/src-sql)
