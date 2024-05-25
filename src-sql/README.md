@@ -1,6 +1,4 @@
-<details>
-<summary>1. SRC-SQL </summary>
+# SRC-SQL
 
-# SQL TUTORIAL
+## SQL TUTORIAL
 
-</details>
