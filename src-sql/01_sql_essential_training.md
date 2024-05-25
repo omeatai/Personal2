@@ -615,7 +615,17 @@ SELECT
 	InvoiceDate,
 	BillingAddress,
 	BillingCity,
-	Total
+	Total,
+	CASE
+		WHEN Total < 2.00 THEN 'Baseline Purchase'
+		WHEN Total BETWEEN 2.00 AND 6.99 THEN 'Low Purchase'
+		WHEN Total BETWEEN 7.00 AND 15.00 THEN 'Target Purchase'
+		ELSE 'Top Performance'
+		END AS PurchaseType,
+	CASE
+		WHEN Total < 7.00 THEN 'Low'
+		WHEN Total > 6.99 THEN 'High'
+		END AS Potential
 FROM
 	Invoice
 WHERE
@@ -624,8 +634,11 @@ ORDER BY
 	InvoiceDate ASC
 LIMIT
 	500
-
+	
 ```
+
+<img width="1414" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/0fe3fe64-1e0d-42b0-9b0f-0d38063f99f9">
+
 
 # #END </details>
 
