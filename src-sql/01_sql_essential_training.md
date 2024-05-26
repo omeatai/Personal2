@@ -715,7 +715,50 @@ ORDER BY
 <img width="1500" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/439e855f-d094-4e2a-8004-a07e527e822f">
 <img width="1500" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/4e3b795c-43eb-4a7c-8302-40cc445c1697">
 
+# #END </details>
 
+<details>
+<summary>21. Accessing Data from multiple Tables - SIMPLIFYING JOINS WITH ALIAS </summary>
+
+# Accessing Data from multiple Tables - SIMPLIFYING JOINS WITH ALIAS
+
+```sql
+/*
+CREATED BY: IFEANYI OMEATA
+CREATE DATE: 05/25/2024
+Description: JOINS
+*/
+
+SELECT 
+    c.LastName,
+	c.FirstName,
+	i.InvoiceId,
+	i.CustomerId,
+	i.InvoiceDate,
+	i.Total
+FROM 
+    Invoice AS i
+INNER JOIN
+	Customer AS c
+ON
+	i.CustomerId = c.CustomerId
+ORDER BY
+	c.CustomerId
+	
+```
+
+<img width="1533" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/7f6aee53-4a1a-4bae-be0e-797234c87a3c">
+
+# #END </details>
+
+<details>
+<summary>22. Accessing Data from multiple Tables - USING INNER JOINS </summary>
+
+# Accessing Data from multiple Tables - USING INNER JOINS
+
+```sql
+
+```
 
 # #END </details>
 
@@ -727,8 +770,6 @@ ORDER BY
 ```sql
 
 ```
-
-## Install venv
 
 ```sql
 
