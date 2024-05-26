@@ -678,6 +678,16 @@ ORDER BY
 
 <img width="1414" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/78921320-c04d-441f-a390-1838ef7c9c59">
 
+# #END </details>
+
+<details>
+<summary>20. Accessing Data from multiple Tables - JOINS </summary>
+
+# Accessing Data from multiple Tables - JOINS
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/dfb1d7ea-6b63-4749-a301-978feccb33a9)
+
+
 
 # #END </details>
 
