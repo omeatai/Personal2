@@ -681,9 +681,31 @@ ORDER BY
 # #END </details>
 
 <details>
-<summary>20. Accessing Data from multiple Tables - JOINS </summary>
+<summary>20. Accessing Data from multiple Tables - BASIC JOINS </summary>
 
-# Accessing Data from multiple Tables - JOINS
+# Accessing Data from multiple Tables - BASIC JOINS
+
+```sql
+/*
+CREATED BY: IFEANYI OMEATA
+CREATE DATE: 05/25/2024
+Description: JOINS
+*/
+
+SELECT 
+    *
+FROM 
+    Invoice
+INNER JOIN
+	Customer
+ON
+	Invoice.CustomerId = Customer.CustomerId
+ORDER BY
+	Customer.CustomerId
+	
+```
+
+<img width="1533" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/8ace37e0-f4ac-49ba-b90a-d4c889be1ce8">
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/dfb1d7ea-6b63-4749-a301-978feccb33a9)
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/e38dd40a-9a39-4aa6-a7ef-a25dc77eba03)
