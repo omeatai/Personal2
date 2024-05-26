@@ -756,9 +756,24 @@ ORDER BY
 
 # Accessing Data from multiple Tables - USING INNER JOINS
 
-```sql
+- An inner join only returns matching records.
+- Any unmatched data from either table is ignored.
+- Joins are often described with the use of Venn diagrams.
+- As our Venn diagram shows, an inner join represents only the overlapping section of the Venn diagram.
+-  The inner join is the most common type of join that's used.
+-  The main use of the inner join is to bring corresponding data together from different tables in a relational database.
 
-```
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/15fa681e-ed29-405c-b535-926235c0cddc)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/300fb60b-9f89-4abb-a626-6843536cb273)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/2f9c8ab3-7d1c-4877-8204-8abb96b51a24)
+
+# #END </details>
+
+<details>
+<summary>23. Accessing Data from multiple Tables - USING LEFT OUTER JOINS </summary>
+
+# Accessing Data from multiple Tables - USING LEFT OUTER JOINS
+
 
 # #END </details>
 
@@ -766,6 +781,14 @@ ORDER BY
 <summary>+LinkedIn - SQL Essential Training </summary>
 
 ## Install venv
+
+```sql
+
+```
+
+```sql
+
+```
 
 ```sql
 
