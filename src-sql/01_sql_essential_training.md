@@ -709,6 +709,7 @@ ORDER BY
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/dfb1d7ea-6b63-4749-a301-978feccb33a9)
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/e38dd40a-9a39-4aa6-a7ef-a25dc77eba03)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/f1c33eeb-b386-455b-b87c-38c43469519f)
 
 <img width="1456" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/0cb7036c-92fa-40fb-990e-f2f07acf8cb2">
 <img width="1500" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/439e855f-d094-4e2a-8004-a07e527e822f">
