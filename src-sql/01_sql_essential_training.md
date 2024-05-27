@@ -860,10 +860,37 @@ LIMIT
  # #END </details>
 
 <details>
-<summary>27. Accessing Data from multiple Tables - W </summary>
+<summary>27. Accessing Data from multiple Tables - Code Challenge: Analyzing customer support interactions </summary>
 
-# Accessing Data from multiple Tables - W
+# Accessing Data from multiple Tables - Code Challenge: Analyzing customer support interactions
 
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/dc8b458b-ca0f-4a5e-a589-a40050c4880e)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/37a1e552-ef87-4a61-877f-686dd27ca179)
+
+```sql
+/*
+CREATED BY: IFEANYI OMEATA
+CREATE DATE: 05/25/2024
+Description: JOINS
+*/
+
+SELECT 
+    c.FirstName AS CustomerFirstName, 
+	c.LastName AS CustomerLastName, 
+	e.FirstName AS SupportRepFirstName, 
+	e.LastName AS SupportRepLastName
+FROM 
+	Customer AS c
+JOIN
+	Employee AS e	
+ON
+	c.SupportRepId = e.EmployeeId
+ORDER BY
+	e.LastName ASC, c.LastName ASC
+	
+```
+
+<img width="1429" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/0ae3047e-3577-4b46-87d5-bc38f9d4fee8">
 
 
 # #END </details>
