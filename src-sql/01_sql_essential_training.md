@@ -795,6 +795,26 @@ ORDER BY
 
 # Accessing Data from multiple Tables - USING RIGHT OUTER JOINS
 
+- The right outer joins are not supported in SQLITE.
+- However, right joins are still very popular in other relational database management systems.
+- The right outer join returns the entire right table as well as matching information from the left table.
+- The right join is a mirror image of the left join, and functions in a very similar way.
+- The right join takes all fields from the right table, in this case the customer's table, and matches that data with any corresponding data from the invoice table or the left table. 
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/dc5f4981-82f8-4a4d-9073-813f06fb919c)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/803ec5c9-1305-48cd-ac89-191485958490)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/0b07c7c2-f196-49a4-af9e-6d886b0721af)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/6c037f79-4d4e-474a-8a7e-1bb8190044b1)
+
+ # #END </details>
+
+<details>
+<summary>25. Accessing Data from multiple Tables - Entity Relationship Diagrams </summary>
+
+# Accessing Data from multiple Tables - Entity Relationship Diagrams
+
+
+
 # #END </details>
 
 <details>
