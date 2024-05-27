@@ -818,9 +818,9 @@ ORDER BY
  # #END </details>
 
 <details>
-<summary>26. Accessing Data from multiple Tables - JOINING MULTIPLE TABLES - What employees are responsible for the 10 highest individual sales? </summary>
+<summary>26. Accessing Data from multiple Tables - JOIN TABLES - What employees are responsible for the 10 highest individual sales? </summary>
 
-# Accessing Data from multiple Tables - JOINING MULTIPLE TABLES - What employees are responsible for the 10 highest individual sales?
+# Accessing Data from multiple Tables - JOIN TABLES - What employees are responsible for the 10 highest individual sales?
 
 ```sql
 /*
