@@ -803,7 +803,6 @@ ORDER BY
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/dc5f4981-82f8-4a4d-9073-813f06fb919c)
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/803ec5c9-1305-48cd-ac89-191485958490)
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/0b07c7c2-f196-49a4-af9e-6d886b0721af)
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/6c037f79-4d4e-474a-8a7e-1bb8190044b1)
 
  # #END </details>
@@ -813,6 +812,9 @@ ORDER BY
 
 # Accessing Data from multiple Tables - Entity Relationship Diagrams
 
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/33f30a8d-0f36-4805-8ab0-ce603d313787)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b29f46b2-9e6e-4820-9efc-8b475471ac4a)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/845d3b76-8ded-4391-a7cc-4a7c0e8351ff)
 
 
 # #END </details>
