@@ -813,8 +813,57 @@ ORDER BY
 # Accessing Data from multiple Tables - Entity Relationship Diagrams
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/33f30a8d-0f36-4805-8ab0-ce603d313787)
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b29f46b2-9e6e-4820-9efc-8b475471ac4a)
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/845d3b76-8ded-4391-a7cc-4a7c0e8351ff)
+
+ # #END </details>
+
+<details>
+<summary>26. Accessing Data from multiple Tables - What employees are responsible for the 10 highest individual sales? </summary>
+
+# Accessing Data from multiple Tables - What employees are responsible for the 10 highest individual sales?
+
+```sql
+/*
+CREATED BY: IFEANYI OMEATA
+CREATE DATE: 05/25/2024
+Description: JOINS
+*/
+
+SELECT 
+    e.FirstName, 
+	e.LastName, 
+	e.EmployeeId, 
+	c.FirstName, 
+	c.LastName, 
+	c.SupportRepId, 
+	i.CustomerId, 
+	i.Total
+FROM 
+    Invoice AS i
+INNER JOIN
+	Customer AS c
+ON
+	i.CustomerId = c.CustomerId
+INNER JOIN
+	Employee AS e	
+ON
+	c.SupportRepId = e.EmployeeId
+ORDER BY
+	i.Total DESC
+LIMIT
+	10	
+	
+```
+
+<img width="1533" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/d28dd8b3-097e-4487-a41f-66f4b8d839e0">
+
+ # #END </details>
+
+<details>
+<summary>27. Accessing Data from multiple Tables - W </summary>
+
+# Accessing Data from multiple Tables - W
+
 
 
 # #END </details>
