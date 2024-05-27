@@ -774,6 +774,26 @@ ORDER BY
 
 # Accessing Data from multiple Tables - USING LEFT OUTER JOINS
 
+- A left outer join combines all the records from the left table with any matching records from the right table.
+- As shown in our Venn diagram, the concept of left table and right table depends entirely on the order these tables are listed in the join statement.
+- So for example, our SQL statement here has listed invoices first. Then after the left outer join, it lists the customer table.
+- Our invoice table is the left table and our customer table is the right table.
+- With this type of join, everything in our invoice table will be displayed.
+- Since customer 1 did not order any songs, that particular record is omitted.
+- We are combining all 5 records from the invoice table with only 3 records from the customer table.
+- Left joins are useful because they allow us to see discrepancies in our data.
+- We can produce lists of customers that have not generated invoices or search for data that has been removed in the right table but still exist in the left.
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b07245c9-8aa0-42b7-9d4c-8c1b6c4d4bde)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/d264d103-e099-48ad-9fc8-26d34e619a4b)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/133ba54d-1dba-4cbe-a013-68da4dd401cb)
+
+# #END </details>
+
+<details>
+<summary>24. Accessing Data from multiple Tables - USING RIGHT OUTER JOINS </summary>
+
+# Accessing Data from multiple Tables - USING RIGHT OUTER JOINS
 
 # #END </details>
 
