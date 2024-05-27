@@ -857,7 +857,7 @@ LIMIT
 
 <img width="1533" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/d28dd8b3-097e-4487-a41f-66f4b8d839e0">
 
- # #END </details>
+# #END </details>
 
 <details>
 <summary>27. Accessing Data from multiple Tables - Code Challenge: Analyzing customer support interactions </summary>
@@ -892,6 +892,104 @@ ORDER BY
 
 <img width="1429" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/0ae3047e-3577-4b46-87d5-bc38f9d4fee8">
 
+# #END </details>
+
+<details>
+<summary>28. SQL Functions - Connecting Strings </summary>
+
+# SQL Functions - Connecting Strings
+
+```sql
+/*
+CREATED BY: IFEANYI OMEATA
+CREATE DATE: 05/25/2024
+Description: FUNCTIONS
+*/
+
+SELECT 
+    FirstName,
+	LastName,
+	Address,
+	FirstName || " " || LastName || ", " || Address || ", " || City || ", " || State || ", " || PostalCode AS "Mailing Address"
+FROM 
+	Customer
+WHERE
+	Country = 'USA'
+	
+```
+
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c1d1847e-ed57-4556-90b2-d003bf20dab7">
+
+# #END </details>
+
+<details>
+<summary>29. SQL Functions - Separating Strings </summary>
+
+# SQL Functions - Separating Strings
+
+```sql
+/*
+CREATED BY: IFEANYI OMEATA
+CREATE DATE: 05/25/2024
+Description: FUNCTIONS
+*/
+
+SELECT 
+    FirstName,
+	LastName,
+	Address,
+	FirstName || " " || LastName || ", " || Address || ", " || City || ", " || State || ", " || PostalCode AS "Mailing Address",
+	LENGTH(PostalCode),
+	SUBSTR(PostalCode, 1, 5) AS [5 Digit Postal Code]
+FROM 
+	Customer
+WHERE
+	Country = 'USA'
+	
+```
+
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/a2d14f40-df48-4da1-bfa8-6af5c2208e63">
+
+# #END </details>
+
+<details>
+<summary>30. SQL Functions - UPPER and LOWER Strings </summary>
+
+# SQL Functions - UPPER and LOWER Strings
+
+```sql
+/*
+CREATED BY: IFEANYI OMEATA
+CREATE DATE: 05/25/2024
+Description: FUNCTIONS
+*/
+
+SELECT 
+    FirstName,
+	LastName,
+	Address,
+	FirstName || " " || LastName || ", " || Address || ", " || City || ", " || State || ", " || PostalCode AS "Mailing Address",
+	LENGTH(PostalCode),
+	SUBSTR(PostalCode, 1, 5) AS [5 Digit Postal Code],
+	UPPER(FirstName) AS [FirstName all Caps],
+	LOWER(LastName) AS [LastName all Lower]
+FROM 
+	Customer
+WHERE
+	Country = 'USA'
+	
+```
+
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/acae8b82-5026-4fb2-82d2-ebaacc40f5ec">
+
+
+# #END </details>
+
+<details>
+<summary>31. SQL Functions - DATE Functions </summary>
+
+# SQL Functions -  DATE Functions
+
 
 # #END </details>
 
@@ -900,9 +998,6 @@ ORDER BY
 
 ## Install venv
 
-```sql
-
-```
 
 ```sql
 
