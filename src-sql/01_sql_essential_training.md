@@ -36,6 +36,9 @@ DESCRIPTION: THIS IS THE STRUCTURE OF A BASIC QUERY
 */
 ```
 
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/561914be-6140-4a48-8634-6e3d2b96d7a0">
+
+
 # #END </details>
 
 <details>
@@ -70,8 +73,8 @@ FROM
 	Customer
 ```
 
-<img width="1327" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c913434f-0eaf-4069-8f90-765880bcc718">
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/01013a4f-539e-41ab-9508-74cb56206f99">
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/58385e2a-cff0-4210-915a-86a1c8b23381">
+
 
 # #END </details>
 
