@@ -79,7 +79,7 @@ FROM
 	Customer
 ```
 
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/c913434f-0eaf-4069-8f90-765880bcc718">
+<img width="1327" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c913434f-0eaf-4069-8f90-765880bcc718">
 <img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/01013a4f-539e-41ab-9508-74cb56206f99">
 
 # #END </details>
