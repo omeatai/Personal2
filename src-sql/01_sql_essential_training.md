@@ -187,9 +187,9 @@ ORDER BY
 # #END </details>
 
 <details>
-<summary>7. Limiting Query Results </summary>
+<summary>7. Limiting Query Results - Select Customers and Order BY Firstname Ascending, Lastname Descending and show only first 5 records </summary>
 
-# Limiting Query Results
+# Limiting Query Results - Select Customers and Order BY Firstname Ascending, Lastname Descending and show only first 5 records
 
 ```sql
 /*
@@ -211,7 +211,7 @@ LIMIT
 	5
 ```
 
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/d687979f-9bf4-4872-af98-752bb4bbb09b">
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/2a300d05-c1ef-4c12-ad14-2649b1cce2ec">
 
 # #END </details>
 
@@ -248,9 +248,7 @@ LIMIT
 
 ```
 
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/e96f63f7-6886-4057-9188-eefaab757c71">
-
-![image](https://github.com/omeatai/AI-and-Data-Science/assets/32337103/1f168133-944b-419b-adda-d39cdbcc7689)
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/51763537-ad58-428b-8ec0-ceb448ed5536">
 
 # #END </details>
 
