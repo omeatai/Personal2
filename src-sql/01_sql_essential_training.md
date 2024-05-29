@@ -60,9 +60,9 @@ DESCRIPTION: THIS IS THE STRUCTURE OF A BASIC QUERY
 # #END </details>
 
 <details>
-<summary>4. SELECT FIRSTNAME, LASTNAME AND EMAIL FROM CUSTOMER </summary>
+<summary>4. Select FirstName, LastName, and Email of all Customers in CUSTOMER Table </summary>
 
-# SELECT FIRSTNAME, LASTNAME AND EMAIL FROM CUSTOMER
+# Select FirstName, LastName, and Email of all Customers in CUSTOMER Table
 
 ```sql
 /*
