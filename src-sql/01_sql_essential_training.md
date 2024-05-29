@@ -1105,6 +1105,19 @@ FROM
 
 <img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/6366d0f7-5138-4c57-ac1b-b207dccd5990">
 
+# #END </details>
+
+<details>
+<summary>33. Code Challenge: Customer postal code transformation </summary>
+
+# Code Challenge: Customer postal code transformation
+
+<img width="725" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/88e816e5-f50f-44aa-8597-d28faf5af9f6">
+<img width="674" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/78e7757a-cc2b-4736-ae25-3beab698722f">
+
+```sql
+
+```
 
 # #END </details>
 
