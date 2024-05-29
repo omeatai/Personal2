@@ -13,7 +13,7 @@
 ![image](https://github.com/omeatai/AI-and-Data-Science/assets/32337103/d1af7765-51a3-4c96-bf76-8d6731bb1d12)
 ![image](https://github.com/omeatai/AI-and-Data-Science/assets/32337103/a2b26072-fb01-4f45-b9a1-ba88b6fd28f2)
 
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/41a516b7-c96b-4a36-9988-71f40af9b873">
+<img width="1327" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/41a516b7-c96b-4a36-9988-71f40af9b873">
 <img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/d35faea5-4387-4e1a-8d60-2148e8f43638">
 
 # #END
