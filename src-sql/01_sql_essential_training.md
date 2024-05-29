@@ -495,7 +495,7 @@ LIMIT
 /*
 CREATED BY: IFEANYI OMEATA
 CREATE DATE: 05/21/2024
-DESCRIPTION: This query displays all customers info per query instance
+DESCRIPTION: How many invoices were billed on May 22, 2010 (2010-05-22 00:00:00)?
 */
 
 SELECT
@@ -517,8 +517,7 @@ LIMIT
 
 ```
 
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/2ded905e-dea9-43e3-aaeb-b48590fe4b21">
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/fcd07f2a-1179-4c00-b470-ebd0b846cc37">
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/21378947-0d3e-4ea7-a32c-12b7aa267fb1">
 
 # #END </details>
 
@@ -531,7 +530,7 @@ LIMIT
 /*
 CREATED BY: IFEANYI OMEATA
 CREATE DATE: 05/21/2024
-DESCRIPTION: This query displays all customers info per query instance
+DESCRIPTION: How many invoices were billed after 2010-05-22 and have a total of less than $3?
 */
 
 SELECT
@@ -551,7 +550,7 @@ LIMIT
 
 ```
 
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/a1089361-3f6b-49c5-a460-b963f8e5cb74">
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/305a9eba-f2a0-452e-ba10-9aeade0d11d7">
 
 # #END </details>
 
@@ -564,7 +563,7 @@ LIMIT
 /*
 CREATED BY: IFEANYI OMEATA
 CREATE DATE: 05/21/2024
-DESCRIPTION: This query displays all customers info per query instance
+DESCRIPTION: How many invoices whose billing city starts with P or the billing city starts with D?
 */
 
 SELECT
@@ -584,7 +583,7 @@ LIMIT
 
 ```
 
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/851eb6a4-1661-4981-9628-305c9ba4bb5d">
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/4b385d0e-c637-4df5-9ca4-a65fb0506fda">
 
 # #END </details>
 
@@ -597,7 +596,7 @@ LIMIT
 /*
 CREATED BY: IFEANYI OMEATA
 CREATE DATE: 05/21/2024
-DESCRIPTION: This query displays all customers info per query instance
+DESCRIPTION: How many invoices are greater than $1.98 from any cities whose names start with P or D?
 */
 
 SELECT
@@ -617,7 +616,7 @@ LIMIT
 
 ```
 
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/37b8079d-1224-4147-b7cb-a8d8d5343a76">
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/164fd339-1709-49cf-93ff-43c13724cff1">
 
 # #END </details>
 
