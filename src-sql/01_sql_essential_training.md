@@ -5,16 +5,7 @@
 
 [https://sqlitebrowser.org/](https://sqlitebrowser.org/)
 
-![image](https://github.com/omeatai/AI-and-Data-Science/assets/32337103/01970cf0-08fa-4879-b5d9-fdde92f5f5e9)
-![image](https://github.com/omeatai/AI-and-Data-Science/assets/32337103/4e7a9d84-75e3-470d-b9d4-d0d60d004662)
-![image](https://github.com/omeatai/AI-and-Data-Science/assets/32337103/c63b3ca3-6ca5-4db8-847a-d6fe99e49852)
-![image](https://github.com/omeatai/AI-and-Data-Science/assets/32337103/732df91d-517d-4806-83ad-87f7520fae5d)
-![image](https://github.com/omeatai/AI-and-Data-Science/assets/32337103/f86c2aeb-e487-4a21-addc-855cdc341b6a)
-![image](https://github.com/omeatai/AI-and-Data-Science/assets/32337103/d1af7765-51a3-4c96-bf76-8d6731bb1d12)
-![image](https://github.com/omeatai/AI-and-Data-Science/assets/32337103/a2b26072-fb01-4f45-b9a1-ba88b6fd28f2)
-
-<img width="1327" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/41a516b7-c96b-4a36-9988-71f40af9b873">
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/d35faea5-4387-4e1a-8d60-2148e8f43638">
+<img width="1488" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/04b30ecf-8e3c-4b0d-a9c1-6fdcb72fd20d">
 
 # #END
 
