@@ -1049,6 +1049,43 @@ FROM
 
 <img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/b2fd841c-ed79-474c-b2dc-6fccbf537028">
 
+# #END </details>
+
+<details>
+<summary>31. SQL Functions - AGGREGATE Functions - Calculate the total global sales of all time </summary>
+
+# SQL Functions - AGGREGATE Functions - Calculate the total global sales of all time
+
+```sql
+/*
+CREATED BY: IFEANYI OMEATA
+CREATE DATE: 05/28/2024
+DESCRIPTION: Calculate the total global sales of all time
+*/
+
+SELECT
+	SUM(Total) AS [Total Sales],
+	AVG(Total) AS [Average Sales],
+	MAX(Total) AS [Maximum Sale],
+	MIN(Total) AS [Minimum Sale],
+	COUNT(*) AS [Sales Count]
+FROM
+	Invoice
+
+```
+
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/96420f20-9c9a-4019-901e-0372a46bbd0e">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/bace6257-486d-4988-b736-72d65e59081e)
+
+# #END </details>
+
+<details>
+<summary>32. SQL Functions - NESTING Functions </summary>
+
+# SQL Functions - NESTING Functions
+
+
 
 # #END </details>
 
