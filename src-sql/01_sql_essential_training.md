@@ -1081,10 +1081,29 @@ FROM
 # #END </details>
 
 <details>
-<summary>32. SQL Functions - NESTING Functions </summary>
+<summary>32. SQL Functions - NESTING Functions - Rounding decimals </summary>
 
-# SQL Functions - NESTING Functions
+# SQL Functions - NESTING Functions - Rounding decimals 
 
+```sql
+/*
+CREATED BY: IFEANYI OMEATA
+CREATE DATE: 05/28/2024
+DESCRIPTION: Rounding decimals 
+*/
+
+SELECT
+	SUM(Total) AS [Total Sales],
+	round(AVG(Total), 3) AS [Average Sales],
+	MAX(Total) AS [Maximum Sale],
+	MIN(Total) AS [Minimum Sale],
+	COUNT(*) AS [Sales Count]
+FROM
+	Invoice
+
+```
+
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/6366d0f7-5138-4c57-ac1b-b207dccd5990">
 
 
 # #END </details>
