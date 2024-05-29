@@ -1020,9 +1020,34 @@ WHERE
 # #END </details>
 
 <details>
-<summary>30. SQL Functions - DATE Functions </summary>
+<summary>30. SQL Functions - DATE Functions - Calculate the ages of all employees </summary>
 
-# SQL Functions -  DATE Functions
+# SQL Functions -  DATE Functions - Calculate the ages of all employees
+
+- We need to leverage the birth date field to calculate each employee's age. 
+- We need to find out the difference between the current date and the employee's birthdate.
+- We can employ a new date function which is called the strftime.
+- The strftime function converts date and time strings into another format.
+
+```sql
+/*
+CREATED BY: IFEANYI OMEATA
+CREATE DATE: 05/28/2024
+DESCRIPTION: Calculate the ages of all employees
+*/
+
+SELECT
+	FirstName,
+	LastName,
+	BirthDate,
+	strftime('%Y-%m-%d', BirthDate) AS [BirthDate with-no-Timecode],
+	strftime('%Y-%m-%d', 'now') - strftime('%Y-%m-%d', BirthDate) AS Age
+FROM
+	Employee
+
+```
+
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/b2fd841c-ed79-474c-b2dc-6fccbf537028">
 
 
 # #END </details>
@@ -1031,7 +1056,6 @@ WHERE
 <summary>+LinkedIn - SQL Essential Training </summary>
 
 ## Install venv
-
 
 ```sql
 
