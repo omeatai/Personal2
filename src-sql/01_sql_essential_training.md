@@ -852,7 +852,7 @@ ORDER BY
  # #END </details>
 
 <details>
-<summary>26. Accessing Data from multiple Tables - JOIN TABLES - What employees are responsible for the 10 highest individual sales? </summary>
+<summary>26A. Accessing Data from multiple Tables - JOIN TABLES - What employees are responsible for the 10 highest individual sales? </summary>
 
 # Accessing Data from multiple Tables - JOIN TABLES - What employees are responsible for the 10 highest individual sales?
 
@@ -894,7 +894,7 @@ LIMIT
 # #END </details>
 
 <details>
-<summary>27. Accessing Data from multiple Tables - Code Challenge: Analyzing customer support interactions </summary>
+<summary>26B. Accessing Data from multiple Tables - Code Challenge: Analyzing customer support interactions </summary>
 
 # Accessing Data from multiple Tables - Code Challenge: Analyzing customer support interactions
 
@@ -929,7 +929,7 @@ ORDER BY
 # #END </details>
 
 <details>
-<summary>28. SQL Functions - Connecting Strings </summary>
+<summary>27. SQL Functions - Connecting Strings </summary>
 
 # SQL Functions - Connecting Strings
 
@@ -957,7 +957,7 @@ WHERE
 # #END </details>
 
 <details>
-<summary>29. SQL Functions - Separating Strings </summary>
+<summary>28. SQL Functions - Separating Strings </summary>
 
 # SQL Functions - Separating Strings
 
@@ -987,7 +987,7 @@ WHERE
 # #END </details>
 
 <details>
-<summary>30. SQL Functions - UPPER and LOWER Strings </summary>
+<summary>29. SQL Functions - UPPER and LOWER Strings </summary>
 
 # SQL Functions - UPPER and LOWER Strings
 
@@ -1020,7 +1020,7 @@ WHERE
 # #END </details>
 
 <details>
-<summary>31. SQL Functions - DATE Functions </summary>
+<summary>30. SQL Functions - DATE Functions </summary>
 
 # SQL Functions -  DATE Functions
 
