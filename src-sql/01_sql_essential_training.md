@@ -216,9 +216,9 @@ LIMIT
 # #END </details>
 
 <details>
-<summary>7B. Code Challenge: Concise track pricing report </summary>
+<summary>7B. Limiting Query Results - Code Challenge: Concise track pricing report </summary>
 
-# Code Challenge: Concise track pricing report
+# Limiting Query Results - Code Challenge: Concise track pricing report
 
 <img width="582" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/756f6d7e-fe1b-408b-a669-0a68cb83ff55">
 <img width="668" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/5a0309fa-93c7-48f2-985f-bb773ae7ca62">
@@ -296,7 +296,7 @@ LIMIT
 /*
 CREATED BY: IFEANYI OMEATA
 CREATE DATE: 05/21/2024
-DESCRIPTION: This query displays all customers first names, last names and email addresses
+DESCRIPTION: How many invoices exist between $1.98 and $5?
 */
 
 SELECT
@@ -316,7 +316,7 @@ LIMIT
 
 ```
 
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/913089fa-c9c0-4ccf-b6e9-ea09e766ce12">
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/24be3aa0-98a3-4a83-b3e0-69aeaa91bd41">
 
 # #END </details>
 
@@ -329,7 +329,7 @@ LIMIT
 /*
 CREATED BY: IFEANYI OMEATA
 CREATE DATE: 05/21/2024
-DESCRIPTION: This query displays all customers first names, last names and email addresses
+DESCRIPTION: How many invoices do we have that are exactly $1.98 or $3.96?
 */
 
 SELECT
@@ -349,7 +349,7 @@ LIMIT
 
 ```
 
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/f07b8a9c-43a4-4801-b357-7a71e66e6060">
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/b6d75b05-82d6-4872-bf12-532ee7fcfa4f">
 
 # #END </details>
 
@@ -362,7 +362,7 @@ LIMIT
 /*
 CREATED BY: IFEANYI OMEATA
 CREATE DATE: 05/21/2024
-DESCRIPTION: This query displays all customers info per query instance
+DESCRIPTION: How many invoices were billed to the city of Brussels?
 */
 
 SELECT
@@ -382,8 +382,7 @@ LIMIT
 
 ```
 
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/51529ad4-5e9b-4589-988e-e7a73b4f845e">
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/ae17089e-2192-42df-b280-1e54eeecf386">
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/da917cfd-3cfc-40ef-ae5a-ad69c2b2c9db">
 
 # #END </details>
 
@@ -396,7 +395,7 @@ LIMIT
 /*
 CREATED BY: IFEANYI OMEATA
 CREATE DATE: 05/21/2024
-DESCRIPTION: This query displays all customers info per query instance
+DESCRIPTION: How many invoices were billed to Brussels, Orlando, or Paris?
 */
 
 SELECT
@@ -416,7 +415,7 @@ LIMIT
 
 ```
 
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/32c6b549-c358-4a7c-b4a2-f04a41291cf5">
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/264cba36-ebf0-42cb-960b-04cacce39356">
 
 # #END </details>
 
@@ -429,7 +428,7 @@ LIMIT
 /*
 CREATED BY: IFEANYI OMEATA
 CREATE DATE: 05/21/2024
-DESCRIPTION: This query displays all customers info per query instance
+DESCRIPTION: How many invoices were billed in the cities that start with B?
 */
 
 SELECT
@@ -449,7 +448,8 @@ LIMIT
 
 ```
 
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/92a3eaee-9a17-44a9-a2a9-9bd111216dea">
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/04a5b037-37a9-4e78-b5bd-54b745369319">
+
 
 # #END </details>
 
@@ -462,7 +462,7 @@ LIMIT
 /*
 CREATED BY: IFEANYI OMEATA
 CREATE DATE: 05/21/2024
-DESCRIPTION: This query displays all customers info per query instance
+DESCRIPTION: How many invoices were billed in cities that have a B anywhere in its name?
 */
 
 SELECT
@@ -482,7 +482,7 @@ LIMIT
 
 ```
 
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/3137beb5-1d6f-4797-b126-1bd0c6b2fdef">
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/5e6ec078-4473-4337-a9a1-f59689c912ea">
 
 # #END </details>
 
