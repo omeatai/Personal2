@@ -621,16 +621,13 @@ LIMIT
 # #END </details>
 
 <details>
-<summary>19. Filter Data - Adding Customised Columns using IF THEN Logic with CASE  </summary>
+<summary>19A. Filter Data - Adding Customised Columns using IF THEN Logic with CASE  </summary>
 
 # Filter Data - Adding Customised Columns using IF THEN Logic with CASE
 
-## 1. WSDA Music Sales Goal:
-
-- They want as many customers as possible to spend between $7.00 and $15.00.
-
 ## Sales Categories:
 
+- They want as many customers as possible to spend between $7.00 and $15.00.
 - Baseline Purchase - Between $0.99 and $1.99
 - Low Purchase- Between $2.00 and $6.99
 - Target Purchase Between $7.00 and $15.00
@@ -640,7 +637,7 @@ LIMIT
 /*
 CREATED BY: IFEANYI OMEATA
 CREATE DATE: 05/21/2024
-DESCRIPTION: This query displays all customers info per query instance
+DESCRIPTION: Adding Customised Columns using IF THEN Logic with CASE
 */
 
 SELECT
@@ -672,8 +669,12 @@ LIMIT
 
 <img width="1414" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/0fe3fe64-1e0d-42b0-9b0f-0d38063f99f9">
 
+# #END </details>
 
-## 2. Code Challenge: Categorize tracks by price
+<details>
+<summary>19B. Filter Data - Code Challenge: Categorize tracks by price  </summary>
+
+# Filter Data - Code Challenge: Categorize tracks by price
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b266d087-55c3-41d4-b500-314e7a7ed68c)
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/4c5bbb82-ad47-4875-ab42-24422c288e46)
