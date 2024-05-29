@@ -79,9 +79,9 @@ FROM
 # #END </details>
 
 <details>
-<summary>5. SELECT FIRSTNAME, LASTNAME AND EMAIL FROM CUSTOMER with Column Aliases </summary>
+<summary>5. Select FirstName, LastName, and Email of all Customers with Column Aliases </summary>
 
-# SELECT FIRSTNAME, LASTNAME AND EMAIL FROM CUSTOMER with Column Aliases
+# Select FirstName, LastName, and Email of all Customers with Column Aliases
 
 ```sql
 /*
@@ -98,16 +98,15 @@ FROM
 	Customer
 ```
 
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/ad61bdef-7bbd-4da1-bfeb-7820f95cdca4">
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/0e186e27-b30e-44e5-adb8-6982fa5a45bf">
+
 
 # #END </details>
 
 <details>
-<summary>6. Sorting Query Results </summary>
+<summary>6A. Sorting Query Results - Select Customers and Order BY Lastname Descending </summary>
 
-# Sorting Query Results
-
-## Order By Column Descending
+# Sorting Query Results - Select Customers and Order BY Lastname Descending
 
 ```sql
 /*
@@ -127,9 +126,15 @@ ORDER BY
 DESC
 ```
 
-<img width="1283" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/98e468ec-d0fa-4a9b-88ea-f28b02100528">
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/d7067b8c-c9d0-4df0-b9ee-d96a276d9d3b">
 
-## Order by Column Ascending
+
+# #END </details>
+
+<details>
+<summary>6B. Sorting Query Results - Select Customers and Order BY Lastname Ascending </summary>
+
+# Sorting Query Results - Select Customers and Order BY Lastname Ascending
 
 ```sql
 /*
@@ -149,9 +154,14 @@ ORDER BY
 ASC
 ```
 
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/eb077893-57a4-4a2a-b52a-c87e399eb5af">
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/568265ed-b759-4b0e-b90f-760554cc153b">
 
-## Order by Multiple Columns
+# #END </details>
+
+<details>
+<summary>6C. Sorting Query Results - Select Customers and Order BY Firstname Ascending, Lastname Descending </summary>
+
+# Sorting Query Results - Select Customers and Order BY Firstname Ascending, Lastname Descending
 
 ```sql
 /*
@@ -172,7 +182,7 @@ ORDER BY
 
 ```
 
-<img width="1327" alt="image" src="https://github.com/omeatai/AI-and-Data-Science/assets/32337103/538a47f7-8d0e-4f42-8e80-605139f81f40">
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/30075a20-e537-499f-81d4-ba9b60922343">
 
 # #END </details>
 
