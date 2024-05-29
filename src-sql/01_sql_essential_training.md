@@ -1116,8 +1116,32 @@ FROM
 <img width="674" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/78e7757a-cc2b-4736-ae25-3beab698722f">
 
 ```sql
+/*
+CREATED BY: IFEANYI OMEATA
+CREATE DATE: 05/28/2024
+DESCRIPTION: Code Challenge: Customer postal code transformation
+*/
+
+SELECT
+	c.FirstName || " " || c.LastName AS CustomerFullName,
+	substr(c.PostalCode, 1, 5) AS StandardizedPostalCode
+FROM
+	Customer AS c
+WHERE
+	c.Country = "USA"
+ORDER BY
+	CustomerFullName;	
 
 ```
+
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/4a559dc1-54e5-4308-9e4d-0fcbd709c4e6">
+
+# #END </details>
+
+<details>
+<summary>34. Code Challenge </summary>
+
+# Code Challenge
 
 # #END </details>
 
