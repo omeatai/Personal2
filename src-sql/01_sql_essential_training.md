@@ -216,6 +216,38 @@ LIMIT
 # #END </details>
 
 <details>
+<summary>7B. Code Challenge: Concise track pricing report </summary>
+
+# Code Challenge: Concise track pricing report
+
+<img width="582" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/756f6d7e-fe1b-408b-a669-0a68cb83ff55">
+<img width="668" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/5a0309fa-93c7-48f2-985f-bb773ae7ca62">
+
+```sql
+/*
+CREATED BY: IFEANYI OMEATA
+CREATE DATE: 05/21/2024
+DESCRIPTION: Code Challenge
+*/
+
+SELECT
+	t.Name AS "Track Name",
+	t.UnitPrice AS Price
+FROM
+	Track AS t
+ORDER BY
+	t.Name ASC
+LIMIT
+	20;
+
+```
+
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/5af84f1d-fc70-4a2e-aea9-11748d5f9236">
+
+
+# #END </details>
+
+<details>
 <summary>8. Filter Data - How many customers purchased two songs at 99 cents each?  </summary>
 
 # Filter Data - How many customers purchased two songs at 99 cents each?
