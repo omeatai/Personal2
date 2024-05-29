@@ -187,7 +187,7 @@ ORDER BY
 # #END </details>
 
 <details>
-<summary>7. Limiting Query Results - Select Customers and Order BY Firstname Ascending, Lastname Descending and show only first 5 records </summary>
+<summary>7A. Limiting Query Results - Select Customers and Order BY Firstname Ascending, Lastname Descending and show only first 5 records </summary>
 
 # Limiting Query Results - Select Customers and Order BY Firstname Ascending, Lastname Descending and show only first 5 records
 
