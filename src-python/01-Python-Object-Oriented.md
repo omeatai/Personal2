@@ -82,12 +82,55 @@ print("Book 2 discount percentage: ", b2._discount)
 # #END</details>
 
 <details>
-<summary>4. Setting Instance Methods and Attributes </summary>
+<summary>4. Checking Instance Types </summary>
+
+# Checking Instance Types
+
+```py
+class Book:
+    def __init__(self, title):
+        self.title = title
 
 
+class Newspaper:
+    def __init__(self, name):
+        self.name = name
 
 
-# Setting Instance Methods and Attributes
+# Create some instances of the classes
+b1 = Book("The Catcher In The Rye")
+b2 = Book("The Grapes of Wrath")
+n1 = Newspaper("The Washington Post")
+n2 = Newspaper("The New York Times")
+
+# TODO: use type() to inspect the object type
+print(type(b1))
+print(type(n1))
+
+# TODO: compare two types together
+print(type(b1) == type(b2))
+print(type(b1) == type(n2))
+
+# TODO: use isinstance to compare a specific instance to a known type
+print(isinstance(b1, Book))
+print(isinstance(n1, Newspaper))
+print(isinstance(n2, Book))
+print(isinstance(n2, object))
+
+```
+
+<img width="1383" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/72410a3a-8ecb-43d8-ba1e-0b0d7cb65e1c">
+
+# #END</details>
+
+<details>
+<summary>5. Class Methods and Static Methods </summary>
+
+# Class Methods and Static Methods
+
+```py
+
+```
 
 # #END</details>
 
