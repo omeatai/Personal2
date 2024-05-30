@@ -185,6 +185,8 @@ print(thebooks)
 
 # Challenge: Stocks
 
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/cbae201c-98c7-4b77-bab5-f2952c69a925)
+
 ```py
 class Stock:
     def __init__(self, ticker, price, company) -> None:
