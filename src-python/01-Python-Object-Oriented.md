@@ -129,6 +129,63 @@ print(isinstance(n2, object))
 # Class Methods and Static Methods
 
 ```py
+class Book:
+    # TODO: Properties defined at the class level are shared by all instances
+    # Class Attributes
+    BOOK_TYPES = ("HARDCOVER", "PAPERBACK", "EBOOK")
+    __booklist = None
+
+    # static methods do not receive class or instance arguments
+    # and usually operate on data that is not instance-specific
+    @staticmethod
+    def get_booklist():
+        if Book.__booklist == None:
+            Book.__booklist = []
+        return Book.__booklist
+
+    # class methods receive a class as their argument and can only
+    # operate on class-level data
+    @classmethod
+    def get_book_types(cls):
+        return cls.BOOK_TYPES
+
+    # instance methods receive a specific object instance as an argument
+    def set_title(self, newtitle):
+        self.title = newtitle
+
+    def __init__(self, title, booktype):
+        self.title = title
+        if (not booktype in self.BOOK_TYPES):
+            raise ValueError(f"{booktype} is not a valid book type")
+        else:
+            self.booktype = booktype
+
+
+# TODO: access the class attribute
+print("Book types: ", Book.get_book_types())
+
+# TODO: Create some book instances
+b1 = Book("Title 1", "HARDCOVER")
+b2 = Book("Title 2", "PAPERBACK")
+
+# TODO: Use the static method to access a singleton object
+thebooks = Book.get_booklist()
+thebooks.append(b1)
+thebooks.append(b2)
+print(thebooks)
+
+```
+
+<img width="1399" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/6cb999e1-aee1-45ac-aaa1-19eda2bcd724">
+
+# #END</details>
+
+<details>
+<summary>6. Challenge: Stocks </summary>
+
+# Challenge: Stocks
+
+```py
 
 ```
 
