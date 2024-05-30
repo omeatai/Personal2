@@ -1199,13 +1199,46 @@ ORDER BY
 # #END </details>
 
 <details>
-<summary>36. Grouping - What are the average invoice totals by City for only Cities that start with L? </summary>
+<summary>36. Grouping - What are the average invoice totals greater than $5.00? </summary>
 
-# Grouping - What are the average invoice totals by City for only Cities that start with L?
+# Grouping - What are the average invoice totals greater than $5.00?
+
+```sql
+/*
+CREATED BY: IFEANYI OMEATA
+CREATE DATE: 05/28/2024
+DESCRIPTION: Grouping - What are the average invoice totals greater than $5.00?
+*/
+
+SELECT
+	BillingCity,
+	avg(Total) AS [Average Per City],
+	round(avg(Total),2) AS [Rounded Average Per City]
+FROM
+	Invoice
+GROUP BY
+	BillingCity
+HAVING	
+	avg(Total) > 5	
+ORDER BY
+	round(avg(Total),2) DESC;	
+
+```
+
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/1289a5ec-24c8-4975-8ac6-2ddfcf7317fe">
+
+# #END </details>
+
+<details>
+<summary>37. Grouping - What are the average invoice totals greater than $5.00? </summary>
+
+# Grouping - What are the average invoice totals greater than $5.00?
 
 ```sql
 
 ```
+
+
 
 # #END </details>
 
