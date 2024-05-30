@@ -1230,15 +1230,77 @@ ORDER BY
 # #END </details>
 
 <details>
-<summary>37. Grouping - What are the average invoice totals greater than $5.00? </summary>
+<summary>37. Grouping - What are the average invoice totals greater than $5.00 for cities starting with B? </summary>
 
-# Grouping - What are the average invoice totals greater than $5.00?
+# Grouping - What are the average invoice totals greater than $5.00 for cities starting with B?
+
+```sql
+/*
+CREATED BY: IFEANYI OMEATA
+CREATE DATE: 05/28/2024
+DESCRIPTION: Grouping - What are the average invoice totals greater than $5.00 for cities starting with B?
+*/
+
+SELECT
+	BillingCity,
+	avg(Total) AS [Average Per City],
+	round(avg(Total),2) AS [Rounded Average Per City]
+FROM
+	Invoice
+WHERE
+	BillingCity LIKE "B%"	
+GROUP BY
+	BillingCity
+HAVING	
+	avg(Total) > 5	
+ORDER BY
+	round(avg(Total),2) DESC;	
+
+```
+
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/ef49d7f8-14cf-4f5e-8348-0507119a3b9a">
+
+# #END </details>
+
+<details>
+<summary>38. Grouping by many Fields - What are the average invoice totals by billing Country and City? </summary>
+
+# Grouping by many Fields - What are the average invoice totals by billing Country and City?
+
+```sql
+/*
+CREATED BY: IFEANYI OMEATA
+CREATE DATE: 05/28/2024
+DESCRIPTION: Grouping by many Fields - What are the average invoice totals by billing Country and City?
+*/
+
+SELECT
+	BillingCountry,
+	BillingCity,
+	avg(Total) AS [Average Per City],
+	round(avg(Total),2) AS [Rounded Average Per City]
+FROM
+	Invoice
+GROUP BY
+	BillingCountry,
+	BillingCity
+ORDER BY
+	BillingCountry ASC;	
+
+```
+
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/15851e82-7879-4a1f-8c0b-2bc1bf7e5cec">
+
+# #END </details>
+
+<details>
+<summary>39. Code Challenge: Calculate average spend per city </summary>
+
+# Code Challenge: Calculate average spend per city
 
 ```sql
 
 ```
-
-
 
 # #END </details>
 
