@@ -1139,9 +1139,73 @@ ORDER BY
 # #END </details>
 
 <details>
-<summary>34. Code Challenge </summary>
+<summary>34. Grouping - What are the average invoice totals by City? </summary>
 
-# Code Challenge
+# Grouping - What are the average invoice totals by City?
+
+```sql
+/*
+CREATED BY: IFEANYI OMEATA
+CREATE DATE: 05/28/2024
+DESCRIPTION: Grouping - What are the average invoice totals by City?
+*/
+
+SELECT
+	BillingCity,
+	avg(Total) AS [Average Per City],
+	round(avg(Total),2) AS [Rounded Average Per City]
+FROM
+	Invoice
+GROUP BY
+	BillingCity
+ORDER BY
+	BillingCity;	
+
+```
+
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/2f54e5a1-3c79-4339-88cc-0bd6e408244e">
+
+# #END </details>
+
+<details>
+<summary>35. Grouping - What are the average invoice totals by City for only Cities that start with L? </summary>
+
+# Grouping - What are the average invoice totals by City for only Cities that start with L?
+
+```sql
+/*
+CREATED BY: IFEANYI OMEATA
+CREATE DATE: 05/28/2024
+DESCRIPTION: Grouping - What are the average invoice totals by City for only Cities that start with L?
+*/
+
+SELECT
+	BillingCity,
+	avg(Total) AS [Average Per City],
+	round(avg(Total),2) AS [Rounded Average Per City]
+FROM
+	Invoice
+WHERE
+	BillingCity LIKE "L%"
+GROUP BY
+	BillingCity
+ORDER BY
+	BillingCity;	
+
+```
+
+<img width="1473" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/faafd22e-a408-4e51-bfab-a6a707ec326c">
+
+# #END </details>
+
+<details>
+<summary>36. Grouping - What are the average invoice totals by City for only Cities that start with L? </summary>
+
+# Grouping - What are the average invoice totals by City for only Cities that start with L?
+
+```sql
+
+```
 
 # #END </details>
 
