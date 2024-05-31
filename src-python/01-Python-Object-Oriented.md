@@ -317,6 +317,54 @@ print(s.calc_area())
 # #END</details>
 
 <details>
+<summary>9. Using Multiple Inheritance </summary>
+
+# Using Multiple Inheritance
+
+```py
+class A:
+    def __init__(self):
+        super().__init__()
+        self.prop1 = "prop1"
+        self.name = "Class A"
+
+
+class B:
+    def __init__(self):
+        super().__init__()
+        self.prop2 = "prop2"
+        self.name = "Class B"
+
+
+class C(B, A):
+    def __init__(self):
+        super().__init__()
+
+    def showprops(self):
+        print(self.prop1)
+        print(self.prop2)
+        print(self.name)
+
+
+# create the class and call showprops()
+c = C()
+print(C.__mro__)
+c.showprops()
+
+```
+
+<img width="1335" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/9e74b666-5a9d-4cc5-94c2-4b058cd0312f">
+
+# #END</details>
+
+<details>
+<summary>10. Using Multiple Inheritance </summary>
+
+# Using Multiple Inheritance
+
+# #END</details>
+
+<details>
 <summary>+LinkedIn - Python Essential Training </summary>
 
 ```py
