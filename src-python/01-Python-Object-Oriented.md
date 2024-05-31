@@ -403,7 +403,7 @@ print(c.toJSON())
 # #END</details>
 
 <details>
-<summary>10. Using Composition </summary>
+<summary>11. Using Composition </summary>
 
 # Using Composition
 
@@ -462,7 +462,7 @@ print(b1.getbookpagecount())
 # #END</details>
 
 <details>
-<summary>11. Challenge: Stocks and Bonds </summary>
+<summary>12. Challenge: Stocks and Bonds </summary>
 
 # Challenge: Stocks and Bonds
 
