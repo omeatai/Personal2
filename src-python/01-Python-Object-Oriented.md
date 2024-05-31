@@ -459,6 +459,16 @@ print(b1.getbookpagecount())
 
 <img width="1440" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/a0fa709d-8e92-4cdb-9ace-05a6fe485e86">
 
+# #END</details>
+
+<details>
+<summary>11. Challenge: Stocks and Bonds </summary>
+
+# Challenge: Stocks and Bonds
+
+<img width="1440" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/e384b541-7524-47fb-8cb1-55b092ecc1fe">
+
+
 
 # #END</details>
 
