@@ -358,9 +358,60 @@ c.showprops()
 # #END</details>
 
 <details>
-<summary>10. Using Multiple Inheritance </summary>
+<summary>10. Using Interfaces </summary>
 
-# Using Multiple Inheritance
+# Using Interfaces
+
+```py
+from abc import ABC, abstractmethod
+
+
+class GraphicShape(ABC):
+    def __init__(self):
+        super().__init__()
+
+    @abstractmethod
+    def calcArea(self):
+        pass
+
+
+class JSONify(ABC):
+    @abstractmethod
+    def toJSON(self):
+        pass
+
+
+class Circle(GraphicShape, JSONify):
+    def __init__(self, radius):
+        self.radius = radius
+
+    def calcArea(self):
+        return 3.14 * (self.radius ** 2)
+
+    def toJSON(self):
+        return f"{{ \"circle\": {str(self.calcArea())} }}"
+
+
+c = Circle(10)
+print(c.calcArea())
+print(c.toJSON())
+
+```
+
+<img width="1335" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/b0c46e8b-97f1-4dac-a9aa-ead3e1f523f8">
+
+# #END</details>
+
+<details>
+<summary>10. Using Composition </summary>
+
+# Using Composition
+
+```py
+
+```
+
+
 
 # #END</details>
 
