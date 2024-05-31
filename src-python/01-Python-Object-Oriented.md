@@ -222,6 +222,56 @@ if __name__ == "__main__":
 # Understanding Inheritance
 
 ```py
+class Publication:
+    def __init__(self, title, price):
+        self.title = title
+        self.price = price
+
+
+class Periodical(Publication):
+    def __init__(self, title, price, publisher, period):
+        super().__init__(title, price)
+        self.period = period
+        self.publisher = publisher
+
+
+class Book(Publication):
+    def __init__(self, title, author, pages, price):
+        super().__init__(title, price)
+        self.author = author
+        self.pages = pages
+
+
+class Magazine(Periodical):
+    def __init__(self, title, publisher, price, period):
+        super().__init__(title, price, publisher, period)
+
+
+class Newspaper(Periodical):
+    def __init__(self, title, publisher, price, period):
+        super().__init__(title, price, publisher, period)
+
+
+b1 = Book("Brave New World", "Aldous Huxley", 311, 29.0)
+n1 = Newspaper("NY Times", "New York Times Company", 6.0, "Daily")
+m1 = Magazine("Scientific American", "Springer Nature", 5.99, "Monthly")
+
+print(b1.author)
+print(n1.publisher)
+print(b1.price, m1.price, n1.price)
+
+```
+
+<img width="1399" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/e0f39339-3684-4958-880b-3ce23b7bee18">
+
+# #END</details>
+
+<details>
+<summary>8. Understanding Abstract Base Classes </summary>
+
+# Understanding Abstract Base Classes
+
+```py
 
 ```
 
