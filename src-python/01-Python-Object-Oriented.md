@@ -546,6 +546,48 @@ print(us2yr.get_description())
 
 <img width="1401" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/4dda58b2-3f3b-4a50-8ef1-1a3b8325c971">
 
+# #END</details>
+
+<details>
+<summary>13. Magic Methods - String Representation </summary>
+
+# Magic Methods - String Representation 
+
+<img width="1440" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/b45fadd3-3fee-457e-abe5-356dce8126db">
+
+```py
+class Book:
+    def __init__(self, title, author, price):
+        super().__init__()
+        self.title = title
+        self.author = author
+        self.price = price
+
+    # The __str__ function is used to return a user-friendly string
+    # representation of the object
+    def __str__(self):
+        return f"{self.title} by {self.author}, costs {self.price}"
+
+    # The __repr__ function is used to return a developer-friendly string
+    # representation of the object
+    def __repr__(self):
+        return f"title={self.title},author={self.author},price={self.price}"
+
+
+b1 = Book("War and Peace", "Leo Tolstoy", 39.95)
+b2 = Book("The Catcher in the Rye", "JD Salinger", 29.95)
+
+# print each object
+print(b1)
+print(b2)
+
+# use str() and repr()
+print("STR=>", str(b1))
+print("REPR=>", (repr(b2)))
+
+```
+
+<img width="1401" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c64521b6-ed0c-420c-8a30-d52e868135cc">
 
 # #END</details>
 
