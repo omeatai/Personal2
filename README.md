@@ -2,17 +2,6 @@
 
 ## Algorithm Challenges - [HERE](https://github.com/omeatai/src-AI-Software/tree/main/src-algorithms)
 
-<details>
-<summary> ## TOPICS </summary>
-
-### [Python](https://github.com/omeatai/src-AI-Software/tree/main/src-python)
-
-### [Django](https://github.com/omeatai/src-AI-Software/tree/main/src-django)
-
-### [SQL](https://github.com/omeatai/src-AI-Software/tree/main/src-sql)
-
-# #END</details>
-
 ---
 
 ## TOPICS
@@ -24,6 +13,30 @@
 ### [Django](https://github.com/omeatai/src-AI-Software/tree/main/src-django)
 
 ### [SQL](https://github.com/omeatai/src-AI-Software/tree/main/src-sql)
+
+---
+
+## PROJECTS
+
+---
+
+###### [1-DJANGO-BLOG-APP](https://github.com/omeatai/Django-Blog-App)
+
+###### [2-REACT-FIREBASE-TODO-APP](https://github.com/omeatai/Firebase-Todo-App)
+
+###### [3-NEXT-OPEN-WEATHER-APP](https://github.com/omeatai/open-weather-app)
+
+###### [4-REACT-CHATBOT-APP](https://github.com/omeatai/ChatBot-API)
+
+###### [5-REACT-MOVIE-SEARCH-APP](https://github.com/omeatai/Movie-search-app)
+
+###### [6-REACT-QR-CODE-GENERATOR-APP](https://github.com/omeatai/QRcode-Generator)
+
+###### [7-NEXT-MY-PORTFOLIO-APP](https://github.com/omeatai/next-project-my-portfolio)
+
+###### [8-MERN-PROJECT-LIBRARY-TRACKER](https://github.com/omeatai/mern-project-library-tracker)
+
+###### [9-MERN-PROJECT-AUTH-REDUX-TOOLKIT-APP](https://github.com/omeatai/mern-project-auth-redux)
 
 ---
 
@@ -161,30 +174,6 @@
 ###### [10-GETIMG.AI](https://getimg.ai/)
 
 </details>
-
----
-
-## PROJECTS
-
----
-
-###### [1-DJANGO-BLOG-APP](https://github.com/omeatai/Django-Blog-App)
-
-###### [2-REACT-FIREBASE-TODO-APP](https://github.com/omeatai/Firebase-Todo-App)
-
-###### [3-NEXT-OPEN-WEATHER-APP](https://github.com/omeatai/open-weather-app)
-
-###### [4-REACT-CHATBOT-APP](https://github.com/omeatai/ChatBot-API)
-
-###### [5-REACT-MOVIE-SEARCH-APP](https://github.com/omeatai/Movie-search-app)
-
-###### [6-REACT-QR-CODE-GENERATOR-APP](https://github.com/omeatai/QRcode-Generator)
-
-###### [7-NEXT-MY-PORTFOLIO-APP](https://github.com/omeatai/next-project-my-portfolio)
-
-###### [8-MERN-PROJECT-LIBRARY-TRACKER](https://github.com/omeatai/mern-project-library-tracker)
-
-###### [9-MERN-PROJECT-AUTH-REDUX-TOOLKIT-APP](https://github.com/omeatai/mern-project-auth-redux)
 
 ---
 
