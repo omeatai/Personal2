@@ -8,9 +8,9 @@
 
 ---
 
-###### [Python](https://github.com/omeatai/src-AI-Software/tree/main/src-python)
+###### [PYTHON](https://github.com/omeatai/src-AI-Software/tree/main/src-python)
 
-###### [Django](https://github.com/omeatai/src-AI-Software/tree/main/src-django)
+###### [DJANGO](https://github.com/omeatai/src-AI-Software/tree/main/src-django)
 
 ###### [SQL](https://github.com/omeatai/src-AI-Software/tree/main/src-sql)
 
