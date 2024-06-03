@@ -7,7 +7,7 @@
 ---
 
 <details>
-  <summary>VIDEOS</summary>
+  <summary>VIDEO TASKS</summary>
 
 ###### [1-EVEN OR ODD](https://scrimba.com/scrim/c6r8ngCM) | [Python](https://scrimba.com/scrim/c6r8ngCM) | [Javascript](https://scrimba.com/scrim/cN8JEqCr)
 
@@ -15,7 +15,7 @@
 
 </details>
 
-+CODEWARS
++CODE
 
 <details>
 <summary>1. Multiples of 3 or 5 </summary>
