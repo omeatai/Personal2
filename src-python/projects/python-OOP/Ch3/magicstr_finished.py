@@ -14,7 +14,7 @@ class Book:
     def __str__(self):
         return f"{self.title} by {self.author}, costs {self.price}"
 
-    # The __str__ function is used to return a developer-friendly string
+    # The __repr__ function is used to return a developer-friendly string
     # representation of the object
     def __repr__(self):
         return f"title={self.title},author={self.author},price={self.price}"
