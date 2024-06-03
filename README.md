@@ -2,26 +2,13 @@
 
 ## My Portfolio - [https://ifeanyiomeata.com/](https://ifeanyiomeata.com/)
 
+## Algorithm Challenges - [Challenges](https://github.com/omeatai/src-AI-Software/tree/main/src-algorithms)
+
 ## [Django](https://github.com/omeatai/src-AI-Software/tree/main/src-django)
 
 ## [Python](https://github.com/omeatai/src-AI-Software/tree/main/src-python)
 
 ## [SQL](https://github.com/omeatai/src-AI-Software/tree/main/src-sql)
-
----
-
-## ALGORITHM & CODE CHALLENGES
-
----
-
-<details>
-  <summary>CODEWARS</summary>
-
-###### [1-EVEN OR ODD](https://scrimba.com/scrim/c6r8ngCM) | [Python](https://scrimba.com/scrim/c6r8ngCM) | [Javascript](https://scrimba.com/scrim/cN8JEqCr)
-
-###### [2-VOWEL COUNT](https://scrimba.com/scrim/c3amV6Az) | [Python](https://scrimba.com/scrim/c3amV6Az) | [Javascript](https://scrimba.com/scrim/cN8JEyfq)
-
-</details>
 
 ---
 

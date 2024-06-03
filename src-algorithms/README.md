@@ -1,5 +1,20 @@
 # src-algorithms
 
+---
+
+## ALGORITHM & CODE CHALLENGES
+
+---
+
+<details>
+  <summary>CODEWARS</summary>
+
+###### [1-EVEN OR ODD](https://scrimba.com/scrim/c6r8ngCM) | [Python](https://scrimba.com/scrim/c6r8ngCM) | [Javascript](https://scrimba.com/scrim/cN8JEqCr)
+
+###### [2-VOWEL COUNT](https://scrimba.com/scrim/c3amV6Az) | [Python](https://scrimba.com/scrim/c3amV6Az) | [Javascript](https://scrimba.com/scrim/cN8JEyfq)
+
+</details>
+
 +CODEWARS
 
 <details>
@@ -108,7 +123,7 @@ def even_or_odd(number):
 
 ```py
 function evenOrOdd(number) {
-  return number%2==0 ? "Even" : "Odd" 
+  return number%2==0 ? "Even" : "Odd"
 }
 ```
 
