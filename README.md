@@ -2,6 +2,17 @@
 
 ## Algorithm Challenges - [HERE](https://github.com/omeatai/src-AI-Software/tree/main/src-algorithms)
 
+<details>
+<summary> ## TOPICS </summary>
+
+### [Python](https://github.com/omeatai/src-AI-Software/tree/main/src-python)
+
+### [Django](https://github.com/omeatai/src-AI-Software/tree/main/src-django)
+
+### [SQL](https://github.com/omeatai/src-AI-Software/tree/main/src-sql)
+
+# #END</details>
+
 ---
 
 ## TOPICS
