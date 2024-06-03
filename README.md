@@ -10,9 +10,9 @@
 
 ---
 
-## [Django](https://github.com/omeatai/src-AI-Software/tree/main/src-django)
-
 ## [Python](https://github.com/omeatai/src-AI-Software/tree/main/src-python)
+
+## [Django](https://github.com/omeatai/src-AI-Software/tree/main/src-django)
 
 ## [SQL](https://github.com/omeatai/src-AI-Software/tree/main/src-sql)
 
