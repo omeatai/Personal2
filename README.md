@@ -177,12 +177,12 @@
 
 ---
 
-## AWS
+## COURSES
 
 ---
 
 <details>
-  <summary>QUIZ</summary>
+  <summary>AWS QUIZ</summary>
 
 ###### [1-EXAM TOPICS FOLDERS](https://quizlet.com/omeatai/folders)
 
@@ -193,7 +193,7 @@
 </details>
 
 <details>
-  <summary>EXAMS</summary>
+  <summary>AWS EXAMS</summary>
 
 ###### [0-EXAM TOPICS](https://www.examtopics.com/exams/amazon/)
 
@@ -226,7 +226,7 @@
 </details>
 
 <details>
-  <summary>COURSES</summary>
+  <summary>AWS COURSES</summary>
 
 ###### [1-AWS CERTIFIED CLOUD PRACTITIONER | MASTER AWS FUNDAMENTALS](https://www.udemy.com/course/aws-certified-cloud-practitioner-master-aws-fundamentals/)
 
@@ -270,14 +270,8 @@
 
 </details>
 
----
-
-## WEB TUTORIALS
-
----
-
 <details>
-  <summary>1. W3SCHOOLS</summary>
+  <summary>W3SCHOOLS</summary>
 
 ###### [0-GIT COURSE - W3SCHOOLS](https://www.w3schools.com/git/default.asp)
 
@@ -285,151 +279,35 @@
 
 ###### [2-CSS COURSE - W3SCHOOLS](https://www.w3schools.com/css/default.asp)
 
-###### [3-SASS COURSE - W3SCHOOLS](https://www.w3schools.com/sass/default.asp)
+###### [3-JAVASCRIPT COURSE - W3SCHOOLS](https://www.w3schools.com/js/default.asp)
 
-###### [4-BOOTSTRAP COURSE - W3SCHOOLS](https://www.w3schools.com/bootstrap5/index.php)
+###### [4-TYPESCRIPT COURSE - W3SCHOOLS](https://www.w3schools.com/typescript/index.php)
 
-###### [5-JAVASCRIPT COURSE - W3SCHOOLS](https://www.w3schools.com/js/default.asp)
+###### [5-REACT COURSE - W3SCHOOLS](https://www.w3schools.com/react/default.asp)
 
-###### [6-TYPESCRIPT COURSE - W3SCHOOLS](https://www.w3schools.com/typescript/index.php)
+###### [6-PYTHON TUTORIAL - W3SCHOOLS](https://www.w3schools.com/python/default.asp)
 
-###### [7-REACT COURSE - W3SCHOOLS](https://www.w3schools.com/react/default.asp)
+###### [7-DJANGO TUTORIAL - W3SCHOOLS](https://www.w3schools.com/django/index.php)
 
-###### [8-ANGULAR COURSE - W3SCHOOLS](https://www.w3schools.com/angular/default.asp)
-
-###### [9-VUE COURSE - W3SCHOOLS](https://www.w3schools.com/vue/index.php)
-
-###### [10-NODE TUTORIAL - W3SCHOOLS](https://www.w3schools.com/nodejs/default.asp)
-
-###### [11-PYTHON TUTORIAL - W3SCHOOLS](https://www.w3schools.com/python/default.asp)
-
-###### [12-DJANGO TUTORIAL - W3SCHOOLS](https://www.w3schools.com/django/index.php)
-
-###### [13-MYSQL TUTORIAL - W3SCHOOLS](https://www.w3schools.com/mysql/default.asp)
-
-###### [14-SQL TUTORIAL - W3SCHOOLS](https://www.w3schools.com/sql/default.asp)
-
-###### [15-POSTGRESQL TUTORIAL - W3SCHOOLS](https://www.w3schools.com/postgresql/index.php)
-
-###### [16-MONGODB TUTORIAL - W3SCHOOLS](https://www.w3schools.com/mongodb/index.php)
-
-###### [17-AWS TUTORIAL - W3SCHOOLS](https://www.w3schools.com/aws/index.php)
+###### [8-SQL TUTORIAL - W3SCHOOLS](https://www.w3schools.com/sql/default.asp)
 
 </details>
 
 <details>
-  <summary>2. SCRIMBA</summary>
+  <summary>SCRIMBA</summary>
 
-###### [1-ALL COURSES](https://scrimba.com/allcourses)
+###### [SCRIMBA COURSES](https://v2.scrimba.com/courses)
 
-###### [2-THE FRONTEND DEVELOPER CAREER PATH](https://scrimba.com/learn/frontend)
+###### [SCRIMBA TOPICS](https://v2.scrimba.com/courses)
 
-###### [3-THE AI ENGINEER PATH](https://scrimba.com/learn/aiengineer)
-
-###### [4-BUILD AI APPS WITH CHATGPT, DALL-E AND GPT-4](https://scrimba.com/learn/buildaiapps)
-
-###### [5-THE OFFICIAL LANGCHAIN.JS COURSE](https://scrimba.com/learn/langchain)
-
-###### [6-PROMPT ENGINEERING FOR WEB DEVELOPERS](https://scrimba.com/learn/promptengineering)
-
-###### [7-LEARN TO CODE WITH AI](https://scrimba.com/learn/aicoding)
-
-###### [8-LEARN HTML AND CSS](https://scrimba.com/learn/htmlandcss)
-
-###### [9-HTML & CSS CRASH COURSE](https://scrimba.com/learn/introhtmlcss)
-
-###### [10-LEARN FLEXBOX](https://scrimba.com/learn/flexbox)
-
-###### [11-LEARN CSS GRID](https://scrimba.com/learn/cssgrid)
-
-###### [12-LEARN CSS VARIABLES](https://scrimba.com/learn/cssvariables)
-
-###### [13-LEARN CSS ANIMATIONS](https://scrimba.com/learn/cssanimations)
-
-###### [14-LEARN RESPONSIVE WEB DESIGN](https://scrimba.com/learn/responsive)
-
-###### [15-LEARN TAILWIND CSS](https://scrimba.com/learn/tailwind)
-
-###### [16-LEARN BOOTSTRAP](https://scrimba.com/learn/bootstrap4)
-
-###### [17-FROM FIGMA TO CODE](https://scrimba.com/learn/figmatocode)
-
-###### [18-LEARN UI DESIGN FUNDAMENTALS](https://scrimba.com/learn/design)
-
-###### [19-LEARN UI DESIGN](https://scrimba.com/learn/designbootcamp)
-
-###### [20-LEARN JAVASCRIPT](https://scrimba.com/learn/learnjavascript)
-
-###### [21-JAVASCRIPT DEEP DIVE](https://scrimba.com/learn/javascript)
-
-###### [22-INTRODUCTION TO ES6+](https://scrimba.com/learn/introtoes6)
-
-###### [23-LEARN TYPESCRIPT](https://scrimba.com/learn/typescript)
-
-###### [24-INTRODUCTION TO UNIT TESTING](https://scrimba.com/learn/unittest)
-
-###### [25-LEARN REGULAR EXPRESSIONS](https://scrimba.com/learn/regularexpressions)
-
-###### [26-BUILD A COLOR TOOL IN VANILLA JAVASCRIPT](https://scrimba.com/learn/javascriptcolortool)
-
-###### [27-JAVASCRIPT INTERVIEW CHALLENGES](https://scrimba.com/learn/interviewchallenges)
-
-###### [28-LEARN BINARY SEARCH IN JAVASCRIPT](https://scrimba.com/learn/algorithmsguide)
-
-###### [29-LEARN MERGE SORT IN JAVASCRIPT](https://scrimba.com/learn/mergesort)
-
-###### [30-LEARN REACT](https://scrimba.com/learn/learnreact)
-
-###### [31-ADVANCED REACT](https://scrimba.com/learn/react)
-
-###### [32-LEARN REACT ROUTER 6](https://scrimba.com/learn/reactrouter6)
-
-###### [33-BUILD REUSABLE REACT](https://scrimba.com/learn/reusablereact)
-
-###### [34-LEARN STYLED COMPONENTS IN REACT](https://scrimba.com/learn/styledcomponents)
-
-###### [35-LEARN CLASS COMPONENTS IN REACT](https://scrimba.com/learn/classcomponents)
-
-###### [36-BUILD TIC TAC TOE WITH REACT HOOKS](https://scrimba.com/learn/reactgame)
-
-###### [37-BUILD A MOVIE SEARCH APP IN REACT](https://scrimba.com/learn/reactmovie)
-
-###### [38-REACT CHALLENGES](https://scrimba.com/learn/reactchallenges)
-
-###### [39-REACT INTERVIEW QUESTIONS](https://scrimba.com/learn/reactinterview)
-
-###### [40-FRONTEND INTERVIEW TIPS](https://scrimba.com/learn/frontendinterview)
-
-###### [41-LEARN FIREBASE](https://scrimba.com/learn/learnfirebase)
-
-###### [42-BUILD A MOBILE APP WITH FIREBASE](https://scrimba.com/learn/firebase)
-
-###### [43-BUILD AND DEPLOY YOUR PORTFOLIO](https://scrimba.com/learn/portfolio)
-
-###### [44-BUILD A SPACE TRAVEL WEBSITE](https://scrimba.com/learn/spacetravel)
-
-###### [45-DEPLOYING WITH NETLIFY](https://scrimba.com/learn/netlify)
-
-###### [46-LEARN MARKDOWN](https://scrimba.com/learn/markdownblog)
-
-###### [47-INTRODUCTION TO CLEAN CODE](https://scrimba.com/learn/cleancode)
-
-###### [48-PRACTICAL MATH FOR FRONTEND DEVELOPERS](https://scrimba.com/learn/practicalmath)
-
-###### [49-LEARN PYTHON](https://scrimba.com/learn/python)
-
-###### [50-LEARN D3](https://scrimba.com/learn/d3js)
-
-###### [51-LEARN SVELTE](https://scrimba.com/learn/learnsvelte)
-
-###### [52-LEARN IMBA](https://scrimba.com/learn/imba)
+###### [The Frontend Developer Career Path](https://v2.scrimba.com/the-frontend-developer-career-path-c0j)
 
 </details>
 
 </details>
 
 <details>
-  <summary>3. FIGMA</summary>
+  <summary>FIGMA</summary>
 
 ###### [0-UDEMY-COMPLETE WEB & MOBILE DESIGNER IN 2023](https://www.udemy.com/course/complete-web-designer-mobile-designer-zero-to-mastery/)
 
@@ -512,12 +390,6 @@
 ###### [38-THE 60-30-10 COLOR RULE](https://www.youtube.com/watch?v=UWwNIMHFdW4&ab_channel=JesseShowalter)
 
 </details>
-
----
-
-## COURSES
-
----
 
 <details>
   <summary>HTML, CSS, TAILWINDCSS, MUI, JAVASCRIPT & TYPESCRIPT</summary>
@@ -700,44 +572,38 @@
 </details>
 
 <details>
-  <summary>A</summary>
+  <summary>YOUTUBE TUTORIALS</summary>
+
+1. [CodingAddict](https://www.codingaddict.io/)
+2. [Codevolution](https://www.youtube.com/@Codevolution/playlists)
+3. [Dave Gray](https://www.youtube.com/@DaveGrayTeachesCode/playlists)
+4. [Net Ninja](https://www.youtube.com/@NetNinja/playlists)
+5. [freeCodeCamp.org](https://www.youtube.com/@freecodecamp/videos)
+6. [Traversy Media](https://www.youtube.com/@TraversyMedia/videos)
+7. [JavaScript Mastery](https://www.youtube.com/@javascriptmastery/videos)
+8. [code with lari](https://www.youtube.com/@codewithlari/videos)
+9. [Jan Marshal](https://www.youtube.com/@janmarshalcoding/videos)
+10. [Coding With Dawid](https://www.youtube.com/@CodingWithDawid/videos)
+11. [TubeGuruji](https://www.youtube.com/@tubeguruji/videos)
+12. [9jaCoder](https://www.youtube.com/@9jaCoder/videos)
+13. [Elliott Chong](https://www.youtube.com/@elliottchong/videos)
+14. [Code With Antonio](https://www.youtube.com/@codewithantonio/videos)
+15. [Kishan Sheth](https://www.youtube.com/@KishanSheth21/videos)
+16. [Code Bootcamp](https://www.youtube.com/@CodeBootcampCom/videos)
+17. [Lama Dev](https://www.youtube.com/@LamaDev/videos)
+18. [Daily Tuition](https://www.youtube.com/@DailyTuition/videos)
+19. [IndGeek](https://www.youtube.com/@indgeek/videos)
+20. [Code With Vini](https://www.youtube.com/@codewithvini1644/videos)
+21. [PedroTech](https://www.youtube.com/@PedroTechnologies/videos)
+22. [Zpunet](https://www.youtube.com/@zpunet/videos)
+23. [NewAwesomeTech](https://www.youtube.com/@NewAwesomeTech/videos)
+24. [Emilian Kasemi](https://www.youtube.com/@the_rings_of_saturn/videos)
+25. [Sonny Sangha](https://www.youtube.com/@SonnySangha/videos)
+26. [Becodemy](https://www.youtube.com/@BecodemyOfficial/videos)
+27. [Sangam Mukherjee](https://www.youtube.com/@sangammukherjee3009/videos)
+28. [Milad Tech](https://www.youtube.com/@miladtech/videos)
+29. [HuXn WebDev](https://www.youtube.com/@huxnwebdev/videos)
+30. [Chaoo Charles](https://www.youtube.com/@ChaooCharles/featured)
+31. [EdRoh](https://www.youtube.com/@EdRohDev/videos)
 
 </details>
-
----
-
-## YOUTUBE
-
----
-
-0. [CodingAddict](https://www.codingaddict.io/)
-1. [Codevolution](https://www.youtube.com/@Codevolution/playlists)
-2. [Dave Gray](https://www.youtube.com/@DaveGrayTeachesCode/playlists)
-3. [Net Ninja](https://www.youtube.com/@NetNinja/playlists)
-4. [freeCodeCamp.org](https://www.youtube.com/@freecodecamp/videos)
-5. [Traversy Media](https://www.youtube.com/@TraversyMedia/videos)
-6. [JavaScript Mastery](https://www.youtube.com/@javascriptmastery/videos)
-7. [code with lari](https://www.youtube.com/@codewithlari/videos)
-8. [Jan Marshal](https://www.youtube.com/@janmarshalcoding/videos)
-9. [Coding With Dawid](https://www.youtube.com/@CodingWithDawid/videos)
-10. [TubeGuruji](https://www.youtube.com/@tubeguruji/videos)
-11. [9jaCoder](https://www.youtube.com/@9jaCoder/videos)
-12. [Elliott Chong](https://www.youtube.com/@elliottchong/videos)
-13. [Code With Antonio](https://www.youtube.com/@codewithantonio/videos)
-14. [Kishan Sheth](https://www.youtube.com/@KishanSheth21/videos)
-15. [Code Bootcamp](https://www.youtube.com/@CodeBootcampCom/videos)
-16. [Lama Dev](https://www.youtube.com/@LamaDev/videos)
-17. [Daily Tuition](https://www.youtube.com/@DailyTuition/videos)
-18. [IndGeek](https://www.youtube.com/@indgeek/videos)
-19. [Code With Vini](https://www.youtube.com/@codewithvini1644/videos)
-20. [PedroTech](https://www.youtube.com/@PedroTechnologies/videos)
-21. [Zpunet](https://www.youtube.com/@zpunet/videos)
-22. [NewAwesomeTech](https://www.youtube.com/@NewAwesomeTech/videos)
-23. [Emilian Kasemi](https://www.youtube.com/@the_rings_of_saturn/videos)
-24. [Sonny Sangha](https://www.youtube.com/@SonnySangha/videos)
-25. [Becodemy](https://www.youtube.com/@BecodemyOfficial/videos)
-26. [Sangam Mukherjee](https://www.youtube.com/@sangammukherjee3009/videos)
-27. [Milad Tech](https://www.youtube.com/@miladtech/videos)
-28. [HuXn WebDev](https://www.youtube.com/@huxnwebdev/videos)
-29. [Chaoo Charles](https://www.youtube.com/@ChaooCharles/featured)
-30. [EdRoh](https://www.youtube.com/@EdRohDev/videos)
