@@ -7,7 +7,7 @@
 ---
 
 <details>
-  <summary>CODEWARS</summary>
+  <summary>VIDEOS</summary>
 
 ###### [1-EVEN OR ODD](https://scrimba.com/scrim/c6r8ngCM) | [Python](https://scrimba.com/scrim/c6r8ngCM) | [Javascript](https://scrimba.com/scrim/cN8JEqCr)
 
@@ -15,7 +15,8 @@
 
 </details>
 
-+CODEWARS
+<details>
+  <summary>CODEWARS</summary>
 
 <details>
 <summary>1. Multiples of 3 or 5 </summary>
@@ -229,5 +230,7 @@ The input string will only consist of lower case letters and/or spaces.
 ```py
 
 ```
+
+# #END</details>
 
 # #END</details>
