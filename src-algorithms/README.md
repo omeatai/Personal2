@@ -7,17 +7,6 @@
 ---
 
 <details>
-  <summary>VIDEO TASKS</summary>
-
-###### [1-EVEN OR ODD](https://scrimba.com/scrim/c6r8ngCM) | [Python](https://scrimba.com/scrim/c6r8ngCM) | [Javascript](https://scrimba.com/scrim/cN8JEqCr)
-
-###### [2-VOWEL COUNT](https://scrimba.com/scrim/c3amV6Az) | [Python](https://scrimba.com/scrim/c3amV6Az) | [Javascript](https://scrimba.com/scrim/cN8JEyfq)
-
-</details>
-
-+CODE
-
-<details>
 <summary>1. Multiples of 3 or 5 </summary>
 
 # Multiples of 3 or 5
@@ -139,10 +128,12 @@ function evenOrOdd(number) {
 
 # #END</details>
 
-<details>
-<summary>3. Even or Odd </summary>
+###### [TASK 2-EVEN OR ODD](https://scrimba.com/scrim/c6r8ngCM) | [Python](https://scrimba.com/scrim/c6r8ngCM) | [Javascript](https://scrimba.com/scrim/cN8JEqCr)
 
-# Even or Odd
+<details>
+<summary>3. Vowel Count </summary>
+
+# Vowel Count
 
 [https://www.codewars.com/kata/54ff3102c1bad923760001f3](https://www.codewars.com/kata/54ff3102c1bad923760001f3)
 
@@ -161,6 +152,15 @@ The input string will only consist of lower case letters and/or spaces.
 ```py
 
 ```
+
+# #END</details>
+
+###### [TASK 3-VOWEL COUNT](https://scrimba.com/scrim/c3amV6Az) | [Python](https://scrimba.com/scrim/c3amV6Az) | [Javascript](https://scrimba.com/scrim/cN8JEyfq)
+
+<details>
+<summary>3. N </summary>
+
+# N
 
 ```py
 
