@@ -1,16 +1,12 @@
 # AI-Software Tutorial
 
-AI-Software Tutorial
-
-## [All Tutorials](https://github.com/omeatai/src-AI-Software/tree/main/src-tutorials)
+## My Portfolio - [https://ifeanyiomeata.com/](https://ifeanyiomeata.com/)
 
 ## [Django](https://github.com/omeatai/src-AI-Software/tree/main/src-django)
 
 ## [Python](https://github.com/omeatai/src-AI-Software/tree/main/src-python)
 
 ## [SQL](https://github.com/omeatai/src-AI-Software/tree/main/src-sql)
-
-## My Portfolio - [https://ifeanyiomeata.com/](https://ifeanyiomeata.com/)
 
 ---
 
