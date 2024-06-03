@@ -1,5 +1,3 @@
-# AI-Software Tutorial
-
 ## My Portfolio - [https://ifeanyiomeata.com/](https://ifeanyiomeata.com/)
 
 ## Algorithm Challenges - [HERE](https://github.com/omeatai/src-AI-Software/tree/main/src-algorithms)
