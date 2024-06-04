@@ -753,6 +753,17 @@ print(b1)
 # #END</details>
 
 <details>
+<summary>17. Challenge - Sorting Stocks </summary>
+
+# Challenge - Sorting Stocks
+
+```py
+
+```
+
+# #END</details>
+
+<details>
 <summary>+LinkedIn - Python Essential Training </summary>
 
 ```py
