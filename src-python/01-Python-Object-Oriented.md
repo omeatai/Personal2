@@ -757,6 +757,12 @@ print(b1)
 
 # Challenge - Sorting Stocks
 
+<img width="1440" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/20c33af5-1653-4c53-b0c7-b243ba4b853e">
+<img width="1440" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/687a286a-86bb-4baa-afc8-15a6878ea372">
+<img width="1440" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/afa3de58-6740-4f98-837f-e20b619703ae">
+<img width="1440" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/cd35e9a0-c353-4f7d-b22f-906a42d1307d">
+
+
 ```py
 
 ```
