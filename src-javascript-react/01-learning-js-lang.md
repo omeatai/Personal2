@@ -30,6 +30,38 @@ monster3;
 
 <img width="1506" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/463e4f30-365d-4de0-94cb-b34e8d2c19d8">
 
+# #END</details>
+
+<details>
+<summary>2-Declaring and Assigning Variables</summary>
+
+## Declaring and Assigning Variables
+
+```js
+var myString = "This is my string. Leave it alone";
+
+myString;
+
+var str1Len = myString.length;
+str1Len;
+
+var str1Upper = myString.toUpperCase();
+str1Upper;
+
+var str2Len = "This is my string".length;
+str2Len;
+
+let declaration = `This I say to you: "good morning". Huzzah!`;
+declaration;
+
+declaration = `This I say to you: "${myString}". Huzzah!`;
+declaration;
+
+```
+
+<img width="1514" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/b05854dd-35c2-4e7c-a1e3-4e5c3d1b7a66">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/013fcf11-ccef-4026-953d-3f0df9725c0e)
 
 # #END</details>
 
