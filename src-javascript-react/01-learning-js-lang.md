@@ -33,9 +33,9 @@ monster3;
 # #END</details>
 
 <details>
-<summary>2-Declaring and Assigning Variables</summary>
+<summary>2-String Properties and Methods</summary>
 
-## Declaring and Assigning Variables
+## String Properties and Methods
 
 ```js
 var myString = "This is my string. Leave it alone";
@@ -66,9 +66,20 @@ declaration;
 # #END</details>
 
 <details>
-<summary>100-</summary>
+<summary>3-Numbers</summary>
 
-## D
+## Numbers
+
+```js
+
+```
+
+# #END</details>
+
+<details>
+<summary>100-Javascript</summary>
+
+## Javascript
 
 ```js
 
