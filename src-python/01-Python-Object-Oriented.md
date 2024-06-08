@@ -988,6 +988,52 @@ print(b2)
 # Immutable Data Classes 
 
 ```py
+# Creating immutable data classes
+
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)  # "The "frozen" parameter makes the class immutable
+class ImmutableClass:
+    value1: str = "Value 1"
+    value2: int = 0
+
+    def somefunc(self, newval):
+        self.value2 = newval
+
+
+obj = ImmutableClass()
+print(obj)
+
+# The values can be initialized also, but not subsequently changed
+obj2 = ImmutableClass("Another Value", 15)
+print(obj2)
+
+# attempting to change the value of an immutable class throws an exception
+# obj.value1 = "Another value"
+print(obj.value1)
+
+# Frozen classes can't modify themselves either
+# obj.somefunc(20)
+print(obj.value2)
+
+```
+
+<img width="1401" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/20ec882b-e472-4913-9054-ee9f13051a68">
+
+# #END</details>
+
+<details>
+<summary>22. Challenge - Data Classes </summary>
+
+# Challenge - Data Classes
+
+<img width="1440" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c552346b-4a6e-4a39-9628-25ae9c3b7859">
+<img width="1440" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/cfe8c78c-5eb0-4cb2-a2d1-dce53e41bf0c">
+<img width="1440" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c18ea494-0eac-47cd-b805-ff88779b2817">
+
+
+```py
 
 ```
 
