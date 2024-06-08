@@ -129,11 +129,12 @@ npm start
 <details>
 <summary>13. Component Lifecycle Methods - Mounting </summary>
 
-# Component Lifecycle Methods - Mounting 
+# Component Lifecycle Methods - Mounting
 
 [https://github.com/omeatai/src-react-typescript/commit/65b9bfe7160dd954026c7e4b013078a8b32ab021](https://github.com/omeatai/src-react-typescript/commit/65b9bfe7160dd954026c7e4b013078a8b32ab021)
 
 ### Mounting Lifecycle Methods
+
 - constructor( props): Invoked immediately after a component and all its children components have been rendered to the DOM.
 - static getDerivedStateFromProps(props, state): Cause side effects. Ex: Interact with the DOM or perform any ajax calls to load data.
 - render()
@@ -153,29 +154,34 @@ npm start
 [https://github.com/omeatai/src-react-typescript/commit/6bbda5bbe6045084eea9244ee73ee1dd8cdc0629](https://github.com/omeatai/src-react-typescript/commit/6bbda5bbe6045084eea9244ee73ee1dd8cdc0629)
 
 ### 1. static getDerivedStateFromProps( props, state):
+
 - Method is called every time a component is re-rendered
 - Set the state
 - Do not cause side effects. Ex: HTTP requests
 
-### 2. shouldComponentUpdate( nextProps, nextState): 
+### 2. shouldComponentUpdate( nextProps, nextState):
+
 - Dictates if the component should re-render or not
 - Performance optimization
 - Do not cause side effects. Ex: HTTP requests
 - Calling the setState method
 
 ### 3. render():
+
 - Only required method
-- static getDerivedStateFromProps( props, state) 
+- static getDerivedStateFromProps( props, state)
 - Read props & state and return JSX
 - Do not change state or interact with DOM or make ajax calls.
 
 ### 4. getSnapshotBeforeUpdate(prevProps, prevState):
+
 - Called right before the changes from the virtual DOM are to be reflected in the DOM
 - Capture some information from the DOM
 - Method will either return null or return a value.
 - Returned value will be passed as the third parameter to the next method.
 
 ### 5. componentDidUpdate(prevProps, prevState, snapshot):
+
 - Called after the render is finished in the re-render cycles
 - Cause side effects
 
@@ -192,7 +198,7 @@ npm start
 # Component Lifecycle Methods - Unmounting
 
 ### componentWillUnmount()
-  
+
 - Method is invoked immediately before a component is unmounted and destroyed.
 - Cancelling any network requests, removing event handlers, cancelling any subscriptions and also invalidating timers.
 - Do not call the setState method.
@@ -205,6 +211,7 @@ npm start
 # Component Lifecycle Methods - Error Handling Phase
 
 ### static getDerivedStateFromError(error)
+
 - componentDidCatch(error, info)
 - called when there is an error either during rendering, in a lifecycle method, or in the constructor of any child component.
 
@@ -228,7 +235,7 @@ npm start
 <details>
 <summary>18. React.memo </summary>
 
-# React.memo 
+# React.memo
 
 [https://github.com/omeatai/src-react-typescript/commit/1b8ef02bfac436662b2821a72bcb7c88f339aaf2](https://github.com/omeatai/src-react-typescript/commit/1b8ef02bfac436662b2821a72bcb7c88f339aaf2)
 
@@ -271,7 +278,7 @@ npm start
 <details>
 <summary>21. React Portals </summary>
 
-# React Portals 
+# React Portals
 
 [https://github.com/omeatai/src-react-typescript/commit/08a326de012e056f45aee1ff8aae69195789e326](https://github.com/omeatai/src-react-typescript/commit/08a326de012e056f45aee1ff8aae69195789e326)
 
@@ -339,7 +346,7 @@ npm start
 <details>
 <summary>25. React HTTP - GET </summary>
 
-# React HTTP - GET 
+# React HTTP - GET
 
 [https://github.com/omeatai/src-react-typescript/commit/1dfbd70da58cc05282ca49cf38c6adee59114ce9](https://github.com/omeatai/src-react-typescript/commit/1dfbd70da58cc05282ca49cf38c6adee59114ce9)
 
@@ -365,7 +372,7 @@ yarn add axios
 <details>
 <summary>26. React HTTP - POST </summary>
 
-# React HTTP - POST 
+# React HTTP - POST
 
 [https://github.com/omeatai/src-react-typescript/commit/7de24b7dc3469cf181ec49daf79a7f3eb0206d18](https://github.com/omeatai/src-react-typescript/commit/7de24b7dc3469cf181ec49daf79a7f3eb0206d18)
 
@@ -378,7 +385,7 @@ yarn add axios
 <details>
 <summary>27. React Hooks - useState </summary>
 
-# React Hooks - useState 
+# React Hooks - useState
 
 ```ts
 
