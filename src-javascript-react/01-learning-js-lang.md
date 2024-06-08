@@ -33,7 +33,38 @@ monster3;
 # #END</details>
 
 <details>
-<summary>2-String Properties and Methods</summary>
+<summary>2-Strings</summary>
+
+## Strings
+
+```js
+"This is a string";
+"12";
+// 12;
+
+"This is also a string";
+// 'This is a string"; // mismatched quotes - this will not execute
+
+'<a href="">';
+'<a href="http://www.example.com">';
+
+"This is Joe's favorite string";
+'This is Joe\'s "favorite" string';
+"This is Joe's \"favorite\" string";
+
+"This is \
+Joe's Favorite \
+String EVER";
+
+```
+
+<img width="1514" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c1f9baff-b3c3-4ae6-a201-bf1173799327">
+
+
+# #END</details>
+
+<details>
+<summary>3-String Properties and Methods</summary>
 
 ## String Properties and Methods
 
@@ -66,7 +97,7 @@ declaration;
 # #END</details>
 
 <details>
-<summary>3-Numbers</summary>
+<summary>4-Numbers</summary>
 
 ## Numbers
 
