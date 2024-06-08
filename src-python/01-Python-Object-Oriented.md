@@ -854,7 +854,7 @@ for bond in bonds:
 # #END</details>
 
 <details>
-<summary>18. Using Data Classes </summary>
+<summary>18. Data Classes - Using Data Classes </summary>
 
 # Using Data Classes
 
@@ -904,7 +904,7 @@ print(b1.bookinfo())
 # #END</details>
 
 <details>
-<summary>19. Using Post Initialization </summary>
+<summary>19. Data Classes - Using Post Initialization </summary>
 
 # Using Post Initialization
 
@@ -942,7 +942,7 @@ print(b2.description)
 # #END</details>
 
 <details>
-<summary>20. Using Default Values </summary>
+<summary>20. Data Classes - Using Default Values </summary>
 
 # Using Default Values
 
@@ -983,7 +983,7 @@ print(b2)
 # #END</details>
 
 <details>
-<summary>21. Immutable Data Classes </summary>
+<summary>21. Data Classes - Immutable Data Classes </summary>
 
 # Immutable Data Classes 
 
