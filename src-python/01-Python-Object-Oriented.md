@@ -655,6 +655,391 @@ print([book.title for book in books])
 # #END</details>
 
 <details>
+<summary>15. Magic Methods - Attribute Access </summary>
+
+# Magic Methods - Attribute Access
+
+```py
+class Book:
+    def __init__(self, title, author, price):
+        super().__init__()
+        self.title = title
+        self.author = author
+        self.price = price
+        self._discount = 0.1
+
+    # The __str__ function is used to return a user-friendly string
+    # representation of the object
+    def __str__(self):
+        return f"{self.title} by {self.author}, costs {self.price}"
+
+    # Called when an attribute is retrieved. Be aware that you can't
+    # directly access the attr name otherwise a recursive loop is created
+    def __getattribute__(self, name):
+        if (name == "price"):
+            p = super().__getattribute__("price")
+            d = super().__getattribute__("_discount")
+            return p - (p * d)
+        return super().__getattribute__(name)
+
+    # __setattr__ called when an attribute value is set. Don't set the attr
+    # directly here otherwise a recursive loop causes a crash
+    def __setattr__(self, name, value):
+        if (name == "price"):
+            if type(value) is not float:
+                raise ValueError("The 'price' attribute must be a float")
+        return super().__setattr__(name, value)
+
+    # __getattr__ called when __getattribute__ lookup fails - you can
+    # pretty much generate attributes on the fly with this method
+    def __getattr__(self, name):
+        return name + " is not here!"
+
+
+b1 = Book("War and Peace", "Leo Tolstoy", 39.95)
+b2 = Book("The Catcher in the Rye", "JD Salinger", 29.95)
+
+# Try setting and accessing the price
+b1.price = 38.95
+print(b1)
+
+b2.price = float(40)  # using an int will raise an exception
+print(b2)
+
+# If an attribute doesn't exist, __getattr__ will be called
+print(b1.randomprop)
+
+```
+
+<img width="1401" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/2fbfd3eb-3080-4ffc-92a6-52fe09cfa081">
+
+# #END</details>
+
+<details>
+<summary>16. Magic Methods - Callable Objects </summary>
+
+# Magic Methods - Callable Objects
+
+```py
+class Book:
+    def __init__(self, title, author, price):
+        super().__init__()
+        self.title = title
+        self.author = author
+        self.price = price
+
+    def __str__(self):
+        return f"{self.title} by {self.author}, costs {self.price}"
+
+    # TODO: the __call__ method can be used to call the object like a function
+    def __call__(self, title, author, price):
+        self.title = title
+        self.author = author
+        self.price = price
+
+
+b1 = Book("War and Peace", "Leo Tolstoy", 39.95)
+b2 = Book("The Catcher in the Rye", "JD Salinger", 29.95)
+
+# call the object as if it were a function
+print(b1)
+b1("Anna Karenina", "Leo Tolstoy", 49.95)
+print(b1)
+
+```
+
+<img width="1401" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/ba44c06f-1fe4-444f-953b-dd8ca84481d9">
+
+# #END</details>
+
+<details>
+<summary>17. Challenge - Sorting Stocks </summary>
+
+# Challenge - Sorting Stocks
+
+<img width="1440" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/20c33af5-1653-4c53-b0c7-b243ba4b853e">
+<img width="1440" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/687a286a-86bb-4baa-afc8-15a6878ea372">
+<img width="1440" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/afa3de58-6740-4f98-837f-e20b619703ae">
+<img width="1440" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/cd35e9a0-c353-4f7d-b22f-906a42d1307d">
+
+```py
+# Programming challenge: add methods for comparison and equality
+# Challenge: use a magic method to make stocks and bonds sortable
+
+# Stocks should sort from low to high on price
+# Bonds should sort from low to high on yield
+
+from abc import ABC, abstractmethod
+
+
+class Asset(ABC):
+    def __init__(self, price):
+        self.price = price
+
+    @abstractmethod
+    def __str__(self):
+        pass
+
+
+class Stock(Asset):
+    def __init__(self, ticker, price, company):
+        super().__init__(price)
+        self.company = company
+        self.ticker = ticker
+
+    def __str__(self):
+        return f"{self.ticker}: {self.company} -- {self.price}"
+
+    def __lt__(self, other):
+        if not isinstance(other, Stock):
+            raise ValueError("Can't compare stock with non-stock type")
+        return self.price < other.price
+
+    # def __gt__(self, other):
+    #     if not isinstance(other, Stock):
+    #         raise ValueError("Can't compare stock with non-stock type")
+    #     return self.price > other.price
+
+
+class Bond(Asset):
+    def __init__(self, price, description, duration, yieldamt):
+        super().__init__(price)
+        self.description = description
+        self.duration = duration
+        self.yieldamt = yieldamt
+
+    def __str__(self):
+        return f"{self.description} : {self.duration}yr : {self.price} : {self.yieldamt}%"
+
+    def __lt__(self, other):
+        if not isinstance(other, Bond):
+            raise ValueError("Can't compare bond with non-bond type")
+        return self.yieldamt < other.yieldamt
+
+    # def __gt__(self, other):
+    #     if not isinstance(other, Bond):
+    #         raise ValueError("Can't compare bond with non-bond type")
+    #     return self.yieldamt > other.yieldamt
+
+
+# 2 ~~~~~~~~~ TEST CODE ~~~~~~~~~
+stocks = [
+    Stock("MSFT", 342.0, "Microsoft Corp"),
+    Stock("GOOG", 135.0, "Google Inc"),
+    Stock("META", 275.0, "Meta Platforms Inc"),
+    Stock("AMZN", 120.0, "Amazon Inc")
+]
+
+bonds = [
+    Bond(95.31, "30 Year US Treasury", 30, 4.38),
+    Bond(96.70, "10 Year US Treasury", 10, 4.28),
+    Bond(98.65, "5 Year US Treasury", 5, 4.43),
+    Bond(99.57, "2 Year US Treasury", 2, 4.98)
+]
+
+stocks.sort()
+bonds.sort()
+
+for stock in stocks:
+    print(stock)
+    print("--- ")
+
+for bond in bonds:
+    print(bond)
+
+```
+
+<img width="1401" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/99dad1fa-f8a9-4d81-8262-66f6cd48b14f">
+
+# #END</details>
+
+<details>
+<summary>18. Data Classes - Using Data Classes </summary>
+
+# Using Data Classes
+
+```py
+# Using data classes to represent data objects
+
+from dataclasses import dataclass
+
+
+@dataclass
+class Book:
+    title: str
+    author: str
+    pages: int
+    price: float
+
+    # You can define methods in a dataclass like any other
+    def bookinfo(self):
+        return f"{self.title}, by {self.author}"
+
+
+# create some instances
+b1 = Book("War and Peace", "Leo Tolstoy", 1225, 39.95)
+b2 = Book("The Catcher in the Rye", "JD Salinger", 234, 29.95)
+
+# access fields
+print(b1.title)
+print(b2.author)
+
+# print the book itself - dataclasses provide a default
+# implementation of the __repr__ function
+print(b1)
+
+# comparing two dataclasses
+b3 = Book("War and Peace", "Leo Tolstoy", 1225, 39.95)
+print(b1 == b3)
+
+# change some fields, call a regular class method
+b1.title = "Anna Karenina"
+b1.pages = 864
+print(b1.bookinfo())
+
+```
+
+<img width="1401" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/513598e0-5732-43b7-ae24-39283fe98b77">
+
+# #END</details>
+
+<details>
+<summary>19. Data Classes - Using Post Initialization </summary>
+
+# Using Post Initialization
+
+```py
+# Using the postinit function in data classes
+
+from dataclasses import dataclass
+
+
+@dataclass
+class Book:
+    title: str
+    author: str
+    pages: int
+    price: float
+
+    # the __post_init__ function lets us customize additional properties
+    # after the object has been initialized via built-in __init__
+    def __post_init__(self):
+        self.description = f"{self.title} by {self.author}, {self.pages} pages"
+
+
+# create some Book objects
+b1 = Book("War and Peace", "Leo Tolstoy", 1225, 39.95)
+b2 = Book("The Catcher in the Rye", "JD Salinger", 234, 29.95)
+
+# use the description attribute
+print(b1.description)
+print(b2.description)
+
+```
+
+<img width="1401" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/abdd2530-426d-4ab3-8136-a3e4b3583879">
+
+# #END</details>
+
+<details>
+<summary>20. Data Classes - Using Default Values </summary>
+
+# Using Default Values
+
+```py
+# implementing default values in data classes
+
+from dataclasses import dataclass, field
+import random
+
+
+def price_func():
+    return float(random.randrange(20, 40))
+
+
+@dataclass
+class Book:
+    # you can define default values when attributes are declared
+    title: str = "No Title"
+    author: str = "No Author"
+    pages: int = 0
+    price: float = field(default_factory=price_func)
+
+
+# Create a default book object
+b1 = Book()
+print(b1)
+
+# Create a specified book, price is set by field operator
+b1 = Book("War and Peace", "Leo Tolstoy", 1225)
+b2 = Book("The Catcher in the Rye", "JD Salinger", 234)
+print(b1)
+print(b2)
+
+```
+
+<img width="1401" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/7ef8b4d8-bf05-4e13-b354-1460972f9395">
+
+# #END</details>
+
+<details>
+<summary>21. Data Classes - Immutable Data Classes </summary>
+
+# Immutable Data Classes 
+
+```py
+# Creating immutable data classes
+
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)  # "The "frozen" parameter makes the class immutable
+class ImmutableClass:
+    value1: str = "Value 1"
+    value2: int = 0
+
+    def somefunc(self, newval):
+        self.value2 = newval
+
+
+obj = ImmutableClass()
+print(obj)
+
+# The values can be initialized also, but not subsequently changed
+obj2 = ImmutableClass("Another Value", 15)
+print(obj2)
+
+# attempting to change the value of an immutable class throws an exception
+# obj.value1 = "Another value"
+print(obj.value1)
+
+# Frozen classes can't modify themselves either
+# obj.somefunc(20)
+print(obj.value2)
+
+```
+
+<img width="1401" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/20ec882b-e472-4913-9054-ee9f13051a68">
+
+# #END</details>
+
+<details>
+<summary>22. Challenge - Data Classes </summary>
+
+# Challenge - Data Classes
+
+<img width="1440" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c552346b-4a6e-4a39-9628-25ae9c3b7859">
+<img width="1440" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/cfe8c78c-5eb0-4cb2-a2d1-dce53e41bf0c">
+<img width="1440" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c18ea494-0eac-47cd-b805-ff88779b2817">
+
+
+```py
+
+```
+
+# #END</details>
+
+<details>
 <summary>+LinkedIn - Python Essential Training </summary>
 
 ```py
