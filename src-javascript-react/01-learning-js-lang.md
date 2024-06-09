@@ -200,6 +200,16 @@ let cookieCount = 5;
 
 <img width="1511" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/9f769cee-5485-4745-8bd1-80337f0f964a">
 
+# #END</details>
+
+<details>
+<summary>7-Objects</summary>
+
+## Objects
+
+```js
+
+```
 
 # #END</details>
 
