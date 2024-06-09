@@ -262,6 +262,105 @@ console.log(bookOfKnowledge);
 # #END</details>
 
 <details>
+<summary>8-Accessing and Manipulating Objects</summary>
+
+## Accessing and Manipulating Objects
+
+```js
+var bird = {
+  genus: "corvus",
+  species: "corvax",
+  commonName: "raven",
+  callType: "squawky",
+  quote: "Nevermore",
+  maxOffspring: 5,
+  noisy: true,
+  deadly: false,
+};
+
+//Accessing Values in Object
+// bird."quote"; // this does not work
+console.log(bird.quote);
+console.log(bird["quote"]);
+
+//Manipulating Objects
+bird.color = "black";
+bird;
+
+bird["where it lives"] = "in London";
+bird.whereItLives = "in a small tree";
+
+console.log(bird["where it lives"]);
+console.log(bird.whereItLives);
+
+delete bird.color;
+
+bird;
+
+// More info:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object
+
+```
+
+<img width="1511" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/33535a67-6a41-43d4-99d2-1b8d8a03ceff">
+
+# #END</details>
+
+<details>
+<summary>9-Object References-Copying an Object safely </summary>
+
+## Object References-Copying an Object safely
+
+```js
+var animal = {
+  genus: "corvus",
+  species: "corvax",
+  commonName: "raven",
+  callType: "squawky",
+  quote: "Nevermore",
+  maxOffspring: 5,
+  noisy: true,
+  deadly: false,
+};
+
+animal;
+
+//Both animal2 and animal have same memory location
+var animal2 = animal;
+
+animal2;
+
+animal2.deadly = true;
+animal2;
+animal;
+
+// Make a copy of an object safely
+animal2 = Object.assign({}, animal);
+var animal3 = { ...animal };
+var animal4 = JSON.parse(JSON.stringify(animal));
+
+animal2.deadly = false;
+animal3.quote = "I am animal 3";
+animal4.quote = "I am animal 4";
+
+animal;
+animal2;
+animal3;
+animal4;
+
+// More info:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object
+
+```
+
+<img width="1511" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/fbcb4774-fc4e-4189-b480-533470785cff">
+
+
+# #END</details>
+
+<details>
 <summary>100-Javascript</summary>
 
 ## Javascript
