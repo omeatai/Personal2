@@ -148,8 +148,58 @@ console.log(num6);
 ## Booleans
 
 ```js
+// true;
+// false;
+
+var myLocation = "Santa Barbara",
+  myOtherLocation = "Los Angeles",
+  buttonHasBeenClicked = false;
+
+console.log(buttonHasBeenClicked);
+console.log(myLocation);
+console.log(myOtherLocation);
+
+console.log(myLocation === myOtherLocation);
+
+myOtherLocation = "Santa Barbara";
+
+console.log(myLocation === myOtherLocation);
+
+// More info:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#literals
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
 ```
+
+<img width="1511" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/cbd382d3-d73f-4adf-b538-516703590561">
+
+# #END</details>
+
+<details>
+<summary>6-Variable immutability with const and let</summary>
+
+## Variable immutability with const and let
+
+```js
+const dozen = 12,
+  halfDozen = 6,
+  bakersDozen = 13;
+
+// dozen = 13; WRONG! Assignment to constant variable.
+console.log(dozen);
+
+let cookieCount = 5;
+// var cookieCount = 10; Identifier 'cookieCount' has already been declared
+
+// More info:
+// http://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let
+// http://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const
+
+```
+
+<img width="1511" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/9f769cee-5485-4745-8bd1-80337f0f964a">
+
 
 # #END</details>
 
