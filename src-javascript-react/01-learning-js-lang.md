@@ -357,6 +357,27 @@ animal4;
 
 <img width="1511" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/fbcb4774-fc4e-4189-b480-533470785cff">
 
+# #END</details>
+
+<details>
+<summary>10-Arrays</summary>
+
+## Arrays
+
+```js
+
+```
+
+# #END</details>
+
+<details>
+<summary>11-Manipulating Arrays</summary>
+
+## Manipulating Arrays
+
+```js
+
+```
 
 # #END</details>
 
