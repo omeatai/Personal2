@@ -594,8 +594,45 @@ console.log(regex.test(string4));
 ## Comparisons
 
 ```js
+var one = 1,
+  two = 2;
+
+one === one; // true
+one !== one; // false
+one !== two; // true
+one === two; // false
+
+one == one; // true
+one == "1"; // true (?!)
+one != "1"; // false (?!)
+one === "1"; // false
+
+one < two; // true
+
+one > two; // false
+
+one <= two; // true
+
+one <= one; // true
+
+one >= two; // false
+
+10 >= two; // true
+
+// More info:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators#equality_operators
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators#relational_operators
 
 ```
+
+<img width="1378" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/bb386faf-24a2-4628-a8a4-2cc957bfe1ec">
+
+# #END</details>
+
+<details>
+<summary>16-Arithmetic Operators </summary>
+
+## Arithmetic Operators
 
 ```js
 
