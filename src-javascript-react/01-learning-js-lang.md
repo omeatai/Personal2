@@ -365,8 +365,30 @@ animal4;
 ## Arrays
 
 ```js
+var myArray = [];
+myArray;
+
+var daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday"];
+daysOfTheWeek;
+
+var myList = [0, 1, 2, "string1", "string2", "string3", true, false];
+myList;
+
+var counties = ["Belknap", "Strafford", "Carroll", "Rockingham"];
+counties;
+
+var listOfStuff = [{ name: "value" }, [1, 2, 3], true, "nifty"];
+listOfStuff;
+console.log(listOfStuff.length);
+
+// More info:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#array_literals
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
 
 ```
+
+<img width="1378" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/a661e280-0407-4153-9819-e578bfeac800">
+
 
 # #END</details>
 
@@ -376,8 +398,47 @@ animal4;
 ## Manipulating Arrays
 
 ```js
+var counties = ["Belknap", "Strafford", "Carroll", "Rockingham"];
+
+// Get items from an array
+console.log(counties[0]);
+console.log(counties[2]);
+
+// Add items at a specific index
+counties[2] = "Cheshire";
+counties;
+
+counties[4] = "Carroll";
+counties;
+
+// Add items to the end of the array
+counties[counties.length] = "Merrimack";
+counties;
+
+counties.push("Coos");
+counties;
+
+// Remove items from the end of the array
+var removedValue = counties.pop();
+removedValue;
+counties;
+
+// Delete an item from the array
+delete counties[2];
+counties;
+
+// Remove specific items from the array
+counties.splice(2, 1);
+counties;
+console.log(counties.length);
+
+// More info:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
 
 ```
+
+<img width="1378" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/bd6a0fd3-a1b2-4fd6-aa6b-190ca40f83f3">
+
 
 # #END</details>
 
