@@ -439,6 +439,99 @@ console.log(counties.length);
 
 <img width="1378" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/bd6a0fd3-a1b2-4fd6-aa6b-190ca40f83f3">
 
+# #END</details>
+
+<details>
+<summary>12-Whitespace</summary>
+
+## Whitespace
+
+```js
+var year=2012,month='October',day=31,holiday='Halloween';
+
+var year   = 2012,       month    =    'October', day =          31,          holiday='Halloween';
+
+var year = 2012,
+	month = 'October',
+	day = 31,
+	holiday = 'Halloween';
+	
+var year  = 2012,
+	month   = 'October',
+	day     = 31,
+	holiday = 'Halloween';
+
+var tinyAlmanac={'year':2012,'month':'October','day':31,'holiday':'Halloween'};
+
+var tinyAlmanac = {
+	'year' : 2012,
+	'month' : 'October',
+	'day' : 31,
+	'holiday' : 'Halloween'
+};
+
+var longString = "Four score \
+and seven years ago \
+our fathers brought forth \
+on this continent \
+a new nation";
+
+// More info:
+// These are not specifications on whitespace, but the Mozilla code style guide discusses formatting.
+// https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Writing_style_guide/Code_style_guide/JavaScript#choosing_a_format
+
+```
+
+<img width="1378" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/d037f37a-ad7d-4f40-8df3-6323448ae23e">
+
+# #END</details>
+
+<details>
+<summary>13-Comments</summary>
+
+## Comments
+
+```js
+// another after the slashes does not execute
+var year = 2012,
+  month = "October", // this is the month
+  day = 31,
+  holiday = "Halloween";
+
+/*
+You can write comments
+across multiple lines
+finally ending with:
+*/
+
+var tinyAlmanac = {
+  year: 2012,
+  month: "October",
+  day: 31,
+  holiday: "Halloween",
+};
+
+// watch out for block comments here
+var myRegExp = /[0-9].*/;
+
+// More info:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#comments
+
+```
+
+<img width="1378" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/d8065503-e1a5-47c8-8d58-74b93dcf42f1">
+
+
+# #END</details>
+
+<details>
+<summary>14-Regular Expressions </summary>
+
+## Regular Expressions
+
+```js
+
+```
 
 # #END</details>
 
