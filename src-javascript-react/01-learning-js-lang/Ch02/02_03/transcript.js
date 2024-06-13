@@ -2,6 +2,7 @@
 // You can copy and paste each line into a JavaScript console to execute it and see the result.
 
 var myString = "This is my string. Leave it alone";
+
 myString;
 myString.length;
 myString.toUpperCase();

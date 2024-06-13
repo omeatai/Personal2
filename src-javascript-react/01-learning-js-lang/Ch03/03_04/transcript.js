@@ -8,34 +8,31 @@ var animal = {
   noisy: true,
   deadly: false,
 };
+
 animal;
 
+//Both animal2 and animal have same memory location
 var animal2 = animal;
+
 animal2;
 
-animal2.genus = "ursus";
+animal2.deadly = true;
 animal2;
 animal;
 
-animal2 = {
-  genus: "corvus",
-  species: "corvax",
-  commonName: "raven",
-  callType: "squawky", // there is a deliberate bug here in the course, removed for your convenience :)
-  quote: "Nevermore",
-  maxOffspring: 5,
-  noisy: true,
-  deadly: false,
-};
-
-// bonus: make a copy of an object safely
+// Make a copy of an object safely
 animal2 = Object.assign({}, animal);
-animal2 = { ...animal };
-animal2 = JSON.parse(JSON.stringify(animal));
+var animal3 = { ...animal };
+var animal4 = JSON.parse(JSON.stringify(animal));
 
-animal2.genus = "ursus";
-animal2;
+animal2.deadly = false;
+animal3.quote = "I am animal 3";
+animal4.quote = "I am animal 4";
+
 animal;
+animal2;
+animal3;
+animal4;
 
 // More info:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects

@@ -3,22 +3,47 @@ var string2 = "This is the shortest string ever.";
 var string3 = "Is this the thing called Mount Everest?";
 var string4 = "This is the Sherman on the Mount.";
 
-var regex = /this/;
+var regex = /this/; // "this" is found in string
 
-regex.test(string1);
-regex.test(string2);
-regex.test(string3);
-regex.test(string4);
+console.log(regex.test(string1));
+console.log(regex.test(string2));
+console.log(regex.test(string3));
+console.log(regex.test(string4));
 
-regex = /this/i;
+regex = /this/i; // "this" (case-insensitive) is found in string
 
-regex = /^this/i;
+console.log(regex.test(string1));
+console.log(regex.test(string2));
+console.log(regex.test(string3));
+console.log(regex.test(string4));
 
-regex = /this$/i;
+regex = /^this/i; // "this" (case-insensitive) is found at the beginning of string
 
-regex = /ever.$/i;
+console.log(regex.test(string1));
+console.log(regex.test(string2));
+console.log(regex.test(string3));
+console.log(regex.test(string4));
 
-regex = /ever\.$/i;
+regex = /this$/i; // "this" (case-insensitive) is found at the end of string
+
+console.log(regex.test(string1));
+console.log(regex.test(string2));
+console.log(regex.test(string3));
+console.log(regex.test(string4));
+
+regex = /ever.$/i; // "ever" (case-insensitive) is found at the end of string
+
+console.log(regex.test(string1));
+console.log(regex.test(string2));
+console.log(regex.test(string3));
+console.log(regex.test(string4));
+
+regex = /ever\.$/i; // "ever." (case-insensitive) is found at the end of string
+
+console.log(regex.test(string1));
+console.log(regex.test(string2));
+console.log(regex.test(string3));
+console.log(regex.test(string4));
 
 // More info:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions

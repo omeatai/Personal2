@@ -12,7 +12,7 @@ counties;
 
 var listOfStuff = [{ name: "value" }, [1, 2, 3], true, "nifty"];
 listOfStuff;
-listOfStuff.length;
+console.log(listOfStuff.length);
 
 // More info:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#array_literals

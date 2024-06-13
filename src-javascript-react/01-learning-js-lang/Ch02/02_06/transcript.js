@@ -1,12 +1,12 @@
-// This is a transcript of the lines of code from the lesson.
-// You can copy and paste each line into a JavaScript console to execute it and see the result.
+const dozen = 12,
+  halfDozen = 6,
+  bakersDozen = 13;
 
-const dozen = 12, halfDozen = 6, bakersDozen = 13;
+// dozen = 13; WRONG! Assignment to constant variable.
+console.log(dozen);
 
-dozen = 13;
-
-var cookieCount = 5;
 let cookieCount = 5;
+// var cookieCount = 10; Identifier 'cookieCount' has already been declared
 
 // More info:
 // http://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let

@@ -1,24 +1,28 @@
-// This is a transcript of the lines of code from the lesson.
-// You can copy and paste each line into a JavaScript console to execute it and see the result.
-
-12
-12.0
-12.82358972893527582
--12
-Infinity
--Infinity
-NaN
+12;
+12.0;
+12.82358972893527582 - 12;
+Infinity - Infinity;
+NaN;
 
 var myNumber = 33;
 
-Math;
-Math.round(12.4984012840918);
-Math.round(12.92309820948209384);
+var num1 = Math.round(12.4984012840918);
+console.log(num1);
 
-Math.random();
-Math.random();
-Math.random();
-Math.random();
+var num2 = Math.round(12.92309820948209384);
+console.log(num2);
+
+var num3 = Math.random();
+console.log(num3);
+
+var num4 = Math.random();
+console.log(num4);
+
+var num5 = Math.random();
+console.log(num5);
+
+var num6 = Math.random();
+console.log(num6);
 
 // More info:
 // https://developer.mozilla.org/en-US/docs/Glossary/Number

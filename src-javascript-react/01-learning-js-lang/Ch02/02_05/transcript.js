@@ -1,24 +1,19 @@
-// This is a transcript of the lines of code from the lesson.
-// You can copy and paste each line into a JavaScript console to execute it and see the result.
+// true;
+// false;
 
-true;
-false;
+var myLocation = "Santa Barbara",
+  myOtherLocation = "Los Angeles",
+  buttonHasBeenClicked = false;
 
-True;
-FALSE;
-tRuE;
-true;
-false;
+console.log(buttonHasBeenClicked);
+console.log(myLocation);
+console.log(myOtherLocation);
 
-buttonHasBeenClicked = false;
-
-var myLocation = "Santa Barbara", myOtherLocation = "Los Angeles";
-
-myLocation === myOtherLocation;
+console.log(myLocation === myOtherLocation);
 
 myOtherLocation = "Santa Barbara";
 
-myLocation === myOtherLocation;
+console.log(myLocation === myOtherLocation);
 
 // More info:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#literals

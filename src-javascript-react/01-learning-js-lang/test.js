@@ -1,19 +1,18 @@
-var x = 32;
-x;
+var myString = "This is my string. Leave it alone";
 
-var whereAmI = "Santa Barbara, CA";
-whereAmI;
+myString;
 
-x = 45;
-x;
+var str1Len = myString.length;
+str1Len;
 
-whereAmI = 75;
-whereAmI;
+var str1Upper = myString.toUpperCase();
+str1Upper;
 
-var monster1 = "Grover",
-  monster2 = "Cookie Monster",
-  monster3 = "Animal";
+var str2Len = "This is my string".length;
+str2Len;
 
-monster1;
-monster2;
-monster3;
+let declaration = `This I say to you: "good morning". Huzzah!`;
+declaration;
+
+declaration = `This I say to you: "${myString}". Huzzah!`;
+declaration;
