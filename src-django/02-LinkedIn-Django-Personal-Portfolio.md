@@ -1,6 +1,3 @@
-
-<details>
-<summary>+LinkedIn - Building a Personal Portfolio with Django </summary>
     
 ## +LinkedIn - Building a Personal Portfolio with Django
 
@@ -2542,4 +2539,3 @@ def job_detail(request, job_id):
 
 # #END</details>
 
-# #END</details>
