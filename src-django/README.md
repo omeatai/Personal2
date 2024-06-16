@@ -1,4 +1,4 @@
-#SRC-PYTHON-FLASK-DJANGO
+#SRC-DJANGO
 
 ## [01-LinkedIn - Django Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src-django/01-LinkedIn-Django-Essential.md)
 ## [02-LinkedIn - Building a Personal Portfolio with Django](https://github.com/omeatai/src-AI-Software/blob/main/src-django/02-LinkedIn-Django-Personal-Portfolio.md)
