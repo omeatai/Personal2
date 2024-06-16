@@ -1228,7 +1228,7 @@ urlpatterns = [
 ### home/templates/home/welcome.html:
 
 ```html
-{% extends 'home/base.html' %} {% block content %}
+{% extends 'notes/base.html' %} {% block content %}
 <h1>Welcome to SmartNotes Home Page - {{name}}.</h1>
 <h2>Today is {{date}}</h2>
 <a href="{% url 'notes-list' %}" class="btn btn-primary"
