@@ -11,14 +11,14 @@
 ## Install venv
 
 ```py
-python -m venv myproject-env
+python -m venv venv
 ```
 
 ## Activate venv
 
 ```py
-# myproject-env\Scripts\activate
-source myproject-env/bin/activate
+# venv\Scripts\activate
+source venv/bin/activate
 ```
 
 ## Install Django
