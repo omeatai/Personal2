@@ -1,7 +1,7 @@
 #SRC-DJANGO
 
-## [01-LinkedIn - Django Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src-django/01-LinkedIn-Django-Essential.md)
-## [02-LinkedIn - Building a Personal Portfolio with Django](https://github.com/omeatai/src-AI-Software/blob/main/src-django/02-LinkedIn-Django-Personal-Portfolio.md)
+### [01-LinkedIn - Django Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src-django/01-LinkedIn-Django-Essential.md)
+### [02-LinkedIn - Building a Personal Portfolio with Django](https://github.com/omeatai/src-AI-Software/blob/main/src-django/02-LinkedIn-Django-Personal-Portfolio.md)
 
 <details>
 <summary>+LinkedIn - Django Forms </summary>
