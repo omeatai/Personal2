@@ -70,14 +70,14 @@ python manage.py runserver
 ```x
 You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
 Run 'python manage.py migrate' to apply them.
-March 20, 2024 - 04:58:12
-Django version 5.0.3, using settings 'smartnotes.settings'
+June 16, 2024 - 03:23:31
+Django version 5.0.6, using settings 'project_smartnotes.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
 
-<img width="1280" alt="image" src="https://github.com/omeatai/src-python-flask-django/assets/32337103/d1188761-5eb8-44f3-849e-b6b69662cd44">
-<img width="1416" alt="image" src="https://github.com/omeatai/src-python-flask-django/assets/32337103/c414f6de-58e0-490e-a6d6-e0cbaae242b1">
+<img width="1403" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/fda6f2a5-f8d9-48aa-8780-5262056dfd43">
+<img width="960" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/6fb2dc02-b2b2-4a94-ac66-e007f1d4f94f">
 
 # #END</details>
 
