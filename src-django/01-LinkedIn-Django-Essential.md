@@ -1097,7 +1097,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'templates',
+            BASE_DIR / 'static/templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -1126,7 +1126,7 @@ h2 {
 }
 ```
 
-### templates/notes/base.html:
+### static/templates/notes/base.html:
 
 ```html
 {% load static %}
@@ -1146,7 +1146,7 @@ h2 {
 </html>
 ```
 
-### templates/notes/notes_list.html:
+### static/templates/notes/notes_list.html:
 
 ```py
 {% extends 'notes/base.html' %}
