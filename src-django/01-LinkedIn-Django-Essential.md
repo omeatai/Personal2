@@ -24,7 +24,7 @@ source venv/bin/activate
 ## Install Django
 
 ```py
-python -m pip install Django
+python -m pip install Django==3.2
 ```
 
 ## Get dependencies
