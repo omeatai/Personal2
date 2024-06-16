@@ -60,7 +60,7 @@ deactivate
 ## Create Django Project
 
 ```py
-django-admin startproject smartnotes .
+django-admin startproject project_smartnotes .
 ```
 
 ## Start Local Server
