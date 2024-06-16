@@ -1,5 +1,3 @@
-<details>
-<summary>+Udemy - Django A-Z Build and Deploy Web Project </summary>
 
 ## +Udemy - Django A-Z Build and Deploy Web Project
 
@@ -5430,7 +5428,5 @@ python manage.py flush
 ```py
 python manage.py loaddata data.json
 ```
-
-# #END</details>
 
 # #END</details>
