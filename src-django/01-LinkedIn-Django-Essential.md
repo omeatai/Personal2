@@ -112,6 +112,9 @@ INSTALLED_APPS = [
 ]
 ```
 
+<img width="1447" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/9d0869ef-4e16-417f-9b18-526bee136a9b">
+
+
 # #END</details>
 
 <details>
