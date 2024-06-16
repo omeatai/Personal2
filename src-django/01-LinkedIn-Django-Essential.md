@@ -1,5 +1,3 @@
-<details>
-<summary>+LinkedIn - Django Essential Training </summary>
 
 ## +LinkedIn - Django Essential Training
 
@@ -2796,4 +2794,3 @@ class AuthorizedView(LoginRequiredMixin, TemplateView):
 
 # #END</details>
 
-# #END</details>
