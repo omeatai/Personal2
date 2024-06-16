@@ -975,9 +975,6 @@ class NotesDetailView(DetailView):
         try:
             return super().get_object(queryset)
         except Http404:
-            # return render(self.request, '404.html', {})
-            # return HttpResponseRedirect(reverse('notes-detail-list', args=[1]))
-            # return HttpResponseRedirect(reverse('notes-list'))
             return "404 - Sorry, the requested note does not exist!"
 
 
