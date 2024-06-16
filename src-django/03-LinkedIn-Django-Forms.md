@@ -1,7 +1,4 @@
 
-<details>
-<summary>+LinkedIn - Django Forms </summary>
-
 ## +LinkedIn - Django Forms
 
 <details>
@@ -1949,7 +1946,5 @@ class MultiplePizzaForm(forms.Form):
 <img width="1454" alt="image" src="https://github.com/omeatai/src-python-flask-django/assets/32337103/4a1219a0-00d4-4682-a40c-cb8b31047757">
 <img width="1454" alt="image" src="https://github.com/omeatai/src-python-flask-django/assets/32337103/ccbd8316-617d-4867-820d-79a295ecc85a">
 <img width="1454" alt="image" src="https://github.com/omeatai/src-python-flask-django/assets/32337103/88c21cf2-3dd6-460b-8b58-c9123e5c1b2c">
-
-# #END</details>
 
 # #END</details>
