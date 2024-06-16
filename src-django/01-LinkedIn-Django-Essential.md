@@ -6,6 +6,8 @@
 
 # Creating a New Django Project
 
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/d9914a67-625b-4165-a58a-5d43d40838e0)
+
 ## Install venv
 
 ```py
