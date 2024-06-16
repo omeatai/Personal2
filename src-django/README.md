@@ -1,8 +1,6 @@
 #SRC-PYTHON-FLASK-DJANGO
 
-[+LinkedIn - Django Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src-django/01-LinkedIn-Django-Essential.md)
-
-## [+LinkedIn - Django Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src-django/01-LinkedIn-Django-Essential.md)
+## [01-LinkedIn - Django Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src-django/01-LinkedIn-Django-Essential.md)
 
 
 <details>
