@@ -6,7 +6,7 @@
 
 ---
 
-### [01-Javascript-Linkedin-Learning Javascript Language](https://github.com/omeatai/src-AI-Software/blob/main/src-javascript-react/01-learning-js-lang.md)
+### [01-Javascript-Linkedin-Learning Javascript Language](https://github.com/omeatai/src-AI-Software/blob/main/src-javascript-react/01-js-learning-js-lang.md)
 
 ---
 
