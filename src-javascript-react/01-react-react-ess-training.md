@@ -455,8 +455,99 @@ export default function App() {
 # React Manually with CDN - Displaying Images
 
 ```js
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React ⚛️</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function Header(props) {
+        return (
+          <header>
+            <h1>{props.name}'s Kitchen</h1>
+          </header>
+        );
+      }
+      function Main(props) {
+        return (
+          <section>
+            <img
+              height={200}
+              src="https://images.pexels.com/photos/1058277/pexels-photo-1058277.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              alt="A fancy restaurant"
+            />
+            <ul>
+              {props.dishes.map((dish) => (
+                <li key={dish.id}>{dish.title}</li>
+              ))}
+            </ul>
+          </section>
+        );
+      }
+
+      function Footer(props) {
+        return (
+          <footer>
+            <p>Copyright {props.year}</p>
+          </footer>
+        );
+      }
+
+      const dishes = [
+        "Black Bean Soup",
+        "Macaroni and Cheese",
+        "Salmon and Potatoes",
+        "Pizza",
+      ];
+      const dishObjects = dishes.map((dish, i) => ({
+        id: i,
+        title: dish,
+      }));
+
+      function App() {
+        return (
+          <div>
+            <Header name="Cindy" />
+            <Main adjective="amazing" dishes={dishObjects} />
+            <Footer year={new Date().getFullYear()} />
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
 
 ```
+
+### [https://www.pexels.com/](https://www.pexels.com/)
+
+<img width="960" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c88ac4ab-14f0-4fb4-8735-0b1b3909f59e">
+<img width="960" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/765bf001-1988-45a4-be4b-8a5e9a16a5a0">
+<img width="1520" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/be9519b8-2fba-4802-8443-527a01696507">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/9717eb3a-0298-4575-a677-a1e2161442ee)
+
+# #End</details>
+  
+<details>
+<summary>8. React Manually with CDN - Using React Fragments </summary>
+
+# React Manually with CDN - Using React Fragments
 
 ```js
 
