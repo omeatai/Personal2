@@ -2787,3 +2787,10 @@ class AuthorizedView(LoginRequiredMixin, TemplateView):
 
 # #END
 
+
+
+# DEMO
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/3520dba9-8728-4306-bf5a-fe2890d51c88)
+
+
