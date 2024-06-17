@@ -641,6 +641,33 @@ export default function App() {
 
 # Using Create React App
 
+## Check Node and NPM versions
+
+```js
+node -v
+npm -v
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
 ```js
 
 ```
