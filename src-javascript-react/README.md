@@ -6,7 +6,7 @@
 
 ---
 
-### [01-Javascript-Linkedin-Learning Javascript Language](https://github.com/omeatai/src-AI-Software/blob/main/src-javascript-react/01-learning-js-lang.md)
+### [01-Javascript-Linkedin-Learning Javascript Language](https://github.com/omeatai/src-AI-Software/blob/main/src-javascript-react/01-js-learning-js-lang.md)
 
 ---
 
@@ -14,7 +14,7 @@
 
 ---
 
-### [01-React-React Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src-django/02-LinkedIn-Django-Personal-Portfolio.md)
+### [01-React-React Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src-javascript-react/01-react-react-ess-training.md)
 
 ---
 
