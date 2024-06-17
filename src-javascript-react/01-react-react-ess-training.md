@@ -180,13 +180,54 @@ export default function App() {
 # #End</details>
   
 <details>
-<summary>3. Setting Up React Manually with CDN - JSX and Babel </summary>
+<summary>3. Setting Up React Manually with CDN - JSX implementation using Babel </summary>
 
-# Setting Up React Manually with CDN - JSX and Babel
+# Setting Up React Manually with CDN - JSX implementation using Babel
 
 ```js
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React ⚛️</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      let robot = "🤖";
+      let cowboy = "🤠";
+      let moon = "🌝";
+      let name = "React";
+
+      ReactDOM.render(
+        <ul style={{ fontSize: "50px" }}>
+          <li>Monday {robot}</li>
+          <li>Tuesday {cowboy}</li>
+          <li>Wednesday {moon}</li>
+          <li>Name: {name.toUpperCase()}</li>
+          <li>Name Length: {name.length}</li>
+        </ul>,
+        document.getElementById("root")
+      );
+    </script>
+  </body>
+</html>
 
 ```
+
+<img width="1411" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/757b8961-8577-4ae8-a086-88e22388b4d8">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/5c9e26b3-39f3-4fce-92ad-6f00844d337d)
 
 ```js
 
