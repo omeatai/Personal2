@@ -1,4 +1,4 @@
-## Javascript | Typescript | React | Node
+#SRC-REACT-JAVASCRIPT-TYPESCRIPT-NODEJS-NEXTJS
 
 ---
 
@@ -6,18 +6,15 @@
 
 ---
 
-<details>
-<summary>+Linkedin - Learning Javascript Language</summary>
-
-## +Linkedin - Learning Javascript Language
-
-</details>
+### [01-Javascript-Linkedin-Learning Javascript Language](https://github.com/omeatai/src-AI-Software/blob/main/src-javascript-react/01-learning-js-lang.md)
 
 ---
 
 ## REACT
 
 ---
+
+### [01-React-React Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src-django/02-LinkedIn-Django-Personal-Portfolio.md)
 
 ---
 
