@@ -428,3 +428,4 @@ poetry.toml
 pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/django,python
+my_projects/02_react_ess_proj/exercises/Ch08/08_04/finished/react-app/
