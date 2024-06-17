@@ -534,13 +534,14 @@ export default function App() {
 
 ```
 
+<img width="1520" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/be9519b8-2fba-4802-8443-527a01696507">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/9717eb3a-0298-4575-a677-a1e2161442ee)
+
 ### [https://www.pexels.com/](https://www.pexels.com/)
 
 <img width="960" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c88ac4ab-14f0-4fb4-8735-0b1b3909f59e">
 <img width="960" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/765bf001-1988-45a4-be4b-8a5e9a16a5a0">
-<img width="1520" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/be9519b8-2fba-4802-8443-527a01696507">
-
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/9717eb3a-0298-4575-a677-a1e2161442ee)
 
 # #End</details>
   
