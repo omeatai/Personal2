@@ -60,9 +60,9 @@ export default function App() {
 # #End</details>
   
 <details>
-<summary>2. Setting Up React Manually with CDN - Basic Setup </summary>
+<summary>2. React Manually with CDN - Basic Setup </summary>
 
-# Setting Up React  Manually with CDN - Basic Setup
+# React  Manually with CDN - Basic Setup
 
 ## Basic Setup
 
@@ -180,9 +180,9 @@ export default function App() {
 # #End</details>
   
 <details>
-<summary>3. Setting Up React Manually with CDN - JSX implementation using Babel </summary>
+<summary>3. React Manually with CDN - JSX implementation using Babel </summary>
 
-# Setting Up React Manually with CDN - JSX implementation using Babel
+# React Manually with CDN - JSX implementation using Babel
 
 ```js
 <!DOCTYPE html>
@@ -232,9 +232,9 @@ export default function App() {
 # #End</details>
   
 <details>
-<summary>4. Setting Up React Manually with CDN - Using JSX Components </summary>
+<summary>4. React Manually with CDN - Using JSX Components </summary>
 
-# Setting Up React Manually with CDN - Using JSX Components
+# React Manually with CDN - Using JSX Components
 
 ```js
 <!DOCTYPE html>
@@ -293,9 +293,9 @@ export default function App() {
 # #End</details>
   
 <details>
-<summary>5. Setting Up React Manually with CDN - Adding JSX Props </summary>
+<summary>5. React Manually with CDN - Adding JSX Props </summary>
 
-# Setting Up React Manually with CDN - Adding JSX Props
+# React Manually with CDN - Adding JSX Props
 
 ```js
 <!DOCTYPE html>
@@ -364,9 +364,9 @@ export default function App() {
 # #End</details>
   
 <details>
-<summary>6. Setting Up React Manually with CDN - Workng with Arrays </summary>
+<summary>6. React Manually with CDN - Workng with Arrays </summary>
 
-# Setting Up React Manually with CDN - Workng with Arrays
+# React Manually with CDN - Workng with Arrays
 
 ```js
 
