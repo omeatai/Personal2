@@ -643,9 +643,240 @@ export default function App() {
 
 ## Check Node and NPM versions
 
-```js
+```x
 node -v
 npm -v
+```
+
+## Create React App
+
+```x
+npx create-react-app my-app
+```
+
+## Start React App
+
+```x
+cd my-app
+npm start
+
+#npm install
+```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/package.json:
+
+```js
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
+```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
+```js
+import logo from "./logo.svg";
+import "./App.css";
+
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.css:
+
+```js
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+```
+
+<img width="1497" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/656df0a5-1704-4ee4-bfa9-0bc144b9fbf8">
+<img width="960" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/1657d3bc-2df2-4ffb-8416-7811221a155a">
+
+# #End</details>
+  
+<details>
+<summary>10. Destructing Arrays and Objects </summary>
+
+# Destructing Arrays and Objects
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+const cities = ["Tokyo", "New York", "London", "Paris"];
+
+root.render(
+  <React.StrictMode>
+    <App library="React" cities={cities} />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
+```js
+import "./App.css";
+
+function App(props) {
+  const [firstCity, secondCity] = props.cities;
+
+  return (
+    <div className="App">
+      <h1>Hello from {props.library}</h1>
+      <h2>First City: {firstCity}</h2>
+      <h2>Second City: {secondCity}</h2>
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+<img width="1497" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/6c93a2c7-c277-4a6d-b801-88e0afa8197e">
+
+<img width="960" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c7cb3667-73c2-4d4e-a83b-8841711585ed">
+
+# #End</details>
+  
+<details>
+<summary>11. Using UseState Hook </summary>
+
+# Using UseState Hook
+
+```js
+
+```
+
+```js
+
 ```
 
 ```js
