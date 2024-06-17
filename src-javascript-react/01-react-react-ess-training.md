@@ -925,6 +925,7 @@ export default App;
 
 <img width="1497" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/aae092b3-723b-4d89-8ce8-380006151f8b">
 <img width="960" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/a57d3da5-ff19-489f-9e4f-bd22197e0be9">
+<img width="960" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/4d06293f-8303-4119-91d3-b919ba18b757">
 
 # #End</details>
   
