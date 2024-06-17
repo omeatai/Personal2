@@ -9,14 +9,14 @@
 ## Install venv
 
 ```py
-python -m venv myproject-env
+python -m venv venv
 ```
 
 ## Activate venv
 
 ```py
-# myproject-env\Scripts\activate
-source myproject-env/bin/activate
+# venv\Scripts\activate
+source venv/bin/activate
 ```
 
 ## Install Django
@@ -58,7 +58,7 @@ deactivate
 ## Create Django Project
 
 ```py
-django-admin startproject smartnotes .
+django-admin startproject project_smartnotes .
 ```
 
 ## Start Local Server
@@ -70,14 +70,14 @@ python manage.py runserver
 ```x
 You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
 Run 'python manage.py migrate' to apply them.
-March 20, 2024 - 04:58:12
-Django version 5.0.3, using settings 'smartnotes.settings'
+June 16, 2024 - 03:23:31
+Django version 5.0.6, using settings 'project_smartnotes.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
 
-<img width="1280" alt="image" src="https://github.com/omeatai/src-python-flask-django/assets/32337103/d1188761-5eb8-44f3-849e-b6b69662cd44">
-<img width="1416" alt="image" src="https://github.com/omeatai/src-python-flask-django/assets/32337103/c414f6de-58e0-490e-a6d6-e0cbaae242b1">
+<img width="1403" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/fda6f2a5-f8d9-48aa-8780-5262056dfd43">
+<img width="960" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/6fb2dc02-b2b2-4a94-ac66-e007f1d4f94f">
 
 # #END</details>
 
@@ -111,6 +111,9 @@ INSTALLED_APPS = [
     'home',
 ]
 ```
+
+<img width="1447" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/9d0869ef-4e16-417f-9b18-526bee136a9b">
+
 
 # #END</details>
 
@@ -437,8 +440,6 @@ from . import models
 
 class NotesAdmin(admin.ModelAdmin):
     list_display = ('title', 'created', 'updated',)
-    verbose_name = "Note"
-    verbose_name_plural = "Notes"
 
     # def get_model_name(self):
     #     return "Notes"
@@ -974,9 +975,6 @@ class NotesDetailView(DetailView):
         try:
             return super().get_object(queryset)
         except Http404:
-            # return render(self.request, '404.html', {})
-            # return HttpResponseRedirect(reverse('notes-detail-list', args=[1]))
-            # return HttpResponseRedirect(reverse('notes-list'))
             return "404 - Sorry, the requested note does not exist!"
 
 
@@ -1099,7 +1097,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'templates',
+            BASE_DIR / 'static/templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -1128,7 +1126,7 @@ h2 {
 }
 ```
 
-### templates/notes/base.html:
+### static/templates/notes/base.html:
 
 ```html
 {% load static %}
@@ -1148,7 +1146,7 @@ h2 {
 </html>
 ```
 
-### templates/notes/notes_list.html:
+### static/templates/notes/notes_list.html:
 
 ```py
 {% extends 'notes/base.html' %}
@@ -2203,43 +2201,36 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
-
-# Create your views here.
+from django.contrib.auth import authenticate, logout, login
 
 
 class LogoutInterfaceView(LogoutView):
     template_name = 'home/logout.html'
     http_method_names = ['get', 'post', 'options']
+    next_page = 'login'
 
     def dispatch(self, request, *args, **kwargs):
         # return super().dispatch(request, *args, **kwargs)
         # Redirect to a specific URL after logout
-        return redirect('/login')
+        logout(request)
+        return redirect('login')
 
 
 class LoginInterfaceView(LoginView):
     template_name = 'home/login.html'
+    # next_page = 'list'
 
 
 class HomeView(TemplateView):
     template_name = 'home/welcome.html'
-    extra_context = {'name': 'John Doe', 'date': datetime.now()}
-
-
-# def home(request):
-#     # return HttpResponse("<h1>Hello World!</h1>")
-#     return render(request, 'home/welcome.html', {'name': 'John Doe', 'date': datetime.now()})
+    extra_context = {'name': 'James Doe', 'date': datetime.now()}
 
 
 class AuthorizedView(LoginRequiredMixin, TemplateView):
     template_name = 'home/authorized.html'
     extra_context = {}
-    login_url = '/admin'
+    login_url = 'login'
 
-
-# @login_required(login_url='/admin')
-# def authorized(request):
-#     return render(request, 'home/authorized.html', {})
 ```
 
 ### src-python/django-essentials/myproject/home/templates/home/login.html:
@@ -2793,4 +2784,13 @@ class AuthorizedView(LoginRequiredMixin, TemplateView):
 <img width="1474" alt="image" src="https://github.com/omeatai/src-python-flask-django/assets/32337103/4ae490ee-34fe-4700-a096-f70509858fe3">
 
 # #END</details>
+
+# #END
+
+
+
+# DEMO
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/3520dba9-8728-4306-bf5a-fe2890d51c88)
+
 
