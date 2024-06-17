@@ -137,7 +137,7 @@ export default function App() {
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/a149800a-f2c5-4df8-92d5-ab74becba43b)
 
-## Setup with multiple components
+## Setup with multiple elements
 
 ```js
 <!DOCTYPE html>
@@ -229,9 +229,73 @@ export default function App() {
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/5c9e26b3-39f3-4fce-92ad-6f00844d337d)
 
+# #End</details>
+  
+<details>
+<summary>4. Setting Up React Manually with CDN - Using JSX Components </summary>
+
+# Setting Up React Manually with CDN - Using JSX Components
+
 ```js
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React ⚛️</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function Header() {
+        return (
+          <header>
+            <h1>Eve's Kitchen</h1>
+          </header>
+        );
+      }
+      function Main() {
+        return (
+          <section>
+            <p>We serve the most delicious food around</p>
+          </section>
+        );
+      }
+      function App() {
+        return (
+          <div>
+            <Header />
+            <Main />
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
 
 ```
+
+<img width="1411" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/5262e05d-237c-48c2-b944-3ad2182141d9">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/fa23738a-862b-4fcf-8997-8e80a64579aa)
+
+# #End</details>
+  
+<details>
+<summary>5. Setting Up React Manually with CDN - Adding JSX Props </summary>
+
+# Setting Up React Manually with CDN - Adding JSX Props
 
 ```js
 
