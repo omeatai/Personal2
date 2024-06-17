@@ -871,13 +871,67 @@ export default App;
 
 # Using UseState Hook
 
+## src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
 ```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
 
 ```
 
+## src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
 ```js
+import React, { useState } from "react";
+import "./App.css";
+
+function App() {
+  const [emotion, setEmotion] = useState("happy😁");
+  return (
+    <div className="App">
+      <h1>Current Emotion is {emotion}</h1>
+      <button
+        onClick={() =>
+          setEmotion((prev) => (prev === "happy😁" ? "sad😢" : "happy😁"))
+        }
+      >
+        Change Emotion
+      </button>
+      <button onClick={() => setEmotion("proud🤩")}>Proud</button>
+      <button onClick={() => setEmotion("angry😡")}>Angry</button>
+    </div>
+  );
+}
+
+export default App;
 
 ```
+
+<img width="1497" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/aae092b3-723b-4d89-8ce8-380006151f8b">
+<img width="960" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/a57d3da5-ff19-489f-9e4f-bd22197e0be9">
+
+# #End</details>
+  
+<details>
+<summary>12. Using UseEffect Hook </summary>
+
+# Using UseEffect Hook
 
 ```js
 
