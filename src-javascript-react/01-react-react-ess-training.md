@@ -60,9 +60,9 @@ export default function App() {
 # #End</details>
   
 <details>
-<summary>2. Setting Up React  Manually with CDN </summary>
+<summary>2. Setting Up React Manually with CDN - Basic Setup </summary>
 
-# Setting Up React  Manually with CDN
+# Setting Up React  Manually with CDN - Basic Setup
 
 ## Basic Setup
 
@@ -137,10 +137,52 @@ export default function App() {
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/a149800a-f2c5-4df8-92d5-ab74becba43b)
 
+## Setup with multiple components
 
 ```js
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <title>React ⚛️</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/javascript">
+      let heading = React.createElement(
+        "ul",
+        { style: { color: "blue", fontSize: "50px" } },
+        React.createElement("li", null, "Monday😊"),
+        React.createElement("li", null, "Tuesday🤓"),
+        React.createElement("li", null, "Wednesday🤪")
+      );
+
+      ReactDOM.render(heading, document.getElementById("root"));
+    </script>
+  </body>
+</html>
 
 ```
+
+<img width="1411" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/5799d71c-aff6-4389-91b6-82bea8f3c576">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/d235efd4-8dd6-4f34-8c78-a068cbd3eba1)
+
+# #End</details>
+  
+<details>
+<summary>3. Setting Up React Manually with CDN - JSX and Babel </summary>
+
+# Setting Up React Manually with CDN - JSX and Babel
 
 ```js
 
