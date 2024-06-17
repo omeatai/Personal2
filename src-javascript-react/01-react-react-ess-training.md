@@ -369,8 +369,90 @@ export default function App() {
 # React Manually with CDN - Workng with Arrays
 
 ```js
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React ⚛️</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function Header(props) {
+        return (
+          <header>
+            <h1>{props.name}'s Kitchen</h1>
+          </header>
+        );
+      }
+      function Main(props) {
+        return (
+          <section>
+            <ul>
+              {props.dishes.map((dish) => (
+                <li key={dish.id}>{dish.title}</li>
+              ))}
+            </ul>
+          </section>
+        );
+      }
+
+      function Footer(props) {
+        return (
+          <footer>
+            <p>Copyright {props.year}</p>
+          </footer>
+        );
+      }
+
+      const dishes = [
+        "Black Bean Soup",
+        "Macaroni and Cheese",
+        "Salmon and Potatoes",
+        "Pizza",
+      ];
+      const dishObjects = dishes.map((dish, i) => ({
+        id: i,
+        title: dish,
+      }));
+
+      function App() {
+        return (
+          <div>
+            <Header name="Cindy" />
+            <Main adjective="amazing" dishes={dishObjects} />
+            <Footer year={new Date().getFullYear()} />
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
 
 ```
+
+<img width="1367" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/678f7797-f5df-4576-87f0-dc71008d51ee">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/bdd76dea-cd39-4b36-b8df-7d7b97999b72)
+
+# #End</details>
+  
+<details>
+<summary>7. React Manually with CDN - Displaying Images </summary>
+
+# React Manually with CDN - Displaying Images
 
 ```js
 
