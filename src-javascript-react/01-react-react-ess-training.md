@@ -298,8 +298,75 @@ export default function App() {
 # Setting Up React Manually with CDN - Adding JSX Props
 
 ```js
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React ⚛️</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function Header(props) {
+        return (
+          <header>
+            <h1>{props.name}'s Kitchen</h1>
+          </header>
+        );
+      }
+      function Main(props) {
+        return (
+          <section>
+            <p>We serve the most {props.adjective} food around.</p>
+          </section>
+        );
+      }
+
+      function Footer(props) {
+        return (
+          <footer>
+            <p>Copyright {props.year}</p>
+          </footer>
+        );
+      }
+
+      function App() {
+        return (
+          <div>
+            <Header name="Cindy" />
+            <Main adjective="amazing" />
+            <Footer year={new Date().getFullYear()} />
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
 
 ```
+
+<img width="1411" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/95e5e987-b388-4346-88de-be34ced9f302">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/c97f4483-6c1d-40b8-9991-3469b8ea6e0d)
+
+# #End</details>
+  
+<details>
+<summary>6. Setting Up React Manually with CDN - Workng with Arrays </summary>
+
+# Setting Up React Manually with CDN - Workng with Arrays
 
 ```js
 
