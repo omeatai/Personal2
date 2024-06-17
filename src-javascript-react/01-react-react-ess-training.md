@@ -64,7 +64,7 @@ export default function App() {
 
 # Setting Up React  Manually with CDN
 
-### Basic Setup
+## Basic Setup
 
 ```js
 <!DOCTYPE html>
@@ -99,7 +99,7 @@ export default function App() {
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/559f23f1-bab7-42a3-8629-c5028cf8d58d)
 
-### Setup using Variables
+## Setup using Variables
 
 ```js
 <!DOCTYPE html>
