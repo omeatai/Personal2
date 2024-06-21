@@ -934,25 +934,159 @@ export default App;
 
 # Using UseEffect Hook
 
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
 ```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
+```js
+import React, { useState, useEffect } from "react";
+import "./App.css";
+
+function App() {
+  const [emotion, setEmotion] = useState("happy😁");
+  const [secondary, setSecondary] = useState("tired🥱");
+
+  useEffect(() => {
+    console.log(`It's ${emotion} around here!`);
+  }, [emotion]);
+
+  useEffect(() => {
+    console.log(`It's ${secondary} around here!`);
+  }, [secondary]);
+
+  return (
+    <div className="App">
+      <h1>Current Emotion is {emotion}</h1>
+      <h2>Current Secondary Emotion is {secondary}.</h2>
+      <button
+        onClick={() =>
+          setEmotion((prev) => (prev === "happy😁" ? "sad😢" : "happy😁"))
+        }
+      >
+        Change Emotion
+      </button>
+      <button onClick={() => setEmotion("proud🤩")}>Proud</button>
+      <button onClick={() => setEmotion("angry😡")}>Angry</button>
+      <button onClick={() => setSecondary("grateful🥹")}>Grateful</button>
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+<img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/e1d113bd-b11f-4f41-bb29-a8c59f04badd">
+
+![Uploading image.png…]()
+
+# #End</details>
+  
+<details>
+<summary>13. Using UseReducer Hook </summary>
+
+# Using UseReducer Hook
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
+```js
+import React, { useState } from "react";
+import "./App.css";
+
+function App() {
+  const [checked, setChecked] = useState(false);
+  // const [checked, setChecked] = useReducer((checked) => !checked, false);
+
+  return (
+    <div className="App">
+      <input
+        type="checkbox"
+        value={checked}
+        onChange={() => setChecked((prev) => !prev)}
+      />
+      <label>{checked ? "checked" : "not checked"}</label>
+    </div>
+  );
+}
+
+export default App;
 
 ```
 
 ```js
+import React, { useReducer } from "react";
+import "./App.css";
+
+function App() {
+  // const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useReducer((checked) => !checked, false);
+
+  return (
+    <div className="App">
+      <input type="checkbox" value={checked} onChange={setChecked} />
+      <label>{checked ? "checked" : "not checked"}</label>
+    </div>
+  );
+}
+
+export default App;
 
 ```
 
-```js
+![Uploading image.png…]()
 
-```
+# #End</details>
+  
+<details>
+<summary>14. Using Controlled Form Elements </summary>
 
-```js
-
-```
-
-```js
-
-```
+# Using Controlled Form Elements
 
 ```js
 
