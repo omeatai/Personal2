@@ -1000,6 +1000,7 @@ export default App;
 
 <img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/e1d113bd-b11f-4f41-bb29-a8c59f04badd">
 
+![Uploading image.png…]()
 
 # #End</details>
   
