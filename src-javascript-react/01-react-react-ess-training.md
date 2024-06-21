@@ -1000,7 +1000,7 @@ export default App;
 
 <img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/e1d113bd-b11f-4f41-bb29-a8c59f04badd">
 
-![Uploading image.png…]()
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/9ba3b516-262f-43ae-98e9-af24604975f8)
 
 # #End</details>
   
@@ -1078,6 +1078,10 @@ function App() {
 export default App;
 
 ```
+
+<img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/bb2295f4-eb4c-4b95-b0a2-3b08a7801e26">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/0cb7369f-fdf7-483e-a48e-79fbe05015e5)
 
 
 # #End</details>
