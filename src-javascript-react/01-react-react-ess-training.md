@@ -1087,9 +1087,117 @@ export default App;
 # #End</details>
   
 <details>
-<summary>14. Using Controlled Form Elements </summary>
+<summary>14. Using Uncontrolled Components with UseRef </summary>
+
+# Using Uncontrolled Components with UseRef
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
+```js
+import { useRef } from "react";
+import "./App.css";
+
+function App() {
+  const txtTitle = useRef();
+  const hexColor = useRef();
+
+  const submit = (e) => {
+    e.preventDefault();
+    const title = txtTitle.current.value;
+    const color = hexColor.current.value;
+    alert(`${title}, ${color}`);
+    txtTitle.current.value = "";
+    hexColor.current.value = "";
+  };
+
+  return (
+    <form onSubmit={submit}>
+      <input ref={txtTitle} type="text" placeholder="color title..." />
+      <input ref={hexColor} type="color" />
+      <button>ADD</button>
+    </form>
+  );
+}
+
+export default App;
+
+```
+
+<img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/8bb23453-407e-4279-8ec4-013cedddb820">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/a091b3cf-daa1-4ea0-b421-b14c02c6ed02)
+
+
+# #End</details>
+  
+<details>
+<summary>15. Using Controlled Form Elements </summary>
 
 # Using Controlled Form Elements
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
 
 ```js
 
