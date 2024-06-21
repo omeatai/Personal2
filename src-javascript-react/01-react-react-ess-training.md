@@ -1159,13 +1159,79 @@ export default App;
 
 # Using Controlled Form Elements
 
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
 ```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
 
 ```
 
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
 ```js
+import { useState } from "react";
+import "./App.css";
+
+function App() {
+  const [title, setTitle] = useState("");
+  const [color, setColor] = useState("#000000");
+
+  const submit = (e) => {
+    e.preventDefault();
+    alert(`${title}, ${color}`);
+    setTitle("");
+    setColor("#000000");
+  };
+
+  return (
+    <form onSubmit={submit}>
+      <input
+        type="text"
+        placeholder="color title..."
+        onChange={(e) => setTitle(e.target.value)}
+        value={title}
+      />
+      <input
+        type="color"
+        value={color}
+        onChange={(e) => setColor(e.target.value)}
+      />
+      <button>ADD</button>
+    </form>
+  );
+}
+
+export default App;
 
 ```
+
+<img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/d9909665-945f-4959-84b7-ff66a3738e46">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/9c9b2487-1bbf-4a81-b775-8eebf46c0315)
+
+# #End</details>
+  
+<details>
+<summary>16. Building a Custom Hook </summary>
+
+# Building a Custom Hook
 
 ```js
 
