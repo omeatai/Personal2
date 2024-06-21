@@ -1079,7 +1079,6 @@ export default App;
 
 ```
 
-![Uploading image.png…]()
 
 # #End</details>
   
