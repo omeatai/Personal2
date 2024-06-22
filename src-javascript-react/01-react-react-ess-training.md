@@ -1563,9 +1563,82 @@ export default App;
 
 # Async React - Working with Render Props
 
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
 ```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
 
 ```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
+```js
+import "./App.css";
+
+const tahoe_peaks = [
+  { name: "Freel", elevation: 10891 },
+  { name: "Monument", elevation: 10067 },
+  { name: "Pyramid", elevation: 9983 },
+  { name: "Tallac", elevation: 9735 },
+];
+
+function List({ data, renderItem, renderEmpty }) {
+  return !data.length ? (
+    renderEmpty
+  ) : (
+    <ul>
+      {data.map((item) => (
+        <li key={item.name}>{renderItem(item)}</li>
+      ))}
+    </ul>
+  );
+}
+
+function App() {
+  return (
+    <List
+      data={tahoe_peaks}
+      renderEmpty={<p>This list is empty</p>}
+      renderItem={(item) => (
+        <>
+          {item.name} - {item.elevation} ft.
+        </>
+      )}
+    />
+  );
+}
+
+export default App;
+
+```
+
+<img width="1535" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/1b077922-967a-41c6-a69f-4180713f11e9">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/393171a1-e8c2-4a34-aefe-e4d4cff5975d)
+
+# #End</details>
+  
+<details>
+<summary>22. React Router - Configuring React Router v6 </summary>
+
+# React Router - Configuring React Router v6
 
 ```js
 
