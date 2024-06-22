@@ -1368,13 +1368,60 @@ export default App;
 # #End</details>
   
 <details>
-<summary>18. Async React - Display Fetch Data in Component </summary>
+<summary>18. Async React - Display Fetched Data in Component </summary>
 
-# Async React - Display Fetch Data in Component
+# Async React - Display Fetched Data in Component
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
 
 ```js
+import "./App.css";
+import { useState, useEffect } from "react";
 
+function GithubUser({ name, location, avatar }) {
+  return (
+    <div style={{ textAlign: "center" }}>
+      <h1>{name}</h1>
+      <p>{location}</p>
+      <img src={avatar} height={100} alt={name} />
+    </div>
+  );
+}
+
+function App() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch(`https://api.github.com/users/omeatai`)
+      .then((response) => response.json())
+      .then((data) => setData(data));
+  }, []);
+
+  if (data)
+    return (
+      <GithubUser
+        name={data.name}
+        location={data.location}
+        avatar={data.avatar_url}
+      />
+    );
+
+  return <h1>Data</h1>;
+}
+
+export default App;
 ```
+
+<img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/38f0dc14-f1ff-4d65-a160-c4cff8782c3e">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/c34dd6a4-72b3-480f-8794-4589437c2cea)
+
+# #End</details>
+  
+<details>
+<summary>19. Async React - Handling Loading of states </summary>
+
+# Async React - Handling Loading of states
 
 ```js
 
