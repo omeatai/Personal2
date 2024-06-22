@@ -1155,9 +1155,9 @@ export default App;
 # #End</details>
   
 <details>
-<summary>15. Using Controlled Form Elements </summary>
+<summary>15. Using Controlled Form Elements with UseState </summary>
 
-# Using Controlled Form Elements
+# Using Controlled Form Elements with UseState
 
 ### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
 
@@ -1233,13 +1233,81 @@ export default App;
 
 # Building a Custom Hook
 
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
 ```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
 
 ```
 
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
 ```js
+import "./App.css";
+import { useState } from "react";
+
+function useInput(initialValue) {
+  const [value, setValue] = useState(initialValue);
+
+  return [
+    {
+      value,
+      onChange: (e) => setValue(e.target.value),
+    },
+    () => setValue(initialValue),
+  ];
+}
+
+function App() {
+  const [titleProps, resetTitle] = useInput("");
+  const [colorProps, resetColor] = useInput("#000000");
+
+  const submit = (e) => {
+    e.preventDefault();
+    alert(`${titleProps.value}, ${colorProps.value}`);
+    resetTitle();
+    resetColor();
+  };
+  return (
+    <form onSubmit={submit}>
+      <input {...titleProps} type="text" placeholder="color title..." />
+      <input {...colorProps} type="color" />
+      <button>ADD</button>
+    </form>
+  );
+}
+
+export default App;
 
 ```
+
+<img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/18514b81-663b-4b6f-8515-b37e9842f6ca">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/2cb82151-9c52-4c89-8dac-b875ae7a2369)
+
+# #End</details>
+  
+<details>
+<summary>17. Async React - Fetching Data with Hooks </summary>
+
+# Async React - Fetching Data with Hooks
 
 ```js
 
