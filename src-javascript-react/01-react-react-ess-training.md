@@ -1423,9 +1423,62 @@ export default App;
 
 # Async React - Handling Loading of states
 
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
 ```js
+import "./App.css";
+import { useState, useEffect } from "react";
+
+function GithubUser({ name, location, avatar }) {
+  return (
+    <div style={{ textAlign: "center" }}>
+      <h1>{name}</h1>
+      <p>{location}</p>
+      <img src={avatar} height={100} alt={name} />
+    </div>
+  );
+}
+
+function App() {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`https://api.github.com/users/omeatai`)
+      .then((response) => response.json())
+      .then(setData)
+      .then(() => setLoading(false))
+      .catch((error) => setError(error));
+  }, []);
+
+  if (loading) return <h1>Loading...</h1>;
+  if (error) return <pre>{JSON.stringify(error)}</pre>;
+  if (!data) return null;
+  return (
+    <GithubUser
+      name={data.name}
+      location={data.location}
+      avatar={data.avatar_url}
+    />
+  );
+}
+
+export default App;
 
 ```
+
+<img width="1535" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c5cd74d6-82d5-4039-a76a-605071551c57">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/f048be5f-afdd-4d91-aa3b-dd64992334ee)
+
+# #End</details>
+  
+<details>
+<summary>20. Async React - Fetching Data with GraphQL </summary>
+
+# Async React - Fetching Data with GraphQL
 
 ```js
 
