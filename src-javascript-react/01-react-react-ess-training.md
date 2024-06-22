@@ -1480,6 +1480,117 @@ export default App;
 
 # Async React - Fetching Data with GraphQL
 
+GRAPHQL API: [https://snowtooth.moonhighway.com/](https://snowtooth.moonhighway.com/)
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/3a82fb27-4340-46be-8d27-4f2fbd5106c4)
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
+```js
+import "./App.css";
+import { useState, useEffect } from "react";
+
+const query = `
+query {
+  allLifts {
+    name
+    elevationGain
+    status
+  }
+}
+`;
+
+const opts = {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ query }),
+};
+
+function Lift({ name, elevationGain, status }) {
+  return (
+    <div>
+      <h1>{name}</h1>
+      <p>
+        {elevationGain} {status}
+      </p>
+    </div>
+  );
+}
+
+function App() {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`https://snowtooth.moonhighway.com/`, opts)
+      .then((response) => response.json())
+      .then(setData)
+      .then(() => setLoading(false))
+      .catch(setError);
+  }, []);
+
+  if (loading) return <h1>Loading...</h1>;
+  if (error) return <pre>{JSON.stringify(error)}</pre>;
+  if (!data) return null;
+  return (
+    <div>
+      {data.data.allLifts.map((lift) => (
+        <Lift
+          key={lift.name}
+          name={lift.name}
+          elevationGain={lift.elevationGain}
+          status={lift.status}
+        />
+      ))}
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+<img width="1535" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/2cdffe83-6c99-486d-8a30-a95470104417">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/5ffd1178-72a7-4488-9336-f968d60f0baf)
+
+# #End</details>
+  
+<details>
+<summary>21. Async React - Working with Render Props </summary>
+
+# Async React - Working with Render Props
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
 ```js
 
 ```
