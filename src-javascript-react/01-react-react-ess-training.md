@@ -1309,15 +1309,68 @@ export default App;
 
 # Async React - Fetching Data with Hooks
 
-[https://api.github.com/users/omeatai](https://api.github.com/users/omeatai)
+GITHUB API: [https://api.github.com/users/omeatai](https://api.github.com/users/omeatai)
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/fec0b0ca-1a64-42d1-a0e6-806911cf6f1a)
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
 
 ```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
 
 ```
 
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
 ```js
+import "./App.css";
+import { useState, useEffect } from "react";
+
+function App() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch(`https://api.github.com/users/omeatai`)
+      .then((response) => response.json())
+      .then((data) => setData(data));
+  }, []);
+
+  if (data) return <pre>{JSON.stringify(data, null, 2)}</pre>;
+
+  return <h1>Data</h1>;
+}
+
+export default App;
 
 ```
+
+<img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/52576a7e-d59e-4215-8e8d-37aaf5738f4a">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/cf6ab97b-8afb-4e02-a446-0f5cf10fd990)
+
+# #End</details>
+  
+<details>
+<summary>18. Async React - Display Fetch Data in Component </summary>
+
+# Async React - Display Fetch Data in Component
 
 ```js
 
