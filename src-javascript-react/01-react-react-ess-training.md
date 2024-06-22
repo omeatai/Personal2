@@ -1629,7 +1629,7 @@ export default App;
 
 ```
 
-<img width="1535" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/1b077922-967a-41c6-a69f-4180713f11e9">
+<img width="1535" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/8aa30e22-109b-4367-9427-9b9749da7c82">
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/393171a1-e8c2-4a34-aefe-e4d4cff5975d)
 
