@@ -1309,6 +1309,8 @@ export default App;
 
 # Async React - Fetching Data with Hooks
 
+[https://api.github.com/users/omeatai](https://api.github.com/users/omeatai)
+
 ```js
 
 ```
