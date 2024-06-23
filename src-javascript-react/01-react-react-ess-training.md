@@ -1640,17 +1640,84 @@ export default App;
 
 # React Router - Configuring React Router v6
 
+## Install React Router DOM
+
 ```js
+npm install react-router-dom@6
+```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { App, About, Contact } from "./App";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>
+);
 
 ```
 
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
 ```js
+import "./App.css";
+
+function Home() {
+  return (
+    <div>
+      <h1>My Website</h1>
+    </div>
+  );
+}
+
+export function About() {
+  return (
+    <div>
+      <h1>About Us</h1>
+    </div>
+  );
+}
+
+export function Contact() {
+  return (
+    <div>
+      <h1>Contact Us</h1>
+    </div>
+  );
+}
+
+export function App() {
+  return <Home />;
+}
 
 ```
 
-```js
+<img width="1493" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/de99cf93-3aa5-4f46-a79b-a3a27c074e8e">
 
-```
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/01f7da17-1f30-45a2-a845-e15b650398a0)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b4ce122d-e90d-4c42-a812-2c4c13a5fac9)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b0043e45-5734-46db-a774-a80b6982abd7)
+
+# #End</details>
+  
+<details>
+<summary>23. React Router - Using the Link Component </summary>
+
+# React Router - Using the Link Component
 
 ```js
 
