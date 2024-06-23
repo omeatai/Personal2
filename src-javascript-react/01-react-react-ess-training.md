@@ -1719,21 +1719,190 @@ export function App() {
 
 # React Router - Using the Link Component
 
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
 ```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { App, About, Contact } from "./App";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>
+);
 
 ```
 
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
 ```js
+import "./App.css";
+import { Link } from "react-router-dom";
+
+function Home() {
+  return (
+    <div>
+      <nav>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+      </nav>
+      <h1>My Website</h1>
+    </div>
+  );
+}
+
+export function About() {
+  return (
+    <div>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+      </nav>
+      <h1>About Us</h1>
+    </div>
+  );
+}
+
+export function Contact() {
+  return (
+    <div>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+      </nav>
+      <h1>Contact Us</h1>
+    </div>
+  );
+}
+
+export function App() {
+  return <Home />;
+}
 
 ```
 
+<img width="1493" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/a027738c-32bf-4873-ba9d-509d03076853">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/046f2ee2-2a76-4894-ac18-9d702531de42)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/5abe2e65-9afd-422d-b54f-ef684a0d1b67)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/7df8032b-470b-44c9-a7a2-bb950f5ebb30)
+
+# #End</details>
+  
+<details>
+<summary>24. React Router - Nesting Links with React Router v6 and Outlet </summary>
+
+# React Router - Nesting Links with React Router v6 and Outlet
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
 ```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { App, About, Contact, History } from "./App";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/about" element={<About />}>
+          <Route path="history" element={<History />} />
+        </Route>
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>
+);
 
 ```
 
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
 ```js
+import "./App.css";
+import { Link, Outlet } from "react-router-dom";
+
+function Home() {
+  return (
+    <div>
+      <nav>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+      </nav>
+      <h1>My Website</h1>
+    </div>
+  );
+}
+
+export function About() {
+  return (
+    <div>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+      </nav>
+      <h1>About Us</h1>
+      <Outlet />
+    </div>
+  );
+}
+
+export function History() {
+  return (
+    <div>
+      <h1>Our History</h1>
+    </div>
+  );
+}
+
+export function Contact() {
+  return (
+    <div>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+      </nav>
+      <h1>Contact Us</h1>
+    </div>
+  );
+}
+
+export function App() {
+  return <Home />;
+}
 
 ```
+
+<img width="1493" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/d49b90cf-30fa-4586-bf1e-add124fa2367">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b0d242df-6bae-469e-934a-ffcaa110c8fb)
+
+# #End</details>
+  
+<details>
+<summary>25. React Router - Testing small functions with jest </summary>
+
+# React Router - Testing small functions with jest
 
 ```js
 
