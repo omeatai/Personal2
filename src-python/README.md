@@ -1,10 +1,3 @@
-# Python Tutorials
-
-<details>
-<summary>1-Python Object Oriented PROGRAMMING </summary>
-
-# #END</details>
-
 #SRC-PYTHON
 
 ### [01-LinkedIn - Python Object Oriented Training](https://github.com/omeatai/src-AI-Software/blob/main/src-python/01-Python-Object-Oriented.md)
