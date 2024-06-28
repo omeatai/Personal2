@@ -1,34 +1,53 @@
-import React, { useState, useEffect } from "react";
 import "./App.css";
+import { Link, Outlet } from "react-router-dom";
 
-function App() {
-  const [emotion, setEmotion] = useState("happy😁");
-  const [secondary, setSecondary] = useState("tired🥱");
-
-  useEffect(() => {
-    console.log(`It's ${emotion} around here!`);
-  }, [emotion]);
-
-  useEffect(() => {
-    console.log(`It's ${secondary} around here!`);
-  }, [secondary]);
-
+function Home() {
   return (
-    <div className="App">
-      <h1>Current Emotion is {emotion}</h1>
-      <h2>Current Secondary Emotion is {secondary}.</h2>
-      <button
-        onClick={() =>
-          setEmotion((prev) => (prev === "happy😁" ? "sad😢" : "happy😁"))
-        }
-      >
-        Change Emotion
-      </button>
-      <button onClick={() => setEmotion("proud🤩")}>Proud</button>
-      <button onClick={() => setEmotion("angry😡")}>Angry</button>
-      <button onClick={() => setSecondary("grateful🥹")}>Grateful</button>
+    <div>
+      <nav>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+      </nav>
+      <h1>My Website</h1>
     </div>
   );
 }
 
-export default App;
+export function About() {
+  return (
+    <div>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+      </nav>
+      <h1>About Us</h1>
+      <Outlet />
+    </div>
+  );
+}
+
+export function History() {
+  return (
+    <div>
+      <h1>Our History</h1>
+    </div>
+  );
+}
+
+export function Contact() {
+  return (
+    <div>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+      </nav>
+      <h1>Contact Us</h1>
+    </div>
+  );
+}
+
+export function App() {
+  return <Home />;
+}

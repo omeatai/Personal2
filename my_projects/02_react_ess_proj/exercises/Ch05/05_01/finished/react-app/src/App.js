@@ -15,11 +15,7 @@ function App() {
   };
   return (
     <form onSubmit={submit}>
-      <input
-        ref={txtTitle}
-        type="text"
-        placeholder="color title..."
-      />
+      <input ref={txtTitle} type="text" placeholder="color title..." />
       <input ref={hexColor} type="color" />
       <button>ADD</button>
     </form>

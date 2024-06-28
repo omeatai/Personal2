@@ -14,9 +14,7 @@ function GithubUser({ name, location, avatar }) {
 function App() {
   const [data, setData] = useState(null);
   useEffect(() => {
-    fetch(
-      `https://api.github.com/users/moonhighway`
-    )
+    fetch(`https://api.github.com/users/moonhighway`)
       .then((response) => response.json())
       .then(setData);
   }, []);
