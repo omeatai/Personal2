@@ -22,28 +22,20 @@ def high_and_low(numbers):
 ### PYTHON SOLUTION:
 
 ```py
-def high_and_low(numbers):
-    list_nums = numbers.split(' ')
-    sorted_nums = sorted(map(int, list_nums))
-    return '{} {}'.format(sorted_nums[-1], sorted_nums[0])
+def getCount(inputStr):
+    return sum(1 for let in inputStr if let in "aeiouAEIOU")
 ```
 
 ```py
-def high_and_low(numbers): #z.
-    nn = [int(s) for s in numbers.split(" ")]
-    return "%i %i" % (max(nn),min(nn))
+def getCount(s):
+    return sum(c in 'aeiou' for c in s)
 ```
 
 ```py
-def high_and_low(numbers):
-  numbers = [int(c) for c in numbers.split(' ')]
-  return f"{max(numbers)} {min(numbers)}"
-```
+import re
 
-```py
-def high_and_low(numbers):
-    nums = sorted(numbers.split(), key=int)
-    return '{} {}'.format(nums[-1], nums[0])
+def getCount(str):
+    return len(re.findall('[aeiou]', str, re.IGNORECASE))
 ```
 
 ### JAVASCRIPT SOLUTION:
@@ -94,21 +86,28 @@ def high_and_low(numbers):
 ### PYTHON SOLUTION:
 
 ```py
-def even_or_odd(number):
-    return "Even" if number%2==0 else "Odd"
+def high_and_low(numbers):
+    list_nums = numbers.split(' ')
+    sorted_nums = sorted(map(int, list_nums))
+    return '{} {}'.format(sorted_nums[-1], sorted_nums[0])
 ```
 
 ```py
-def even_or_odd(number):
-	return 'Odd' if number % 2 else 'Even'
+def high_and_low(numbers): #z.
+    nn = [int(s) for s in numbers.split(" ")]
+    return "%i %i" % (max(nn),min(nn))
 ```
 
 ```py
-def even_or_odd(number):
-  if number % 2 == 0:
-    return "Even"
-  else:
-    return "Odd"
+def high_and_low(numbers):
+  numbers = [int(c) for c in numbers.split(' ')]
+  return f"{max(numbers)} {min(numbers)}"
+```
+
+```py
+def high_and_low(numbers):
+    nums = sorted(numbers.split(), key=int)
+    return '{} {}'.format(nums[-1], nums[0])
 ```
 
 ### JAVASCRIPT SOLUTION:
@@ -128,9 +127,9 @@ def even_or_odd(number):
 # #END</details>
 
 <details>
-<summary>3. Vowel Count </summary>
+<summary>3. V </summary>
 
-# Vowel Count
+# V
 
 [https://www.codewars.com/kata/54ff3102c1bad923760001f3](https://www.codewars.com/kata/54ff3102c1bad923760001f3)
 
