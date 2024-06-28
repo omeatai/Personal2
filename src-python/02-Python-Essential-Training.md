@@ -1,7 +1,3 @@
-
-<details>
-<summary>+LinkedIn - Python Essential Training </summary>
-
 ## +LinkedIn - Python Essential Training
 
 <details>
@@ -25,7 +21,7 @@ jupyter notebook
 <summary>2. Run Python </summary>
 
 # Run Python
-    
+
 ```py
 python
 ```
@@ -61,7 +57,7 @@ Although never is often better than *right* now.
 If the implementation is hard to explain, it's a bad idea.
 If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!
->>> 
+>>>
 ```
 
 # #END</details>
@@ -73,11 +69,11 @@ Namespaces are one honking great idea -- let's do more of those!
 
 The factorial function gives the number of possible arrangements of a set of items of length "n"
 
-For example, there are 4! ("four factorial") or 24 ways to arrange four items, which can be calculated as: 4 * 3 * 2 * 1
+For example, there are 4! ("four factorial") or 24 ways to arrange four items, which can be calculated as: 4 _ 3 _ 2 \* 1
 
-5! = 5 * 4 * 3 * 2 * 1 = 120
+5! = 5 _ 4 _ 3 _ 2 _ 1 = 120
 
-6! = 6 * 5 * 4 * 3 * 2 * 1 = 720
+6! = 6 _ 5 _ 4 _ 3 _ 2 \* 1 = 720
 
 etc.
 
@@ -86,7 +82,7 @@ In a set of 0 items (an empty set) there is only one way to arrange the items, t
 For the purposes of this exercise, factorials are only defined for positive integers (including 0)
 
 # Solution 1 - Using While Loop
-    
+
 ```py
 def factorial(num):
     if type(num) is not int:
@@ -372,8 +368,3 @@ Decimal('3.14')
 ```
 
 # #END</details>
-
-# #END</details>
-
-
-
