@@ -16,19 +16,22 @@ DESCRIPTION:
 ### PYTHON SOLUTION:
 
 ```py
-def getCount(inputStr):
-    return sum(1 for let in inputStr if let in "aeiouAEIOU")
+def get_count(sentence):
+    return sum(1 for v in sentence if v in 'aeiou')
 ```
 
 ```py
-def getCount(s):
-    return sum(c in 'aeiou' for c in s)
+def get_count(sentence):
+    return sum(v in 'aeiou' for v in sentence)
 ```
 
 ```py
 import re
-def getCount(str):
-    return len(re.findall('[aeiou]', str, re.IGNORECASE))
+
+import re
+
+def get_count(sentence):
+    return len(re.findall('[aeiou]', sentence, re.IGNORECASE))
 ```
 
 # #END</details>
