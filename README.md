@@ -1,12 +1,12 @@
 ## My Portfolio - [https://ifeanyiomeata.com/](https://ifeanyiomeata.com/)
 
-## Algorithm Challenges - [HERE](https://github.com/omeatai/src-AI-Software/tree/main/src-algorithms)
-
 ---
 
 ## TOPICS
 
 ---
+
+###### [ALGORITHM CHALLENGES](https://github.com/omeatai/src-AI-Software/tree/main/src-algorithms)
 
 ###### [PYTHON](https://github.com/omeatai/src-AI-Software/tree/main/src-python)
 
