@@ -1,19 +1,5 @@
 # src-algorithms
 
----
-
-## ALGORITHM & CODE CHALLENGES
-
----
-
-## TASKS
-
-###### [TASK 2-EVEN OR ODD](https://scrimba.com/scrim/c6r8ngCM) | [Python](https://scrimba.com/scrim/c6r8ngCM) | [Javascript](https://scrimba.com/scrim/cN8JEqCr)
-
-###### [TASK 3-VOWEL COUNT](https://scrimba.com/scrim/c3amV6Az) | [Python](https://scrimba.com/scrim/c3amV6Az) | [Javascript](https://scrimba.com/scrim/cN8JEyfq)
-
-## SOLUTIONS
-
 <details>
 <summary>1. Multiples of 3 or 5 </summary>
 
