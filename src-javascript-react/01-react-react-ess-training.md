@@ -1000,7 +1000,7 @@ export default App;
 
 <img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/e1d113bd-b11f-4f41-bb29-a8c59f04badd">
 
-![Uploading image.png…]()
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/9ba3b516-262f-43ae-98e9-af24604975f8)
 
 # #End</details>
   
@@ -1079,14 +1079,834 @@ export default App;
 
 ```
 
-![Uploading image.png…]()
+<img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/bb2295f4-eb4c-4b95-b0a2-3b08a7801e26">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/0cb7369f-fdf7-483e-a48e-79fbe05015e5)
+
 
 # #End</details>
   
 <details>
-<summary>14. Using Controlled Form Elements </summary>
+<summary>14. Using Uncontrolled Components with UseRef </summary>
 
-# Using Controlled Form Elements
+# Using Uncontrolled Components with UseRef
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
+```js
+import { useRef } from "react";
+import "./App.css";
+
+function App() {
+  const txtTitle = useRef();
+  const hexColor = useRef();
+
+  const submit = (e) => {
+    e.preventDefault();
+    const title = txtTitle.current.value;
+    const color = hexColor.current.value;
+    alert(`${title}, ${color}`);
+    txtTitle.current.value = "";
+    hexColor.current.value = "";
+  };
+
+  return (
+    <form onSubmit={submit}>
+      <input ref={txtTitle} type="text" placeholder="color title..." />
+      <input ref={hexColor} type="color" />
+      <button>ADD</button>
+    </form>
+  );
+}
+
+export default App;
+
+```
+
+<img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/8bb23453-407e-4279-8ec4-013cedddb820">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/a091b3cf-daa1-4ea0-b421-b14c02c6ed02)
+
+
+# #End</details>
+  
+<details>
+<summary>15. Using Controlled Form Elements with UseState </summary>
+
+# Using Controlled Form Elements with UseState
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
+```js
+import { useState } from "react";
+import "./App.css";
+
+function App() {
+  const [title, setTitle] = useState("");
+  const [color, setColor] = useState("#000000");
+
+  const submit = (e) => {
+    e.preventDefault();
+    alert(`${title}, ${color}`);
+    setTitle("");
+    setColor("#000000");
+  };
+
+  return (
+    <form onSubmit={submit}>
+      <input
+        type="text"
+        placeholder="color title..."
+        onChange={(e) => setTitle(e.target.value)}
+        value={title}
+      />
+      <input
+        type="color"
+        value={color}
+        onChange={(e) => setColor(e.target.value)}
+      />
+      <button>ADD</button>
+    </form>
+  );
+}
+
+export default App;
+
+```
+
+<img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/d9909665-945f-4959-84b7-ff66a3738e46">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/9c9b2487-1bbf-4a81-b775-8eebf46c0315)
+
+# #End</details>
+  
+<details>
+<summary>16. Building a Custom Hook </summary>
+
+# Building a Custom Hook
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
+```js
+import "./App.css";
+import { useState } from "react";
+
+function useInput(initialValue) {
+  const [value, setValue] = useState(initialValue);
+
+  return [
+    {
+      value,
+      onChange: (e) => setValue(e.target.value),
+    },
+    () => setValue(initialValue),
+  ];
+}
+
+function App() {
+  const [titleProps, resetTitle] = useInput("");
+  const [colorProps, resetColor] = useInput("#000000");
+
+  const submit = (e) => {
+    e.preventDefault();
+    alert(`${titleProps.value}, ${colorProps.value}`);
+    resetTitle();
+    resetColor();
+  };
+  return (
+    <form onSubmit={submit}>
+      <input {...titleProps} type="text" placeholder="color title..." />
+      <input {...colorProps} type="color" />
+      <button>ADD</button>
+    </form>
+  );
+}
+
+export default App;
+
+```
+
+<img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/18514b81-663b-4b6f-8515-b37e9842f6ca">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/2cb82151-9c52-4c89-8dac-b875ae7a2369)
+
+# #End</details>
+  
+<details>
+<summary>17. Async React - Fetching Data with Hooks </summary>
+
+# Async React - Fetching Data with Hooks
+
+GITHUB API: [https://api.github.com/users/omeatai](https://api.github.com/users/omeatai)
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/fec0b0ca-1a64-42d1-a0e6-806911cf6f1a)
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
+```js
+import "./App.css";
+import { useState, useEffect } from "react";
+
+function App() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch(`https://api.github.com/users/omeatai`)
+      .then((response) => response.json())
+      .then((data) => setData(data));
+  }, []);
+
+  if (data) return <pre>{JSON.stringify(data, null, 2)}</pre>;
+
+  return <h1>Data</h1>;
+}
+
+export default App;
+
+```
+
+<img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/52576a7e-d59e-4215-8e8d-37aaf5738f4a">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/cf6ab97b-8afb-4e02-a446-0f5cf10fd990)
+
+# #End</details>
+  
+<details>
+<summary>18. Async React - Display Fetched Data in Component </summary>
+
+# Async React - Display Fetched Data in Component
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
+```js
+import "./App.css";
+import { useState, useEffect } from "react";
+
+function GithubUser({ name, location, avatar }) {
+  return (
+    <div style={{ textAlign: "center" }}>
+      <h1>{name}</h1>
+      <p>{location}</p>
+      <img src={avatar} height={100} alt={name} />
+    </div>
+  );
+}
+
+function App() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch(`https://api.github.com/users/omeatai`)
+      .then((response) => response.json())
+      .then((data) => setData(data));
+  }, []);
+
+  if (data)
+    return (
+      <GithubUser
+        name={data.name}
+        location={data.location}
+        avatar={data.avatar_url}
+      />
+    );
+
+  return <h1>Data</h1>;
+}
+
+export default App;
+```
+
+<img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/38f0dc14-f1ff-4d65-a160-c4cff8782c3e">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/c34dd6a4-72b3-480f-8794-4589437c2cea)
+
+# #End</details>
+  
+<details>
+<summary>19. Async React - Handling Loading of states </summary>
+
+# Async React - Handling Loading of states
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
+```js
+import "./App.css";
+import { useState, useEffect } from "react";
+
+function GithubUser({ name, location, avatar }) {
+  return (
+    <div style={{ textAlign: "center" }}>
+      <h1>{name}</h1>
+      <p>{location}</p>
+      <img src={avatar} height={100} alt={name} />
+    </div>
+  );
+}
+
+function App() {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`https://api.github.com/users/omeatai`)
+      .then((response) => response.json())
+      .then(setData)
+      .then(() => setLoading(false))
+      .catch((error) => setError(error));
+  }, []);
+
+  if (loading) return <h1>Loading...</h1>;
+  if (error) return <pre>{JSON.stringify(error)}</pre>;
+  if (!data) return null;
+  return (
+    <GithubUser
+      name={data.name}
+      location={data.location}
+      avatar={data.avatar_url}
+    />
+  );
+}
+
+export default App;
+
+```
+
+<img width="1535" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c5cd74d6-82d5-4039-a76a-605071551c57">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/f048be5f-afdd-4d91-aa3b-dd64992334ee)
+
+# #End</details>
+  
+<details>
+<summary>20. Async React - Fetching Data with GraphQL </summary>
+
+# Async React - Fetching Data with GraphQL
+
+GRAPHQL API: [https://snowtooth.moonhighway.com/](https://snowtooth.moonhighway.com/)
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/3a82fb27-4340-46be-8d27-4f2fbd5106c4)
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
+```js
+import "./App.css";
+import { useState, useEffect } from "react";
+
+const query = `
+query {
+  allLifts {
+    name
+    elevationGain
+    status
+  }
+}
+`;
+
+const opts = {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ query }),
+};
+
+function Lift({ name, elevationGain, status }) {
+  return (
+    <div>
+      <h1>{name}</h1>
+      <p>
+        {elevationGain} {status}
+      </p>
+    </div>
+  );
+}
+
+function App() {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`https://snowtooth.moonhighway.com/`, opts)
+      .then((response) => response.json())
+      .then(setData)
+      .then(() => setLoading(false))
+      .catch(setError);
+  }, []);
+
+  if (loading) return <h1>Loading...</h1>;
+  if (error) return <pre>{JSON.stringify(error)}</pre>;
+  if (!data) return null;
+  return (
+    <div>
+      {data.data.allLifts.map((lift) => (
+        <Lift
+          key={lift.name}
+          name={lift.name}
+          elevationGain={lift.elevationGain}
+          status={lift.status}
+        />
+      ))}
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+<img width="1535" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/2cdffe83-6c99-486d-8a30-a95470104417">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/5ffd1178-72a7-4488-9336-f968d60f0baf)
+
+# #End</details>
+  
+<details>
+<summary>21. Async React - Working with Render Props </summary>
+
+# Async React - Working with Render Props
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
+```js
+import "./App.css";
+
+const tahoe_peaks = [
+  { name: "Freel", elevation: 10891 },
+  { name: "Monument", elevation: 10067 },
+  { name: "Pyramid", elevation: 9983 },
+  { name: "Tallac", elevation: 9735 },
+];
+
+function List({ data, renderItem, renderEmpty }) {
+  return !data.length ? (
+    renderEmpty
+  ) : (
+    <ul>
+      {data.map((item) => (
+        <li key={item.name}>{renderItem(item)}</li>
+      ))}
+    </ul>
+  );
+}
+
+function App() {
+  return (
+    <List
+      data={tahoe_peaks}
+      renderEmpty={<p>This list is empty</p>}
+      renderItem={(item) => (
+        <>
+          {item.name} - {item.elevation} ft.
+        </>
+      )}
+    />
+  );
+}
+
+export default App;
+
+```
+
+<img width="1535" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/8aa30e22-109b-4367-9427-9b9749da7c82">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/393171a1-e8c2-4a34-aefe-e4d4cff5975d)
+
+# #End</details>
+  
+<details>
+<summary>22. React Router - Configuring React Router v6 </summary>
+
+# React Router - Configuring React Router v6
+
+## Install React Router DOM
+
+```js
+npm install react-router-dom@6
+```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { App, About, Contact } from "./App";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>
+);
+
+```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
+```js
+import "./App.css";
+
+function Home() {
+  return (
+    <div>
+      <h1>My Website</h1>
+    </div>
+  );
+}
+
+export function About() {
+  return (
+    <div>
+      <h1>About Us</h1>
+    </div>
+  );
+}
+
+export function Contact() {
+  return (
+    <div>
+      <h1>Contact Us</h1>
+    </div>
+  );
+}
+
+export function App() {
+  return <Home />;
+}
+
+```
+
+<img width="1493" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/de99cf93-3aa5-4f46-a79b-a3a27c074e8e">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/01f7da17-1f30-45a2-a845-e15b650398a0)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b4ce122d-e90d-4c42-a812-2c4c13a5fac9)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b0043e45-5734-46db-a774-a80b6982abd7)
+
+# #End</details>
+  
+<details>
+<summary>23. React Router - Using the Link Component </summary>
+
+# React Router - Using the Link Component
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { App, About, Contact } from "./App";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>
+);
+
+```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
+```js
+import "./App.css";
+import { Link } from "react-router-dom";
+
+function Home() {
+  return (
+    <div>
+      <nav>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+      </nav>
+      <h1>My Website</h1>
+    </div>
+  );
+}
+
+export function About() {
+  return (
+    <div>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+      </nav>
+      <h1>About Us</h1>
+    </div>
+  );
+}
+
+export function Contact() {
+  return (
+    <div>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+      </nav>
+      <h1>Contact Us</h1>
+    </div>
+  );
+}
+
+export function App() {
+  return <Home />;
+}
+
+```
+
+<img width="1493" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/a027738c-32bf-4873-ba9d-509d03076853">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/046f2ee2-2a76-4894-ac18-9d702531de42)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/5abe2e65-9afd-422d-b54f-ef684a0d1b67)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/7df8032b-470b-44c9-a7a2-bb950f5ebb30)
+
+# #End</details>
+  
+<details>
+<summary>24. React Router - Nesting Links with React Router v6 and Outlet </summary>
+
+# React Router - Nesting Links with React Router v6 and Outlet
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/index.js:
+
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { App, About, Contact, History } from "./App";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/about" element={<About />}>
+          <Route path="history" element={<History />} />
+        </Route>
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>
+);
+
+```
+
+### src-AI-Software/my_projects/02_react_ess_proj/my-app/src/App.js:
+
+```js
+import "./App.css";
+import { Link, Outlet } from "react-router-dom";
+
+function Home() {
+  return (
+    <div>
+      <nav>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+      </nav>
+      <h1>My Website</h1>
+    </div>
+  );
+}
+
+export function About() {
+  return (
+    <div>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+      </nav>
+      <h1>About Us</h1>
+      <Outlet />
+    </div>
+  );
+}
+
+export function History() {
+  return (
+    <div>
+      <h1>Our History</h1>
+    </div>
+  );
+}
+
+export function Contact() {
+  return (
+    <div>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+      </nav>
+      <h1>Contact Us</h1>
+    </div>
+  );
+}
+
+export function App() {
+  return <Home />;
+}
+
+```
+
+<img width="1493" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/d49b90cf-30fa-4586-bf1e-add124fa2367">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b0d242df-6bae-469e-934a-ffcaa110c8fb)
+
+# #End</details>
+  
+<details>
+<summary>25. React Router - Testing small functions with jest </summary>
+
+# React Router - Testing small functions with jest
+
+```js
+
+```
 
 ```js
 
