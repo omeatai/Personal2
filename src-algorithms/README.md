@@ -14,28 +14,27 @@ DESCRIPTION:
 - The input string will only consist of lower case letters and/or spaces.
 
 ```py
-def high_and_low(numbers):
-    # ...
-    return numbers
+def get_count(sentence):
+    pass
 ```
 
 ### PYTHON SOLUTION:
 
 ```py
-def getCount(inputStr):
-    return sum(1 for let in inputStr if let in "aeiouAEIOU")
+def get_count(sentence):
+    return sum(1 for v in sentence if v in 'aeiou')
 ```
 
 ```py
-def getCount(s):
-    return sum(c in 'aeiou' for c in s)
+def get_count(sentence):
+    return sum(v in 'aeiou' for v in sentence)
 ```
 
 ```py
 import re
 
-def getCount(str):
-    return len(re.findall('[aeiou]', str, re.IGNORECASE))
+def get_count(sentence):
+    return len(re.findall('[aeiou]', sentence, re.IGNORECASE))
 ```
 
 ### JAVASCRIPT SOLUTION:
