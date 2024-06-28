@@ -13,23 +13,37 @@ DESCRIPTION:
 - We will consider a, e, i, o, u as vowels for this Kata (but not y).
 - The input string will only consist of lower case letters and/or spaces.
 
+```py
+def high_and_low(numbers):
+    # ...
+    return numbers
+```
+
 ### PYTHON SOLUTION:
 
 ```py
-def get_count(sentence):
-    return sum(1 for v in sentence if v in 'aeiou')
+def high_and_low(numbers):
+    list_nums = numbers.split(' ')
+    sorted_nums = sorted(map(int, list_nums))
+    return '{} {}'.format(sorted_nums[-1], sorted_nums[0])
 ```
 
 ```py
-def get_count(sentence):
-    return sum(v in 'aeiou' for v in sentence)
+def high_and_low(numbers): #z.
+    nn = [int(s) for s in numbers.split(" ")]
+    return "%i %i" % (max(nn),min(nn))
 ```
 
 ```py
-import re
+def high_and_low(numbers):
+  numbers = [int(c) for c in numbers.split(' ')]
+  return f"{max(numbers)} {min(numbers)}"
+```
 
-def get_count(sentence):
-    return len(re.findall('[aeiou]', sentence, re.IGNORECASE))
+```py
+def high_and_low(numbers):
+    nums = sorted(numbers.split(), key=int)
+    return '{} {}'.format(nums[-1], nums[0])
 ```
 
 ### JAVASCRIPT SOLUTION:
@@ -70,6 +84,12 @@ Notes
 * All numbers are valid Int32, no need to validate them.
 * There will always be at least one number in the input string.
 * Output string must be two numbers separated by a single space, and highest number is first.
+
+```py
+def high_and_low(numbers):
+    # ...
+    return numbers
+```
 
 ### PYTHON SOLUTION:
 
