@@ -815,36 +815,93 @@ def litres(time):
 ### PYTHON SOLUTION:
 
 ```py
+import math
 
+def litres(time):
+    return math.floor(0.5*time)
 ```
 
 ```py
-
+def litres(time):
+    return time // 2
 ```
 
 ```py
+def litres(time):
+    return int(time*0.5)
+```
 
+### JAVASCRIPT SOLUTION:
+
+```js
+
+```
+
+```js
+
+```
+
+# #END</details>
+
+<details>
+<summary>18. Is n divisible by x and y? </summary>
+
+# Is n divisible by x and y?
+
+[https://www.codewars.com/kata/5545f109004975ea66000086](https://www.codewars.com/kata/5545f109004975ea66000086)
+
+DESCRIPTION:
+
+Create a function that checks if a number n is divisible by two numbers x AND y. All inputs are positive, non-zero numbers.
+
+```x
+Examples:
+1) n =   3, x = 1, y = 3 =>  true because   3 is divisible by 1 and 3
+2) n =  12, x = 2, y = 6 =>  true because  12 is divisible by 2 and 6
+3) n = 100, x = 5, y = 3 => false because 100 is not divisible by 3
+4) n =  12, x = 7, y = 5 => false because  12 is neither divisible by 7 nor 5
 ```
 
 ```py
+def is_divisible(n,x,y):
+    pass
+```
 
+### PYTHON SOLUTION:
+
+```py
+def is_divisible(n,x,y):
+    return n%x + n%y == 0
 ```
 
 ```py
-
+def is_divisible(n,x,y):
+    return n%x==0 and n%y==0
 ```
 
 ```py
+def is_divisible(n, x, y):
+    return n % x == n % y == 0
+```
+
+### JAVASCRIPT SOLUTION:
+
+```js
 
 ```
 
-```py
+```js
 
 ```
 
-```py
+# #END</details>
 
-```
+<details>
+<summary>19. Basic Mathematical Operations </summary>
+
+# Basic Mathematical Operations
+
+DESCRIPTION:
 
 ```py
 
