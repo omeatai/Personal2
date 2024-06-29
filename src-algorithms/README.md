@@ -750,6 +750,147 @@ def century(year):
 ### PYTHON SOLUTION:
 
 ```py
+def century(year):
+    str_year = str(year)
+    if len(str_year) < 3:
+        return 1
+    elif len(str_year) == 3:
+        return int(str_year[0]) if str_year[1:] == "00" else int(str_year[0]) + 1
+    else:
+        return int(str_year[:2]) if (str_year[1:] == "000" or str_year[2:] == "00") else int(str_year[:2]) + 1
+```
+
+```py
+def century(year):
+    return (year + 99) // 100
+```
+
+```py
+import math
+
+def century(year):
+    return math.ceil(year / 100)
+```
+
+### JAVASCRIPT SOLUTION:
+
+```js
+
+```
+
+```js
+
+```
+
+# #END</details>
+
+<details>
+<summary>17. Keep Hydrated! </summary>
+
+# Keep Hydrated!
+
+[https://www.codewars.com/kata/582cb0224e56e068d800003c](https://www.codewars.com/kata/582cb0224e56e068d800003c)
+
+DESCRIPTION:
+
+- Nathan loves cycling.
+- Because Nathan knows it is important to stay hydrated, he drinks 0.5 litres of water per hour of cycling.
+- You get given the time in hours and you need to return the number of litres Nathan will drink, rounded to the smallest value.
+
+For example:
+
+```x
+time = 3 ----> litres = 1
+
+time = 6.7---> litres = 3
+
+time = 11.8--> litres = 5
+```
+
+```py
+def litres(time):
+    return 0
+```
+
+### PYTHON SOLUTION:
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
 
 ```
 
