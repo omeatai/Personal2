@@ -561,11 +561,14 @@ def find_smallest_int(arr):
 ### PYTHON SOLUTION:
 
 ```py
-
+def find_smallest_int(arr):
+    return min(arr)
 ```
 
 ```py
-
+def findSmallestInt(arr):
+    arr.sort()
+    return arr[0]
 ```
 
 ### JAVASCRIPT SOLUTION:
@@ -578,13 +581,173 @@ def find_smallest_int(arr):
 
 ```
 
-```py
+# #END</details>
 
+<details>
+<summary>13. Convert a Number to a String! </summary>
+
+# Convert a Number to a String!
+
+[https://www.codewars.com/kata/5265326f5fda8eb1160004c8](https://www.codewars.com/kata/5265326f5fda8eb1160004c8)
+
+DESCRIPTION:
+
+- We need a function that can transform a number (integer) into a string.
+- What ways of achieving this do you know?
+
+Examples (input --> output):
+
+```x
+123  --> "123"
+999  --> "999"
+-100 --> "-100"
 ```
 
 ```py
+def number_to_string(num):
+    pass
+```
+
+### PYTHON SOLUTION:
+
+```py
+def number_to_string(num):
+    return str(num)
+```
+
+### JAVASCRIPT SOLUTION:
+
+```js
 
 ```
+
+# #END</details>
+
+<details>
+<summary>14. Counting sheep </summary>
+
+# Counting sheep
+
+[https://www.codewars.com/kata/54edbc7200b811e956000556](https://www.codewars.com/kata/54edbc7200b811e956000556)
+
+DESCRIPTION:
+
+- Consider an array/list of sheep where some sheep may be missing from their place.
+- We need a function that counts the number of sheep present in the array (true means present).
+
+For example,
+
+```x
+[True,  True,  True,  False,
+  True,  True,  True,  True ,
+  True,  False, True,  False,
+  True,  False, False, True ,
+  True,  True,  True,  True ,
+  False, False, True,  True]
+```
+
+- The correct answer would be 17.
+- Hint: Don't forget to check for bad values like null/undefined
+
+```py
+def count_sheeps(sheep):
+  pass
+```
+
+### PYTHON SOLUTION:
+
+```py
+def count_sheeps(sheep):
+    return sum(s in {True} for s in sheep)
+```
+
+```py
+def count_sheeps(sheep):
+    return sum(s for s in sheep if s)
+```
+
+```py
+def count_sheeps(sheep):
+  return sheep.count(True)
+```
+
+### JAVASCRIPT SOLUTION:
+
+```js
+
+```
+
+```js
+
+```
+
+# #END</details>
+
+<details>
+<summary>15. Square(n) Sum </summary>
+
+# Square(n) Sum
+
+[https://www.codewars.com/kata/515e271a311df0350d00000f](https://www.codewars.com/kata/515e271a311df0350d00000f)
+
+DESCRIPTION:
+
+Complete the square sum function so that it squares each number passed into it and then sums the results together.
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/3bbda463-c69a-4de9-b201-bcf4f1d51f51)
+
+```py
+def square_sum(numbers):
+    pass
+```
+
+### PYTHON SOLUTION:
+
+```py
+def square_sum(numbers):
+    return sum(n**2 for n in numbers)
+```
+
+### JAVASCRIPT SOLUTION:
+
+```js
+
+```
+
+# #END</details>
+
+<details>
+<summary>16. Century From Year </summary>
+
+# Century From Year
+
+[https://www.codewars.com/kata/5a3fe3dde1ce0e8ed6000097](https://www.codewars.com/kata/5a3fe3dde1ce0e8ed6000097)
+
+DESCRIPTION:
+
+Introduction
+
+- The first century spans from the year 1 up to and including the year 100, the second century - from the year 101 up to and including the year 200, etc.
+
+Task
+
+- Given a year, return the century it is in.
+
+```x
+Examples
+1705 --> 18
+1900 --> 19
+1601 --> 17
+2000 --> 20
+2742 --> 28
+```
+
+```py
+def century(year):
+    pass
+```
+
+### PYTHON SOLUTION:
 
 ```py
 
