@@ -466,7 +466,13 @@ def summation(num):
 ```
 
 ```py
+def summation(num):
+    return sum(range(1,num+1))
+```
 
+```py
+def summation(num):
+    return (1+num) * num / 2
 ```
 
 ### JAVASCRIPT SOLUTION:
@@ -479,6 +485,81 @@ def summation(num):
 
 ```
 
+# #END</details>
+
+<details>
+<summary>11. Remove String Spaces </summary>
+
+# Remove String Spaces
+
+[https://www.codewars.com/kata/57eae20f5500ad98e50002c5](https://www.codewars.com/kata/57eae20f5500ad98e50002c5)
+
+DESCRIPTION:
+
+Write a function that removes the spaces from the string, then return the resultant string.
+
+Examples:
+
+```x
+Input -> Output
+"8 j 8   mBliB8g  imjB8B8  jl  B" -> "8j8mBliB8gimjB8B8jlB"
+"8 8 Bi fk8h B 8 BB8B B B  B888 c hl8 BhB fd" -> "88Bifk8hB8BB8BBBB888chl8BhBfd"
+"8aaaaa dddd r     " -> "8aaaaaddddr"
+```
+
+```py
+def no_space(x):
+    pass
+```
+
+### PYTHON SOLUTION:
+
+```py
+def no_space(x):
+    return x.replace(" ", "")
+```
+
+```py
+def no_space(x):
+    return "".join(x.split())
+```
+
+### JAVASCRIPT SOLUTION:
+
+```js
+
+```
+
+```js
+
+```
+
+# #END</details>
+
+<details>
+<summary>12. Find the smallest integer in the array </summary>
+
+# Find the smallest integer in the array
+
+[https://www.codewars.com/kata/55a2d7ebe362935a210000b2](https://www.codewars.com/kata/55a2d7ebe362935a210000b2)
+
+DESCRIPTION:
+
+Given an array of integers your solution should find the smallest integer.
+
+For example:
+
+- Given [34, 15, 88, 2] your solution will return 2
+- Given [34, -345, -1, 100] your solution will return -345
+- You can assume, for the purpose of this kata, that the supplied array will not be empty.
+
+```py
+def find_smallest_int(arr):
+    pass
+```
+
+### PYTHON SOLUTION:
+
 ```py
 
 ```
@@ -487,23 +568,13 @@ def summation(num):
 
 ```
 
-```py
+### JAVASCRIPT SOLUTION:
+
+```js
 
 ```
 
-```py
-
-```
-
-```py
-
-```
-
-```py
-
-```
-
-```py
+```js
 
 ```
 
