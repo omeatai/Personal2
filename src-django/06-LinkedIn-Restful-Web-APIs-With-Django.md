@@ -365,13 +365,103 @@ Products
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/4d8de945-af6d-40e6-abd4-343df5899b54)
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/70e47928-735f-4416-b1d3-b989fc25b351)
 
-```py
+### src-AI-Software/my_projects/03_restful_apls_proj/templates/store/base.html:
+
+```html
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body>
+
+<main>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Products</h1>
+        <p class="lead text-body-secondary">Discover the best deals on a wide range of products tailored just for you. From the latest electronics and trendy fashion to home essentials and more, we have everything you need in one place. Enjoy seamless shopping, fast delivery, and excellent customer service. Happy shopping!</p>
+        <p>
+          <a href="#" class="btn btn-primary my-2">View Categories</a>
+          <a href="#" class="btn btn-secondary my-2">My Cart</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        {% block content %}{% endblock content %}
+    </div>
+  </div>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    </body>
+</html>
 
 ```
 
-```py
+### src-AI-Software/my_projects/03_restful_apls_proj/store/templates/store/product_list.html:
+
+```html
+{% extends 'store/base.html' %}
+
+{% block title %}
+Products
+{% endblock title %}
+
+{% block content %}
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+    {% for product in products %}
+    <div class="col">
+        <div class="card shadow-sm">
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/>
+        <text x="50%" y="50%" fill="#eceeef" dy=".3em">S/N: 000{{ product.id }}</text>
+        </svg>
+        <div class="card-body">
+            <h2>{{ product.name }}</h2>
+            <p class="card-text">{{ product.description }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <small class="text-body-secondary">${{ product.price }}</small>
+            </div>
+        </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
 
 ```
+
+<img width="1493" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/56a989b1-4567-4ed7-90ce-d5a9d6cc3af2">
+<img width="1493" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/592c028f-b922-42c2-84ce-4b05f9cc9c12">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/687dee76-5b56-43b0-9930-88543014418f)
+
+# #END</details>
+
+<details>
+<summary>6. Setup Bootstrap Template </summary>
+
+# Setup Bootstrap Template 
 
 ```py
 
