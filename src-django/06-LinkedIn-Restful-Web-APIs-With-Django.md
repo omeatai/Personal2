@@ -459,17 +459,79 @@ Products
 # #END</details>
 
 <details>
-<summary>6. Setup Bootstrap Template </summary>
+<summary>6. Adding Static and Media Files to Django </summary>
 
-# Setup Bootstrap Template 
+# Adding Static and Media Files to Django
+
+### src-AI-Software/my_projects/03_restful_apls_proj/demo_project/settings.py:
 
 ```py
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.0/howto/static-files/
+
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'store', 'uploads'))
+MEDIA_URL = '/uploads/'
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+```
+
+### src-AI-Software/my_projects/03_restful_apls_proj/demo_project/urls.py:
+
+```py
+"""
+URL configuration for demo_project project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.0/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('store.urls')),
+]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 ```
 
-```py
+## Run Collectstatic (To add all static folders into a single main folder):
 
+```py
+python manage.py collectstatic
 ```
+
+<img width="1493" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/42ed4634-c3fb-4a80-8fd3-ed12455e7e0f">
+<img width="1493" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/81d822ec-97a9-44a9-8ed4-70efaebbf249">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/6e95459a-d5d5-4aa7-9d6e-4475be3f5996)
+
+# #END</details>
+
+<details>
+<summary>7. Creating Models in Django </summary>
+
+# Creating Models in Django
 
 ```py
 
