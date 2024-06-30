@@ -924,18 +924,115 @@ python manage.py shell
 
 # Display all Products in Template
 
+### src-AI-Software/my_projects/03_restful_apls_proj/store/urls.py:
 
 ```py
+from django.urls import path
+from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('', views.index, name='list-products'),
+]
 
 ```
 
+src-AI-Software/my_projects/03_restful_apls_proj/store/views.py:
+
 ```py
+from django.shortcuts import render
+from store.models import Product, ShoppingCart
+
+
+def index(request):
+    # context = {
+    #     'products': [
+    #         {
+    #             "id": 1,
+    #             "name": "Product 1",
+    #             "description": "Description of Product 1",
+    #             "price": "10.99",
+    #             "created_at": "2024-06-26T12:34:56Z"
+    #         },
+    #         {
+    #             "id": 2,
+    #             "name": "Product 2",
+    #             "description": "Description of Product 2",
+    #             "price": "20.99",
+    #             "created_at": "2024-06-27T12:34:56Z"
+    #         }
+    #     ],
+    # }
+
+    context = {
+        'products': Product.objects.all(),
+    }
+    return render(request, 'store/product_list.html', context)
 
 ```
 
-```py
+### src-AI-Software/my_projects/03_restful_apls_proj/store/templates/store/product_list.html:
+
+```html
+{% extends 'store/base.html' %}
+
+{% block title %}
+Products
+{% endblock title %}
+
+{% block content %}
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+    {% for product in products %}
+    <div class="col">
+        <div class="card shadow-sm">
+        <a href="">
+            {% if product.photo %}
+            <img width="100%" src="uploads/{{ product.photo }}" />
+            {% else %}
+            <img width="100%" src="uploads/products/mineralwater-strawberry.jpg" />
+            {% endif %}
+        </a>
+
+        <div class="card-body d-flex flex-column justify-content-between align-items-between" style="min-height: 25vh;">
+            <h2>{{ product.name }}</h2>
+            <p class="card-text">{{ product.description }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                {% if product.is_on_sale %}
+                <button type="button" class="btn btn-sm btn-danger">SALE: {{ product.DISCOUNT_RATE|cut:"0."}}0% OFF</button>
+                {% endif %}
+            </div>
+            <h3 class="text-body-secondary">${{ product.current_price }}</h3>
+            </div>
+        </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
 
 ```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/53855d77-7f37-4966-8429-c7902a5ec4f5)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/579e769c-5b09-47da-b701-5bf9f459c653)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/899618f6-2fe4-4c00-be10-ef8ce1d3057d)
+
+<img width="1470" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/2ad1c274-0d2c-4435-a157-a74c38429036">
+<img width="1470" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/d56ebb2e-0913-453f-835c-04f8c37d0e3d">
+<img width="1470" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/be934642-2eef-4428-9f89-e6dbfe081928">
+
+# #END</details>
+
+<details>
+<summary>12. Display a single Product w 404 Page </summary>
+
+# Display a single Product w 404 Page
+
 
 ```py
 
