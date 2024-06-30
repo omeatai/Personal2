@@ -537,6 +537,7 @@ python manage.py collectstatic
 
 ```py
 
+
 from django.utils import timezone
 from django.db import models
 
@@ -552,6 +553,10 @@ class Product(models.Model):
     sale_end = models.DateTimeField(blank=True, null=True, default=None)
     photo = models.ImageField(blank=True, null=True,
                               default=None, upload_to='products')
+
+    class Meta:
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
 
     def is_on_sale(self):
         now = timezone.now()
@@ -584,6 +589,10 @@ class ShoppingCart(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
 
+    class Meta:
+        verbose_name = "ShoppingCart"
+        verbose_name_plural = "ShoppingCarts"
+
     def subtotal(self):
         amount = 0.0
         for item in self.shopping_cart_items:
@@ -611,6 +620,10 @@ class ShoppingCartItem(models.Model):
     product = models.ForeignKey(
         Product, related_name='+', on_delete=models.CASCADE)
     quantity = models.IntegerField()
+
+    class Meta:
+        verbose_name = "ShoppingCartItem"
+        verbose_name_plural = "ShoppingCartItems"
 
     def total(self):
         return round(self.quantity * self.product.current_price())
@@ -682,6 +695,7 @@ admin.site.register(ShoppingCartItem, ShoppingCartItemAdmin)
 
 ```py
 
+
 from django.utils import timezone
 from django.db import models
 
@@ -697,6 +711,10 @@ class Product(models.Model):
     sale_end = models.DateTimeField(blank=True, null=True, default=None)
     photo = models.ImageField(blank=True, null=True,
                               default=None, upload_to='products')
+
+    class Meta:
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
 
     def is_on_sale(self):
         now = timezone.now()
@@ -729,6 +747,10 @@ class ShoppingCart(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
 
+    class Meta:
+        verbose_name = "ShoppingCart"
+        verbose_name_plural = "ShoppingCarts"
+
     def subtotal(self):
         amount = 0.0
         for item in self.shopping_cart_items:
@@ -757,6 +779,10 @@ class ShoppingCartItem(models.Model):
         Product, related_name='+', on_delete=models.CASCADE)
     quantity = models.IntegerField()
 
+    class Meta:
+        verbose_name = "ShoppingCartItem"
+        verbose_name_plural = "ShoppingCartItems"
+
     def total(self):
         return round(self.quantity * self.product.current_price())
 
@@ -766,6 +792,18 @@ class ShoppingCartItem(models.Model):
     def __str__(self):
         return '{}-{}'.format(self.shopping_cart.id, self.product.name)
 
+
+```
+
+## Run migrations:
+
+```py
+python manage.py makemigrations
+python manage.py migrate
+```
+
+```py
+python manage.py runserver 
 ```
 
 <img width="1527" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/35673948-d69f-4181-a5a7-a86318d00cfe">
@@ -797,9 +835,10 @@ class ShoppingCartItem(models.Model):
 
 # Using Django shell for creating and querying data
 
+## Run Shell:
 
 ```py
-
+python manage.py shell
 ```
 
 ```py
