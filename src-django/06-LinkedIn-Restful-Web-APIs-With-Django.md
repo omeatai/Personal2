@@ -1,92 +1,113 @@
-## +Udemy - Django A-Z Build and Deploy Web Project
+## +Udemy - Building Restful Web APIs with Django
 
 <details>
-<summary>1. Creating a New Django Project </summary>
+<summary>1. Creating a New Django Project: demo_project </summary>
 
-# Creating a New Django Project
+# Creating a New Django Project: demo_project
 
 ## Install venv
 
-```py
-python -m venv myproject-env
+```x
+python -m venv venv
 ```
 
 ## Activate venv
 
-```py
-# myproject-env\Scripts\activate
-source myproject-env/bin/activate
+```x
+# venv\Scripts\activate
+source venv/bin/activate
 ```
 
 ## Install Django
 
-```py
+```x
 python -m pip install Django
 pip install django
 pip install django==5.0
 ```
 
+## Install Other Project Dependencies: djangorestframework, django-filter, mock and Pillow
+
+```x
+pip install djangorestframework django-filter mock pillow
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/c4226191-bb1f-42c4-83f0-08b1812d5831)
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/d963db78-6367-40d0-af49-1b90eaac8339)
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b30e9e58-8cdc-4c3f-8b3f-5d96ef09882d)
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/84446ae5-a1fa-411f-9d09-b3de73ef66f9)
+
 ## Get dependencies
 
-```py
+```x
 pip freeze
 ```
 
 ```x
-asgiref==3.7.2
-Django==5.0.3
-sqlparse==0.4.4
+asgiref==3.8.1
+Django==5.0.6
+django-filter==24.2
+djangorestframework==3.15.2
+mock==5.1.0
+pillow==10.3.0
+sqlparse==0.5.0
 ```
 
 ## Save Dependencies to Requirements.txt
 
-```py
+```x
 pip freeze > requirements.txt
 ```
 
 ## Install requirements from Requirements.txt
 
-```py
+```x
 pip install -r requirements.txt
 ```
 
 ## Deactivate a virtual environment
 
-```py
+```x
 deactivate
 ```
 
 ## Create Django Project
 
-```py
-django-admin startproject taskmate .
+```x
+django-admin startproject demo_project .
 ```
 
 ## Make Migrations
 
-```py
+```x
 python manage.py makemigrations
 python manage.py migrate
 ```
 
 ## Start Local Server
 
-```py
+```x
 python manage.py runserver
 ```
 
 ```x
-You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
-Run 'python manage.py migrate' to apply them.
-April 03, 2024 - 19:56:32
-Django version 5.0.4, using settings 'taskmate.settings'
+(venv) ➜  03_restful_apls_proj git:(main) ✗ python manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+June 30, 2024 - 01:32:55
+Django version 5.0.6, using settings 'demo_project.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
 
-![image](https://github.com/omeatai/src-python-flask-django/assets/32337103/22df5e9a-3927-4360-bffc-40c6cfb95033)
+<img width="1489" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/24efbb26-8bae-45cc-9887-303d6c606011">
 
-<img width="1529" alt="image" src="https://github.com/omeatai/src-python-flask-django/assets/32337103/e087d565-d986-4697-b1d6-3e1a239d5689">
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/10b75f10-04cb-4b99-99ff-4f2a423269d7)
 
 # #END</details>
 
