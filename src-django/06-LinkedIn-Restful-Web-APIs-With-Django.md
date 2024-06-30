@@ -889,16 +889,40 @@ python manage.py shell
 <Product object (6) "Mineral Water Peach">
 
 >>> Product.objects.all()                                                                 
-<QuerySet [<Product object (2) "Mineral Water Strawberry">, <Product object (3) "Mineral Water Raspberry">, <Product object (4) "Vitamin A 10,000 IU (125 caplets)">,
-<Product object (5) "Vitamin B-Complex (100 caplets)">, <Product object (6) "Mineral Water Peach">]>
+<QuerySet [<Product object (2) "Mineral Water Strawberry">, <Product object (3) "Mineral Water Raspberry">,
+<Product object (4) "Vitamin A 10,000 IU (125 caplets)">, <Product object (5) "Vitamin B-Complex (100 caplets)">, <Product object (6) "Mineral Water Peach">]>
 
 ```
+
+## Filter and Exclude contents
 
 ```py
 
+>>> Product.objects.filter(name__startswith="Mineral")
+<QuerySet [<Product object (2) "Mineral Water Strawberry">, <Product object (3) "Mineral Water Raspberry">, <Product object (6) "Mineral Water Peach">]>
+
+
+>>> Product.objects.filter(description__icontains="anti-oxidant")
+<QuerySet [<Product object (2) "Mineral Water Strawberry">, <Product object (3) "Mineral Water Raspberry">, <Product object (6) "Mineral Water Peach">]>
+
+
+>>> Product.objects.exclude(description__icontains="vitamin")
+<QuerySet [<Product object (2) "Mineral Water Strawberry">, <Product object (3) "Mineral Water Raspberry">, <Product object (6) "Mineral Water Peach">]>
+
+
+>>> Product.objects.filter(description__icontains="essential").exclude(name__icontains="10,000")
+<QuerySet [<Product object (5) "Vitamin B-Complex (100 caplets)">]>
+
 ```
 
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/9bfec00c-8199-4607-a727-f4509c372775)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b141596d-5392-486d-a5a0-52564ac09eb6)
+
+# #END</details>
+
+<details>
+<summary>11. Display all Products in Template </summary>
+
+# Display all Products in Template
 
 
 ```py
