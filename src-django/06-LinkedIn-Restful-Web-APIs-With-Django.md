@@ -112,20 +112,17 @@ Quit the server with CONTROL-C.
 # #END</details>
 
 <details>
-<summary>2. Create new App - TodoList </summary>
+<summary>2. Create new App - store </summary>
 
-# Create new App - TodoList
-
-[https://github.com/omeatai/src-python-flask-django/commit/fbf231bb53a548dc15c021d4041212fa10ffc13b](https://github.com/omeatai/src-python-flask-django/commit/fbf231bb53a548dc15c021d4041212fa10ffc13b)
+# Create new App - store
 
 ## Create App
 
 ```py
-python manage.py startapp todolist
-django-admin startapp todolist
+django-admin startapp store
 ```
 
-### taskmate.settings:
+### src-AI-Software/my_projects/03_restful_apls_proj/demo_project/settings.py:
 
 ```x
 # Application definition
@@ -139,10 +136,169 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # apps
-    'todolist',
+    'rest_framework',
+    'django_filters',
+    'store',
 ]
+
 ```
 
-<img width="1529" alt="image" src="https://github.com/omeatai/src-python-flask-django/assets/32337103/0df79c8a-1bcd-44c9-8941-cae421178859">
+<img width="1533" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/ba0867bc-93c8-48ea-b9c0-b4798d0e32da">
+
+# #END</details>
+
+<details>
+<summary>3. Create URLs, Views and Templates </summary>
+
+# Create URLs, Views and Templates
+
+### src-AI-Software/my_projects/03_restful_apls_proj/demo_project/urls.py:
+
+```py
+"""
+URL configuration for demo_project project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.0/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('store.urls')),
+]
+
+```
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/urls.py:
+
+```py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='list-products'),
+]
+
+```
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/views.py:
+
+```py
+from django.shortcuts import render
+
+
+def index(request):
+    context = {
+        'products': [
+            {
+                "id": 1,
+                "name": "Product 1",
+                "description": "Description of Product 1",
+                "price": "10.99",
+                "created_at": "2024-06-26T12:34:56Z"
+            },
+            {
+                "id": 2,
+                "name": "Product 2",
+                "description": "Description of Product 2",
+                "price": "20.99",
+                "created_at": "2024-06-27T12:34:56Z"
+            }
+        ],
+    }
+
+    return render(request, 'store/product_list.html', context)
+
+```
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/templates/store/product_list.html:
+
+```py
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+</head>
+<body>
+
+<div class="product-list">
+  {% for product in products %}
+  <div class="product">
+    <h2>S/N: 000{{ product.id }}</h2>
+    <h2>{{ product.name }}</h2>
+    <p>{{ product.description }}</p>
+    <p>${{ product.price }}</p>
+  </div>
+  {% endfor %}
+</div>
+
+
+</body>
+</html>
+```
+
+<img width="1533" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/8463fedb-2f6f-4aab-9e58-0fb4cd56304c">
+<img width="1533" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/5ddaf4a5-6003-4013-943b-e5e97402807b">
+<img width="1533" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/38411a04-d297-4728-bc5f-949ae80322f2">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/021ab1dc-9ff4-4904-9c79-47b4d11ba321)
+
+# #END</details>
+
+<details>
+<summary>4. Create URLs, Views and Templates </summary>
+
+# Create URLs, Views and Templates
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
 
 # #END</details>
