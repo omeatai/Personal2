@@ -843,7 +843,7 @@ python manage.py shell
 
 ## Get Instance of Model Object:
 
-```x
+```py
 >>> from store.models import Product
 
 >>> Product
@@ -868,7 +868,29 @@ python manage.py shell
 
 ```
 
+## Get all Object Instances
+
 ```py
+>>> Product.objects.all()
+<QuerySet [<Product object (2) "Mineral Water Strawberry">, <Product object (3) "Mineral Water Raspberry">,
+<Product object (4) "Vitamin A 10,000 IU (125 caplets)">, <Product object (5) "Vitamin B-Complex (100 caplets)">]>
+
+```
+
+## Create New Object Instance
+
+```py
+>>> new_product = Product.objects.create(name='Mineral Water Peach', description='Flavoured with peach, loaded with anti-oxidants.', price=2.0)
+
+>>> new_product
+<Product object (6) "Mineral Water Peach">
+
+>>> Product.objects.get(pk=6)
+<Product object (6) "Mineral Water Peach">
+
+>>> Product.objects.all()                                                                 
+<QuerySet [<Product object (2) "Mineral Water Strawberry">, <Product object (3) "Mineral Water Raspberry">, <Product object (4) "Vitamin A 10,000 IU (125 caplets)">,
+<Product object (5) "Vitamin B-Complex (100 caplets)">, <Product object (6) "Mineral Water Peach">]>
 
 ```
 
