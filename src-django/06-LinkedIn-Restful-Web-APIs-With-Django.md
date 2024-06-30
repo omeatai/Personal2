@@ -260,9 +260,142 @@ def index(request):
 # #END</details>
 
 <details>
-<summary>4. Create URLs, Views and Templates </summary>
+<summary>4. Create Base Template </summary>
 
-# Create URLs, Views and Templates
+# Create Base Template
+
+### src-AI-Software/my_projects/03_restful_apls_proj/demo_project/settings.py:
+
+```py
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            BASE_DIR / 'templates',
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+```
+
+### src-AI-Software/my_projects/03_restful_apls_proj/templates/store/base.html:
+
+```py
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+
+{% block content %}{% endblock content %}
+
+</body>
+</html>
+```
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/templates/store/product_list.html:
+
+```py
+{% extends 'store/base.html' %}
+
+{% block title %}
+Products
+{% endblock title %}
+
+{% block content %}
+
+<div class="product-list">
+  {% for product in products %}
+  <div class="product">
+    <h2>S/N: 000{{ product.id }}</h2>
+    <h2>{{ product.name }}</h2>
+    <p>{{ product.description }}</p>
+    <p>${{ product.price }}</p>
+  </div>
+  <hr>
+
+  {% endfor %}
+</div>
+
+{% endblock content %}
+
+```
+
+<img width="1533" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/ae9321c1-3254-4a5e-a42f-5a70e4fb9684">
+<img width="1533" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/5380b272-6b6b-4ad5-a957-5ccf43ef30c7">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/f3ffe45c-f5d2-411a-b27b-ec975137a696)
+
+# #END</details>
+
+<details>
+<summary>5. Setup Bootstrap Template </summary>
+
+# Setup Bootstrap Template 
+
+### Bootstrap default 
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1>Hello, world!</h1>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/4d8de945-af6d-40e6-abd4-343df5899b54)
+
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
 
 ```py
 
