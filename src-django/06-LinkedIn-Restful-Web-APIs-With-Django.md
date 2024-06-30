@@ -783,7 +783,76 @@ class ShoppingCartItem(models.Model):
 <details>
 <summary>9. Add Products using Admin Panel </summary>
 
-# Add Products using Admin Panel 
+# Add Products using Admin Panel
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/671de37b-8a76-49b3-a53c-fbe959ab21b9)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/5e33c089-f630-471d-afd1-f80183934311)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/7dc40e19-7bf9-4234-b672-4acc51d0b99a)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/40995476-2d27-41a0-bea7-c729db03e643)
+
+# #END</details>
+
+<details>
+<summary>10. Using Django shell for creating and querying data </summary>
+
+# Using Django shell for creating and querying data
+
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
 
 ```py
 
