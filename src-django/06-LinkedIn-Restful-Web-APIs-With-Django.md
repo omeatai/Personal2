@@ -639,12 +639,12 @@ class ShoppingCartItem(models.Model):
 
 ## Run migrations:
 
-```py
+```x
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-```py
+```x
 python manage.py runserver 
 ```
 
@@ -661,7 +661,7 @@ python manage.py runserver
 
 ## Create Super User
 
-```py
+```x
 python manage.py createsuperuser
 ```
 
@@ -797,12 +797,12 @@ class ShoppingCartItem(models.Model):
 
 ## Run migrations:
 
-```py
+```x
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-```py
+```x
 python manage.py runserver 
 ```
 
@@ -837,11 +837,34 @@ python manage.py runserver
 
 ## Run Shell:
 
-```py
+```x
 python manage.py shell
 ```
 
-```py
+## Get Instance of Model Object:
+
+```x
+>>> from store.models import Product
+
+>>> Product
+<class 'store.models.Product'>
+
+>>> myproduct = Product.objects.get(name='Vitamin B-Complex (100 caplets)')
+
+>>> myproduct
+<Product object (5) "Vitamin B-Complex (100 caplets)">
+
+>>> myproduct.id
+5
+
+>>> myproduct.name
+'Vitamin B-Complex (100 caplets)'
+
+>>> myproduct.price
+3.0
+
+>>> myproduct.description
+'Contains a combination of essential B vitamins that help convert food to energy.'
 
 ```
 
@@ -852,6 +875,9 @@ python manage.py shell
 ```py
 
 ```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/9bfec00c-8199-4607-a727-f4509c372775)
+
 
 ```py
 
