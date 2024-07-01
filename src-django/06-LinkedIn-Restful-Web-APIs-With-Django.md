@@ -1834,25 +1834,260 @@ curl -X POST http://localhost:8000/api/v1/products/new -d price=1.00 -d name='My
 
 # DRF - Delete Products with DestroyAPIView
 
+### src-AI-Software/my_projects/03_restful_apls_proj/store/urls.py:
+
 ```py
+from django.urls import path
+from . import views
+from . import api_views
+
+urlpatterns = [
+    path('', views.index, name='list-products'),
+    path('products/<int:id>/', views.show, name='show-product'),
+    path('cart/', views.cart, name='shopping-cart'),
+    path('api/v1/products/', api_views.ProductList.as_view()),
+    path('api/v1/products/new', api_views.ProductCreate.as_view()),
+    path('api/v1/products/<int:id>/destroy',
+         api_views.ProductDestroy.as_view()),
+]
 
 ```
 
+### src-AI-Software/my_projects/03_restful_apls_proj/store/api_views.py:
+
 ```py
+from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
+from rest_framework.exceptions import ValidationError
+from django_filters import rest_framework as filters
+from rest_framework.filters import SearchFilter
+from rest_framework.pagination import LimitOffsetPagination
+
+from store.serializers import ProductSerializer
+from store.models import Product
+
+
+class ProductsPagination(LimitOffsetPagination):
+    default_limit = 10  # default limit set of 10 search results per page
+    max_limit = 100  # maximum limit set of 100 search results per page by client
+    # offset_query_param = 'offset'  # offset query parameter name
+    # offset is the number of previous pages to skip
+
+
+class ProductList(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = (filters.DjangoFilterBackend, SearchFilter)
+    filterset_fields = ('id', 'name', 'price')
+    search_fields = ('name', 'description')
+    pagination_class = ProductsPagination
+
+    def get_queryset(self):
+        on_sale = self.request.query_params.get('on_sale', None)
+        if on_sale is None:
+            return super().get_queryset()
+        queryset = Product.objects.all()
+        if on_sale.lower() == 'true':
+            from django.utils import timezone
+            now = timezone.now()
+            return queryset.filter(
+                sale_start__lte=now,
+                sale_end__gte=now,
+            )
+        return queryset
+
+
+class ProductCreate(CreateAPIView):
+    serializer_class = ProductSerializer
+
+    def create(self, request, *args, **kwargs):
+        try:
+            price = request.data.get('price')
+            if price is not None and float(price) <= 0.0:
+                raise ValidationError({'price': 'Must be above $0.00'})
+        except ValueError:
+            raise ValidationError({'price': 'A valid number is required'})
+        return super().create(request, *args, **kwargs)
+
+
+class ProductDestroy(DestroyAPIView):
+    queryset = Product.objects.all()
+    lookup_field = 'id'
+
+    def delete(self, request, *args, **kwargs):
+        product_id = request.data.get('id')
+        response = super().delete(request, *args, **kwargs)
+        if response.status_code == 204:
+            from django.core.cache import cache
+            cache.delete('product_data_{}'.format(product_id))
+        return response
 
 ```
 
+## Test DestoryAPI Route with Curl:
+
+```x
+curl -X DELETE http://localhost:8000/api/v1/products/7/destroy
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/5d693f01-e568-4b83-b29b-644afc237d72)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/8df0e1b6-b8e8-44e6-aad4-bda34a8d6789)
+
+
+## Test DestoryAPI Route with Postman:
+
+<img width="1415" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/282289be-159b-400e-be75-aa2484e0d494">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/8df0e1b6-b8e8-44e6-aad4-bda34a8d6789)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/ed763665-526e-4ed2-aafa-7b45495d0977)
+
+## Test DestoryAPI Route with Browser:
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/2c166ab0-4513-4aca-91ed-62100efe7b82)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/11fa00a2-4751-43ce-979a-f695abcce5f6)
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/ed763665-526e-4ed2-aafa-7b45495d0977)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/681eea82-bcc3-499f-9ffa-dd48ec51e4b0)
+
+# #END</details>
+
+<details>
+<summary>23. DRF - Update Products with RetrieveUpdateDestroyAPIView </summary>
+
+# DRF - Update Products with RetrieveUpdateDestroyAPIView
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/urls.py:
+
 ```py
+from django.urls import path
+from . import views
+from . import api_views
+
+urlpatterns = [
+    path('', views.index, name='list-products'),
+    path('products/<int:id>/', views.show, name='show-product'),
+    path('cart/', views.cart, name='shopping-cart'),
+    path('api/v1/products/', api_views.ProductList.as_view()),
+    path('api/v1/products/new', api_views.ProductCreate.as_view()),
+    path('api/v1/products/<int:id>/destroy',
+         api_views.ProductDestroy.as_view()),
+    path('api/v1/products/<int:id>/',
+         api_views.ProductRetrieveUpdateDestroy.as_view()),
+]
 
 ```
 
+### src-AI-Software/my_projects/03_restful_apls_proj/store/api_views.py:
+
 ```py
+from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.exceptions import ValidationError
+from django_filters import rest_framework as filters
+from rest_framework.filters import SearchFilter
+from rest_framework.pagination import LimitOffsetPagination
+
+from store.serializers import ProductSerializer
+from store.models import Product
+
+
+class ProductsPagination(LimitOffsetPagination):
+    default_limit = 10  # default limit set of 10 search results per page
+    max_limit = 100  # maximum limit set of 100 search results per page by client
+    # offset_query_param = 'offset'  # offset query parameter name
+    # offset is the number of previous pages to skip
+
+
+class ProductList(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = (filters.DjangoFilterBackend, SearchFilter)
+    filterset_fields = ('id', 'name', 'price')
+    search_fields = ('name', 'description')
+    pagination_class = ProductsPagination
+
+    def get_queryset(self):
+        on_sale = self.request.query_params.get('on_sale', None)
+        if on_sale is None:
+            return super().get_queryset()
+        queryset = Product.objects.all()
+        if on_sale.lower() == 'true':
+            from django.utils import timezone
+            now = timezone.now()
+            return queryset.filter(
+                sale_start__lte=now,
+                sale_end__gte=now,
+            )
+        return queryset
+
+
+class ProductCreate(CreateAPIView):
+    serializer_class = ProductSerializer
+
+    def create(self, request, *args, **kwargs):
+        try:
+            price = request.data.get('price')
+            if price is not None and float(price) <= 0.0:
+                raise ValidationError({'price': 'Must be above $0.00'})
+        except ValueError:
+            raise ValidationError({'price': 'A valid number is required'})
+        return super().create(request, *args, **kwargs)
+
+
+class ProductDestroy(DestroyAPIView):
+    queryset = Product.objects.all()
+    lookup_field = 'id'
+
+    def delete(self, request, *args, **kwargs):
+        product_id = request.data.get('id')
+        response = super().delete(request, *args, **kwargs)
+        if response.status_code == 204:
+            from django.core.cache import cache
+            cache.delete('product_data_{}'.format(product_id))
+        return response
+
+
+class ProductRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
+    lookup_field = 'id'
+    serializer_class = ProductSerializer
+
+    def delete(self, request, *args, **kwargs):
+        product_id = request.data.get('id')
+        response = super().delete(request, *args, **kwargs)
+        if response.status_code == 204:
+            from django.core.cache import cache
+            cache.delete('product_data_{}'.format(product_id))
+        return response
+
+    def update(self, request, *args, **kwargs):
+        response = super().update(request, *args, **kwargs)
+        if response.status_code == 200:
+            from django.core.cache import cache
+            product = response.data
+            cache.set('product_data_{}'.format(product['id']), {
+                'name': product['name'],
+                'description': product['description'],
+                'price': product['price'],
+            })
+        return response
 
 ```
 
-```py
+## Test RetrieveUpdateDestroyAPI Route with Browser to Update Record:
 
-```
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/123cb76d-f930-4159-8593-eaed1c598c7a)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/87871b1d-1f3f-4b35-9301-bb2efe7f8bd7)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/153833de-6719-40fc-bc20-4f69443616f3)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/d65b9375-360a-483a-99de-11775d196ff4)
+
+<img width="1453" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/b7cabaa3-6270-43b8-ad0d-096564b35afc">
+<img width="1453" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/860107a1-1c44-4e93-8386-cdf387438777">
+
+# #END</details>
+
+<details>
+<summary>24. DRF - Serializer with selected Customized Fields </summary>
+
+# DRF - Serializer with selected Customized Fields
 
 ```py
 
