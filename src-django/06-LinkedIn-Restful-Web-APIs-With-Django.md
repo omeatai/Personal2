@@ -1533,9 +1533,9 @@ class ProductList(ListAPIView):
 # #END</details>
 
 <details>
-<summary>17. DRF - Connecting  </summary>
+<summary>17. DRF - Filter search results with URL Query Parameters </summary>
 
-# DRF - Connecting
+# DRF - Filter search results with URL Query Parameters
 
 ```py
 
