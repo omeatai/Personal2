@@ -1405,7 +1405,7 @@ class ProductSerializer(serializers.ModelSerializer):
 python manage.py shell
 ```
 
-```py
+```x
 >>> from store.models import Product
 >>> product = Product.objects.all()[0]
 >>> product
