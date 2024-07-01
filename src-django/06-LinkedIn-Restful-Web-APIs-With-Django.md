@@ -1721,14 +1721,118 @@ class ProductList(ListAPIView):
 # #END</details>
 
 <details>
-<summary>21. DRF -  </summary>
+<summary>21. DRF - Create Products with CreateAPIView </summary>
 
-# DRF - 
+# DRF - Create Products with CreateAPIView 
 
+### src-AI-Software/my_projects/03_restful_apls_proj/store/urls.py:
 
 ```py
+from django.urls import path
+from . import views
+from . import api_views
+
+urlpatterns = [
+    path('', views.index, name='list-products'),
+    path('products/<int:id>/', views.show, name='show-product'),
+    path('cart/', views.cart, name='shopping-cart'),
+    path('api/v1/products/', api_views.ProductList.as_view()),
+    path('api/v1/products/new', api_views.ProductCreate.as_view()),
+]
 
 ```
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/api_views.py:
+
+```py
+from rest_framework.generics import ListAPIView, CreateAPIView
+from rest_framework.exceptions import ValidationError
+from django_filters import rest_framework as filters
+from rest_framework.filters import SearchFilter
+from rest_framework.pagination import LimitOffsetPagination
+
+from store.serializers import ProductSerializer
+from store.models import Product
+
+
+class ProductsPagination(LimitOffsetPagination):
+    default_limit = 10  # default limit set of 10 search results per page
+    max_limit = 100  # maximum limit set of 100 search results per page by client
+    # offset_query_param = 'offset'  # offset query parameter name
+    # offset is the number of previous pages to skip
+
+
+class ProductList(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = (filters.DjangoFilterBackend, SearchFilter)
+    filterset_fields = ('id', 'name', 'price')
+    search_fields = ('name', 'description')
+    pagination_class = ProductsPagination
+
+    def get_queryset(self):
+        on_sale = self.request.query_params.get('on_sale', None)
+        if on_sale is None:
+            return super().get_queryset()
+        queryset = Product.objects.all()
+        if on_sale.lower() == 'true':
+            from django.utils import timezone
+            now = timezone.now()
+            return queryset.filter(
+                sale_start__lte=now,
+                sale_end__gte=now,
+            )
+        return queryset
+
+
+class ProductCreate(CreateAPIView):
+    serializer_class = ProductSerializer
+
+    def create(self, request, *args, **kwargs):
+        try:
+            price = request.data.get('price')
+            if price is not None and float(price) <= 0.0:
+                raise ValidationError({'price': 'Must be above $0.00'})
+        except ValueError:
+            raise ValidationError({'price': 'A valid number is required'})
+        return super().create(request, *args, **kwargs)
+
+```
+
+## Test CreateAPI Route with Curl: 
+
+```x
+curl -X POST http://localhost:8000/api/v1/products/new -d price=1.00 -d name='My Product' -d description='Hello world'
+
+{"id":7,"name":"My Product","description":"Hello world","price":1.0,"sale_start":null,
+"sale_end":null,"is_on_sale":false,"current_price":1.0}
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/e2512014-959d-4574-b3f3-4aa68d323d6e)
+
+## Test CreateAPI Route with Postman:
+
+<img width="1415" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c5c47e12-1f1f-4536-91d7-a668df7dec1f">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b35b1e4a-3e7a-4b7e-a067-67a782009e44)
+
+## Test CreateAPI Route with Browser:
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/645ae70e-9537-43c6-ab46-65bfce568e93)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b42232b0-8b1f-4f8f-af18-4b25e340ac67)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/9b85c192-e23c-4406-8cde-692e315fe81e)
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/7e559772-a853-428a-8082-34f8fb3bc931)
+
+<img width="1453" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/e567b8f0-1e4f-4011-bceb-e8428a81bf89">
+<img width="1453" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/4b643b86-866c-46bb-805b-23b03f990807">
+
+# #END</details>
+
+<details>
+<summary>22. DRF - Delete Products with DestroyAPIView </summary>
+
+# DRF - Delete Products with DestroyAPIView
 
 ```py
 
