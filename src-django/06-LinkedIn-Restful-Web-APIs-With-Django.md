@@ -1033,30 +1033,233 @@ Products
 
 # Display a single Product w 404 Page
 
+### src-AI-Software/my_projects/03_restful_apls_proj/store/urls.py:
 
 ```py
+from django.urls import path
+from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('', views.index, name='list-products'),
+    path('products/<int:id>/', views.show, name='show-product'),
+]
 
 ```
 
+### src-AI-Software/my_projects/03_restful_apls_proj/store/views.py:
+
 ```py
+from django.shortcuts import render
+from django.http import Http404
+from store.models import Product
+
+
+def index(request):
+    # context = {
+    #     'products': [
+    #         {
+    #             "id": 1,
+    #             "name": "Product 1",
+    #             "description": "Description of Product 1",
+    #             "price": "10.99",
+    #             "created_at": "2024-06-26T12:34:56Z"
+    #         },
+    #         {
+    #             "id": 2,
+    #             "name": "Product 2",
+    #             "description": "Description of Product 2",
+    #             "price": "20.99",
+    #             "created_at": "2024-06-27T12:34:56Z"
+    #         }
+    #     ],
+    # }
+
+    context = {
+        'products': Product.objects.all(),
+    }
+    return render(request, 'store/product_list.html', context)
+
+
+def show(request, id):
+    try:
+        product = Product.objects.get(id=id)
+    except Product.DoesNotExist:
+        # return render(request, '404.html')
+        raise Http404("Note does not exist")
+
+    context = {
+        'product': product,
+    }
+    return render(request, 'store/product.html', context)
 
 ```
 
+### src-AI-Software/my_projects/03_restful_apls_proj/store/templates/store/product.html:
+
 ```py
+{% extends 'store/base.html' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<h2>{{ product.name }}</h2>
+<p>{{ product.description }}</p>
+
+{% if product.is_on_sale %}
+  <p class="price sale-price">
+    Regular Price:<del>${{ product.price|floatformat:2 }}</del> <br/>
+    <strong>SALE: ${{ product.current_price|floatformat:2 }}</strong>
+  </p>
+{% else %}
+  <p class="price price-regular">
+    <strong>Price: ${{ product.price|floatformat:2 }}</strong>
+  </p>
+{% endif %}
+
+ {% if product.photo %}
+<img src="{{product.photo.url}}" width="300px" />
+{% else %}
+<img src="/uploads/products/mineralwater-strawberry.jpg" width="300px" />
+{% endif %}
+
+{% endblock %}
 
 ```
 
+### src-AI-Software/my_projects/03_restful_apls_proj/store/templates/store/product_list.html:
+
 ```py
+{% extends 'store/base.html' %}
+
+{% block title %}
+Products
+{% endblock title %}
+
+{% block content %}
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+    {% for product in products %}
+    <div class="col">
+        <div class="card shadow-sm">
+        <a href="{% url 'show-product' product.id %}">
+            {% if product.photo %}
+            <img width="100%" src="uploads/{{ product.photo }}" />
+            {% else %}
+            <img width="100%" src="uploads/products/mineralwater-strawberry.jpg" />
+            {% endif %}
+        </a>
+
+        <div class="card-body d-flex flex-column justify-content-between align-items-between" style="min-height: 25vh;">
+            <h2>{{ product.name }}</h2>
+            <p class="card-text">{{ product.description }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+                <a href="{% url 'show-product' product.id %}">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                </a>
+
+                {% if product.is_on_sale %}
+                <button type="button" class="btn btn-sm btn-danger">SALE: {{ product.DISCOUNT_RATE|cut:"0."}}0% OFF</button>
+                {% endif %}
+            </div>
+            <h3 class="text-body-secondary">${{ product.current_price|floatformat:2 }}</h3>
+            </div>
+        </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
 
 ```
 
+### src-AI-Software/my_projects/03_restful_apls_proj/templates/404.html:
+
 ```py
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 Page</title>
+  </head>
+
+  <body>
+    <h1>404 - Ooops!</h1>
+    <h2>I cannot find the Page you requested!</h2>
+  </body>
+</html>
+```
+
+### src-AI-Software/my_projects/03_restful_apls_proj/templates/store/base.html:
+
+```py
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body>
+
+<main>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Products</h1>
+        <p class="lead text-body-secondary">Discover the best deals on a wide range of products tailored just for you. From the latest electronics and trendy fashion to home essentials and more, we have everything you need in one place. Enjoy seamless shopping, fast delivery, and excellent customer service. Happy shopping!</p>
+        <p>
+          <a href="{% url 'list-products' %}" class="btn btn-primary my-2">All Products</a>
+          <a href="#" class="btn btn-secondary my-2">My Cart</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        {% block content %}{% endblock content %}
+    </div>
+  </div>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    </body>
+</html>
 
 ```
 
-```py
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/e66b7fca-053b-423f-b879-9c33871de5b6)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/1cdba6cb-fceb-4860-aacb-19785aa810fd)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/58f45695-cb32-4417-9266-0778c9d129ba)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/35490631-9cf2-485b-9edf-bdbcc7248365)
 
-```
+<img width="1470" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/03998596-30be-4f07-ac3a-546a6224e6bf">
+<img width="1470" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/7bf3fdbf-3eb5-4a75-8aae-231e68f23016">
+<img width="1470" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/ec1b53f5-2b19-4ea6-b7d8-a2c1484ba99f">
+<img width="1470" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/61035939-da65-4bbb-b581-c2ec7fa493db">
+<img width="1470" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/7a5a0568-99e4-4aba-bb4c-749916706987">
+<img width="1470" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/5de2f7bb-c271-4618-b88b-04c236f55c79">
+
+# #END</details>
+
+<details>
+<summary>13. DRF - Creating Serializer to Serialize Model </summary>
+
+# DRF - Creating Serializer to Serialize Model
 
 ```py
 
