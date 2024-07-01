@@ -1656,13 +1656,75 @@ class ProductList(ListAPIView):
 # #END</details>
 
 <details>
-<summary>20. DRF - Filter Results with URL Query Parameters </summary>
+<summary>20. DRF - Enabling Pagination </summary>
 
-# DRF - Filter Results with URL Query Parameters
+# DRF - Enabling Pagination
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/api_views.py:
 
 ```py
+from rest_framework.generics import ListAPIView
+from django_filters import rest_framework as filters
+from rest_framework.filters import SearchFilter
+from rest_framework.pagination import LimitOffsetPagination
+
+from store.serializers import ProductSerializer
+from store.models import Product
+
+
+class ProductsPagination(LimitOffsetPagination):
+    default_limit = 10  # default limit set of 10 search results per page
+    max_limit = 100  # maximum limit set of 100 search results per page by client
+    # offset_query_param = 'offset'  # offset query parameter name
+    # offset is the number of previous pages to skip
+
+class ProductList(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = (filters.DjangoFilterBackend, SearchFilter)
+    filterset_fields = ('id', 'name', 'price')
+    search_fields = ('name', 'description')
+    pagination_class = ProductsPagination
+
+    def get_queryset(self):
+        on_sale = self.request.query_params.get('on_sale', None)
+        if on_sale is None:
+            return super().get_queryset()
+        queryset = Product.objects.all()
+        if on_sale.lower() == 'true':
+            from django.utils import timezone
+            now = timezone.now()
+            return queryset.filter(
+                sale_start__lte=now,
+                sale_end__gte=now,
+            )
+        return queryset
 
 ```
+
+## http://127.0.0.1:8000/api/v1/products/?limit=2
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/c62ce380-e33c-4c2f-af20-00a733b2f42d)
+
+## http://127.0.0.1:8000/api/v1/products/?limit=2&offset=1
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/ecefe038-6ed5-49bd-a530-3b9941356100)
+
+## http://127.0.0.1:8000/api/v1/products/?limit=1&offset=3
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/32f8dd6f-eb97-44eb-8c0b-5d2bea96d6fa)
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/5d9654db-1f07-493c-84c0-b35212d33db8)
+
+<img width="1517" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/feb191aa-c93c-4761-b0ef-33f65ca3db10">
+
+# #END</details>
+
+<details>
+<summary>21. DRF -  </summary>
+
+# DRF - 
+
 
 ```py
 
