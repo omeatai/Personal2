@@ -1257,9 +1257,144 @@ Products
 # #END</details>
 
 <details>
-<summary>13. DRF - Creating Serializer to Serialize Model </summary>
+<summary>13. Setup Cart Page with dummy data </summary>
+
+# Setup Cart Page with dummy data
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/urls.py:
+
+```py
+from django.urls import path
+from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('', views.index, name='list-products'),
+    path('products/<int:id>/', views.show, name='show-product'),
+    path('cart/', views.cart, name='shopping-cart'),
+]
+
+```
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/views.py:
+
+```py
+from django.shortcuts import render
+from django.http import Http404
+from store.models import Product, ShoppingCart
+
+
+def index(request):
+    context = {
+        'products': Product.objects.all(),
+    }
+    return render(request, 'store/product_list.html', context)
+
+
+def show(request, id):
+    try:
+        product = Product.objects.get(id=id)
+    except Product.DoesNotExist:
+        # return render(request, '404.html')
+        raise Http404("Note does not exist")
+
+    context = {
+        'product': product,
+    }
+    return render(request, 'store/product.html', context)
+
+
+def cart(request):
+    context = {
+        'items': [],
+        'subtotal': 1.0,
+        'tax_rate': int(ShoppingCart.TAX_RATE * 100.0),
+        'tax_total': 2.0,
+        'total': 3.0,
+    }
+    return render(request, 'store/cart.html', context)
+
+```
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/templates/store/cart.html:
+
+```py
+{% extends 'store/base.html' %}
+
+{% block title %}Shopping Cart{% endblock title %}
+
+{% block content %}
+<h2>Shopping Cart</h2>
+<table class="table">
+  <tbody>
+    <tr>
+      <th>Items</th>
+      <td>
+        {% for item in items %}
+        <div>
+          {{ item.quantity }}x
+          {{ item.name }}
+        </div>
+        {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <th>Subtotal</th>
+      <td>${{ subtotal|floatformat:2 }}</td>
+    </tr>
+    <tr>
+      <th>Shipping</th>
+      <td>Free</td>
+    </tr>
+    <tr>
+      <th>Taxes ({{ tax_rate }}%)</th>
+      <td>${{ tax_total|floatformat:2 }}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>Total</th>
+      <td>${{ total|floatformat:2 }}</td>
+    </tr>
+  </tfoot>
+</table>
+{% endblock content %}
+
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/ee7d73f9-fb38-46fb-8131-18f71d645731)
+
+<img width="1470" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/6c71a7be-b474-487b-af1f-3731f2204548">
+<img width="1470" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/7a473315-b6c3-421d-8bec-be5dff2228e6">
+<img width="1470" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/99eccbbc-755a-4410-b843-188d74dd71b9">
+
+# #END</details>
+
+<details>
+<summary>14. DRF - Creating Serializer to Serialize Model </summary>
 
 # DRF - Creating Serializer to Serialize Model
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
 
 ```py
 
