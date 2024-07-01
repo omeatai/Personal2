@@ -1533,17 +1533,87 @@ class ProductList(ListAPIView):
 # #END</details>
 
 <details>
-<summary>17. DRF - Filter search results with URL Query Parameters </summary>
+<summary>17. DRF - Filter results with URL Query Parameters - id, name, price </summary>
 
-# DRF - Filter search results with URL Query Parameters
+# DRF - Filter results with URL Query Parameters - id, name, price 
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/api_views.py:
 
 ```py
+from rest_framework.generics import ListAPIView
+from django_filters import rest_framework as filters
+
+from store.serializers import ProductSerializer
+from store.models import Product
+
+
+class ProductList(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_fields = ('id', 'name', 'price')
 
 ```
 
+## http://127.0.0.1:8000/api/v1/products/?id=3&name=&price=
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/a3a6bb39-705e-4043-b94d-0769e61990f0)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/ee179fe3-fe64-4c73-99d1-4df3eb115233)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/587cfeef-3246-4392-a4f9-471760eece69)
+
+<img width="1517" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/6cc7617d-2be4-498f-9512-d1d25f5e8de6">
+
+# #END</details>
+
+<details>
+<summary>18. DRF - Filter Results with URL Query Parameters - Customized Fields (is_on_sale) </summary>
+
+# DRF - Filter Results with URL Query Parameters - Customized Fields (is_on_sale)
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/api_views.py:
+
 ```py
+from rest_framework.generics import ListAPIView
+from django_filters import rest_framework as filters
+
+from store.serializers import ProductSerializer
+from store.models import Product
+
+
+class ProductList(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_fields = ('id', 'name', 'price')
+
+    def get_queryset(self):
+        on_sale = self.request.query_params.get('on_sale', None)
+        if on_sale is None:
+            return super().get_queryset()
+        queryset = Product.objects.all()
+        if on_sale.lower() == 'true':
+            from django.utils import timezone
+            now = timezone.now()
+            return queryset.filter(
+                sale_start__lte=now,
+                sale_end__gte=now,
+            )
+        return queryset
 
 ```
+
+## http://127.0.0.1:8000/api/v1/products/?on_sale=true
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/9d78fb87-a108-4710-bd26-fb796775580e)
+
+<img width="1517" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/62695a5a-e2e3-4a92-93a6-06e0a7da1780">
+
+# #END</details>
+
+<details>
+<summary>19. DRF - Filter Results with URL Query Parameters - Full text Search </summary>
+
+# DRF - Filter Results with URL Query Parameters - Full text Search
 
 ```py
 
