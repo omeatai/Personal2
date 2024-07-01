@@ -1611,13 +1611,54 @@ class ProductList(ListAPIView):
 # #END</details>
 
 <details>
-<summary>19. DRF - Filter Results with URL Query Parameters - Full text Search </summary>
+<summary>19. DRF - Filter Results with URL Query Parameters - Partial and Full text Search </summary>
 
-# DRF - Filter Results with URL Query Parameters - Full text Search
+# DRF - Filter Results with URL Query Parameters - Partial and Full text Search
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/api_views.py:
 
 ```py
+from rest_framework.generics import ListAPIView
+from django_filters import rest_framework as filters
+from rest_framework.filters import SearchFilter
+
+from store.serializers import ProductSerializer
+from store.models import Product
+
+
+class ProductList(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = (filters.DjangoFilterBackend, SearchFilter)
+    filterset_fields = ('id', 'name', 'price')
+    search_fields = ('name', 'description')
+
+    def get_queryset(self):
+        on_sale = self.request.query_params.get('on_sale', None)
+        if on_sale is None:
+            return super().get_queryset()
+        queryset = Product.objects.all()
+        if on_sale.lower() == 'true':
+            from django.utils import timezone
+            now = timezone.now()
+            return queryset.filter(
+                sale_start__lte=now,
+                sale_end__gte=now,
+            )
+        return queryset
 
 ```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/67837399-e150-41f1-bb4c-3551cffd27de)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/4269faa5-92ff-452a-996e-631455af413f)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b3315169-b8d8-4142-9016-fecdc0b4adba)
+
+# #END</details>
+
+<details>
+<summary>20. DRF - Filter Results with URL Query Parameters </summary>
+
+# DRF - Filter Results with URL Query Parameters
 
 ```py
 
