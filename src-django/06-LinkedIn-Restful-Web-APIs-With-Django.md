@@ -1319,7 +1319,7 @@ def cart(request):
 
 ### src-AI-Software/my_projects/03_restful_apls_proj/store/templates/store/cart.html:
 
-```py
+```html
 {% extends 'store/base.html' %}
 
 {% block title %}Shopping Cart{% endblock title %}
@@ -1372,21 +1372,78 @@ def cart(request):
 # #END</details>
 
 <details>
-<summary>14. DRF - Creating Serializer to Serialize Model </summary>
+<summary>14. DRF - Creating Serializer to Serialize Product Model </summary>
 
-# DRF - Creating Serializer to Serialize Model
+# DRF - Creating Serializer to Serialize Product Model
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/serializers.py:
 
 ```py
+from rest_framework import serializers
+
+from store.models import Product
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ('id', 'name', 'description',
+                  'price', 'sale_start', 'sale_end')
+
+    # add additional custom fields to the serializer.
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['is_on_sale'] = instance.is_on_sale()
+        data['current_price'] = instance.current_price()
+        return data
 
 ```
 
-```py
+## Run Django Shell
 
+```x
+python manage.py shell
 ```
 
 ```py
+>>> from store.models import Product
+>>> product = Product.objects.all()[0]
+>>> product
+<Product object (2) "Mineral Water Strawberry">
+
+>>> from store.serializers import ProductSerializer
+>>> serializer = ProductSerializer()
+>>> serializer
+ProductSerializer():
+    id = IntegerField(read_only=True)
+    name = CharField(max_length=200)
+    description = CharField(style={'base_template': 'textarea.html'})
+    price = FloatField()
+    sale_start = DateTimeField(allow_null=True, required=False)
+    sale_end = DateTimeField(allow_null=True, required=False)
+
+>>> data = serializer.to_representation(product)
+>>> data
+{'id': 2, 'name': 'Mineral Water Strawberry', 'description': 'Natural-flavored strawberry with an anti-oxidant kick.',
+'price': 1.0, 'sale_start': None, 'sale_end': None, 'is_on_sale': False, 'current_price': 1.0}
+
+>>> from rest_framework.renderers import JSONRenderer
+>>> renderer = JSONRenderer()
+>>> print(renderer.render(data))
+b'{"id":2,"name":"Mineral Water Strawberry","description":"Natural-flavored strawberry with an anti-oxidant kick.",
+"price":1.0,"sale_start":null,"sale_end":null,"is_on_sale":false,"current_price":1.0}'
 
 ```
+
+<img width="1470" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/02f67553-b872-4f49-b09a-f8d62517bc33">
+
+
+# #END</details>
+
+<details>
+<summary>15. DRF - Creating ListAPIView to view serialized Data </summary>
+
+# DRF - Creating ListAPIView to view serialized Data
 
 ```py
 
