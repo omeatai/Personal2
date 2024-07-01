@@ -1651,7 +1651,7 @@ class ProductList(ListAPIView):
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/67837399-e150-41f1-bb4c-3551cffd27de)
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/4269faa5-92ff-452a-996e-631455af413f)
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b3315169-b8d8-4142-9016-fecdc0b4adba)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/f260b4d8-cf8c-4f0a-94ca-9fcd150844e8)
 
 # #END</details>
 
