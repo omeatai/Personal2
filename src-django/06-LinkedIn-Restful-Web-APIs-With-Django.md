@@ -2117,5 +2117,33 @@ class ProductRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
 
 ```
 
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
 
 # #END</details>
