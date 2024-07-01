@@ -1445,6 +1445,126 @@ b'{"id":2,"name":"Mineral Water Strawberry","description":"Natural-flavored stra
 
 # DRF - Creating ListAPIView to view serialized Data
 
+### src-AI-Software/my_projects/03_restful_apls_proj/store/api_views.py:
+
+```py
+from rest_framework.generics import ListAPIView
+
+from store.serializers import ProductSerializer
+from store.models import Product
+
+
+class ProductList(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+```
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/serializers.py:
+
+```py
+from rest_framework import serializers
+
+from store.models import Product
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ('id', 'name', 'description',
+                  'price', 'sale_start', 'sale_end')
+
+    # add additional custom fields to the serializer.
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['is_on_sale'] = instance.is_on_sale()
+        data['current_price'] = instance.current_price()
+        return data
+
+```
+
+<img width="1517" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/88aacef9-aea0-4172-b030-3fc058aa4210">
+
+# #END</details>
+
+<details>
+<summary>16. DRF - Connecting ListAPIView to URL Route </summary>
+
+# DRF - Connecting ListAPIView to URL Route
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/urls.py:
+
+```py
+from django.urls import path
+from . import views
+from . import api_views
+
+urlpatterns = [
+    path('', views.index, name='list-products'),
+    path('products/<int:id>/', views.show, name='show-product'),
+    path('cart/', views.cart, name='shopping-cart'),
+    path('api/v1/products/', api_views.ProductList.as_view()),
+]
+
+```
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/api_views.py:
+
+```py
+from rest_framework.generics import ListAPIView
+
+from store.serializers import ProductSerializer
+from store.models import Product
+
+
+class ProductList(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+```
+
+## http://127.0.0.1:8000/api/v1/products/
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b08b65dd-e760-4938-9516-42785e824974)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/feb3dce3-a823-4c7a-96ea-0d39b6f6f43b)
+
+<img width="1517" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/36329589-fc38-432e-87e8-08b722c04740">
+
+# #END</details>
+
+<details>
+<summary>17. DRF - Connecting  </summary>
+
+# DRF - Connecting
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
 ```py
 
 ```
