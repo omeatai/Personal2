@@ -2356,17 +2356,160 @@ ProductSerializer(<Product object (2) "Mineral Water Strawberry">):
 # #END</details>
 
 <details>
-<summary>26. DRF - Serializer with Number Fields </summary>
+<summary>26. DRF - Serializer with Custom Number Fields </summary>
 
-# DRF - Serializer with Number Fields 
+# DRF - Serializer with Custom Number Fields 
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/serializers.py:
 
 ```py
+from rest_framework import serializers
+
+from store.models import Product, ShoppingCartItem
+
+
+class CartItemSerializer(serializers.ModelSerializer):
+    quantity = serializers.IntegerField(min_value=1, max_value=100)
+
+    class Meta:
+        model = ShoppingCartItem
+        fields = ('product', 'quantity')
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    is_on_sale = serializers.BooleanField(read_only=True)
+    current_price = serializers.FloatField(read_only=True)
+    description = serializers.CharField(min_length=2, max_length=200)
+    cart_items = serializers.SerializerMethodField()
+    # price = serializers.FloatField(min_value=1.00, max_value=100000)
+    price = serializers.DecimalField(
+        min_value=1.00, max_value=100000,
+        max_digits=None, decimal_places=2,
+    )
+
+    class Meta:
+        model = Product
+        fields = (
+            'id', 'name', 'description', 'price', 'sale_start', 'sale_end',
+            'is_on_sale', 'current_price', 'cart_items',
+        )
+
+    def get_cart_items(self, instance):
+        items = ShoppingCartItem.objects.filter(product=instance)
+        return CartItemSerializer(items, many=True).data
+
+# class ProductSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Product
+#         fields = ('id', 'name', 'description',
+#                   'price', 'sale_start', 'sale_end')
+
+#     # add additional custom fields to the serializer.
+#     def to_representation(self, instance):
+#         data = super().to_representation(instance)
+#         data['is_on_sale'] = instance.is_on_sale()
+#         data['current_price'] = instance.current_price()
+#         return data
 
 ```
 
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/d0b2d82e-dfcc-40f8-b37d-dcd1faaa5b6f)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/86f254ea-4229-49fb-b3a6-e700a4b3aa98)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/6bda82c5-35a6-4e49-99e3-e71539b0f553)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/0e450a2c-bec3-4fe2-afe2-1081db4865a2)
+
+<img width="1483" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/9dbaea4c-cf21-4e10-90c9-0a97a6ebfc7e">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/25afe1fd-d535-435a-a801-7f26d76a01a8)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/847523d7-d88b-409d-910c-4d45f4f2f35c)
+
+# #END</details>
+
+<details>
+<summary>27. DRF - Serializer with Custom Date and Time Fields </summary>
+
+# DRF - Serializer with Custom Date and Time Fields
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/serializers.py:
+
 ```py
+from rest_framework import serializers
+
+from store.models import Product, ShoppingCartItem
+
+
+class CartItemSerializer(serializers.ModelSerializer):
+    quantity = serializers.IntegerField(min_value=1, max_value=100)
+
+    class Meta:
+        model = ShoppingCartItem
+        fields = ('product', 'quantity')
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    is_on_sale = serializers.BooleanField(read_only=True)
+    current_price = serializers.FloatField(read_only=True)
+    description = serializers.CharField(min_length=2, max_length=200)
+    cart_items = serializers.SerializerMethodField()
+    # price = serializers.FloatField(min_value=1.00, max_value=100000)
+    price = serializers.DecimalField(
+        min_value=1.00, max_value=100000,
+        max_digits=None, decimal_places=2,
+    )
+
+    sale_start = serializers.DateTimeField(
+        input_formats=['%I:%M %p %d %B %Y'], format=None, allow_null=True,
+        help_text='Accepted format is "12:01 PM 16 April 2019"',
+        style={'input_type': 'text', 'placeholder': '12:01 AM 28 July 2019'},
+    )
+    sale_end = serializers.DateTimeField(
+        input_formats=['%I:%M %p %d %B %Y'], format=None, allow_null=True,
+        help_text='Accepted format is "12:01 PM 16 April 2019"',
+        style={'input_type': 'text', 'placeholder': '12:01 AM 28 July 2019'},
+    )
+
+    class Meta:
+        model = Product
+        fields = (
+            'id', 'name', 'description', 'price', 'sale_start', 'sale_end',
+            'is_on_sale', 'current_price', 'cart_items',
+        )
+
+    def get_cart_items(self, instance):
+        items = ShoppingCartItem.objects.filter(product=instance)
+        return CartItemSerializer(items, many=True).data
+
+# class ProductSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Product
+#         fields = ('id', 'name', 'description',
+#                   'price', 'sale_start', 'sale_end')
+
+#     # add additional custom fields to the serializer.
+#     def to_representation(self, instance):
+#         data = super().to_representation(instance)
+#         data['is_on_sale'] = instance.is_on_sale()
+#         data['current_price'] = instance.current_price()
+#         return data
 
 ```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/62c0411f-50f3-421a-a7e0-35ed13059973)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/9256deb8-af2a-4f50-860f-9c868e2cd2a4)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/afdd71c5-b5aa-4f46-b199-389601111fc9)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/a03f50a2-d873-430b-84d7-afc0ec424bdc)
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/57519e8b-433d-4d15-84b6-95c0d17939ee)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/5812498e-0be1-4b1b-a498-0ce8459e5e46)
+
+<img width="1527" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/1318af90-703b-4016-86a5-37f93b4ed340">
+
+# #END</details>
+
+<details>
+<summary>28. DRF - Serializer for List, dicts and JSON Objects </summary>
+
+# DRF - Serializer for List, dicts and JSON Objects
 
 ```py
 
