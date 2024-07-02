@@ -2132,9 +2132,9 @@ class ProductSerializer(serializers.ModelSerializer):
 # #END</details>
 
 <details>
-<summary>25. DRF - Serializer for Shopping Cart to Product Relationship </summary>
+<summary>25. DRF - Serializer Relationship - Adding Shopping Cart to Product Field </summary>
 
-# DRF - Serializer for Shopping Cart to Product Relationship
+# DRF - Serializer Relationship - Adding Shopping Cart to Product Field
 
 ### src-AI-Software/my_projects/03_restful_apls_proj/store/serializers.py:
 
