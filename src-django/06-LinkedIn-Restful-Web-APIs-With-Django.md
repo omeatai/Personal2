@@ -2823,6 +2823,8 @@ class ProductStatSerializer(serializers.Serializer):
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/0c1aff10-7e93-4e7c-88e8-66ebaf8b5f94)
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/0fbd8885-bb9e-4662-957e-616e379d58a6)
 
+<img width="1385" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/aeedbfff-0456-4315-8fc7-b68b8fec2c96">
+
 # #END</details>
 
 <details>
