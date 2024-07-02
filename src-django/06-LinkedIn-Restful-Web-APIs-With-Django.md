@@ -2089,17 +2089,276 @@ class ProductRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
 
 # DRF - Serializer with selected Customized Fields
 
+### src-AI-Software/my_projects/03_restful_apls_proj/store/serializers.py:
+
 ```py
+from rest_framework import serializers
+
+from store.models import Product
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    is_on_sale = serializers.BooleanField(read_only=True)
+    current_price = serializers.FloatField(read_only=True)
+    description = serializers.CharField(min_length=2, max_length=200)
+
+    class Meta:
+        model = Product
+        fields = (
+            'id', 'name', 'description', 'price', 'sale_start', 'sale_end',
+            'is_on_sale', 'current_price',
+        )
+
+# class ProductSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Product
+#         fields = ('id', 'name', 'description',
+#                   'price', 'sale_start', 'sale_end')
+
+#     # add additional custom fields to the serializer.
+#     def to_representation(self, instance):
+#         data = super().to_representation(instance)
+#         data['is_on_sale'] = instance.is_on_sale()
+#         data['current_price'] = instance.current_price()
+#         return data
 
 ```
 
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/1aebac1f-c930-4895-815d-0715e309793c)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b8f16118-0e50-4841-a708-455dcac0fa8e)
+
+<img width="1527" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/44737416-d158-425d-83fa-d2f64fbe007d">
+
+# #END</details>
+
+<details>
+<summary>25. DRF - Serializer for Shopping Cart to Product Relationship </summary>
+
+# DRF - Serializer for Shopping Cart to Product Relationship
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/serializers.py:
+
 ```py
+from rest_framework import serializers
+
+from store.models import Product, ShoppingCartItem
+
+
+class CartItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ShoppingCartItem
+        fields = ('product', 'quantity')
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    is_on_sale = serializers.BooleanField(read_only=True)
+    current_price = serializers.FloatField(read_only=True)
+    description = serializers.CharField(min_length=2, max_length=200)
+    cart_items = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Product
+        fields = (
+            'id', 'name', 'description', 'price', 'sale_start', 'sale_end',
+            'is_on_sale', 'current_price', 'cart_items',
+        )
+
+    def get_cart_items(self, instance):
+        items = ShoppingCartItem.objects.filter(product=instance)
+        return CartItemSerializer(items, many=True).data
+
+# class ProductSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Product
+#         fields = ('id', 'name', 'description',
+#                   'price', 'sale_start', 'sale_end')
+
+#     # add additional custom fields to the serializer.
+#     def to_representation(self, instance):
+#         data = super().to_representation(instance)
+#         data['is_on_sale'] = instance.is_on_sale()
+#         data['current_price'] = instance.current_price()
+#         return data
 
 ```
 
+### src-AI-Software/my_projects/03_restful_apls_proj/store/models.py:
+
 ```py
 
+from django.utils import timezone
+from django.db import models
+
+
+class Product(models.Model):
+    DISCOUNT_RATE = 0.10
+
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200)
+    description = models.TextField()
+    price = models.FloatField()
+    sale_start = models.DateTimeField(blank=True, null=True, default=None)
+    sale_end = models.DateTimeField(blank=True, null=True, default=None)
+    photo = models.ImageField(blank=True, null=True,
+                              default=None, upload_to='products')
+
+    class Meta:
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
+
+    def is_on_sale(self):
+        now = timezone.now()
+        if self.sale_start:
+            if self.sale_end:
+                return self.sale_start <= now <= self.sale_end
+            return self.sale_start <= now
+        return False
+
+    def get_rounded_price(self):
+        return round(self.price, 2)
+
+    def current_price(self):
+        if self.is_on_sale():
+            discounted_price = self.price * (1 - self.DISCOUNT_RATE)
+            return round(discounted_price, 2)
+        return self.get_rounded_price()
+
+    def __repr__(self):
+        return '<Product object ({}) "{}">'.format(self.id, self.name)
+
+    def __str__(self):
+        return '{}-{}'.format(self.id, self.name)
+
+
+class ShoppingCart(models.Model):
+    TAX_RATE = 0.13
+
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200)
+    address = models.CharField(max_length=200)
+
+    class Meta:
+        verbose_name = "ShoppingCart"
+        verbose_name_plural = "ShoppingCarts"
+
+    def subtotal(self):
+        amount = 0.0
+        for item in self.shopping_cart_items:
+            amount += item.quantity * item.product.get_price()
+        return round(amount, 2)
+
+    def taxes(self):
+        return round(self.TAX_RATE * self.subtotal(), 2)
+
+    def total(self):
+        return round(self.subtotal() * self.taxes(), 2)
+
+    def __repr__(self):
+        name = self.name or '[Guest]'
+        address = self.address or '[No Address]'
+        return '<ShoppingCart object ({}) "{}" "{}">'.format(self.id, name, address)
+
+    def __str__(self):
+        return '{}-{}'.format(self.id, self.name)
+
+
+class ShoppingCartItem(models.Model):
+    shopping_cart = models.ForeignKey(
+        ShoppingCart, related_name='items', related_query_name='item', on_delete=models.CASCADE)
+    product = models.ForeignKey(
+        Product, related_name='+', on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+
+    class Meta:
+        verbose_name = "ShoppingCartItem"
+        verbose_name_plural = "ShoppingCartItems"
+
+    def total(self):
+        return round(self.quantity * self.product.current_price())
+
+    def __repr__(self):
+        return '<ShoppingCartItem object ({}) {}x "{}">'.format(self.id, self.quantity, self.product.name)
+
+    def __str__(self):
+        return '{}-{}'.format(self.shopping_cart.id, self.product.name)
+
 ```
+
+## Run Python Shell
+
+```py
+python manage.py shell
+```
+
+```py
+>>> import json
+>>> from store.models import *
+>>> from store.serializers import *
+
+>>> product = Product.objects.all().first()
+>>> product
+<Product object (2) "Mineral Water Strawberry">
+
+>>> cart = ShoppingCart(name='ifeanyi', address='234 Haven str., Calgary')
+>>> cart
+<ShoppingCart object (None) "ifeanyi" "234 Haven str., Calgary">
+>>> cart.save()
+>>> cart
+<ShoppingCart object (1) "ifeanyi" "234 Haven str., Calgary">
+
+>>> item = ShoppingCartItem(shopping_cart=cart, product=product, quantity=5)
+>>> item
+<ShoppingCartItem object (None) 5x "Mineral Water Strawberry">
+>>> item.save()
+>>> item
+<ShoppingCartItem object (1) 5x "Mineral Water Strawberry">
+
+>>> serializer = ProductSerializer(product)
+>>> serializer
+ProductSerializer(<Product object (2) "Mineral Water Strawberry">):
+    id = IntegerField(read_only=True)
+    name = CharField(max_length=200)
+    description = CharField(max_length=200, min_length=2)
+    price = FloatField()
+    sale_start = DateTimeField(allow_null=True, required=False)
+    sale_end = DateTimeField(allow_null=True, required=False)
+    is_on_sale = BooleanField(read_only=True)
+    current_price = FloatField(read_only=True)
+    cart_items = SerializerMethodField()
+>>> serializer.data
+{'id': 2, 'name': 'Mineral Water Strawberry', 'description': 'Natural-flavored strawberry with an anti-oxidant kick.',
+'price': 1.0, 'sale_start': None, 'sale_end': None, 'is_on_sale': False, 'current_price': 1.0, 'cart_items': [{'product': 2, 'quantity': 5}]}
+
+>>> print(json.dumps(serializer.data, indent=2))
+{
+  "id": 2,
+  "name": "Mineral Water Strawberry",
+  "description": "Natural-flavored strawberry with an anti-oxidant kick.",
+  "price": 1.0,
+  "sale_start": null,
+  "sale_end": null,
+  "is_on_sale": false,
+  "current_price": 1.0,
+  "cart_items": [
+    {
+      "product": 2,
+      "quantity": 5
+    }
+  ]
+}
+```
+
+<img width="1527" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/cab50558-7374-4238-afb4-ab49c101c4ad">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/9b2666a9-9263-498b-b6c4-575289d324ca)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/eb257bd8-04c8-4f41-ad29-8664c7271576)
+
+# #END</details>
+
+<details>
+<summary>26. DRF - Serializer with Number Fields </summary>
+
+# DRF - Serializer with Number Fields 
 
 ```py
 
