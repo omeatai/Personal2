@@ -2967,9 +2967,97 @@ class ProductCreateTestCase(APITestCase):
 
 # DRF API UnitTesting - TestCase for DestroyAPIView
 
+### src-AI-Software/my_projects/03_restful_apls_proj/store/tests.py:
+
 ```py
+# from django.test import TestCase
+from rest_framework.test import APITestCase
+
+from store.models import Product
+
+
+class ProductCreateTestCase(APITestCase):
+    def test_create_product(self):
+        # Get the Total number of created Products
+        initial_product_count = Product.objects.count()
+
+        # Create a new Product
+        product_attrs = {
+            'name': 'New Product',
+            'description': 'Awesome product',
+            'price': '123.45',
+        }
+
+        # Send a POST request to the ProductCreate API endpoint
+        response = self.client.post('/api/v1/products/new', product_attrs)
+        if response.status_code != 201:
+            print(response.data)
+
+        # Check that the Product was created successfully
+        self.assertEqual(
+            Product.objects.count(),
+            initial_product_count + 1,
+        )
+
+        # Check that the Product was created with the correct attributes
+        for attr, expected_value in product_attrs.items():
+            self.assertEqual(response.data[attr], expected_value)
+
+        # Check that the Product was created with the correct Custom Field attributes for is_on_sale and current_price
+        self.assertEqual(response.data['is_on_sale'], False)
+        self.assertEqual(
+            response.data['current_price'],
+            float(product_attrs['price']),
+        )
+
+
+class ProductDestroyTestCase(APITestCase):
+    def test_delete_product(self):
+        # Get the Total number of created Products
+        initial_product_count = Product.objects.count()
+
+        # Create a new Product
+        product_attrs = {
+            'name': 'New Product',
+            'description': 'Awesome product',
+            'price': '123.45',
+        }
+        # Send a POST request to the ProductCreate API endpoint
+        response = self.client.post('/api/v1/products/new', product_attrs)
+        if response.status_code != 201:
+            print(response.data)
+
+        # Get the first created Product
+        product_id = Product.objects.first().id
+        # print(product_id)
+
+        # Send a DELETE request to the ProductDestroyAPI endpoint
+        self.client.delete('/api/v1/products/{}/destroy'.format(product_id))
+
+        # Check that the Product was deleted successfully
+        self.assertEqual(
+            Product.objects.count(),
+            initial_product_count,
+        )
+
+        # Check that the Product was deleted from the database
+        self.assertRaises(
+            Product.DoesNotExist,
+            Product.objects.get, id=product_id,
+        )
 
 ```
+
+<img width="1502" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/ddf243aa-c5ce-46d2-b57f-216e358dab1d">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/a2a866e8-49a5-4a0c-824f-ae647ff4b647)
+
+# #END</details>
+
+<details>
+<summary>32. DRF API UnitTesting - TestCase for ListAPIView  </summary>
+
+# DRF API UnitTesting - TestCase for ListAPIView
 
 ```py
 
