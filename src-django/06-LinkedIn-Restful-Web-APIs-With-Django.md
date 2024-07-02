@@ -2507,21 +2507,233 @@ class ProductSerializer(serializers.ModelSerializer):
 # #END</details>
 
 <details>
-<summary>28. DRF - Serializer for List, dicts and JSON Objects </summary>
+<summary>28. DRF - Serializer for Composite Fields (List, dicts and JSON Objects) </summary>
 
-# DRF - Serializer for List, dicts and JSON Objects
+# DRF - Serializer for Composite Fields (List, dicts and JSON Objects)
+
+### src-AI-Software/my_projects/03_restful_apls_proj/store/urls.py:
 
 ```py
+from django.urls import path
+from . import views
+from . import api_views
+
+urlpatterns = [
+    path('', views.index, name='list-products'),
+    path('products/<int:id>/', views.show, name='show-product'),
+    path('cart/', views.cart, name='shopping-cart'),
+    path('api/v1/products/', api_views.ProductList.as_view()),
+    path('api/v1/products/new', api_views.ProductCreate.as_view()),
+    path('api/v1/products/<int:id>/destroy',
+         api_views.ProductDestroy.as_view()),
+    path('api/v1/products/<int:id>/',
+         api_views.ProductRetrieveUpdateDestroy.as_view()),
+    path('api/v1/products/<int:id>/stats',
+         api_views.ProductStats.as_view(),
+         ),
+]
 
 ```
 
+### src-AI-Software/my_projects/03_restful_apls_proj/store/api_views.py:
+
 ```py
+from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView, \
+    RetrieveUpdateDestroyAPIView, GenericAPIView
+from rest_framework.exceptions import ValidationError
+from django_filters import rest_framework as filters
+from rest_framework.filters import SearchFilter
+from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.response import Response
+
+from store.serializers import ProductSerializer, ProductStatSerializer
+from store.models import Product
+
+
+class ProductsPagination(LimitOffsetPagination):
+    default_limit = 10  # default limit set of 10 search results per page
+    max_limit = 100  # maximum limit set of 100 search results per page by client
+    # offset_query_param = 'offset'  # offset query parameter name
+    # offset is the number of previous pages to skip
+
+
+class ProductList(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = (filters.DjangoFilterBackend, SearchFilter)
+    filterset_fields = ('id', 'name', 'price')
+    search_fields = ('name', 'description')
+    pagination_class = ProductsPagination
+
+    def get_queryset(self):
+        on_sale = self.request.query_params.get('on_sale', None)
+        if on_sale is None:
+            return super().get_queryset()
+        queryset = Product.objects.all()
+        if on_sale.lower() == 'true':
+            from django.utils import timezone
+            now = timezone.now()
+            return queryset.filter(
+                sale_start__lte=now,
+                sale_end__gte=now,
+            )
+        return queryset
+
+
+class ProductCreate(CreateAPIView):
+    serializer_class = ProductSerializer
+
+    def create(self, request, *args, **kwargs):
+        try:
+            price = request.data.get('price')
+            if price is not None and float(price) <= 0.0:
+                raise ValidationError({'price': 'Must be above $0.00'})
+        except ValueError:
+            raise ValidationError({'price': 'A valid number is required'})
+        return super().create(request, *args, **kwargs)
+
+
+class ProductDestroy(DestroyAPIView):
+    queryset = Product.objects.all()
+    lookup_field = 'id'
+
+    def delete(self, request, *args, **kwargs):
+        product_id = request.data.get('id')
+        response = super().delete(request, *args, **kwargs)
+        if response.status_code == 204:
+            from django.core.cache import cache
+            cache.delete('product_data_{}'.format(product_id))
+        return response
+
+
+class ProductRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
+    lookup_field = 'id'
+    serializer_class = ProductSerializer
+
+    def delete(self, request, *args, **kwargs):
+        product_id = request.data.get('id')
+        response = super().delete(request, *args, **kwargs)
+        if response.status_code == 204:
+            from django.core.cache import cache
+            cache.delete('product_data_{}'.format(product_id))
+        return response
+
+    def update(self, request, *args, **kwargs):
+        response = super().update(request, *args, **kwargs)
+        if response.status_code == 200:
+            from django.core.cache import cache
+            product = response.data
+            cache.set('product_data_{}'.format(product['id']), {
+                'name': product['name'],
+                'description': product['description'],
+                'price': product['price'],
+            })
+        return response
+
+
+class ProductStats(GenericAPIView):
+    lookup_field = 'id'
+    serializer_class = ProductStatSerializer
+    queryset = Product.objects.all()
+
+    def get(self, request, format=None, id=None):
+        obj = self.get_object()
+        serializer = ProductStatSerializer({
+            'stats': {
+                '2019-01-01': [5, 10, 15],
+                '2019-01-02': [20, 1, 1],
+            }
+        })
+        return Response(serializer.data)
 
 ```
 
+### src-AI-Software/my_projects/03_restful_apls_proj/store/serializers.py:
+
 ```py
+from rest_framework import serializers
+
+from store.models import Product, ShoppingCartItem
+
+
+class CartItemSerializer(serializers.ModelSerializer):
+    quantity = serializers.IntegerField(min_value=1, max_value=100)
+
+    class Meta:
+        model = ShoppingCartItem
+        fields = ('product', 'quantity')
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    is_on_sale = serializers.BooleanField(read_only=True)
+    current_price = serializers.FloatField(read_only=True)
+    description = serializers.CharField(min_length=2, max_length=200)
+    cart_items = serializers.SerializerMethodField()
+    # price = serializers.FloatField(min_value=1.00, max_value=100000)
+    price = serializers.DecimalField(
+        min_value=1.00, max_value=100000,
+        max_digits=None, decimal_places=2,
+    )
+
+    sale_start = serializers.DateTimeField(
+        input_formats=['%I:%M %p %d %B %Y'], format=None, allow_null=True,
+        help_text='Accepted format is "12:01 PM 16 April 2019"',
+        style={'input_type': 'text', 'placeholder': '12:01 AM 28 July 2019'},
+    )
+    sale_end = serializers.DateTimeField(
+        input_formats=['%I:%M %p %d %B %Y'], format=None, allow_null=True,
+        help_text='Accepted format is "12:01 PM 16 April 2019"',
+        style={'input_type': 'text', 'placeholder': '12:01 AM 28 July 2019'},
+    )
+
+    class Meta:
+        model = Product
+        fields = (
+            'id', 'name', 'description', 'price', 'sale_start', 'sale_end',
+            'is_on_sale', 'current_price', 'cart_items',
+        )
+
+    def get_cart_items(self, instance):
+        items = ShoppingCartItem.objects.filter(product=instance)
+        return CartItemSerializer(items, many=True).data
+
+# class ProductSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Product
+#         fields = ('id', 'name', 'description',
+#                   'price', 'sale_start', 'sale_end')
+
+#     # add additional custom fields to the serializer.
+#     def to_representation(self, instance):
+#         data = super().to_representation(instance)
+#         data['is_on_sale'] = instance.is_on_sale()
+#         data['current_price'] = instance.current_price()
+#         return data
+
+
+class ProductStatSerializer(serializers.Serializer):
+    stats = serializers.DictField(
+        child=serializers.ListField(
+            child=serializers.IntegerField(),
+        )
+    )
 
 ```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/d9af3591-f874-4a01-889b-0d567b1a9a59)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/f8f0f64e-7ce2-4a8f-874d-5f5847e89640)
+
+<img width="1527" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/9a84dff1-996e-476d-8a62-b24e915aa039">
+<img width="1527" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/a6409182-3e96-41a4-bc88-a539f8a9e321">
+<img width="1527" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/1da344e6-bdcf-4d98-952c-2ad93a8cc0e9">
+
+# #END</details>
+
+<details>
+<summary>29. DRF - Serializer for ImageField and FileField </summary>
+
+# DRF - Serializer for ImageField and FileField
 
 ```py
 
