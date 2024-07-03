@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from store.models import Product
 
+
 class ProductSerializer(serializers.ModelSerializer):
     is_on_sale = serializers.BooleanField(read_only=True)
     current_price = serializers.FloatField(read_only=True)

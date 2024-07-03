@@ -2,6 +2,7 @@ from rest_framework.test import APITestCase
 
 from store.models import Product
 
+
 class ProductCreateTestCase(APITestCase):
     def test_create_product(self):
         initial_product_count = Product.objects.count()
@@ -24,6 +25,7 @@ class ProductCreateTestCase(APITestCase):
             response.data['current_price'],
             float(product_attrs['price']),
         )
+
 
 class ProductDestroyTestCase(APITestCase):
     def test_delete_product(self):

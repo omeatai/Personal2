@@ -5,6 +5,7 @@ from rest_framework.test import APITestCase
 
 from store.models import Product
 
+
 class ProductCreateTestCase(APITestCase):
     def test_create_product(self):
         initial_product_count = Product.objects.count()
@@ -28,6 +29,7 @@ class ProductCreateTestCase(APITestCase):
             float(product_attrs['price']),
         )
 
+
 class ProductDestroyTestCase(APITestCase):
     def test_delete_product(self):
         initial_product_count = Product.objects.count()
@@ -42,6 +44,7 @@ class ProductDestroyTestCase(APITestCase):
             Product.objects.get, id=product_id,
         )
 
+
 class ProductListTestCase(APITestCase):
     def test_list_products(self):
         products_count = Product.objects.count()
@@ -50,6 +53,7 @@ class ProductListTestCase(APITestCase):
         self.assertIsNone(response.data['previous'])
         self.assertEqual(response.data['count'], products_count)
         self.assertEqual(len(response.data['results']), products_count)
+
 
 class ProductUpdateTestCase(APITestCase):
     def test_update_product(self):
@@ -69,7 +73,8 @@ class ProductUpdateTestCase(APITestCase):
     def test_upload_product_photo(self):
         product = Product.objects.first()
         original_photo = product.photo
-        photo_path = os.path.join(settings.MEDIA_ROOT, 'products', 'vitamin-iron.jpg')
+        photo_path = os.path.join(
+            settings.MEDIA_ROOT, 'products', 'vitamin-iron.jpg')
         with open(photo_path, 'rb') as photo_data:
             response = self.client.patch('/api/v1/products/{}/'.format(product.id), {
                 'photo': photo_data,
@@ -78,7 +83,8 @@ class ProductUpdateTestCase(APITestCase):
         self.assertNotEqual(response.data['photo'], original_photo)
         try:
             updated = Product.objects.get(id=product.id)
-            expected_photo = os.path.join(settings.MEDIA_ROOT, 'products', 'vitamin-iron')
+            expected_photo = os.path.join(
+                settings.MEDIA_ROOT, 'products', 'vitamin-iron')
             self.assertTrue(updated.photo.path.startswith(expected_photo))
         finally:
             os.remove(updated.photo.path)

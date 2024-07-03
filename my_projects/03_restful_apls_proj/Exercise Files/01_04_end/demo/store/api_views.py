@@ -4,6 +4,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from store.serializers import ProductSerializer
 from store.models import Product
 
+
 class ProductList(ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -23,4 +24,3 @@ class ProductList(ListAPIView):
                 sale_end__gte=now,
             )
         return queryset
-

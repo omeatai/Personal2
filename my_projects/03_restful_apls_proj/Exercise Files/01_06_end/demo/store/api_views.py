@@ -6,9 +6,11 @@ from rest_framework.pagination import LimitOffsetPagination
 from store.serializers import ProductSerializer
 from store.models import Product
 
+
 class ProductsPagination(LimitOffsetPagination):
     default_limit = 10
     max_limit = 100
+
 
 class ProductList(ListAPIView):
     queryset = Product.objects.all()
@@ -31,4 +33,3 @@ class ProductList(ListAPIView):
                 sale_end__gte=now,
             )
         return queryset
-
