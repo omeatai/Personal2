@@ -337,12 +337,294 @@ The pocketNum value: 15
 
 <img width="1492" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/17d02b3c-7bf2-4841-904b-5626e8bb1263">
 
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/Practice/03_07/script.js:
+
+```js
+/**
+ * Practice: Building objects
+ *
+ * - Create JavaScript objects based on objects in your current environment.
+ * - Give each object an identifiable name.
+ * - Create properties to describe the objects and set their values.
+ * - Find an object that has another object inside of it to create a nested object.
+ * - Test your objects in the browser console by accessing the entire object and its specific properties.
+ */
+
+// Create an object for a car
+const car = {
+  make: "Toyota",
+  model: "Corolla",
+  year: 2020,
+  color: "black",
+  price: 20000,
+  lightBulbON: true,
+  "travel bag": {
+    brand: "chanel",
+    color: "black",
+    straps: 2,
+    compartments: 3,
+    contents: {
+      clothes: 5,
+      shoes: 2,
+      toiletries: 1,
+      electronics: 1,
+    },
+  },
+
+  start: function () {
+    console.log("Car started");
+  },
+
+  stop: function () {
+    console.log("Car stopped");
+  },
+
+  drive: function () {
+    console.log("Car is moving");
+  },
+
+  toggleLights: function (lightBulbON) {
+    this.lightBulbON = !this.lightBulbON;
+    console.log(
+      this.lightBulbON ? "Light is turned ON" : "Light is turned OFF"
+    );
+  },
+
+  lightStatus: function () {
+    console.log(this.lightBulbON ? "Light is ON" : "Light is OFF");
+    return this.lightBulbON;
+  },
+};
+
+console.log("Car", car);
+console.log("Car Model", car.model);
+console.log("Car Year", car.year);
+console.log("Car Bulb Status", car.lightStatus());
+console.log("Car Luggage contents", car["travel bag"].contents);
+
+```
+
+## Output
+
+```x
+Car 
+{make: 'Toyota', model: 'Corolla', year: 2020, color: 'black', price: 20000, …}
+Car Model Corolla
+Car Year 2020
+Light is ON
+Car Bulb Status true
+Car Luggage contents 
+{clothes: 5, shoes: 2, toiletries: 1, electronics: 1}
+clothes: 5
+electronics: 1
+shoes: 2
+toiletries: 1
+
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/ec2ab3d9-bbbf-453f-9b2b-4811661d14b1)
+
+
 # #END</details>
 
 <details>
-<summary>6-JS Objects - Prototype Inheritance </summary>
+<summary>6-JS Objects - Access Methods </summary>
 
-## JS Objects - Prototype Inheritance
+## JS Objects - Access Methods
+
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_08e/index.html:
+
+```js
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Object methods</title>
+    <script src="script.js" defer></script>
+  </head>
+  <body></body>
+</html>
+
+```
+
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_08e/script.js:
+
+```js
+/**
+ * Create a Backpack object.
+ */
+
+const backpack = {
+  name: "Everyday Backpack",
+  volume: 30,
+  color: "grey",
+  pocketNum: 15,
+  strapLength: {
+    left: 26,
+    right: 26,
+  },
+  lidOpen: false,
+  toggleLid: function (lidStatus) {
+    this.lidOpen = lidStatus;
+  },
+  newStrapLength: function (lengthLeft, lengthRight) {
+    this.strapLength.left = lengthLeft;
+    this.strapLength.right = lengthRight;
+  },
+};
+
+console.log("The backpack object:", backpack);
+console.log("The pocketNum value:", backpack.pocketNum);
+console.log("Left before:", backpack.strapLength.left);
+
+backpack.newStrapLength(10, 15);
+
+console.log("Left after:", backpack.strapLength.left);
+
+```
+
+## Output
+
+```x
+The backpack object: {name: 'Everyday Backpack', volume: 30, color: 'grey', pocketNum: 15, strapLength: {…}, …}color: "grey"lidOpen: falsename: "Everyday Backpack"newStrapLength: ƒ (lengthLeft, lengthRight)pocketNum: 15strapLength: {left: 10, right: 15}toggleLid: ƒ (lidStatus)volume: 30[[Prototype]]: Object
+The pocketNum value: 15
+Left before: 26
+Left after: 10
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/ad7cec28-0894-4a41-9ad7-3800aecaa13e)
+
+<img width="1492" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/776614f9-2f88-41b7-b2e9-b5fad9d297e6">
+
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/Practice/03_09/script.js:
+
+```js
+/**
+ * Practice: Making methods
+ *
+ * - Create a method for each object property.
+ * - The method receives a value to match the property to be changed.
+ * - Create a simple function to replace the current property value with the received value.
+ * - Test the method by sending new values and checking the properties in the console.
+ */
+
+const backpack = {
+  name: "Everyday Backpack",
+  volume: 30,
+  color: "grey",
+  pocketNum: 15,
+  strapLength: {
+    left: 26,
+    right: 26,
+  },
+  toggleLid: function (lidStatus) {
+    this.lidOpen = lidStatus;
+  },
+  newStrapLength: function (lengthLeft, lengthRight) {
+    this.strapLength.left = lengthLeft;
+    this.strapLength.right = lengthRight;
+  },
+
+  setName: function (newName) {
+    this.name = newName;
+    console.log("The new name is: ", this.name);
+  },
+
+  setVolume: function (newVolume) {
+    this.volume = newVolume;
+    console.log("The new volume is: ", this.volume);
+  },
+
+  setColor: function (newColor) {
+    this.color = newColor;
+    console.log("The new color is: ", this.color);
+  },
+
+  setStrapLength: function (leftStrapLength, rightStrapLength) {
+    this.strapLength.left = leftStrapLength;
+    this.strapLength.right = rightStrapLength;
+    console.log("The new strap length is: ", this.strapLength);
+  },
+};
+
+```
+
+## Output
+
+```x
+backpack.name
+'Everyday Backpack'
+
+backpack.setName("Ruby Backpack")
+script.js:29 The new name is:  Ruby Backpack
+undefined
+
+backpack.name
+'Ruby Backpack'
+
+backpack.setStrapLength(10, 15)
+script.js:45 The new strap length is:  {left: 10, right: 15}
+undefined
+
+backpack.strapLength
+{left: 10, right: 15}
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/941ca51e-5a3a-40f2-8bf9-3a87b0875084)
+
+<img width="1448" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/d3cd6967-7127-4fd9-88c1-0a27042aba6e">
+
+# #END</details>
+
+<details>
+<summary>7-JS Objects - Classes as Blueprints </summary>
+
+## JS Objects - Classes as Blueprints
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
 
 ```js
 
