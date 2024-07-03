@@ -14,7 +14,7 @@
 
 ---
 
-### [01-React-React Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src-javascript-react/01-react-react-ess-training.md)
+### [01-React-React Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src-javascript-react/02-react-react-ess-training.md)
 
 ---
 
