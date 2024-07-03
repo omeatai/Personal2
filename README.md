@@ -12,7 +12,7 @@
 
 ###### [DJANGO](https://github.com/omeatai/src-AI-Software/tree/main/src-django)
 
-###### [JAVASCRIPT | REACT | NODE](https://github.com/omeatai/src-AI-Software/tree/main/src-javascript-react)
+###### [JAVASCRIPT | REACT | NODE](https://github.com/omeatai/src-AI-Software/tree/main/src-javascript-react-node)
 
 ###### [SQL](https://github.com/omeatai/src-AI-Software/tree/main/src-sql)
 
