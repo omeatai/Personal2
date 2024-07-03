@@ -3480,3 +3480,5 @@ class ProductUpdateTestCase(APITestCase):
 
 
 # #END</details>
+
+# #END
