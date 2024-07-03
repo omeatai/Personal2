@@ -766,17 +766,143 @@ const everydayPack = new Backpack(
 
 ## JS Objects - Extending Classes
 
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_11/index.html:
+
 ```js
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Extending Classes</title>
+    <script src="script.js" defer></script>
+  </head>
+  <body></body>
+</html>
 
 ```
 
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_11/script.js:
+
 ```js
+/**
+ * Create an object constructor function for the Backpack object type.
+ * @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new
+ */
+
+class Backpack {
+  constructor(
+    // Defines parameters:
+    name,
+    volume,
+    color,
+    pocketNum,
+    strapLengthL,
+    strapLengthR,
+    lidOpen
+  ) {
+    // Define properties:
+    this.name = name;
+    this.volume = volume;
+    this.color = color;
+    this.pocketNum = pocketNum;
+    this.strapLength = {
+      left: strapLengthL,
+      right: strapLengthR,
+    };
+    this.lidOpen = lidOpen;
+  }
+
+  // Add methods like normal functions:
+  toggleLid(lidStatus) {
+    this.lidOpen = lidStatus;
+  }
+  newStrapLength(lengthLeft, lengthRight) {
+    this.strapLength.left = lengthLeft;
+    this.strapLength.right = lengthRight;
+  }
+}
+
+class HikingBackpack extends Backpack {
+  constructor(
+    name,
+    volume,
+    color,
+    pocketNum,
+    strapLengthL,
+    strapLengthR,
+    lidOpen,
+    hydrationCapacity
+  ) {
+    // Initialize the parent class properties
+    super(name, volume, color, pocketNum, strapLengthL, strapLengthR, lidOpen);
+    // New property specific to HikingBackpack
+    this.hydrationCapacity = hydrationCapacity; // Capacity in liters
+  }
+
+  // Method to check the hydration level and alert if it needs refilling
+  checkHydration() {
+    if (this.hydrationCapacity > 0) {
+      console.log(`You have ${this.hydrationCapacity} liters of water left.`);
+    } else {
+      console.log("Time to refill your water!");
+    }
+  }
+
+  // Extend or override methods from the parent class if necessary
+  // For example, adding extra functionality when the lid is toggled
+  toggleLid(lidStatus) {
+    super.toggleLid(lidStatus); // Call the parent method
+    if (lidStatus) {
+      console.log(
+        "Your hiking backpack lid is open. Remember to check to make sure the hydration pack is inserted."
+      );
+    } else {
+      console.log(
+        "Your hiking backpack lid is closed. Remember to check to make sure the hydration pack is inserted."
+      );
+    }
+  }
+}
+
+const everydayPack = new HikingBackpack(
+  "Everyday Backpack",
+  30,
+  "grey",
+  15,
+  26,
+  26,
+  false,
+  30
+);
+
+console.log("The everydayPack object:", everydayPack);
+console.log("The hydration level:", everydayPack.hydrationCapacity);
+console.log("Check the hydration pack", everydayPack.checkHydration());
+console.log("Open the lid", everydayPack.toggleLid(true));
 
 ```
 
-```js
+## Output
 
+```js
+The everydayPack object: HikingBackpack {name: 'Everyday Backpack', volume: 30, color: 'grey', pocketNum: 15, strapLength: {…}, …}
+The hydration level: 30
+You have 30 liters of water left.
+Check the hydration pack undefined
+Your hiking backpack lid is open. Remember to check to make sure the hydration pack is inserted.
 ```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/feb208e1-8c4b-4bdb-9fb0-9e998fcb934b)
+
+<img width="1448" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/b49ff9ef-27fd-4d26-92e8-ceceee4c45d6">
+
+# #END</details>
+
+<details>
+<summary>10-JS Objects - Global Objects </summary>
+
+## JS Objects - Global Objects
 
 ```js
 
