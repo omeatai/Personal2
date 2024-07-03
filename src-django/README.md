@@ -8,6 +8,6 @@
 
 ### [04-Udemy - Django A-Z Build and Deploy Web Project](https://github.com/omeatai/src-AI-Software/blob/main/src-django/04-Udemy-Django-A-Z.md)
 
-### [05-Udemy - Django A-Z Build and Deploy Web Project](https://github.com/omeatai/src-AI-Software/blob/main/src-django/04-Udemy-Django-A-Z.md)
+### [05-LinkedIn-Django-React-and-Django-apps](https://github.com/omeatai/src-AI-Software/blob/main/src-django/05-LinkedIn-Django-React-and-Django-apps.md)
 
-### [06-Udemy - Django A-Z Build and Deploy Web Project](https://github.com/omeatai/src-AI-Software/blob/main/src-django/04-Udemy-Django-A-Z.md)
+### [06-LinkedIn-Restful-Web-APIs-With-Django](https://github.com/omeatai/src-AI-Software/blob/main/src-django/06-LinkedIn-Restful-Web-APIs-With-Django.md)
