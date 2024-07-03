@@ -582,29 +582,189 @@ backpack.strapLength
 
 ## JS Objects - Classes as Blueprints
 
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_10/index.html:
+
 ```js
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classes</title>
+    <script type="module" src="Backpack.js"></script>
+    <script type="module" src="script.js"></script>
+  </head>
+  <body></body>
+</html>
 
 ```
 
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_10/Backpack.js:
+
 ```js
+/**
+ * Creating classes:
+ *
+ * Class declaration: class Name {}
+ * Class expression:  const Name = class {}
+ */
+
+class Backpack {
+  constructor(
+    // Defines parameters:
+    name,
+    volume,
+    color,
+    pocketNum,
+    strapLengthL,
+    strapLengthR,
+    lidOpen
+  ) {
+    // Define properties:
+    this.name = name;
+    this.volume = volume;
+    this.color = color;
+    this.pocketNum = pocketNum;
+    this.strapLength = {
+      left: strapLengthL,
+      right: strapLengthR,
+    };
+    this.lidOpen = lidOpen;
+  }
+
+  // Add methods like normal functions:
+  toggleLid(lidStatus) {
+    this.lidOpen = lidStatus;
+  }
+  newStrapLength(lengthLeft, lengthRight) {
+    this.strapLength.left = lengthLeft;
+    this.strapLength.right = lengthRight;
+  }
+}
+
+export default Backpack;
 
 ```
 
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_10/script.js:
+
 ```js
+/**
+ * Create a class for the Backpack object type.
+ * @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+ */
+import Backpack from "./Backpack.js";
+
+const everydayPack = new Backpack(
+  "Everyday Backpack",
+  30,
+  "grey",
+  15,
+  26,
+  26,
+  false
+);
+
+console.log("The everydayPack object:", everydayPack);
+console.log("The pocketNum value:", everydayPack.pocketNum);
 
 ```
 
+## Output
+
+```x
+The everydayPack object: Backpack {name: 'Everyday Backpack', volume: 30, color: 'grey', pocketNum: 15, strapLength: {…}, …}
+The pocketNum value: 15
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/9ba1b5a0-e4b3-4b20-82a6-2f147e214b1f)
+
+<img width="1492" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/3b359261-5164-472b-aaa0-6e28bb1d527a">
+
+<img width="1492" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/d4550153-068d-48db-b8d7-ab06394f56d9">
+
+# #END</details>
+
+<details>
+<summary>8-JS Objects - Functional Constructors as Blueprints </summary>
+
+## JS Objects - Functional Constructors as Blueprints
+
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_11/index.html:
+
 ```js
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classes</title>
+    <script src="script.js" defer></script>
+  </head>
+  <body></body>
+</html>
 
 ```
 
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_11/script.js:
+
 ```js
+/**
+ * Create an object constructor function for the Backpack object type.
+ * @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new
+ */
+
+function Backpack(
+  name,
+  volume,
+  color,
+  pocketNum,
+  strapLengthL,
+  strapLengthR,
+  lidOpen
+) {
+  this.name = name;
+  this.volume = volume;
+  this.color = color;
+  this.pocketNum = pocketNum;
+  this.strapLength = {
+    left: strapLengthL,
+    right: strapLengthR,
+  };
+  this.lidOpen = lidOpen;
+
+  // Methods are within the Constructor
+  this.toggleLid = function (lidStatus) {
+    this.lidOpen = lidStatus;
+  };
+  this.newStrapLength = function (lengthLeft, lengthRight) {
+    this.strapLength.left = lengthLeft;
+    this.strapLength.right = lengthRight;
+  };
+}
+
+const everydayPack = new Backpack(
+  "Everyday Backpack",
+  30,
+  "grey",
+  15,
+  26,
+  26,
+  false
+);
 
 ```
 
-```js
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/34bcd280-72f6-494f-8071-94e599e0a678)
 
-```
+<img width="1448" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/f742e4f2-6adb-4cec-8acf-729fc1655e05">
+
+# #END</details>
+
+<details>
+<summary>9-JS Objects - Extending Classes </summary>
+
+## JS Objects - Extending Classes
 
 ```js
 
