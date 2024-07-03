@@ -261,27 +261,88 @@ const backpack = {
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/afb49d58-ca67-4516-bb29-c8c074b1f47e)
 
-<img width="1492" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/fea17d75-5b07-48a7-82a6-0d3399f56b71">
 <img width="1492" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/45ef5068-dc20-48cb-a955-e48e320c64d8">
 
 # #END</details>
 
 <details>
-<summary>5-JS Objects - Accessing Objects </summary>
+<summary>5-JS Objects - Accessing Object Properties </summary>
 
-## JS Objects - Accessing Objects
+## JS Objects - Accessing Object Properties
+
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_08/index.html:
 
 ```js
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Object methods</title>
+    <script src="script.js" defer></script>
+  </head>
+  <body></body>
+</html>
 
 ```
 
-```js
-
-```
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_08/script.js:
 
 ```js
+/**
+ * Create a Backpack object.
+ */
 
+const backpack = {
+  name: "Everyday Backpack",
+  volume: 30,
+  color: "grey",
+  pocketNum: 15,
+  strapLength: {
+    left: 26,
+    right: 26,
+  },
+  lidOpen: false,
+
+  toggleLid: function (lidStatus) {
+    this.lidOpen = lidStatus;
+  },
+  newStrapLength: function (lengthLeft, lengthRight) {
+    this.strapLength.left = lengthLeft;
+    this.strapLength.right = lengthRight;
+  },
+};
+
+console.log("The backpack object:", backpack);
+console.log("The pocketNum value:", backpack.pocketNum);
+console.log("Left before:", backpack.strapLength.left);
+
+console.log("The pocketNum value:", backpack["pocketNum"]);
+
+let query = "pocketNum";
+console.log("The pocketNum value:", backpack[query]);
 ```
+
+## Output
+
+```x
+The backpack object: {name: 'Everyday Backpack', volume: 30, color: 'grey', pocketNum: 15, strapLength: {…}, …}
+The pocketNum value: 15
+Left before: 26
+The pocketNum value: 15
+The pocketNum value: 15
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/ae17e8fd-7c08-4ab5-9153-fe24d75f9a05)
+
+<img width="1492" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/17d02b3c-7bf2-4841-904b-5626e8bb1263">
+
+# #END</details>
+
+<details>
+<summary>6-JS Objects - Prototype Inheritance </summary>
+
+## JS Objects - Prototype Inheritance
 
 ```js
 
