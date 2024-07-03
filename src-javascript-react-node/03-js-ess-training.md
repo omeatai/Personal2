@@ -885,7 +885,7 @@ console.log("Open the lid", everydayPack.toggleLid(true));
 
 ## Output
 
-```js
+```x
 The everydayPack object: HikingBackpack {name: 'Everyday Backpack', volume: 30, color: 'grey', pocketNum: 15, strapLength: {…}, …}
 The hydration level: 30
 You have 30 liters of water left.
