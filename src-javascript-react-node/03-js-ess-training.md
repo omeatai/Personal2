@@ -207,17 +207,69 @@ document.body.appendChild(main);
 # #END</details>
 
 <details>
-<summary>4-JS Objects</summary>
+<summary>4-JS Objects with Properties and Methods </summary>
 
-## JS Objects
+## JS Objects with Properties and Methods
+
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_02/index.html:
 
 ```js
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Building a JavaScript object from scratch</title>
+    <script src="script.js" defer></script>
+  </head>
+  <body></body>
+</html>
 
 ```
 
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_02/script.js:
+
 ```js
+/**
+ * Create a Backpack object.
+ */
+
+const backpack = {
+  name: "Everyday Backpack", // This is a Property
+  volume: 30,
+  color: "grey",
+  pocketNum: 15, // This is a Property
+  strapLength: {
+    // This is a Property
+    left: 26,
+    right: 26,
+  },
+  lidOpen: false, // This is a Property
+
+  toggleLid: function (lidStatus) {
+    // This is a Method
+    this.lidOpen = lidStatus;
+  },
+  newStrapLength: function (lengthLeft, lengthRight) {
+    // This is a Method
+    this.strapLength.left = lengthLeft;
+    this.strapLength.right = lengthRight;
+  },
+};
 
 ```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/afb49d58-ca67-4516-bb29-c8c074b1f47e)
+
+<img width="1492" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/fea17d75-5b07-48a7-82a6-0d3399f56b71">
+<img width="1492" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/45ef5068-dc20-48cb-a955-e48e320c64d8">
+
+# #END</details>
+
+<details>
+<summary>5-JS Objects - Accessing Objects </summary>
+
+## JS Objects - Accessing Objects
 
 ```js
 
