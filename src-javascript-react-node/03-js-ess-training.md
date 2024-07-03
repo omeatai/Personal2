@@ -26,17 +26,96 @@ const updateBackpack = (update) => {
 # #END</details>
 
 <details>
-<summary>2-Introduction</summary>
+<summary>2-Loading JS in external files - async/defer</summary>
 
-## Introduction
+## Loading JS in external files - async/defer
+
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/02_03/index.html:
 
 ```js
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Module demo</title>
+    <script src="script.js" defer></script>
+  </head>
+  <body></body>
+</html>
+```
+
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/02_03/script.js:
+
+```js
+/**
+ * Create a Backpack object, populate some HTML to display its properties.
+ */
+const updateBackpack = (update) => {
+  let main = document.querySelector("main");
+  main.innerHTML = markup(backpack);
+  console.info(update);
+};
+
+const backpack = {
+  name: "Everyday Backpack",
+  volume: 30,
+  color: "grey",
+  pocketNum: 15,
+  strapLength: {
+    left: 26,
+    right: 26,
+  },
+  lidOpen: false,
+  toggleLid: function (lidStatus) {
+    this.lidOpen = lidStatus;
+    updateBackpack(`Lid status changed.`);
+  },
+  newStrapLength: function (lengthLeft, lengthRight) {
+    this.strapLength.left = lengthLeft;
+    this.strapLength.right = lengthRight;
+    updateBackpack(`Strap lengths updated.`);
+  },
+};
+
+const markup = (backpack) => {
+  return `
+  <div>
+    <h3>${backpack.name}</h3>
+    <ul>
+      <li>Volume: ${backpack.volume}</li>
+      <li>Color: ${backpack.color}</li>
+      <li>Number of pockets: ${backpack.pocketNum}</li>
+      <li>Strap lengths: L: ${backpack.strapLength.left}, R: ${
+    backpack.strapLength.right
+  } </li>
+      <li>Top lid: ${backpack.lidOpen ? "Open" : "Closed"}</li>
+    </ul>
+  </div>
+`;
+};
+
+const main = document.createElement("main");
+main.innerHTML = markup(backpack);
+document.body.appendChild(main);
 
 ```
 
-```js
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/7a2527a8-053d-42d7-8977-29590ac3c285)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/655ed317-c00b-41f1-b92a-ff22b6c8e4e3)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/1e866625-1f55-4eca-a72a-e4cb4694679f)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/ddb21a9a-886c-4e4d-ad69-3c52e3f86d9c)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/d9843fb1-98be-4b06-afbc-220cec2b08ef)
 
-```
+<img width="1492" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/2bebf9cd-6349-4dc9-a93a-d7899a8e4dce">
+<img width="1492" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/2d7d8f8b-937f-48cd-a3f4-b70f6399cd03">
+
+# #END</details>
+
+<details>
+<summary>3-Loading JS in external files - async/defer</summary>
+
+## Loading JS in external files - async/defer
 
 ```js
 
