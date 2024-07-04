@@ -686,9 +686,9 @@ The pocketNum value: 15
 # #END</details>
 
 <details>
-<summary>8-JS Objects - Functional Constructors as Blueprints </summary>
+<summary>8-JS Objects - Functional Object Constructors as Blueprints </summary>
 
-# JS Objects - Functional Constructors as Blueprints
+# JS Objects - Functional Object Constructors as Blueprints
 
 ### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_11/index.html:
 
@@ -758,6 +758,24 @@ const everydayPack = new Backpack(
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/34bcd280-72f6-494f-8071-94e599e0a678)
 
 <img width="1448" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/f742e4f2-6adb-4cec-8acf-729fc1655e05">
+
+# Another Sample
+
+```js
+const bookTitle = "Alice's Adventures in Wonderland"
+const bookAuthor = "Lewis Carroll"
+const bookPubYear = 1865
+const bookISBN = 9798369203415
+
+// Your code goes here
+function Book(bookTitle, bookAuthor, bookISBN, bookPubYear){
+        this.title = bookTitle
+        this.author = bookAuthor
+        this.ISBN = bookISBN
+        this.publicationYear = bookPubYear
+}
+
+```
 
 # #END</details>
 
