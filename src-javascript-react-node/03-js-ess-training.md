@@ -1218,9 +1218,9 @@ Days since aquired: 2037
 # #END</details>
 
 <details>
-<summary>11-JS Strings-Template Literals </summary>
+<summary>11-JS Strings - Template Literals </summary>
 
-# Template Literals
+# JS Strings - Template Literals
 
 ```js
 
