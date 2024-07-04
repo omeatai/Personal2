@@ -897,28 +897,218 @@ Your hiking backpack lid is open. Remember to check to make sure the hydration p
 
 <img width="1448" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/b49ff9ef-27fd-4d26-92e8-ceceee4c45d6">
 
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/Practice/03_12b/index.html:
+
+```js
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Practice: Making classes and objects</title>
+    <script type="module" src="script.js" defer></script>
+  </head>
+  <body></body>
+</html>
+
+```
+
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/Practice/03_12b/script.js:
+
+```js
+/**
+ * Practice: Making classes and objects
+ *
+ * - Find a type of object you have more than one of in your house (eg. clothing, writing tools, etc).
+ * - Create a class describing this object type - its properties and methods.
+ * - Create several objects using the class.
+ * - Test the objects by calling their properties and using their methods in the console.
+ */
+
+import { Jug, ArmyJug } from "./Jug.js";
+
+const mySmallJug = new Jug("My Small Jug", 5, "green", "plastic", false);
+const myArmyJug = new ArmyJug("My Army Jug", 10, "brown", "metal", true, true);
+
+console.log(mySmallJug);
+console.log(mySmallJug.volume);
+console.log(mySmallJug.setVolume(10));
+console.log(mySmallJug.volume);
+
+console.log(myArmyJug);
+console.log(myArmyJug.color);
+console.log(myArmyJug.hasStraw);
+console.log(myArmyJug.toggleStraw());
+console.log(myArmyJug.hasStraw);
+
+/**
+ * Creates a new WaterJug object.
+ * @param {string} name - The name of the WaterJug.
+ * @param {number} volume - The volume of the water in the jug in liters.
+ * @param {string} color- The color of the water jug.
+ * @param {string} material - The type of material used to make the jug.
+ * @param {boolean} lidOpen - The status of the lid on the jug.
+ */
+
+const waterJug = {
+  name: "Water Jug",
+  volume: 15,
+  color: "blue",
+  material: "plastic",
+  lidOpen: false,
+
+  toggleLid: function (lidStatus) {
+    this.lidOpen = lidStatus;
+  },
+  setVolume: function (newVolume) {
+    this.volume = newVolume;
+    console.log("The new volume is: ", this.volume);
+  },
+  setName: function (newName) {
+    this.name = newName;
+    console.log("The new name is: ", this.name);
+  },
+};
+
+```
+
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/Practice/03_12b/Jug.js:
+
+```js
+/**
+ * Represents a water jug with various properties.
+ * @class Jug
+ * @constructor
+ * @param {string} name - The name of the water jug.
+ * @param {number} volume - The volume of water in the jug, in liters.
+ * @param {string} color - The color of the jug.
+ * @param {string} material - The material used to make the jug.
+ * @param {boolean} lidOpen - Indicates whether the jug's lid is open or closed.
+ */
+class Jug {
+  constructor(name, volume, color, material, lidOpen) {
+    this.name = name;
+    this.volume = volume;
+    this.color = color;
+    this.material = material;
+    this.lidOpen = lidOpen;
+  }
+
+  /**
+   * Toggles the status of the Jug's lid from open to close or vice versa.
+   * @returns {void}
+   */
+  toggleLid(lidStatus) {
+    this.lidOpen = lidStatus;
+  }
+
+  /**
+   * Sets the volume of the Jug.
+   * Logs the new volume to the console.
+   * @param {number} newVolume - The new volume to set.
+   * @returns {void}
+   */
+  setVolume(newVolume) {
+    this.volume = newVolume;
+    console.log(`The new volume is: ${this.volume}`);
+  }
+
+  /**
+   * Sets the name of the Jug.
+   * Logs the new name to the console.
+   * @param {string} newName - The new name to set.
+   * @returns {void}
+   */
+  setName(newName) {
+    this.name = newName;
+    console.log("The new name is: ", this.name);
+  }
+}
+
+/**
+ * Represents an Army Jug with properties and methods
+ *
+ * @class ArmyJug
+ * @extends {Jug}
+ * @constructor
+ * @param {string} name - The name of the water jug.
+ * @param {number} volume - The volume of water in the jug, in liters.
+ * @param {string} color - The color of the jug.
+ * @param {string} material - The material used to make the jug.
+ * @param {boolean} lidOpen - Indicates whether the jug's lid is open or closed.
+ * @param {boolean} hasStraw - Indicates whether a straw is in the Jug as true or false.
+ */
+class ArmyJug extends Jug {
+  constructor(name, volume, color, material, lidOpen, hasStraw) {
+    super(name, volume, color, material, lidOpen);
+    this.hasStraw = true;
+  }
+
+  /**
+   * Toggle the status of the hasStraw property in the Army Jug.
+   * Logs the hasStraw property status
+   * @returns {void}
+   */
+  toggleStraw() {
+    this.hasStraw = !this.hasStraw;
+    console.log("The straw is: ", this.hasStraw ? "inside" : "outside");
+  }
+
+  /**
+   * Sets the volume of the Army Jug.
+   * overwrites the setVolume method in the Jug class.
+   * @param {number} newVolume
+   * @returns {void}
+   */
+  setVolume(newVolume) {
+    this.volume = newVolume;
+    console.log("The new Army Jug volume is: ", this.volume + 30);
+  }
+
+  /**
+   * Sets the name of the Army Jug.
+   * Extends the setName method in the Jug class.
+   * @param {string} newName
+   * @returns {void}
+   */
+  setName(newName) {
+    super.setName(newName);
+    console.log("It is an Army Jug.");
+  }
+}
+
+export { Jug, ArmyJug };
+
+```
+
+Output:
+
+```x
+Jug {name: 'My Small Jug', volume: 5, color: 'green', material: 'plastic', lidOpen: false}
+5
+The new volume is: 10
+undefined
+10
+
+ArmyJug {name: 'My Army Jug', volume: 10, color: 'brown', material: 'metal', lidOpen: true, …}
+brown
+true
+The straw is:  outside
+undefined
+false
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/47c10e6b-99d5-47c0-a8de-29738095641e)
+
+<img width="1492" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/29e83d69-f50c-4be6-9067-85c2882a04f8">
+<img width="1492" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/e47dcdf0-54e9-4688-a274-2f710a41cfea">
+
 # #END</details>
 
 <details>
 <summary>10-JS Objects - Global Objects </summary>
 
 ## JS Objects - Global Objects
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
 
 ```js
 
