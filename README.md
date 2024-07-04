@@ -8,13 +8,9 @@
 
 ###### [ALGORITHM CHALLENGES](https://github.com/omeatai/src-AI-Software/tree/main/src-algorithms)
 
-###### [PYTHON](https://github.com/omeatai/src-AI-Software/tree/main/src-python)
+###### [PYTHON | DJANGO | FLASK | SQL](https://github.com/omeatai/src-AI-Software/tree/main/src-python-django-flask-sql)
 
-###### [DJANGO](https://github.com/omeatai/src-AI-Software/tree/main/src-django)
-
-###### [JAVASCRIPT | REACT | NODE](https://github.com/omeatai/src-AI-Software/tree/main/src-javascript-react-node)
-
-###### [SQL](https://github.com/omeatai/src-AI-Software/tree/main/src-sql)
+###### [JAVASCRIPT | REACT | NODE | NEXT](https://github.com/omeatai/src-AI-Software/tree/main/src-javascript-react-node-next)
 
 ---
 
