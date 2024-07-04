@@ -3,7 +3,7 @@
 <details>
 <summary>1-JS Comments</summary>
 
-## Introduction
+# JS Comments
 
 ```js
 // Single line comment
@@ -28,11 +28,11 @@ const updateBackpack = (update) => {
 <details>
 <summary>2-Loading JS in external files - async/defer</summary>
 
-## Loading JS in external files - async/defer
+# Loading JS in external files - async/defer
 
 ### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/02_03/index.html:
 
-```js
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -115,11 +115,11 @@ document.body.appendChild(main);
 <details>
 <summary>3-Using Javascript Modules</summary>
 
-## Using Javascript Modules
+# Using Javascript Modules
 
 ### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/02_04/index.html:
 
-```js
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -213,7 +213,7 @@ document.body.appendChild(main);
 
 ### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_02/index.html:
 
-```js
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -268,11 +268,11 @@ const backpack = {
 <details>
 <summary>5-JS Objects - Accessing Object Properties </summary>
 
-## JS Objects - Accessing Object Properties
+# JS Objects - Accessing Object Properties
 
 ### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_08/index.html:
 
-```js
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -430,11 +430,11 @@ toiletries: 1
 <details>
 <summary>6-JS Objects - Access Methods </summary>
 
-## JS Objects - Access Methods
+# JS Objects - Access Methods
 
 ### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_08e/index.html:
 
-```js
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -580,11 +580,11 @@ backpack.strapLength
 <details>
 <summary>7-JS Objects - Classes as Blueprints </summary>
 
-## JS Objects - Classes as Blueprints
+# JS Objects - Classes as Blueprints
 
 ### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_10/index.html:
 
-```js
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -688,11 +688,11 @@ The pocketNum value: 15
 <details>
 <summary>8-JS Objects - Functional Constructors as Blueprints </summary>
 
-## JS Objects - Functional Constructors as Blueprints
+# JS Objects - Functional Constructors as Blueprints
 
 ### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_11/index.html:
 
-```js
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -764,7 +764,7 @@ const everydayPack = new Backpack(
 <details>
 <summary>9-JS Objects - Extending Classes </summary>
 
-## JS Objects - Extending Classes
+# JS Objects - Extending Classes
 
 ### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_11/index.html:
 
@@ -899,7 +899,7 @@ Your hiking backpack lid is open. Remember to check to make sure the hydration p
 
 ### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/Practice/03_12b/index.html:
 
-```js
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -1106,9 +1106,137 @@ false
 # #END</details>
 
 <details>
-<summary>10-JS Objects - Global Objects </summary>
+<summary>10-JS Objects - Global Date Object </summary>
 
-## JS Objects - Global Objects
+# JS Objects - Global Date Object
+
+## MDN Date Object = [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
+
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_13e/index.html:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classes</title>
+    <script type="module" src="Backpack.js"></script>
+    <script type="module" src="script.js"></script>
+  </head>
+  <body></body>
+</html>
+
+```
+
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_13e/Backpack.js:
+
+```js
+class Backpack {
+  constructor(
+    name,
+    volume,
+    color,
+    pocketNum,
+    strapLengthL,
+    strapLengthR,
+    lidOpen,
+    dateAcquired
+  ) {
+    this.name = name;
+    this.volume = volume;
+    this.color = color;
+    this.pocketNum = pocketNum;
+    this.strapLength = {
+      left: strapLengthL,
+      right: strapLengthR,
+    };
+    this.lidOpen = lidOpen;
+    this.dateAcquired = dateAcquired;
+  }
+  toggleLid(lidStatus) {
+    this.lidOpen = lidStatus;
+  }
+  newStrapLength(lengthLeft, lengthRight) {
+    this.strapLength.left = lengthLeft;
+    this.strapLength.right = lengthRight;
+  }
+  backpackAge() {
+    let now = new Date();
+    let acquired = new Date(this.dateAcquired);
+    let elapsed = now - acquired; // elapsed time in milliseconds
+    let daysSinceAcquired = Math.floor(elapsed / (1000 * 3600 * 24));
+    return daysSinceAcquired;
+  }
+}
+
+export default Backpack;
+
+```
+
+## src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/03_13e/script.js:
+
+```js
+/**
+ * Use the global Date() object to transform dates.
+ * @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
+ */
+
+import Backpack from "./Backpack.js";
+
+const everydayPack = new Backpack(
+  "Everyday Backpack",
+  30,
+  "grey",
+  15,
+  26,
+  26,
+  false,
+  "December 5, 2018 15:00:00 PST"
+);
+
+console.log("The everydayPack object:", everydayPack);
+console.log("The pocketNum value:", everydayPack.pocketNum);
+console.log("Days since aquired:", everydayPack.backpackAge());
+
+```
+
+## Output:
+
+```x
+The everydayPack object: Backpackcolor: "grey"dateAcquired: "December 5, 2018 15:00:00 PST"lidOpen: falsename: "Everyday Backpack"pocketNum: 15strapLength: {left: 26, right: 26}volume: 30[[Prototype]]: Object
+The pocketNum value: 15
+Days since aquired: 2037
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/9a2a61b7-ca8d-4554-b86a-d1624499a55b)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/d3a59e24-4111-4d70-bb3a-48d87fab09e1)
+
+<img width="1492" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/db55a596-3671-42f4-a807-4fe8ca68f5e0">
+<img width="1492" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/e20dafea-3b85-4fa6-90e4-6b15cb58e403">
+
+# #END</details>
+
+<details>
+<summary>11-Template Literals </summary>
+
+# Template Literals
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
 
 ```js
 
