@@ -23,4 +23,25 @@ const backpack = {
     this.strapLength.left = lengthLeft;
     this.strapLength.right = lengthRight;
   },
+
+  setName: function (newName) {
+    this.name = newName;
+    console.log("The new name is: ", this.name);
+  },
+
+  setVolume: function (newVolume) {
+    this.volume = newVolume;
+    console.log("The new volume is: ", this.volume);
+  },
+
+  setColor: function (newColor) {
+    this.color = newColor;
+    console.log("The new color is: ", this.color);
+  },
+
+  setStrapLength: function (leftStrapLength, rightStrapLength) {
+    this.strapLength.left = leftStrapLength;
+    this.strapLength.right = rightStrapLength;
+    console.log("The new strap length is: ", this.strapLength);
+  },
 };
