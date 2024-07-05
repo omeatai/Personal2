@@ -1494,9 +1494,9 @@ console.log("Days since aquired:", everydayPack.backpackAge());
 # #END</details>
 
 <details>
-<summary>13-JS DOM - Access Elements and Target CSS Queries with querySelectors </summary>
+<summary>13-JS DOM - Access DOM Elements and Target CSS Queries with querySelectors </summary>
 
-# JS DOM - Access Elements and Target CSS Queries with querySelectors
+# JS DOM - Access DOM Elements and Target CSS Queries with querySelectors
 
 ## Select an element
 
@@ -1701,9 +1701,9 @@ main.innerHTML = content;
 # #END</details>
 
 <details>
-<summary>14-JS DOM - Modifying Element Classes </summary>
+<summary>14-JS DOM - Modifying DOM Element Classes </summary>
 
-# JS DOM - Modifying Element Classes
+# JS DOM - Modifying DOM Element Classes
 
 ## Get the ClassName of an element
 
