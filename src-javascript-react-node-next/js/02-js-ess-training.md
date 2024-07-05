@@ -1504,15 +1504,57 @@ console.log("Days since aquired:", everydayPack.backpackAge());
 // Select the main element
 document.querySelector("main")
 
-// Select the 
-document.querySelector("main
+// Select the article element in the main element
+document.querySelector("main article")
+
+// Select the main->article->figure->img element
+document.querySelector("main article figure img")
+document.querySelector("main img")
+
+// Style the article element with a red border
+document.querySelector("article").style.border="10px solid orange"
 ```
 
-```js
-
-```
+## Select all elements
 
 ```js
+// Select all the list items
+document.querySelectorAll("main li")
+
+//Select the first item in the list
+document.querySelectorAll("main li")[0]
+document.querySelectorAll("main li:first-child")
+document.querySelectorAll("main li:first-of-type")
+document.querySelectorAll("main li:first-child").forEach(item => item.style.backgroundColor="blue")
+
+//Select the last item in the list
+document.querySelectorAll("main li")[(document.querySelectorAll("main li").length) - 1]
+document.querySelectorAll("main li:last-child")
+document.querySelectorAll("main li:last-of-type")
+document.querySelectorAll("main li:last-child").forEach(item => item.style.backgroundColor="red")
+
+//Select the third item in the list
+document.querySelectorAll("main li:nth-child(3)")
+document.querySelectorAll("main li:nth-child(3)").forEach(item.style.backgroundColor="purple")
+
+//Select the first to third items from the top of the list
+document.querySelectorAll("main li:nth-child(-n + 3)")
+document.querySelectorAll("main li:nth-child(-n + 3)").forEach(item => item.style.border="5px solid red")
+
+//Select the first to third items from the bottom of the list
+document.querySelectorAll("main li:nth-last-of-child(-n + 3)")
+document.querySelectorAll("main li:nth-last-of-child(-n + 3)").forEach(item => item.style.border="5px solid blue")
+
+
+
+li:nth-child(-n + 3) {
+  border: 2px solid orange;
+  margin-bottom: 1px;
+}
+
+li:nth-child(even) {
+  background-color: lightyellow;
+}
 
 ```
 
