@@ -1822,9 +1822,65 @@ main.innerHTML = content;
 # #END</details>
 
 <details>
-<summary>15-JS DOM - Modifying DOM Element Attributes </summary>
+<summary>15-JS DOM - Accessing DOM Attributes with Methods </summary>
 
-# JS DOM - Modifying DOM Element Attributes
+# JS DOM - Accessing DOM Attributes with Methods
+
+## Check if element has attribute
+
+```js
+document.querySelector("main img")
+// <img src="../assets/images/everyday.svg" alt="">
+
+document.querySelector("main img").hasAttribute("id")
+// false
+
+document.querySelector("main img").hasAttribute("src")
+// true
+```
+
+## Get the value assigned to attribute
+
+```js
+document.querySelector("main img")
+// <img src="../assets/images/everyday.svg" alt="">
+
+document.querySelector("main img").getAttribute("src")
+// '../assets/images/everyday.svg'
+```
+
+## Set a value to attribute
+
+```js
+document.querySelector("main img")
+// <img src="../assets/images/everyday.svg" alt="">
+
+document.querySelector("main img").setAttribute("alt", "A drawing of a backpack")
+
+document.querySelector("main img")
+// <img src="../assets/images/everyday.svg" alt="A drawing of a backpack">
+
+document.querySelector("main img").setAttribute("title", "This image shouldn't be here.")
+
+document.querySelector("main img")
+// <img src="../assets/images/everyday.svg" alt="A drawing of a backpack" title="This image shouldn't be here.">
+```
+
+## Remove value from attribute
+
+```js
+document.querySelector("main img").removeAttribute("title")
+
+document.querySelector("main img")
+// <img src="../assets/images/everyday.svg" alt="A drawing of a backpack">
+```
+
+# #END</details>
+
+<details>
+<summary>16-JS DOM - Inline Styling of DOM Elements </summary>
+
+# JS DOM - Inline Styling of DOM Elements
 
 ```js
 
@@ -1845,5 +1901,22 @@ main.innerHTML = content;
 ```js
 
 ```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
 
 # #END</details>
