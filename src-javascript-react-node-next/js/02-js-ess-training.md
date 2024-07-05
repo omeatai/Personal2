@@ -1705,20 +1705,39 @@ main.innerHTML = content;
 
 # JS DOM - Modifying Element Classes
 
-```js
+## Get the ClassName of an element
 
+```js
+document.querySelector("main li").className
+// 'backpack__volume'
+
+document.querySelector("main li").classList
+// DOMTokenList ['backpack__volume', value: 'backpack__volume']
 ```
 
-```js
+## Get the ClassName of an element in a List
 
+```js
+document.querySelectorAll("main li:first-child")[0].classList
+// DOMTokenList ['backpack__volume', value: 'backpack__volume']
 ```
 
-```js
+## Add a new class to an element in a List
 
+```js
+document.querySelectorAll("main li:first-child")[0].classList.add("backpack__volume2")
+
+document.querySelectorAll("main li:first-child")[0].classList
+// DOMTokenList(2) ['backpack__volume', 'backpack__volume2', value: 'backpack__volume backpack__volume2']
 ```
 
-```js
+## Remove a class from an element in a List
 
+```js
+document.querySelectorAll("main li:first-child")[0].classList.remove("backpack__volume2")
+
+document.querySelectorAll("main li:first-child")[0].classList
+// DOMTokenList ['backpack__volume', value: 'backpack__volume']
 ```
 
 ```js
