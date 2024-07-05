@@ -1242,7 +1242,7 @@ Days since aquired: 2037
 
 ### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/04_01e/index.html:
 
-```js
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -1355,22 +1355,113 @@ console.log("Days since aquired:", everydayPack.backpackAge());
 # #END</details>
 
 <details>
-<summary>12-JS Strings - Using Traditional String Output (for HTML in JS) </summary>
+<summary>12-JS Strings - Using Traditional String Concatenation (for HTML in JS) </summary>
 
-# JS Strings - Using Traditional String Output (for HTML in JS)
+# JS Strings - Using Traditional String Concatenation (for HTML in JS)
 
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/04_02e/index.html:
 
-```js
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>String output</title>
+    <script type="module" src="Backpack.js"></script>
+    <script type="module" src="script.js"></script>
+  </head>
+  <body></body>
+</html>
 
 ```
 
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/04_02e/Backpack.js:
+
 ```js
+class Backpack {
+  constructor(
+    name,
+    volume,
+    color,
+    pocketNum,
+    strapLengthL,
+    strapLengthR,
+    lidOpen,
+    dateAcquired
+  ) {
+    this.name = name;
+    this.volume = volume;
+    this.color = color;
+    this.pocketNum = pocketNum;
+    this.strapLength = {
+      left: strapLengthL,
+      right: strapLengthR,
+    };
+    this.lidOpen = lidOpen;
+    this.dateAcquired = dateAcquired;
+  }
+  toggleLid(lidStatus) {
+    this.lidOpen = lidStatus;
+  }
+  newStrapLength(lengthLeft, lengthRight) {
+    this.strapLength.left = lengthLeft;
+    this.strapLength.right = lengthRight;
+  }
+  backpackAge() {
+    let now = new Date();
+    let acquired = new Date(this.dateAcquired);
+    let elapsed = now - acquired; // elapsed time in milliseconds
+    let daysSinceAcquired = Math.floor(elapsed / (1000 * 3600 * 24));
+    return daysSinceAcquired;
+  }
+}
+
+export default Backpack;
 
 ```
 
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/04_02e/script.js:
+
 ```js
+/**
+ * Use template literals to output HTML
+ * @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+ *
+ */
+import Backpack from "./Backpack.js";
+
+const everydayPack = new Backpack(
+  "Everyday Pack",
+  30,
+  "grey",
+  15,
+  26,
+  26,
+  false,
+  "December 5, 2018 15:00:00 PST"
+);
+
+const content = "<h1>" + everydayPack.name + "</h1>";
+
+document.body.innerHTML = content;
+
+console.log("The everydayPack object:", everydayPack);
+console.log("The pocketNum value:", everydayPack.pocketNum);
+console.log("Days since aquired:", everydayPack.backpackAge());
 
 ```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/97714b71-c017-4c32-9561-07c68819c9e7)
+
+<img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/8748fd99-1438-4d96-918f-d17fe415c635">
+
+# #END</details>
+
+<details>
+<summary>13-JS DOM - </summary>
+
+# JS DOM -
 
 ```js
 
