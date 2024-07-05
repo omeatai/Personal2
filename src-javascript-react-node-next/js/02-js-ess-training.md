@@ -1236,21 +1236,130 @@ Days since aquired: 2037
 # #END</details>
 
 <details>
-<summary>11-JS Strings - Template Literals </summary>
+<summary>11-JS Strings - Using Template Literals (for HTML in JS) </summary>
 
-# JS Strings - Template Literals
+# JS Strings - Using Template Literals (for HTML in JS)
+
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/04_01e/index.html:
 
 ```js
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>String output</title>
+    <script type="module" src="Backpack.js"></script>
+    <script type="module" src="script.js"></script>
+  </head>
+  <body></body>
+</html>
 
 ```
 
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/04_01e/Backpack.js:
+
 ```js
+class Backpack {
+  constructor(
+    name,
+    volume,
+    color,
+    pocketNum,
+    strapLengthL,
+    strapLengthR,
+    lidOpen,
+    dateAcquired
+  ) {
+    this.name = name;
+    this.volume = volume;
+    this.color = color;
+    this.pocketNum = pocketNum;
+    this.strapLength = {
+      left: strapLengthL,
+      right: strapLengthR,
+    };
+    this.lidOpen = lidOpen;
+    this.dateAcquired = dateAcquired;
+  }
+  toggleLid(lidStatus) {
+    this.lidOpen = lidStatus;
+  }
+  newStrapLength(lengthLeft, lengthRight) {
+    this.strapLength.left = lengthLeft;
+    this.strapLength.right = lengthRight;
+  }
+  backpackAge() {
+    let now = new Date();
+    let acquired = new Date(this.dateAcquired);
+    let elapsed = now - acquired; // elapsed time in milliseconds
+    let daysSinceAcquired = Math.floor(elapsed / (1000 * 3600 * 24));
+    return daysSinceAcquired;
+  }
+}
+
+export default Backpack;
 
 ```
 
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/04_01e/script.js:
+
 ```js
+/**
+ * Use template literals to output HTML
+ * @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+ *
+ */
+import Backpack from "./Backpack.js";
+
+const everydayPack = new Backpack(
+  "Everyday Pack",
+  30,
+  "grey",
+  15,
+  26,
+  26,
+  false,
+  "December 5, 2018 15:00:00 PST"
+);
+
+const content = `
+  <main>
+    <article>
+      <h1>${everydayPack.name}</h1>
+      <ul>
+        <li>Volume: ${everydayPack.volume}</li>
+        <li>Color: ${everydayPack.color}</li>
+        <li>Age: ${everydayPack.backpackAge()}</li>
+        <li>Number of pockets: ${everydayPack.pocketNum}</li>
+        <li>Left strap length: ${everydayPack.strapLength.left}</li>
+        <li>Right strap length: ${everydayPack.strapLength.right}</li>
+        <li>Lid status: ${everydayPack.lidOpen}</li>
+      </ul>
+    </article>
+  </main>
+`;
+
+document.body.innerHTML = content;
+
+console.log("The everydayPack object:", everydayPack);
+console.log("The pocketNum value:", everydayPack.pocketNum);
+console.log("Days since aquired:", everydayPack.backpackAge());
 
 ```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/fb480a4f-e1f2-4605-807f-fb3f70dc36be)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/4815890d-7572-4dea-8504-014fb85dce39)
+
+<img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/434dad16-3e99-491f-982a-137dba71e989">
+
+# #END</details>
+
+<details>
+<summary>12-JS Strings - Using Traditional String Output (for HTML in JS) </summary>
+
+# JS Strings - Using Traditional String Output (for HTML in JS)
+
 
 ```js
 
