@@ -1740,7 +1740,7 @@ document.querySelectorAll("main li:first-child")[0].classList
 // DOMTokenList ['backpack__volume', value: 'backpack__volume']
 ```
 
-## Toggle: Add a class (if exists) or Remove it (if not exist) from an element in a List
+## Toggle: Add a class (if not exist) or Remove it (if exists) from an element in a List
 
 ```js
 document.querySelectorAll("main li:first-child")[0].classList.toggle("backpack__volume3")
