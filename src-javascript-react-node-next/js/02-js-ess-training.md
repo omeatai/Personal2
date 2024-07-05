@@ -1535,40 +1535,175 @@ document.querySelectorAll("main li:last-child").forEach(item => item.style.backg
 
 //Select the third item in the list
 document.querySelectorAll("main li:nth-child(3)")
-document.querySelectorAll("main li:nth-child(3)").forEach(item.style.backgroundColor="purple")
+document.querySelectorAll("main li:nth-child(3)").forEach(item => item.style.backgroundColor="purple")
 
 //Select the first to third items from the top of the list
 document.querySelectorAll("main li:nth-child(-n + 3)")
 document.querySelectorAll("main li:nth-child(-n + 3)").forEach(item => item.style.border="5px solid red")
 
 //Select the first to third items from the bottom of the list
-document.querySelectorAll("main li:nth-last-of-child(-n + 3)")
-document.querySelectorAll("main li:nth-last-of-child(-n + 3)").forEach(item => item.style.border="5px solid blue")
+document.querySelectorAll("main li:nth-last-child(-n + 3)")
+document.querySelectorAll("main li:nth-last-child(-n + 3)").forEach(item => item.style.border="5px solid blue")
 
+//Select the even indexed items in the list
+document.querySelectorAll("main li:nth-child(even)")
+document.querySelectorAll("main li:nth-child(even)").forEach(item => item.style.backgroundColor="#f0f8ff")
 
+```
 
-li:nth-child(-n + 3) {
-  border: 2px solid orange;
-  margin-bottom: 1px;
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/a9914140-a3a5-4e57-a727-74ec8cb901fd)
+
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/05_02/index.html:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BackpackPacker</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Work+Sans:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="../assets/style.css"
+      type="text/css"
+      media="all"
+    />
+    <script type="module" src="Backpack.js"></script>
+    <script type="module" src="script.js"></script>
+  </head>
+  <body>
+    <header class="siteheader">
+      <div class="site-title">BackpackPacker</div>
+      <div class="site-description">All backpack packing, all the time.</div>
+    </header>
+    <main class="maincontent"></main>
+    <footer class="sitefooter">
+      <p>
+        Demo project for JavaScript Essential Training, a LinkedIn Learning
+        course.
+      </p>
+    </footer>
+  </body>
+</html>
+
+```
+
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/05_02/Backpack.js:
+
+```js
+class Backpack {
+  constructor(
+    name,
+    volume,
+    color,
+    pocketNum,
+    strapLengthL,
+    strapLengthR,
+    lidOpen,
+    dateAcquired,
+    image
+  ) {
+    this.name = name;
+    this.volume = volume;
+    this.color = color;
+    this.pocketNum = pocketNum;
+    this.strapLength = {
+      left: strapLengthL,
+      right: strapLengthR,
+    };
+    this.lidOpen = lidOpen;
+    this.dateAcquired = dateAcquired;
+    this.image = image;
+  }
+  toggleLid(lidStatus) {
+    this.lidOpen = lidStatus;
+  }
+  newStrapLength(lengthLeft, lengthRight) {
+    this.strapLength.left = lengthLeft;
+    this.strapLength.right = lengthRight;
+  }
+  backpackAge() {
+    let now = new Date();
+    let acquired = new Date(this.dateAcquired);
+    let elapsed = now - acquired; // elapsed time in milliseconds
+    let daysSinceAcquired = Math.floor(elapsed / (1000 * 3600 * 24));
+    return daysSinceAcquired;
+  }
 }
 
-li:nth-child(even) {
-  background-color: lightyellow;
-}
+export default Backpack;
 
 ```
+
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/05_02/script.js:
 
 ```js
+/**
+ * Traverse the DOM tree using querySelector() and querySelectorAll()
+ * @link https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelector
+ * @link https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelectorAll
+ */
+
+import Backpack from "./Backpack.js";
+
+const everydayPack = new Backpack(
+  "Everyday Backpack",
+  30,
+  "grey",
+  15,
+  26,
+  26,
+  false,
+  "December 5, 2018 15:00:00 PST",
+  "../assets/images/everyday.svg"
+);
+
+const main = document.querySelector(".maincontent");
+
+const content = `
+  <article class="backpack" id="everyday">
+    <figure class="backpack__image">
+      <img src=${everydayPack.image} alt="" />
+    </figure>
+    <h1 class="backpack__name">${everydayPack.name}</h1>
+    <ul class="backpack__features">
+      <li class="backpack__volume">Volume:<span> ${
+        everydayPack.volume
+      }l</span></li>
+      <li class="backpack__color">Color:<span> ${everydayPack.color}</span></li>
+      <li class="backpack__age">Age:<span> ${everydayPack.backpackAge()} days old</span></li>
+      <li class="backpack__pockets">Number of pockets:<span> ${
+        everydayPack.pocketNum
+      }</span></li>
+      <li class="backpack__strap">Left strap length:<span> ${
+        everydayPack.strapLength.left
+      } inches</span></li>
+      <li class="backpack__strap">Right strap length:<span> ${
+        everydayPack.strapLength.right
+      } inches</span></li>
+      <li class="backpack__lid">Lid status:<span> ${
+        everydayPack.lidOpen
+      }</span></li>
+    </ul>
+  </article>
+`;
+
+main.innerHTML = content;
 
 ```
 
-```js
+<img width="1490" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/7d753a3f-726e-4de8-9d3d-fc6e730d2fd2">
 
-```
+# #END</details>
 
-```js
+<details>
+<summary>14-JS DOM - Modifying Element Classes </summary>
 
-```
+# JS DOM - Modifying Element Classes
 
 ```js
 
