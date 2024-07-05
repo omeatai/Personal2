@@ -1875,8 +1875,6 @@ document.querySelector("main img")
 // <img src="../assets/images/everyday.svg" alt="A drawing of a backpack">
 ```
 
-# #END</details>
-
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/d48ef5bc-0297-4baa-9db8-3c312d53f76d)
 
 ### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/05_05/script.js:
@@ -1939,6 +1937,8 @@ main.innerHTML = content;
 ```
 
 <img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/05fb6fe3-9b96-45f8-9373-9502aec8efa0">
+
+# #END</details>
 
 <details>
 <summary>16-JS DOM - Inline Styling of DOM Elements </summary>
