@@ -1349,7 +1349,6 @@ console.log("Days since aquired:", everydayPack.backpackAge());
 ```
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/fb480a4f-e1f2-4605-807f-fb3f70dc36be)
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/4815890d-7572-4dea-8504-014fb85dce39)
 
 <img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/434dad16-3e99-491f-982a-137dba71e989">
 
