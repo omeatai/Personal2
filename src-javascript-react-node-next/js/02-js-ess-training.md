@@ -1494,9 +1494,19 @@ console.log("Days since aquired:", everydayPack.backpackAge());
 # #END</details>
 
 <details>
-<summary>13-JS DOM - </summary>
+<summary>13-JS DOM - Access Elements and Target CSS Queries with querySelectors </summary>
 
-# JS DOM -
+# JS DOM - Access Elements and Target CSS Queries with querySelectors
+
+## Select an element
+
+```js
+// Select the main element
+document.querySelector("main")
+
+// Select the 
+document.querySelector("main
+```
 
 ```js
 
