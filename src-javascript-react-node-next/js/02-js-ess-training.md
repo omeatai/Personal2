@@ -1749,9 +1749,82 @@ document.querySelectorAll("main li:first-child")[0].classList
 // DOMTokenList(2) ['backpack__volume', 'backpack__volume3', value: 'backpack__volume backpack__volume3']
 ```
 
+## Replace a class in an element in a List
+
 ```js
+document.querySelectorAll("main li:first-child")[0].classList.replace("backpack__volume3", "backback__dim")
+
+document.querySelectorAll("main li:first-child")[0].classList
+// DOMTokenList(2) ['backpack__volume', 'backback__dim', value: 'backpack__volume backback__dim']
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/05835043-e5fe-4244-a3fa-ae90c5dc2be4)
+
+### src-AI-Software/my_projects/06_js_ess_proj/Exercises/DEMO/05_02/script.js:
+
+```js
+/**
+ * Traverse the DOM tree using querySelector() and querySelectorAll()
+ * @link https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelector
+ * @link https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelectorAll
+ */
+
+import Backpack from "./Backpack.js";
+
+const everydayPack = new Backpack(
+  "Everyday Backpack",
+  30,
+  "grey",
+  15,
+  26,
+  26,
+  false,
+  "December 5, 2018 15:00:00 PST",
+  "../assets/images/everyday.svg"
+);
+
+const main = document.querySelector(".maincontent");
+
+const content = `
+  <article class="backpack" id="everyday">
+    <figure class="backpack__image">
+      <img src=${everydayPack.image} alt="" />
+    </figure>
+    <h1 class="backpack__name">${everydayPack.name}</h1>
+    <ul class="backpack__features">
+      <li class="backpack__volume">Volume:<span> ${
+        everydayPack.volume
+      }l</span></li>
+      <li class="backpack__color">Color:<span> ${everydayPack.color}</span></li>
+      <li class="backpack__age">Age:<span> ${everydayPack.backpackAge()} days old</span></li>
+      <li class="backpack__pockets">Number of pockets:<span> ${
+        everydayPack.pocketNum
+      }</span></li>
+      <li class="backpack__strap">Left strap length:<span> ${
+        everydayPack.strapLength.left
+      } inches</span></li>
+      <li class="backpack__strap">Right strap length:<span> ${
+        everydayPack.strapLength.right
+      } inches</span></li>
+      <li class="backpack__lid">Lid status:<span> ${
+        everydayPack.lidOpen
+      }</span></li>
+    </ul>
+  </article>
+`;
+
+main.innerHTML = content;
 
 ```
+
+<img width="1534" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/90c3ed29-7cf5-4485-91f4-04b8a1bdcc34">
+
+# #END</details>
+
+<details>
+<summary>15-JS DOM - Modifying DOM Element Attributes </summary>
+
+# JS DOM - Modifying DOM Element Attributes
 
 ```js
 
