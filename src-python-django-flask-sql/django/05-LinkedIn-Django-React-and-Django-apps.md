@@ -212,7 +212,7 @@ REST_FRAMEWORK = {
 # #END</details>
 
 <details>
-<summary>3. Setup View and URLs for User Model </summary>
+<summary>3. Setup Views, URLs and Serializers for User Model </summary>
 
 # Setup View and URLs for User Model
 
