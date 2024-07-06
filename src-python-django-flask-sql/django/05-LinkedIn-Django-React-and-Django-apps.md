@@ -127,7 +127,7 @@ django-admin startapp api
 
 ## Add dependecies to installed apps
 
-```x
+```py
 # Application definition
 
 INSTALLED_APPS = [
