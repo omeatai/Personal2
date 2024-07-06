@@ -205,6 +205,8 @@ REST_FRAMEWORK = {
     ),
 }
 
+LOGIN_URL = '/admin/login/'
+
 ```
 
 <img width="1515" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/d9b32918-d09a-459e-8bd3-4c66246e0618">
