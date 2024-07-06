@@ -146,7 +146,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-## Add Oauth2 to Niddlewares
+## Add Oauth2 to Middlewares
 
 ```py
 MIDDLEWARE = [
