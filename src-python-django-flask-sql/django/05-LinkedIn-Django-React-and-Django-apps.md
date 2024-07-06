@@ -216,7 +216,93 @@ LOGIN_URL = '/admin/login/'
 <details>
 <summary>3. Setup Views, URLs and Serializers for User Model </summary>
 
-# Setup View and URLs for User Model
+# Setup Views, URLs and Serializers for User Model
+
+### src-AI-Software/my_projects/07_django_react_apps/APP/demo/urls.py:
+
+```py
+"""
+URL configuration for demo project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.0/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('oauth/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    path('api/v1/', include('api.urls')),
+]
+
+```
+
+### src-AI-Software/my_projects/07_django_react_apps/APP/api/urls.py:
+
+```py
+from django.urls import path
+from .views import UserList, UserDetails
+
+urlpatterns = [
+    path('users/', UserList.as_view()),
+    path('users/<pk>/', UserDetails.as_view()),
+]
+
+```
+
+### src-AI-Software/my_projects/07_django_react_apps/APP/api/views.py:
+
+```py
+from django.shortcuts import render
+from django.contrib.auth.models import User
+from rest_framework import generics, permissions
+from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope
+
+from .serializers import UserSerializer
+# Create the API views
+
+
+class UserList(generics.ListCreateAPIView):
+    permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetails(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+```
+
+### src-AI-Software/my_projects/07_django_react_apps/APP/api/serializers.py:
+
+```py
+from rest_framework import serializers
+from django.contrib.auth.models import User
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'email', "first_name", "last_name")
+
+```
+
+```py
+
+```
 
 ```py
 
