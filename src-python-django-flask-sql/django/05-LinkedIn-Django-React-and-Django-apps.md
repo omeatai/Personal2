@@ -161,7 +161,7 @@ MIDDLEWARE = [
 ]
 ```
 
-Setup Static and Media URL/ROOT, and React Frontend Folder
+## Setup Static and Media URL/ROOT, and React Frontend Folder
 
 ```py
 import os
@@ -177,7 +177,7 @@ MEDIA_URL = '/uploads/'
 FRONTEND_ROOT = os.path.abspath(os.path.join(BASE_DIR, '..', 'frontend', 'build'))
 ```
 
-Setup Oauth2 Settings and Permission
+## Setup Oauth2 Settings and Permission
 
 ```py
 # Authentication using OAuth 2.0
