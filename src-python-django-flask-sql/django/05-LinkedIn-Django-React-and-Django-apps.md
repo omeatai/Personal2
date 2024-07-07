@@ -300,29 +300,34 @@ class UserSerializer(serializers.ModelSerializer):
 
 ```
 
-Run Migration:
+## Run Migration:
 
 ```py
 python manage.py migration
 python manage.py migrate
 ```
 
-Create SuperUser:
+## Create SuperUser:
 
 ```x
 python manage.py createsuperuser
 ```
 
-Run Server:
+## Run Server:
 
 ```x
 python manage.py runserver
 ```
 
-Create Users in Admin:
+## Create Users in Admin:
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/c863d17f-d0b0-439f-8a9c-85dbcacb4e6e)
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/31eb84e3-977f-4916-b1db-e5664143b3e5)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/31eb84e3-977f-4916-b1db-e5664143b3e5)\
+
+## Confirm Protected Site:
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/c6209dcf-079d-40ac-92f2-88932c3b4cf0)
+
 
 # #END</details>
 
@@ -331,25 +336,77 @@ Create Users in Admin:
 
 # Register Oauth Application
 
-```py
-
+```x
+http://localhost:8000/oauth/applications/
 ```
 
-```py
-
+```x
+Name: just a name of your choice
+Client Type: confidential
+Authorization Grant Type: Resource owner password-based
 ```
 
-```py
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/7b9e6a69-27b6-4a24-bd7f-391b95b97535)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/a072ef6e-ddda-47e3-a38a-39779d90c3bf)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/fc7584c0-2a88-49b3-ba9a-f7eaf95f0c77)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/b4181812-5f85-4321-8f6c-c9676c399f8d)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/94fed201-7dbc-4444-be98-b27dae01bd8d)
 
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/23c5eee3-cf11-4657-b8da-e5a82e5c95ff)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/f99927d0-4c62-4289-b2d3-e3827a742558)
+
+
+# #END</details>
+
+<details>
+<summary>4. Test Oauth Application with Curl and Postman - Login with Credentials to get Access Token </summary>
+
+# Test Oauth Application with Curl and Postman - Login with Credentials to get Access Token
+
+## Using Curl
+
+```x
+curl -X POST -d "grant_type=password&username=<user_name>&password=<password>" -u"<client_id>:<client_secret>" http://localhost:8000/oauth/token/
+
+curl -X POST -d '{
+"grant_type":"password",
+"username":"admin",
+"password":"admin123password",
+"client_id":"rzGJIhKkFgXB6be6hSlreQJwkZ0ZydNYp17Uh5EF",
+"client_secret":"3iZH2l8ROdIR8ZxEeTZ0eOqV0H50dBMvEZLEl85T"}' http://localhost:8000/oauth/token/
 ```
 
-```py
-
+```x
+{
+    "access_token": "gzxSZK63kpaAWmmVeNPDLrcSEVaDXF",
+    "expires_in": 36000,
+    "token_type": "Bearer",
+    "scope": "read write groups packages",
+    "refresh_token": "x1OQel3Rx575UdR1V12NkcnzsaQhph"
+}
 ```
 
-```py
+## Using Postman
 
+```py
+{
+"grant_type":"password",
+"username":"admin",
+"password":"admin123password",
+"client_id":"rzGJIhKkFgXB6be6hSlreQJwkZ0ZydNYp17Uh5EF",
+"client_secret":"3iZH2l8ROdIR8ZxEeTZ0eOqV0H50dBMvEZLEl"
+}
 ```
+
+<img width="1415" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/a386c0b9-c061-4e2a-9a9a-1c200f6f6204">
+
+# #END</details>
+
+<details>
+<summary>5. Test Oauth Application with Curl and Postman - View Users with Access Token Credentials </summary>
+
+# Test Oauth Application with Curl and Postman - View Users with Access Token Credentials
+
 
 ```py
 
