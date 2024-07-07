@@ -1,4 +1,4 @@
-## +Udemy - Django A-Z Build and Deploy Web Project
+.tx## +Udemy - Django A-Z Build and Deploy Web Project
 
 <details>
 <summary>1. Creating a New Django Project </summary>
@@ -317,6 +317,54 @@ Run Server:
 
 ```x
 python manage.py runserver
+```
+
+Create Users in Admin:
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/c863d17f-d0b0-439f-8a9c-85dbcacb4e6e)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/31eb84e3-977f-4916-b1db-e5664143b3e5)
+
+# #END</details>
+
+<details>
+<summary>3. Register Oauth Application </summary>
+
+# Register Oauth Application
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
 ```
 
 ```py
