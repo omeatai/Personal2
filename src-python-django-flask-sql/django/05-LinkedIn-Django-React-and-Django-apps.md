@@ -300,16 +300,23 @@ class UserSerializer(serializers.ModelSerializer):
 
 ```
 
-```py
+Run Migration:
 
+```py
+python manage.py migration
+python manage.py migrate
 ```
 
-```py
+Create SuperUser:
 
+```x
+python manage.py createsuperuser
 ```
 
-```py
+Run Server:
 
+```x
+python manage.py runserver
 ```
 
 ```py
