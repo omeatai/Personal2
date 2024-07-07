@@ -400,6 +400,11 @@ curl -X POST -d '{
 
 <img width="1415" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/a386c0b9-c061-4e2a-9a9a-1c200f6f6204">
 
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/62e33224-d721-44df-a888-e61c0fd5629a)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/a22c4f98-e53a-45f9-a6e7-d763c81f3d6e)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/274e0883-dbd5-48dd-b508-237fc17c44a4)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/122ce4fe-d849-4b97-b38d-2503cd06647e)
+
 # #END</details>
 
 <details>
