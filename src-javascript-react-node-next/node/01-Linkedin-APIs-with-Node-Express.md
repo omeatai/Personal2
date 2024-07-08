@@ -221,17 +221,66 @@ touch .babelrc
 # #END</details>
 
 <details>
-<summary>4. Initial Server Setup </summary>
+<summary>4. Setup a basic Express Server </summary>
 
-# Initial Server Setup
+# Setup a basic Express Server
+
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/package.json:
 
 ```js
+{
+  "name": "crm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./index.js --exec babel-node"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.5",
+    "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.24.7",
+    "@babel/core": "^7.24.7",
+    "@babel/node": "^7.24.7",
+    "@babel/preset-env": "^7.24.7"
+  }
+}
+```
+
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/index.js:
+
+```js
+import express from "express";
+
+const app = express();
+const PORT = 3001;
+
+app.get("/", (req, res) =>
+  res.send(`<h1>Your server is running on port ${PORT}</h1>`)
+);
+
+app.listen(PORT, () => console.log(`Your server is running on port ${PORT}`));
 
 ```
 
-```js
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/d6b461eb-98a5-434e-b143-6a4bd707525f)
 
-```
+<img width="1521" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/b0a6d7fa-a1d1-4a73-8b19-f4b59dc97271">
+
+# #END</details>
+
+<details>
+<summary>5. Setup Server Folders </summary>
+
+# Setup Server Folders
 
 ```js
 
