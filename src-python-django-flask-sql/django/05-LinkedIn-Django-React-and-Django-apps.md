@@ -904,9 +904,9 @@ admin.site.register(Booking)
 # #END</details>
 
 <details>
-<summary>10. Setup React Frontend </summary>
+<summary>10. Create React Frontend App </summary>
 
-# Setup React Frontend
+# Create React Frontend App
 
 ## Create React App - Frontend
 
