@@ -412,6 +412,86 @@ curl -X POST -d '{
 
 # Test Oauth Application with Curl and Postman - View Users with Access Token Credentials
 
+## Using Curl
+
+```x
+curl -H "Authorization: Bearer <your_access_token>" http://localhost:8000/users/
+
+curl -H "Authorization: Bearer YdKYEFhex8LqLk4umjGuY77QX" http://localhost:8000/api/v1/users/
+```
+
+```x
+[
+    {"username":"admin","email":"admin@gmail.com","first_name":"","last_name":""},
+    {"username":"admin2","email":"admin2@gmail.com","first_name":"","last_name":""},
+    {"username":"admin3","email":"admin3@gmail.com","first_name":"","last_name":""}
+] 
+```
+
+```x
+curl -H "Authorization: Bearer <your_access_token>" http://localhost:8000/users/1/
+
+curl -H "Authorization: Bearer YdKYEFhex8LqLk4umjGuY77QX" http://localhost:8000/api/v1/users/1/
+```
+
+```x
+    {"username":"admin","email":"admin@gmail.com","first_name":"","last_name":""}
+```
+
+## Using Postman
+
+<img width="1376" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/87717caf-394a-4efe-9454-1dcede868179">
+<img width="1376" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c9068454-d010-4d86-bbae-9e29653de1c0">
+<img width="1376" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/2ffd4346-47e2-4ac1-b514-0c1d8b80c117">
+<img width="1376" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/91e319c0-9eaa-4dab-8431-94687c627023">
+
+# #END</details>
+
+<details>
+<summary>6. Test Oauth Application with Curl and Postman - Create Users with Access Token Credentials </summary>
+
+# Test Oauth Application with Curl and Postman - Create Users with Access Token Credentials
+
+## Using Curl
+
+```x
+curl -H "Authorization: Bearer <your_access_token>" -X POST -d"username=foo&password=bar&scope=write" http://localhost:8000/users/
+
+curl -H "Authorization: Bearer cekmhyGiNE3ockaMaWSisc141pAzNy" -X POST -d"username=admin4&password=admin123password&scope=write" http://localhost:8000/api/v1/users/
+```
+
+```x
+{"username":"admin4","email":"","first_name":"","last_name":""}   
+```
+
+## Using Postman
+
+<img width="1376" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/1b245a34-4968-4541-ac74-c1981cf83d72">
+<img width="1376" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/6be36a04-82f9-4597-bc68-b4f36664dddf">
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/d33fb2a9-e606-43ea-96ed-9d42d1a25760)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/38ea5085-12ec-4c3d-ab1a-b41c99657cf3)
+
+# #END</details>
+
+<details>
+<summary>7. Test Oauth Application with Curl and Postman - Refresh Expired Access Token Credentials </summary>
+
+# Test Oauth Application with Curl and Postman - Refresh Expired Access Token Credentials
+
+## Using Curl
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
 
 ```py
 
