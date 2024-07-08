@@ -14,6 +14,8 @@
 
 ## NODEJS
 
+### [01-React Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src-javascript-react-node-next/react/01-react-ess-training.md)
+
 ## NEXTJS
 
 ## ANGULAR
