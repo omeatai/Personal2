@@ -136,6 +136,8 @@ npm i mongoose
 
 <img width="1505" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/ccf17fa2-1b89-4c02-b268-7b9dc2ceb205">
 
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/1c0f54b5-5b8d-44aa-9b0d-216988f2423a)
+
 # #END</details>
 
 <details>
