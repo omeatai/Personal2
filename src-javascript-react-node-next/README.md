@@ -14,7 +14,7 @@
 
 ## NODEJS
 
-### [01-React Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src-javascript-react-node-next/react/01-react-ess-training.md)
+### [01-Building APIs with Node and Express](https://github.com/omeatai/src-AI-Software/blob/main/src-javascript-react-node-next/node/01-Linkedin-APIs-with-Node-Express.md)
 
 ## NEXTJS
 
