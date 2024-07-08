@@ -1,0 +1,55 @@
+
+
+Clientid: rzGJIhKkFgXB6be6hSlreQJwkZ0ZydNYp17Uh5EF
+
+Client Secret: 3iZH2l8ROdIR8ZxEeTZ0eOqV0H50dBMvEZLElIGWwAnypXxZoxuBkdyUA3arWj4bUXUXuxPqoWSeFfGbyuXvSF5NwpsMofswhZGVv2y2MW9wovd22Gh5XzkItu5Qp85T
+
+
+
+
+from django.urls import path
+from .views import UserList, UserDetails
+
+
+urlpatterns = [
+    path('users/', UserList.as_view()),
+    path('users/<pk>/', UserDetails.as_view()),
+    # path('login', user_login, name='login'),
+    # path('logout', user_logout, name='Logout'),
+    # path('rtoken/', TokenRefresh.as_view()),
+]
+
+
+from oauth2_provider.models import AccessToken
+
+def user_login(request):
+    """
+    Logs in a user based on the provided username and password.
+    Args:
+        request (HttpRequest): The HTTP request object.
+    Returns:
+        JsonResponse: A JSON response indicating the result of the login attempt.
+            - If the login is successful, the response will contain a 'message' key with the value 'Login successful'.
+            - If the provided credentials are invalid, the response will contain a 'message' key with the value 'Invalid credentials' and a status code of 401 (Unauthorized).
+            - If the request method is not POST, the response will contain a 'message' key with the value 'Invalid request method' and a status code of 400 (Bad Request).
+    """
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                print('User is valid, active and authenticated')
+                login(request, user)
+                token =""
+                time_threshold = datetime.now()
+                token_obj = AccessToken.objects.filter(user=user, expires__gt=time_threshold)
+                if token_obj.exists():
+                    token = token_obj.first().token
+                else:
+                    token = AccessToken.objects.create(user=user).token
+                return JsonResponse({'message': 'Login successful', 'token': token})
+        else:
+            return JsonResponse({'message': 'Invalid credentials'}, status=401)
+    else:
+        return JsonResponse({'message': 'Invalid request method'}, status=400)
