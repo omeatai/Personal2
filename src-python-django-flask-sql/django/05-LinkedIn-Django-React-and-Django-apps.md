@@ -484,24 +484,431 @@ curl -H "Authorization: Bearer cekmhyGiNE3ockaMaWSisc141pAzNy" -X POST -d"userna
 ```x
 curl -X POST -d "grant_type=refresh_token&refresh_token=<your_refresh_token>&client_id=<your_client_id>&client_secret=<your_client_secret>" http://localhost:8000/o/token/
 
-curl -X POST -d "grant_type=refresh_token&refresh_token=ibscEmyvWXT3nMRSvO5bNZfxAmffXr&client_id=rzGJIhKkFgXB6be6hSlreQJwkZ0ZydNYp17Uh5EF&client_secret=3iZH2l8ROdIR8ZxEeTZ0eOqV0H50dBMvEZLElIGWwAnypXxZoxuBkdyUA3arWj4bUXUXuxPqoWSeFfGbyuXvSF5NwpsMofswhZGVv2y2MW9wovd22Gh5XzkItu5Qp85T" http://localhost:8000/oauth/token/
-
 curl -X POST -d '{
-"grant_type":"password",
-"username":"admin",
-"password":"admin123password",
+"grant_type":"refresh_token",
+"refresh_token":"ibscEmyvWXT3nMRSvO5bNZfxAmffXr",
 "client_id":"rzGJIhKkFgXB6be6hSlreQJwkZ0ZydNYp17Uh5EF",
-"client_secret":"3iZH2l8ROdIR8ZxEeTZ0eOqV0H50dBMvEZLEl85T"}' http://localhost:8000/oauth/token/
+"client_secret":"3iZH2l8ROdIR8ZxEeTZ0eOqV0H50dBMvEZLElIGWwAnypXxZoxuBkdyUA3arWj4bUXUXuxPqoWSeFfGbyuXvSF5NwpsMofswhZGVv2y2MW9wovd22Gh5XzkItu5Qp85T"}' http://localhost:8000/oauth/token/
 
 ```
 
 ```py
-
+{
+    "access_token": "ZN9fAWf51OHp7EBui4itSd1B6rry95",
+    "expires_in": 36000,
+    "token_type": "Bearer",
+    "scope": "read write groups packages",
+    "refresh_token": "voG1SJzmM1ei2ZeFxS4n50cO59RHIj"
+}       
 ```
+
+## Using Postman
+
+```x
+{
+"grant_type":"refresh_token",
+"refresh_token":"voG1SJzmM1ei2ZeFxS4n50cO59RHIj",
+"client_id":"rzGJIhKkFgXB6be6hSlreQJwkZ0ZydNYp17Uh5EF",
+"client_secret":"3iZH2l8ROdIR8ZxEeTZ0eOqV0H50dBMvEZLElIGWwAnypXxZoxuBkdyUA3arWj4bUXUXuxPqoWSeFfGbyuXvSF5NwpsMofswhZGVv2y2MW9wovd22Gh5XzkItu5Qp85T"
+}
+```
+
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c2393180-8fa5-4480-8697-531e77b7b3e2">
+
+# #END</details>
+
+<details>
+<summary>8. Setup Backend App Models and Admin </summary>
+
+# Setup Backend App Models and Admin
+
+### src-AI-Software/my_projects/07_django_react_apps/APP/api/models.py:
 
 ```py
+from django.db import models
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+import django.utils.timezone
+
+class Package(models.Model):
+    id = models.AutoField(primary_key=True)
+    category = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
+    promo = models.TextField()
+    price = models.FloatField()
+    rating = models.CharField(max_length=50)
+    tour_length = models.IntegerField()
+    start = models.DateField(default=django.utils.timezone.now)
+    thumbnail_url = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+class WishlistItem(models.Model):
+    session_id = models.CharField(max_length=32)
+    package = models.ForeignKey(Package, null=True, on_delete=models.SET_NULL)
+    added_to_cart = models.BooleanField(default=False)
+
+class Booking(models.Model):
+    name = models.CharField(max_length=200)
+    email_address = models.CharField(max_length=200)
+    street_address = models.CharField(max_length=200)
+    city = models.CharField(max_length=200)
+    package = models.ForeignKey(Package, null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return '{}, {}'.format(self.name, self.email_address)
+
+class PackagePermission(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    package = models.ForeignKey(Package, on_delete=models.CASCADE)
+    is_owner = models.BooleanField(blank=False, default=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'package'], name='unique_owner'),
+        ]
+
+    def __str__(self):
+        if self.is_owner:
+            fmt = '{} ({}) can write to {} ({})'
+        else:
+            fmt = '{} ({}) cannot write to {}'
+        return fmt.format(self.user.username, self.user.id, self.package.name, self.package.id)
+
+    @classmethod
+    def can_write(cls, user, package):
+        try:
+            permission = cls.objects.get(user=user, package=package)
+            return permission.is_owner
+        except ObjectDoesNotExist:
+            return False
+
+    @classmethod
+    def set_can_write(cls, user, package):
+        obj, created = cls.objects.get_or_create(user=user, package=package, defaults={'is_owner': True})
+        if not created:
+            obj.is_owner = True
+            obj.save()
 
 ```
+
+### src-AI-Software/my_projects/07_django_react_apps/APP/api/admin.py:
+
+```py
+from django.contrib import admin
+
+from api.models import Package, PackagePermission
+
+class PackagePermissionInline(admin.TabularInline):
+    model = PackagePermission
+
+class PackageAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'category', 'price', 'rating', 'tour_length', 'start')
+    inlines = (PackagePermissionInline,)
+
+admin.site.register(Package, PackageAdmin)
+
+```
+
+## Run Migrations
+
+```py
+python manage.py makemigrations
+python manage.py migrate
+```
+
+## Run Server
+
+```py
+python manage.py runserver
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/9740b62e-baaa-4a41-89a1-f9b8f22a3fc7)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/70e5f997-ca8a-4639-88aa-29e1ab20a75a)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/f4678cfd-1850-4bc5-b9d3-b454dc30e829)
+
+# #END</details>
+
+<details>
+<summary>9. Setup Backend App URLs, Serializers and Views </summary>
+
+# Setup Backend App URLs, Serializers and Views
+
+### src-AI-Software/my_projects/07_django_react_apps/APP/demo/urls.py:
+
+```py
+"""
+URL configuration for demo project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.0/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path, include, re_path
+from django.conf import settings
+from django.conf.urls.static import static, serve
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('oauth/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    path('api/v1/', include('api.urls')),
+    re_path(r'^(?P<path>.*)$', serve, { 'document_root': settings.FRONTEND_ROOT}),
+]
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+#     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+```
+
+### src-AI-Software/my_projects/07_django_react_apps/APP/api/urls.py:
+
+```py
+from django.urls import path, include
+from . import views
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+
+router.register('packages', views.PackageViewSet, basename='packages')
+router.register('wishlist', views.WishlistItemViewSet, basename='wishlist')
+router.register('public/packages', views.PublicPackageViewSet, basename="public-packages")
+router.register('bookings', views.BookingViewSet, basename='bookings')
+
+urlpatterns = [
+    path('', include(router.urls)),
+    path('users/', views.UserList.as_view()),
+    path('users/<pk>/', views.UserDetails.as_view()),
+]
+
+```
+
+### src-AI-Software/my_projects/07_django_react_apps/APP/api/views.py:
+
+```py
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django.core.cache import cache
+from django.http import JsonResponse
+from django.shortcuts import render
+from datetime import datetime
+
+from rest_framework import generics, permissions
+from rest_framework.generics import CreateAPIView
+from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.filters import BaseFilterBackend, SearchFilter
+from rest_framework.permissions import BasePermission
+
+from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
+
+from .models import Package, PackagePermission, WishlistItem, Booking
+from .serializers import PackageSerializer, BookingSerializer, UserSerializer
+
+class UserList(generics.ListCreateAPIView):
+    permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetails(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class PackageCreateView(CreateAPIView):
+    queryset = Package.objects.all()
+    serializer_class = PackageSerializer
+
+class PackagePagination(PageNumberPagination):
+    page_size = 9
+
+class CanWritePackageFilterBackend(BaseFilterBackend):
+    def filter_queryset(self, request, queryset, view):
+        queryset = self.check_permission(request, queryset, view)
+        filters = {}
+        tour_length = request.query_params.get('tourLength', None)
+        if tour_length:
+            filters['tour_length'] = tour_length
+        return queryset.filter(**filters).order_by('id')
+
+    def check_permission(self, request, queryset, view):
+        if request.user is None:
+            return queryset.none()
+        if request.user.username == 'admin':
+            return queryset
+        package_ids = queryset.values_list('id', flat=True)
+        own_package_ids = PackagePermission.objects.filter(
+            is_owner=True, package__in=package_ids, user=request.user,
+        ).values_list('package__id', flat=True)
+        return queryset.filter(id__in=own_package_ids)
+
+class PackageViewSet(viewsets.ModelViewSet):
+    queryset = Package.objects.all()
+    serializer_class = PackageSerializer
+    filter_backends = (CanWritePackageFilterBackend,)
+    permission_classes = [TokenHasScope, TokenHasReadWriteScope]
+    required_scopes = ['packages']
+
+class WishlistItemViewSet(viewsets.ViewSet):
+    queryset = WishlistItem.objects.all()
+    permission_classes = [BasePermission]
+    session_id = 'wishlist-items'
+
+    def update(self, request, pk=None):
+        return Response()
+
+    def partial_update(self, request, pk=None):
+        try:
+            package_id = request.data.pop('id')
+            package = Package.objects.get(id=package_id)
+            item = self.queryset.get(session_id=self.session_id, package=package)
+            for attr in request.data.keys():
+                setattr(item, attr, request.data[attr])
+            item.save()
+            message = 'Item fields {} were updated'.format(','.join(request.data.keys()))
+        except WishlistItem.DoesNotExist:
+            message = 'Item was not in wishlist'
+        return Response(message)
+
+    def list(self, request):
+        def get_package_ids():
+            queryset = self.queryset.filter(session_id=self.session_id)
+            return list(queryset.values_list('package__id', flat=True))
+        package_ids = cache.get_or_set(
+            'wishlist:{}'.format(self.session_id),
+            get_package_ids
+        )
+        return Response(package_ids)
+
+    def create(self, request):
+        package_id = request.data['id']
+        package = Package.objects.get(id=package_id)
+        self.queryset.get_or_create(session_id=self.session_id, package=package)
+        cache.delete('wishlist:{}'.format(self.session_id))
+        return Response('Item added to wishlist', status=200)
+
+    def destroy(self, request, pk=None):
+        package_id = pk
+        item = self.queryset.filter(session_id=self.session_id, package__in=[package_id])
+        item.delete()
+        cache.delete('wishlist:{}'.format(self.session_id))
+        return Response('Item removed from wishlist', status=200)
+
+    def retrieve(self, request, pk=None):
+        return Response()
+
+class PackagePriceFilterBackend(BaseFilterBackend):
+    def filter_queryset(self, request, queryset, view):
+        filters = {}
+        price_min = request.query_params.get('price_min', None)
+        if price_min:
+            filters['price__gte'] = price_min
+        price_max = request.query_params.get('price_max', None)
+        if price_max:
+            filters['price__lte'] = price_max
+        return queryset.filter(**filters)
+
+class PublicPackageViewSet(viewsets.ModelViewSet):
+    permission_classes = [TokenHasScope]
+    required_scopes = ['read']
+    queryset = Package.objects.all().order_by('-price')
+    serializer_class = PackageSerializer
+    pagination_class = PackagePagination
+    filter_backends = (PackagePriceFilterBackend, SearchFilter)
+    search_fields = ('name', 'promo')
+
+class BookingViewSet(viewsets.ModelViewSet):
+    queryset = Booking.objects.all()
+    serializer_class = BookingSerializer
+    permission_classes = [BasePermission]
+
+```
+
+### src-AI-Software/my_projects/07_django_react_apps/APP/api/serializers.py:
+
+```py
+import re
+from django.contrib.auth.models import User
+from rest_framework import serializers
+from api.models import Package, Booking
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'email', "first_name", "last_name")
+
+class PackageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Package
+        fields = '__all__'
+
+class BookingSerializer(serializers.ModelSerializer):
+    STREET_ADDRESS_ERROR = 'Street address must be in the format "11 Abc St."'
+
+    class Meta:
+        model = Booking
+        fields = '__all__'
+
+    def validate_street_address(self, value):
+        regexp = re.compile(r'\d+ \w+ \w+')
+        if regexp.search(value):
+            return value
+        raise serializers.ValidationError(
+            self.STREET_ADDRESS_ERROR
+        )
+
+```
+
+### src-AI-Software/my_projects/07_django_react_apps/APP/api/admin.py:
+
+```py
+from django.contrib import admin
+
+from api.models import Package, WishlistItem, Booking, PackagePermission
+
+class PackagePermissionInline(admin.TabularInline):
+    model = PackagePermission
+
+class PackageAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'category', 'price', 'rating', 'tour_length', 'start')
+    inlines = (PackagePermissionInline,)
+
+admin.site.register(Package, PackageAdmin)
+admin.site.register(WishlistItem)
+admin.site.register(Booking)
+
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/1cf14c7d-3bb5-4e30-8ba3-f36e2727a2ce)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/e07fd02f-949a-4ab6-9d0d-04a6d817d097)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/34e13667-76cf-4ba9-ac97-dc971e34d306)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/598f0e2b-218b-4270-9ad8-1e0fd3e36be2)
+
+<img width="1537" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/32ea3b66-35c0-4b2a-a7d2-5a0aac16c434">
+<img width="1537" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/aa4649ba-9a43-4fce-b52a-f1c07f983dde">
+<img width="1537" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/0dc15e09-7f24-4f1f-8492-b165892ea314">
+<img width="1537" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/5a74f71a-7df6-42d6-ba01-9cc9371af7c0">
+
+# #END</details>
+
+<details>
+<summary>10. Setup React Frontend </summary>
+
+# Setup React Frontend
+
+# Install React
 
 ```py
 
