@@ -141,99 +141,145 @@ npm i mongoose
 # #END</details>
 
 <details>
-<summary>3. Configure Babel </summary>
+<summary>3. Install and Configure Babel </summary>
 
-# Configure Babel
-
-```py
-
-```
-
-```py
-
-```
-
-```py
-
-```
-
-```py
-
-```
-
-## Get dependencies
+# Install and Configure Babel
 
 ```x
-pip freeze
+npm install --save-dev @babel/cli @babel/core @babel/node @babel/preset-env
 ```
 
-```x
-asgiref==3.8.1
-Django==5.0.6
-django-filter==24.2
-djangorestframework==3.15.2
-Markdown==3.6
-mock==5.1.0
-pillow==10.4.0
+## Install Nodemon and Body-Parser
+
+```js
+npm i nodemon body-parser
 ```
 
-## Save Dependencies to Requirements.txt
-
-```x
-pip freeze > requirements.txt
+```js
+touch .babelrc
 ```
 
-## Install requirements from Requirements.txt
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/.babelrc:
 
-```x
-pip install -r requirements.txt
+```js
+{
+    "presets": [
+        "@babel/preset-env"
+    ]
+}
 ```
 
-## Deactivate a virtual environment
-
-```x
-deactivate
+```js
+{
+  "presets": [
+    ["@babel/env", {
+      "targets": {
+        "node": "current"
+      }
+    }]
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread"
+  ]
+}
 ```
 
-## Create Django Project
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/package.json:
 
-```x
-django-admin startproject admin_project .
+```js
+{
+  "name": "crm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.5",
+    "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.24.7",
+    "@babel/core": "^7.24.7",
+    "@babel/node": "^7.24.7",
+    "@babel/preset-env": "^7.24.7"
+  }
+}
+
 ```
 
-## Start Local Server
+<img width="1521" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/dc2fbb4e-c55a-4f27-b186-fcab5eb9afa3">
+<img width="1521" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/aa1801fe-a818-4c49-ad35-d98af4765bb4">
 
-```x
-python manage.py runserver
+# #END</details>
+
+<details>
+<summary>4. Initial Server Setup </summary>
+
+# Initial Server Setup
+
+```js
+
 ```
 
-```x
-(venv) ➜  07_react_django_practical git:(main) ✗ python manage.py runserver
-Watching for file changes with StatReloader
-Performing system checks...
+```js
 
-System check identified no issues (0 silenced).
-
-You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
-Run 'python manage.py migrate' to apply them.
-July 08, 2024 - 05:48:12
-Django version 5.0.6, using settings 'admin_project.settings'
-Starting development server at http://127.0.0.1:8000/
-Quit the server with CONTROL-C.
-
-[08/Jul/2024 05:48:15] "GET / HTTP/1.1" 200 10629
 ```
 
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/e39eef9e-8179-4904-83ba-c12faed70e02)
+```js
 
-<img width="1505" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/1de6eb8a-f756-4347-94b2-57fe6f927b85">
-
-
-## Make Migrations
-
-```x
-python manage.py makemigrations
-python manage.py migrate
 ```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
 
 # #END</details>
