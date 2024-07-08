@@ -12,26 +12,50 @@ mkdir crm
 ls
 ```
 
-## Activate venv
+## Initialise npm
 
 ```x
-# venv\Scripts\activate
-source venv/bin/activate
+cd crm
+npm init -y
 ```
 
-## Install Django
+```js
+{
+  "name": "crm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
+```
+
+## Install Express
 
 ```x
-python -m pip install Django
-pip install django
-pip install django==5.0
+npm i express
 ```
 
-## Install Other Project Dependencies: djangorestframework, markdown, django-filter, mock and Pillow
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/a52e046a-9e61-4d71-9302-01612a15153a)
 
-```x
-pip install djangorestframework markdown django-filter mock pillow
-```
+<img width="1505" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/8f2e9309-246d-4076-b3c8-182e9f14e3f6">
+
+# #END</details>
+
+<details>
+<summary>2. Configure Docker for Django </summary>
+
+# Configure Docker for Django
+
+## Download and install Docker Desktop
+
+## [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/da417af6-4ae0-4c24-9166-bd70c33671ba)
 
 ## Get dependencies
 
@@ -100,18 +124,6 @@ Quit the server with CONTROL-C.
 
 <img width="1505" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/1de6eb8a-f756-4347-94b2-57fe6f927b85">
 
-# #END</details>
-
-<details>
-<summary>2. Configure Docker for Django </summary>
-
-# Configure Docker for Django
-
-## Download and install Docker Desktop
-
-## [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
-
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/da417af6-4ae0-4c24-9166-bd70c33671ba)
 
 ```py
 
