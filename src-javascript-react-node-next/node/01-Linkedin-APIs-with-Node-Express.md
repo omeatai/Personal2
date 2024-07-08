@@ -1,14 +1,15 @@
 ## +Linkedin-Building RESTful APIs with Node.js and Express
 
 <details>
-<summary>1. Creating a New Django Project: admin_project </summary>
+<summary>1. Install Node and Express </summary>
 
-# Creating a New Django Project: admin_project
+# Install Node and Express
 
-## Install venv
+## Create Project Folder
 
 ```x
-python -m venv venv
+mkdir crm
+ls
 ```
 
 ## Activate venv
