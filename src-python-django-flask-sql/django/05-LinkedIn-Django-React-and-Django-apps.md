@@ -904,11 +904,55 @@ admin.site.register(Booking)
 # #END</details>
 
 <details>
-<summary>10. Setup React Frontend </summary>
+<summary>10. Create React Frontend App </summary>
 
-# Setup React Frontend
+# Create React Frontend App
 
-# Install React
+## Create React App - Frontend
+
+```x
+npx create-react-app frontend
+cd frontend
+```
+
+## Install Main Dependencies - React Router DOM and Axios
+
+```x
+npm install react-router-dom axios
+```
+
+## Install Dev Testing Libraries - Jest, Cypress and React-Icons
+
+```x
+npm install --save-dev jest @types/jest babel-jest
+npm install --save-dev cypress
+npm install --save-dev react-icons
+```
+
+## Start React App
+
+```py
+npm start
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/ea80133f-bafd-4c66-9e4a-cf1c90567250)
+
+<img width="1537" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/a3d88f5d-21fa-42d5-809a-866a80835a86">
+
+# #END</details>
+
+<details>
+<summary>11. Setup React Frontend Components and Folders </summary>
+
+# Setup React Frontend Components and Folders
+
+```py
+
+```
+
+```py
+
+```
 
 ```py
 
