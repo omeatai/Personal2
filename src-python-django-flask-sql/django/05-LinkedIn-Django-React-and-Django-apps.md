@@ -481,7 +481,17 @@ curl -H "Authorization: Bearer cekmhyGiNE3ockaMaWSisc141pAzNy" -X POST -d"userna
 
 ## Using Curl
 
-```py
+```x
+curl -X POST -d "grant_type=refresh_token&refresh_token=<your_refresh_token>&client_id=<your_client_id>&client_secret=<your_client_secret>" http://localhost:8000/o/token/
+
+curl -X POST -d "grant_type=refresh_token&refresh_token=ibscEmyvWXT3nMRSvO5bNZfxAmffXr&client_id=rzGJIhKkFgXB6be6hSlreQJwkZ0ZydNYp17Uh5EF&client_secret=3iZH2l8ROdIR8ZxEeTZ0eOqV0H50dBMvEZLElIGWwAnypXxZoxuBkdyUA3arWj4bUXUXuxPqoWSeFfGbyuXvSF5NwpsMofswhZGVv2y2MW9wovd22Gh5XzkItu5Qp85T" http://localhost:8000/oauth/token/
+
+curl -X POST -d '{
+"grant_type":"password",
+"username":"admin",
+"password":"admin123password",
+"client_id":"rzGJIhKkFgXB6be6hSlreQJwkZ0ZydNYp17Uh5EF",
+"client_secret":"3iZH2l8ROdIR8ZxEeTZ0eOqV0H50dBMvEZLEl85T"}' http://localhost:8000/oauth/token/
 
 ```
 
