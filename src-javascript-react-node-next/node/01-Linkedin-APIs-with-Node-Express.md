@@ -5,6 +5,13 @@
 
 # Install Node and Express
 
+## Check Node Version
+
+```x
+node --version
+npm --version
+```
+
 ## Create Project Folder
 
 ```x
@@ -47,15 +54,108 @@ npm i express
 # #END</details>
 
 <details>
-<summary>2. Configure Docker for Django </summary>
+<summary>2. Install and Configure MongoDB </summary>
 
-# Configure Docker for Django
+# Install and Configure MongoDB
 
-## Download and install Docker Desktop
+## Install Homebrew
 
-## [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
+```x
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
 
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/da417af6-4ae0-4c24-9166-bd70c33671ba)
+## [MongoDB Website](https://www.mongodb.com/)
+
+## [Install MongoDB on Mac](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/)
+
+## [Mongoose Website ](https://mongoosejs.com/)
+
+Mongodb.com --> Products --> Community Edition --> Download
+
+```x
+xcode-select --install
+brew tap mongodb/brew
+brew update
+brew install mongodb-community@7.0
+```
+
+## To Run MongoDB:
+
+```py
+brew services start mongodb-community@7.0
+```
+
+## To stop a mongod running:
+
+```py
+brew services stop mongodb-community@7.0
+```
+
+## To verify that MongoDB is running:
+
+```py
+brew services list
+```
+
+## Connect and Use MongoDB:
+
+```py
+mongosh
+```
+
+## Install Mongoose
+
+```x
+npm i mongoose
+```
+
+```js
+{
+  "name": "crm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.4.5"
+  }
+}
+
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/dfb00874-456e-4941-a9ea-fb6e22662824)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/4ca66a64-2c45-4ff9-8572-fc0066f878fb)
+
+<img width="1505" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/ccf17fa2-1b89-4c02-b268-7b9dc2ceb205">
+
+# #END</details>
+
+<details>
+<summary>3. Configure Babel </summary>
+
+# Configure Babel
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
 
 ## Get dependencies
 
@@ -124,37 +224,6 @@ Quit the server with CONTROL-C.
 
 <img width="1505" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/1de6eb8a-f756-4347-94b2-57fe6f927b85">
 
-
-```py
-
-```
-
-```py
-
-```
-
-# #END</details>
-
-<details>
-<summary>3. Configure Docker for Django </summary>
-
-# Configure Docker for Django
-
-```py
-
-```
-
-```py
-
-```
-
-```py
-
-```
-
-```py
-
-```
 
 ## Make Migrations
 
