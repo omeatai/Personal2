@@ -24,6 +24,8 @@
 
 ### [06-LinkedIn-Restful-Web-APIs-With-Django](https://github.com/omeatai/src-AI-Software/blob/main/src-python-django-flask-sql/django/06-LinkedIn-Restful-Web-APIs-With-Django.md)
 
+### [07-Udemy-React-Django-Practical](https://github.com/omeatai/src-AI-Software/blob/main/src-python-django-flask-sql/django/07-Udemy-React-Django-Practical.md)
+
 ## FLASK
 
 ## SQL
