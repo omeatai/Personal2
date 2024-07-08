@@ -484,16 +484,156 @@ curl -H "Authorization: Bearer cekmhyGiNE3ockaMaWSisc141pAzNy" -X POST -d"userna
 ```x
 curl -X POST -d "grant_type=refresh_token&refresh_token=<your_refresh_token>&client_id=<your_client_id>&client_secret=<your_client_secret>" http://localhost:8000/o/token/
 
-curl -X POST -d "grant_type=refresh_token&refresh_token=ibscEmyvWXT3nMRSvO5bNZfxAmffXr&client_id=rzGJIhKkFgXB6be6hSlreQJwkZ0ZydNYp17Uh5EF&client_secret=3iZH2l8ROdIR8ZxEeTZ0eOqV0H50dBMvEZLElIGWwAnypXxZoxuBkdyUA3arWj4bUXUXuxPqoWSeFfGbyuXvSF5NwpsMofswhZGVv2y2MW9wovd22Gh5XzkItu5Qp85T" http://localhost:8000/oauth/token/
-
 curl -X POST -d '{
-"grant_type":"password",
-"username":"admin",
-"password":"admin123password",
+"grant_type":"refresh_token",
+"refresh_token":"ibscEmyvWXT3nMRSvO5bNZfxAmffXr",
 "client_id":"rzGJIhKkFgXB6be6hSlreQJwkZ0ZydNYp17Uh5EF",
-"client_secret":"3iZH2l8ROdIR8ZxEeTZ0eOqV0H50dBMvEZLEl85T"}' http://localhost:8000/oauth/token/
+"client_secret":"3iZH2l8ROdIR8ZxEeTZ0eOqV0H50dBMvEZLElIGWwAnypXxZoxuBkdyUA3arWj4bUXUXuxPqoWSeFfGbyuXvSF5NwpsMofswhZGVv2y2MW9wovd22Gh5XzkItu5Qp85T"}' http://localhost:8000/oauth/token/
 
 ```
+
+```py
+{
+    "access_token": "ZN9fAWf51OHp7EBui4itSd1B6rry95",
+    "expires_in": 36000,
+    "token_type": "Bearer",
+    "scope": "read write groups packages",
+    "refresh_token": "voG1SJzmM1ei2ZeFxS4n50cO59RHIj"
+}       
+```
+
+## Using Postman
+
+```x
+{
+"grant_type":"refresh_token",
+"refresh_token":"voG1SJzmM1ei2ZeFxS4n50cO59RHIj",
+"client_id":"rzGJIhKkFgXB6be6hSlreQJwkZ0ZydNYp17Uh5EF",
+"client_secret":"3iZH2l8ROdIR8ZxEeTZ0eOqV0H50dBMvEZLElIGWwAnypXxZoxuBkdyUA3arWj4bUXUXuxPqoWSeFfGbyuXvSF5NwpsMofswhZGVv2y2MW9wovd22Gh5XzkItu5Qp85T"
+}
+```
+
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c2393180-8fa5-4480-8697-531e77b7b3e2">
+
+# #END</details>
+
+<details>
+<summary>8. Setup Backend App Models and Admin </summary>
+
+# Setup Backend App Models and Admin
+
+### src-AI-Software/my_projects/07_django_react_apps/APP/api/models.py:
+
+```py
+from django.db import models
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+import django.utils.timezone
+
+class Package(models.Model):
+    id = models.AutoField(primary_key=True)
+    category = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
+    promo = models.TextField()
+    price = models.FloatField()
+    rating = models.CharField(max_length=50)
+    tour_length = models.IntegerField()
+    start = models.DateField(default=django.utils.timezone.now)
+    thumbnail_url = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+class WishlistItem(models.Model):
+    session_id = models.CharField(max_length=32)
+    package = models.ForeignKey(Package, null=True, on_delete=models.SET_NULL)
+    added_to_cart = models.BooleanField(default=False)
+
+class Booking(models.Model):
+    name = models.CharField(max_length=200)
+    email_address = models.CharField(max_length=200)
+    street_address = models.CharField(max_length=200)
+    city = models.CharField(max_length=200)
+    package = models.ForeignKey(Package, null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return '{}, {}'.format(self.name, self.email_address)
+
+class PackagePermission(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    package = models.ForeignKey(Package, on_delete=models.CASCADE)
+    is_owner = models.BooleanField(blank=False, default=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'package'], name='unique_owner'),
+        ]
+
+    def __str__(self):
+        if self.is_owner:
+            fmt = '{} ({}) can write to {} ({})'
+        else:
+            fmt = '{} ({}) cannot write to {}'
+        return fmt.format(self.user.username, self.user.id, self.package.name, self.package.id)
+
+    @classmethod
+    def can_write(cls, user, package):
+        try:
+            permission = cls.objects.get(user=user, package=package)
+            return permission.is_owner
+        except ObjectDoesNotExist:
+            return False
+
+    @classmethod
+    def set_can_write(cls, user, package):
+        obj, created = cls.objects.get_or_create(user=user, package=package, defaults={'is_owner': True})
+        if not created:
+            obj.is_owner = True
+            obj.save()
+
+```
+
+### src-AI-Software/my_projects/07_django_react_apps/APP/api/admin.py:
+
+```py
+from django.contrib import admin
+
+from api.models import Package, PackagePermission
+
+class PackagePermissionInline(admin.TabularInline):
+    model = PackagePermission
+
+class PackageAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'category', 'price', 'rating', 'tour_length', 'start')
+    inlines = (PackagePermissionInline,)
+
+admin.site.register(Package, PackageAdmin)
+
+```
+
+## Run Migrations
+
+```py
+python manage.py makemigrations
+python manage.py migrate
+```
+
+## Run Server
+
+```py
+python manage.py runserver
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/9740b62e-baaa-4a41-89a1-f9b8f22a3fc7)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/70e5f997-ca8a-4639-88aa-29e1ab20a75a)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/f4678cfd-1850-4bc5-b9d3-b454dc30e829)
+
+# #END</details>
+
+<details>
+<summary>9. Setup Backend App URLs and Views </summary>
+
+# Setup Backend App URLs and Views
 
 ```py
 
@@ -502,6 +642,20 @@ curl -X POST -d '{
 ```py
 
 ```
+
+```py
+
+```
+
+
+# #END</details>
+
+<details>
+<summary>10. Setup React Frontend </summary>
+
+# Setup React Frontend
+
+# Install React
 
 ```py
 
