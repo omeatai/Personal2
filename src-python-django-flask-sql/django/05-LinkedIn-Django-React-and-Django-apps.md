@@ -942,9 +942,33 @@ npm start
 # #END</details>
 
 <details>
-<summary>10. Setup React Frontend </summary>
+<summary>10. Setup React Frontend Components and Folders </summary>
 
-# Setup React Frontend
+# Setup React Frontend Components and Folders
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
 
 ```py
 
