@@ -26,10 +26,10 @@ pip install django
 pip install django==5.0
 ```
 
-## Install Other Project Dependencies: djangorestframework, markdown, django-filter, mock and Pillow
+## Install Other Project Dependencies: djangorestframework, markdown, django-filter, mock, Pillow, mysqlclient, django-mysql
 
 ```x
-pip install djangorestframework markdown django-filter mock pillow
+pip install djangorestframework markdown django-filter mock pillow mysqlclient django-mysql
 ```
 
 ## Get dependencies
@@ -42,10 +42,13 @@ pip freeze
 asgiref==3.8.1
 Django==5.0.6
 django-filter==24.2
+django-mysql==4.14.0
 djangorestframework==3.15.2
 Markdown==3.6
 mock==5.1.0
+mysqlclient==2.2.4
 pillow==10.4.0
+sqlparse==0.5.0
 ```
 
 ## Save Dependencies to Requirements.txt
@@ -112,6 +115,10 @@ Quit the server with CONTROL-C.
 ## [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/da417af6-4ae0-4c24-9166-bd70c33671ba)
+
+<img width="1443" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/1dcafa97-10bd-4d6d-aeef-5f44fda1519d">
+
+## Create Dockerfile and docker-compose.yaml files
 
 ```py
 
