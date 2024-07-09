@@ -362,9 +362,190 @@ DELETE http://localhost:3001/contact/4
 # #END</details>
 
 <details>
-<summary>6. Setup Middleware </summary>
+<summary>6. Setup Middlewares </summary>
 
-# Setup Middleware
+# Setup Middlewares
+
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/index.js:
+
+```js
+import express from "express";
+import routes from "./src/routes/crmRoute";
+import basicLogger from "./src/middlewares/basicLoggerMiddleware";
+import checkAuth from "./src/middlewares/checkAuthMiddleware";
+import errorHandler from "./src/middlewares/errorHandlerMiddleware";
+
+const app = express();
+const PORT = 3001;
+
+// middleware to log basic request info
+app.use(basicLogger);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+routes(app, checkAuth);
+
+app.get("/", (req, res) =>
+  res.send(`<h1>Your server is running on port ${PORT}</h1>`)
+);
+
+// middleware to log Errors
+app.use(errorHandler);
+
+app.listen(PORT, () => console.log(`Your server is running on port ${PORT}`));
+
+```
+
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/src/middlewares/basicLoggerMiddleware.js:
+
+```js
+const basicLogger = (req, res, next) => {
+  console.log(`Basic Logger: ${req.method} request for '${req.url}'`);
+  next();
+};
+
+export default basicLogger;
+
+```
+
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/src/middlewares/checkAuthMiddleware.js:
+
+```js
+const checkAuth = (req, res, next) => {
+  const isLoggedIn = false; // Replace with real authentication check
+  if (isLoggedIn) {
+    next();
+  } else {
+    res.status(401).send("Unauthorized Access!");
+  }
+};
+
+export default checkAuth;
+
+```
+
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/src/middlewares/errorHandlerMiddleware.js:
+
+```js
+const errorHandler = (err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+};
+
+export default errorHandler;
+
+```
+
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/src/routes/crmRoute.js:
+
+```js
+const routes = (app, checkAuth) => {
+  app
+    .route("/contact")
+    .get(
+      (req, res, next) => {
+        console.log("Request from: " + req.originalUrl);
+        console.log("Request type: " + req.method);
+        next();
+      },
+      (req, res) => {
+        res.send("GET request successful!");
+      }
+    )
+    .post(checkAuth, (req, res) => {
+      res.send("POST request successful!");
+    });
+
+  app
+    .route("/contact/:contactId")
+    .put(checkAuth, (req, res) =>
+      res.send("PUT request successful!" + " ID: " + req.params.contactId)
+    )
+
+    .delete(checkAuth, (req, res) =>
+      res.send("DELETE request successful!" + " ID: " + req.params.contactId)
+    );
+};
+
+export default routes;
+
+```
+
+## Test GET Contact Route
+
+```js
+GET http://localhost:3001/contact
+```
+
+```x
+[nodemon] restarting due to changes...
+[nodemon] starting `babel-node ./index.js`
+Your server is running on port 3001
+
+Basic Logger: GET request for '/contact'
+Request from: /contact
+Request type: GET
+```
+
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/7c973224-2d2e-47fa-9b4b-9e8647c0b0a7">
+
+## Test POST Contact Route (with checkAuth[isLoggedIn] === false )
+
+```js
+POST http://localhost:3001/contact
+```
+
+```js
+Basic Logger: POST request for '/contact'
+```
+
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/ca27c995-5a75-42ca-aeb8-58e2377a49db">
+
+## Test POST Contact Route (with checkAuth[isLoggedIn] === true )
+
+```x
+POST http://localhost:3001/contact
+```
+
+```x
+Basic Logger: POST request for '/contact'
+```
+
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/62671629-9dd3-4196-ba21-f57f66981fd1">
+
+## Test UPDATE Contact Route (with checkAuth[isLoggedIn] === true )
+
+```x
+PUT http://localhost:3001/contact
+```
+
+```x
+Basic Logger: PUT request for '/contact'
+```
+
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/dd37c138-8d33-4d77-8d46-855d48af1710">
+
+<img width="1398" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/ca7c0dd4-b4a9-48cb-8765-82a65dd5d334">
+<img width="1398" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/10d17f95-6767-4cfb-96c7-c3320d53f922">
+<img width="1398" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/6f786507-8808-45c3-ab57-2ab690c1e478">
+<img width="1398" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/9a20f8cd-f345-4aa3-aa84-7f6b859ca27b">
+<img width="1398" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c8e27259-78eb-4ded-9a15-11687ce5a095">
+
+# #END</details>
+
+<details>
+<summary>7. MongoDB Database Setup </summary>
+
+# MongoDB Database Setup
+
+```js
+
+```
+
+```js
+
+```
 
 ```js
 
