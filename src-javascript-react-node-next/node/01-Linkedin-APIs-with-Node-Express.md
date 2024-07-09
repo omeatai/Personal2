@@ -808,9 +808,9 @@ app.listen(PORT, () => console.log(`Your server is running on port ${PORT}`));
 # #END</details>
 
 <details>
-<summary>10. Create GET Contacts Endpoint </summary>
+<summary>10. Create GET Endpoint </summary>
 
-# Create GET Contacts Endpoint
+# Create GET Endpoint
 
 ### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/src/routes/crmRoute.js:
 
@@ -891,9 +891,9 @@ export const getContacts = async (req, res) => {
 # #END</details>
 
 <details>
-<summary>11. Create GET Contact (Single) Endpoint </summary>
+<summary>11. Create GET (Single) Endpoint </summary>
 
-# Create GET Contact (Single) Endpoint
+# Create GET (Single) Endpoint
 
 ### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/src/routes/crmRoute.js:
 
@@ -981,9 +981,9 @@ export const getContactWithId = async (req, res) => {
 # #END</details>
 
 <details>
-<summary>12. Create PUT Contact Endpoint </summary>
+<summary>12. Create PUT Endpoint </summary>
 
-# Create PUT Contact Endpoint
+# Create PUT Endpoint
 
 ```js
 
