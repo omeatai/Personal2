@@ -668,21 +668,149 @@ export const ContactSchema = new Schema({
 
 # Create POST Endpoint
 
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/src/routes/crmRoute.js:
+
 ```js
+import { addNewContact } from "../controllers/crmController";
+
+const routes = (app, checkAuth) => {
+  app
+    .route("/contact")
+    .get(
+      (req, res, next) => {
+        console.log("Request from: " + req.originalUrl);
+        console.log("Request type: " + req.method);
+        next();
+      },
+      (req, res) => {
+        res.send("GET request successful!");
+      }
+    )
+    .post(checkAuth, addNewContact);
+
+  app
+    .route("/contact/:contactId")
+    .put(checkAuth, (req, res) =>
+      res.send("PUT request successful!" + " ID: " + req.params.contactId)
+    )
+
+    .delete(checkAuth, (req, res) =>
+      res.send("DELETE request successful!" + " ID: " + req.params.contactId)
+    );
+};
+
+export default routes;
 
 ```
 
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/src/controllers/crmController.js:
+
 ```js
+import mongoose from "mongoose";
+import { ContactSchema } from "../models/crmModel";
+
+const Contact = mongoose.model("Contact", ContactSchema);
+
+export const addNewContact = async (req, res) => {
+  try {
+    const newContact = new Contact(req.body);
+    const savedContact = await newContact.save();
+    res.json(savedContact);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
 
 ```
 
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/src/models/crmModel.js:
+
 ```js
+import mongoose from "mongoose";
+
+const Schema = mongoose.Schema;
+
+export const ContactSchema = new Schema({
+  firstName: {
+    type: String,
+    required: "Enter a first name",
+  },
+  lastName: {
+    type: String,
+    required: "Enter a last name",
+  },
+  email: {
+    type: String,
+  },
+  company: {
+    type: String,
+  },
+  phone: {
+    type: Number,
+  },
+  created_date: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
 ```
 
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/index.js:
+
 ```js
+import express from "express";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
+
+import routes from "./src/routes/crmRoute";
+import basicLogger from "./src/middlewares/basicLoggerMiddleware";
+import checkAuth from "./src/middlewares/checkAuthMiddleware";
+import errorHandler from "./src/middlewares/errorHandlerMiddleware";
+
+const app = express();
+const PORT = 3001;
+
+// middleware to log basic request info
+app.use(basicLogger);
+
+// mongoose connection
+mongoose.Promise = global.Promise;
+// mongoose.connect("mongodb://localhost:27017/crm", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/CRMdb");
+
+// middleware to parse request body
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+
+routes(app, checkAuth);
+
+app.get("/", (req, res) =>
+  res.send(`<h1>Your server is running on port ${PORT}</h1>`)
+);
+
+// middleware to log Errors
+app.use(errorHandler);
+
+app.listen(PORT, () => console.log(`Your server is running on port ${PORT}`));
 
 ```
+
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/28dba0f0-a3fd-4d54-ae17-e71d20d0a62b">
+<img width="1431" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/d95b34ea-892d-4211-b2c8-101073479646">
+
+<img width="1407" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/2a7747f1-892f-42a6-b4d3-dca8225e2f59">
+<img width="1407" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/7570326c-4985-47b4-aa87-f2858c623c12">
+
+# #END</details>
+
+<details>
+<summary>10. Create GET Endpoint </summary>
+
+# Create GET Endpoint
 
 ```js
 
