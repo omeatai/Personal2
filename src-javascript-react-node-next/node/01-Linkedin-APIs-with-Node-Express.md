@@ -474,7 +474,7 @@ export default routes;
 
 ## Test GET Contact Route
 
-```js
+```x
 GET http://localhost:3001/contact
 ```
 
@@ -492,11 +492,11 @@ Request type: GET
 
 ## Test POST Contact Route (with checkAuth[isLoggedIn] === false )
 
-```js
+```x
 POST http://localhost:3001/contact
 ```
 
-```js
+```x
 Basic Logger: POST request for '/contact'
 ```
 
