@@ -535,7 +535,50 @@ Basic Logger: PUT request for '/contact'
 # #END</details>
 
 <details>
-<summary>7. MongoDB Database Setup </summary>
+<summary>7. Setup Studio3T (MongoDB Studio) </summary>
+
+# Setup Studio3T (MongoDB Studio)
+
+## To Run MongoDB:
+
+```py
+brew services start mongodb-community@7.0
+```
+
+## To stop a mongod running:
+
+```py
+brew services stop mongodb-community@7.0
+```
+
+## To verify that MongoDB is running:
+
+```py
+brew services list
+```
+
+## Connect and Use MongoDB:
+
+```py
+mongosh
+```
+
+## Download and Install Studio3T
+
+## [https://robomongo.org/](https://robomongo.org/)
+
+```js
+localhost:27017
+```
+
+<img width="1366" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/ec8d31c0-8982-450a-96a6-0256792666d6">
+<img width="1322" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/ca9c23a0-78db-40ae-8379-2173034b8da7">
+<img width="1366" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/5d2537cf-0ce3-4abf-ab72-273a73edee58">
+
+# #END</details>
+
+<details>
+<summary>8. MongoDB Database Setup </summary>
 
 # MongoDB Database Setup
 
