@@ -26,10 +26,10 @@ pip install django
 pip install django==5.0
 ```
 
-## Install Other Project Dependencies: djangorestframework, markdown, django-filter, mock, Pillow, mysqlclient, django-mysql
+## Install Other Project Dependencies: djangorestframework, markdown, django-filter, mock, Pillow, mysqlclient, django-mysql, python-decouple
 
 ```x
-pip install djangorestframework markdown django-filter mock pillow mysqlclient django-mysql
+pip install djangorestframework markdown django-filter mock pillow mysqlclient django-mysql python-decouple
 ```
 
 ## Get dependencies
@@ -48,6 +48,7 @@ Markdown==3.6
 mock==5.1.0
 mysqlclient==2.2.4
 pillow==10.4.0
+python-decouple==3.8
 sqlparse==0.5.0
 ```
 
@@ -106,19 +107,19 @@ Quit the server with CONTROL-C.
 # #END</details>
 
 <details>
-<summary>2. Configure Docker for Django </summary>
+<summary>2. Configure Mysql for Django </summary>
 
-# Configure Docker for Django
+# Configure Mysql for Django
 
-## Download and install Docker Desktop
+## Install Xampp for MAC
 
-## [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
+## [https://www.apachefriends.org/download.html](https://www.apachefriends.org/download.html)
 
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/da417af6-4ae0-4c24-9166-bd70c33671ba)
+<img width="782" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/86956fc2-76a0-494c-8737-3fc3129ab6a5">
+<img width="782" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/0af54b4b-e1f9-49b6-b789-8e0d81d716be">
 
-<img width="1443" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/1dcafa97-10bd-4d6d-aeef-5f44fda1519d">
-
-## Create Dockerfile and docker-compose.yaml files
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/51c26f92-ece8-4a1f-a5dd-e2e829226b06)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/86f70001-db48-409c-a4df-7f26d7db9eb8)
 
 ```py
 
