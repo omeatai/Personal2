@@ -1,3 +1,4 @@
+import path from "path";
 import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
@@ -24,6 +25,9 @@ app.use(bodyParser.json());
 
 // app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
+
+// serving static files
+app.use(express.static(path.join(__dirname, "public")));
 
 routes(app, checkAuth);
 
