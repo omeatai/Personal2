@@ -812,6 +812,118 @@ app.listen(PORT, () => console.log(`Your server is running on port ${PORT}`));
 
 # Create GET Endpoint
 
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/src/routes/crmRoute.js:
+
+```js
+import { addNewContact, getContacts } from "../controllers/crmController";
+
+const routes = (app, checkAuth) => {
+  app
+    .route("/contact")
+    .get((req, res, next) => {
+      console.log("Request from: " + req.originalUrl);
+      console.log("Request type: " + req.method);
+      next();
+    }, getContacts)
+
+    .post(checkAuth, addNewContact);
+
+  app
+    .route("/contact/:contactId")
+    .put(checkAuth, (req, res) =>
+      res.send("PUT request successful!" + " ID: " + req.params.contactId)
+    )
+
+    .delete(checkAuth, (req, res) =>
+      res.send("DELETE request successful!" + " ID: " + req.params.contactId)
+    );
+};
+
+export default routes;
+
+```
+
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/src/controllers/crmController.js:
+
+```js
+import mongoose from "mongoose";
+import { ContactSchema } from "../models/crmModel";
+
+const Contact = mongoose.model("Contact", ContactSchema);
+
+export const addNewContact = async (req, res) => {
+  try {
+    const newContact = new Contact(req.body);
+    const savedContact = await newContact.save();
+    res.json(savedContact);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+export const getContacts = async (req, res) => {
+  try {
+    const contact = await Contact.find({});
+    res.json(contact);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+// export const getContact = async (req, res) => {
+//   try {
+//     const contact = await Contact.findById(req.params.contactId);
+//     res.json(contact);
+//   } catch (err) {
+//     res.status(400).json({ error: err.message });
+//   }
+// };
+
+```
+
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/cd7c5057-26ae-4572-8a81-bc2b2af045bd">
+<img width="1407" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c9245b4c-7348-44d4-961a-ec73190622da">
+<img width="1407" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/115ce2ce-f48d-4165-9e36-70865c2ba97b">
+
+# #END</details>
+
+<details>
+<summary>11. Create GET (Single) Endpoint </summary>
+
+# Create GET (Single) Endpoint
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
 ```js
 
 ```
