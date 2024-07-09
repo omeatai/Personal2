@@ -1191,6 +1191,7 @@ export const deleteContact = async (req, res) => {
 
 <img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c7eaf1fb-4c50-425e-b73f-f92d49705eed">
 <img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/ea21780c-db29-42ee-89ad-e2e22aa413fa">
+<img width="1431" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/9e35e7c0-10f2-42f1-97b0-1c18022f8e35">
 
 <img width="1409" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/06e51efd-095a-4d28-8243-ef78edb63c4e">
 <img width="1409" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/dd68fe93-d8c8-464c-b432-d2fa6f313f9c">
@@ -1202,29 +1203,61 @@ export const deleteContact = async (req, res) => {
 
 # Serving Static Files 
 
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/index.js:
+
 ```js
+import path from "path";
+import express from "express";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
+
+import routes from "./src/routes/crmRoute";
+import basicLogger from "./src/middlewares/basicLoggerMiddleware";
+import checkAuth from "./src/middlewares/checkAuthMiddleware";
+import errorHandler from "./src/middlewares/errorHandlerMiddleware";
+
+const app = express();
+const PORT = 3001;
+
+// middleware to log basic request info
+app.use(basicLogger);
+
+// mongoose connection
+mongoose.Promise = global.Promise;
+// mongoose.connect("mongodb://localhost:27017/crm", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/CRMdb");
+
+// middleware to parse request body
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+
+// serving static files
+app.use(express.static(path.join(__dirname, "public")));
+
+routes(app, checkAuth);
+
+app.get("/", (req, res) =>
+  res.send(`<h1>Your server is running on port ${PORT}</h1>`)
+);
+
+// middleware to log Errors
+app.use(errorHandler);
+
+app.listen(PORT, () => console.log(`Your server is running on port ${PORT}`));
 
 ```
 
-```js
+## [http://localhost:3001/football.jpeg](http://localhost:3001/football.jpeg)
 
-```
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/42bb0e09-0eb0-481e-a41c-5f8c7bb57e44)
 
-```js
+## [http://localhost:3001/sky.jpeg](http://localhost:3001/sky.jpeg)
 
-```
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/edf351e4-d5e0-4496-8920-6d0d3aa41adc)
 
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
 
 ```js
 
