@@ -278,17 +278,93 @@ app.listen(PORT, () => console.log(`Your server is running on port ${PORT}`));
 # #END</details>
 
 <details>
-<summary>5. Setup Server Folders </summary>
+<summary>5. Setup Routing Endpoints </summary>
 
-# Setup Server Folders
+# Setup Routing Endpoints
+
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/index.js:
 
 ```js
+import express from "express";
+import routes from "./src/routes/crmRoute";
+
+const app = express();
+const PORT = 3001;
+
+routes(app);
+
+app.get("/", (req, res) =>
+  res.send(`<h1>Your server is running on port ${PORT}</h1>`)
+);
+
+app.listen(PORT, () => console.log(`Your server is running on port ${PORT}`));
 
 ```
 
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/src/routes/crmRoute.js:
+
 ```js
+const routes = (app) => {
+  app
+    .route("/contact")
+    .get((req, res) => {
+      res.send("GET request successful!");
+    })
+    .post((req, res) => {
+      res.send("POST request successful!");
+    });
+
+  app
+    .route("/contact/:contactId")
+    .put((req, res) =>
+      res.send("PUT request successful!" + " ID: " + req.params.contactId)
+    )
+
+    .delete((req, res) =>
+      res.send("DELETE request successful!" + " ID: " + req.params.contactId)
+    );
+};
+
+export default routes;
 
 ```
+
+## Test EndPoints with Postman
+
+```x
+GET http://localhost:3001/contact
+```
+
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/cc149242-a871-41a9-aa00-ae5be44e14a9">
+
+```x
+POST http://localhost:3001/contact
+```
+
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/95a8ebc0-ba1b-460d-bbb4-be61e534cd1e">
+
+```js
+PUT http://localhost:3001/contact/2
+```
+
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/6840a185-ef77-4884-8254-e114fe0846e4">
+
+```js
+DELETE http://localhost:3001/contact/4
+```
+
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/720ecea7-5cda-4248-8f59-d4fb7ba8f408">
+
+<img width="1398" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/a3275a13-bad3-421a-bc12-7850642e8e57">
+
+<img width="1398" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/80944b49-21cf-47b6-8581-ac78417f4a94">
+
+# #END</details>
+
+<details>
+<summary>6. Setup Middleware </summary>
+
+# Setup Middleware
 
 ```js
 
