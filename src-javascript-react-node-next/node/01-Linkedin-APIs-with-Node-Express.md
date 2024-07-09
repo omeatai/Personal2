@@ -985,21 +985,222 @@ export const getContactWithId = async (req, res) => {
 
 # Create PUT Endpoint
 
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/src/routes/crmRoute.js:
+
 ```js
+import {
+  addNewContact,
+  getContacts,
+  getContactWithId,
+  updateContact,
+} from "../controllers/crmController";
+
+const routes = (app, checkAuth) => {
+  app
+    .route("/contact")
+    // get all contacts
+    .get((req, res, next) => {
+      console.log("Request from: " + req.originalUrl);
+      console.log("Request type: " + req.method);
+      next();
+    }, getContacts)
+    // post a new contact
+    .post(checkAuth, addNewContact);
+
+  app
+    .route("/contact/:contactId")
+    // get a specific contact
+    .get(checkAuth, getContactWithId)
+    // update a specific contact
+    .put(checkAuth, updateContact)
+
+    .delete(checkAuth, (req, res) =>
+      res.send("DELETE request successful!" + " ID: " + req.params.contactId)
+    );
+};
+
+export default routes;
 
 ```
 
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/src/controllers/crmController.js:
+
 ```js
+import mongoose from "mongoose";
+import { ContactSchema } from "../models/crmModel";
+
+const Contact = mongoose.model("Contact", ContactSchema);
+
+export const addNewContact = async (req, res) => {
+  try {
+    const newContact = new Contact(req.body);
+    const savedContact = await newContact.save();
+    res.json(savedContact);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+export const getContacts = async (req, res) => {
+  try {
+    const contact = await Contact.find({});
+    res.json(contact);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+export const getContactWithId = async (req, res) => {
+  try {
+    const contact = await Contact.findById(req.params.contactId);
+    res.json(contact);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+export const updateContact = async (req, res) => {
+  try {
+    const updatedContact = await Contact.findByIdAndUpdate(
+      req.params.contactId,
+      req.body,
+      { new: true }
+    );
+    res.json(updatedContact);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
 
 ```
 
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/78cd5b03-4eab-4a54-93a6-c16d4e56b259">
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/10a239ad-4bec-412d-afbe-8d9f182efbfa">
+
+<img width="1407" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/cdd8ef9f-9855-4743-a957-f7160488458a">
+<img width="1407" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/b551e481-6411-483e-b38a-4562d1b701ec">
+
+# #END</details>
+
+<details>
+<summary>13. Create DELETE Endpoint </summary>
+
+# Create DELETE Endpoint
+
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/src/routes/crmRoute.js:
+
 ```js
+import {
+  addNewContact,
+  getContacts,
+  getContactWithId,
+  updateContact,
+  deleteContact,
+} from "../controllers/crmController";
+
+const routes = (app, checkAuth) => {
+  app
+    .route("/contact")
+    // get all contacts
+    .get((req, res, next) => {
+      console.log("Request from: " + req.originalUrl);
+      console.log("Request type: " + req.method);
+      next();
+    }, getContacts)
+    // post a new contact
+    .post(checkAuth, addNewContact);
+
+  app
+    .route("/contact/:contactId")
+    // get a specific contact
+    .get(checkAuth, getContactWithId)
+    // update a specific contact
+    .put(checkAuth, updateContact)
+    // delete a specific contact
+    .delete(checkAuth, deleteContact);
+};
+
+export default routes;
 
 ```
 
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/src/controllers/crmController.js:
+
 ```js
+import mongoose from "mongoose";
+import { ContactSchema } from "../models/crmModel";
+
+const Contact = mongoose.model("Contact", ContactSchema);
+
+export const addNewContact = async (req, res) => {
+  try {
+    const newContact = new Contact(req.body);
+    const savedContact = await newContact.save();
+    res.json(savedContact);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+export const getContacts = async (req, res) => {
+  try {
+    const contact = await Contact.find({});
+    res.json(contact);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+export const getContactWithId = async (req, res) => {
+  try {
+    const contact = await Contact.findById(req.params.contactId);
+    res.json(contact);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+export const updateContact = async (req, res) => {
+  try {
+    const updatedContact = await Contact.findByIdAndUpdate(
+      req.params.contactId,
+      req.body,
+      { new: true }
+    );
+    res.json(updatedContact);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+export const deleteContact = async (req, res) => {
+  try {
+    const deletedContact = await Contact.findByIdAndDelete(
+      req.params.contactId
+    );
+    if (!deletedContact) {
+      return res.status(404).json({ message: "Contact not found" });
+    }
+    res.json({ message: "Contact deleted successfully", deletedContact });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
 
 ```
+
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c7eaf1fb-4c50-425e-b73f-f92d49705eed">
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/ea21780c-db29-42ee-89ad-e2e22aa413fa">
+
+<img width="1409" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/06e51efd-095a-4d28-8243-ef78edb63c4e">
+<img width="1409" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/dd68fe93-d8c8-464c-b432-d2fa6f313f9c">
+
+# #END</details>
+
+<details>
+<summary>14. Serving Static Files </summary>
+
+# Serving Static Files 
 
 ```js
 
