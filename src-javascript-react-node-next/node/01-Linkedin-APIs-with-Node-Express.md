@@ -578,17 +578,95 @@ localhost:27017
 # #END</details>
 
 <details>
-<summary>8. MongoDB Database Setup </summary>
+<summary>8. Setup MongoDB Database and Schema </summary>
 
-# MongoDB Database Setup
+# Setup MongoDB Database and Schema
+
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/index.js:
 
 ```js
+import express from "express";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
+
+import routes from "./src/routes/crmRoute";
+import basicLogger from "./src/middlewares/basicLoggerMiddleware";
+import checkAuth from "./src/middlewares/checkAuthMiddleware";
+import errorHandler from "./src/middlewares/errorHandlerMiddleware";
+
+const app = express();
+const PORT = 3001;
+
+// middleware to log basic request info
+app.use(basicLogger);
+
+// mongoose connection
+mongoose.Promise = global.Promise;
+// mongoose.connect("mongodb://localhost:27017/crm", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/CRMdb", { useNewUrlParser: true });
+
+// middleware to parse request body
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+
+routes(app, checkAuth);
+
+app.get("/", (req, res) =>
+  res.send(`<h1>Your server is running on port ${PORT}</h1>`)
+);
+
+// middleware to log Errors
+app.use(errorHandler);
+
+app.listen(PORT, () => console.log(`Your server is running on port ${PORT}`));
 
 ```
 
+### src-AI-Software/my_projects/08_APIs_with_Node_Express/APP/crm/src/models/crmModel.js:
+
 ```js
+import mongoose from "mongoose";
+
+const Schema = mongoose.Schema;
+
+export const ContactSchema = new Schema({
+  firstName: {
+    type: String,
+    required: "Enter a first name",
+  },
+  lastName: {
+    type: String,
+    required: "Enter a last name",
+  },
+  email: {
+    type: String,
+  },
+  company: {
+    type: String,
+  },
+  phone: {
+    type: Number,
+  },
+  created_date: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
 ```
+
+<img width="1407" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/a135d3e4-4791-45e3-8b96-d4b73e3f02de">
+<img width="1407" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/9db858b5-9ee8-451a-b297-30b8b68776dc">
+
+# #END</details>
+
+<details>
+<summary>9. Create POST Endpoint </summary>
+
+# Create POST Endpoint
 
 ```js
 
