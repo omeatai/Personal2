@@ -406,21 +406,84 @@ def hello(request):
 
 # Create Models
 
+### src-AI-Software/my_projects/07_react_django_practical/user/urls.py:
+
 ```py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.members, name='members'),
+]
 
 ```
 
+### src-AI-Software/my_projects/07_react_django_practical/user/views.py:
+
 ```py
+from django.shortcuts import render
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import Member
+
+
+@api_view(['GET', 'POST'])
+def members(request):
+    if request.method == 'GET':
+        members = Member.objects.all()
+        context = {
+            'members': members
+        }
+        return Response(context)
+
+    elif request.method == 'POST':
+        return Response('This is the POST EndPoint')
 
 ```
 
+### src-AI-Software/my_projects/07_react_django_practical/user/models.py:
+
 ```py
+from django.db import models
+
+
+class Member(models.Model):
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200, unique=True)
+    password = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = 'Members'
+        verbose_name = 'Member'
+
+    def __str__(self):
+        return self.name
 
 ```
 
-```py
+## Run Migrations
 
+```py
+python manage.py makemigrations
+python manage.py migrate
 ```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/5eff4ac2-4b2e-4900-8cdb-d172602e5c9a)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/dfda5768-dd5b-4e5c-a14a-ab69bd82a57e)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/1c00336a-dcd8-4d59-8628-db16d3cee5f9)
+
+<img width="1452" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/1e332e5d-15a8-4373-a580-5c8e770c38c1">
+<img width="1452" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c7f94211-a611-48ac-8a0d-7bf8defe4cf2">
+
+# #END</details>
+
+<details>
+<summary>5. Create Serializers </summary>
+
+# Create Serializers
 
 ```py
 
