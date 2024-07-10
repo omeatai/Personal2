@@ -311,7 +311,7 @@ def hello(request):
 
 <img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/26bc0cd7-3b32-41dd-99a0-d152cfb1e58d">
 <img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/17b999be-5a77-4270-a94d-32110a52e8cd">
-<img width="1408" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/7c8aae14-f9f3-44b3-b08d-b5f1e5834270">
+<img width="1485" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/d4f79bce-ec17-402f-8913-de7cb64f04e6">
 
 # #END</details>
 
@@ -320,7 +320,7 @@ def hello(request):
 
 # Create Models
 
-### src-AI-Software/my_projects/07_react_django_practical/user/models.py:
+### src-AI-Software/my_projects/07_react_django_practical/users_app/models.py:
 
 ```py
 from django.db import models
@@ -343,7 +343,7 @@ class User(models.Model):
 
 ```
 
-### src-AI-Software/my_projects/07_react_django_practical/user/urls.py:
+### src-AI-Software/my_projects/07_react_django_practical/users_app/urls.py:
 
 ```py
 from django.urls import path
@@ -355,21 +355,21 @@ urlpatterns = [
 
 ```
 
-### src-AI-Software/my_projects/07_react_django_practical/user/views.py:
+### src-AI-Software/my_projects/07_react_django_practical/users_app/views.py:
 
 ```py
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Member
+from .models import User
 
 
 @api_view(['GET', 'POST'])
-def members(request):
+def users(request):
     if request.method == 'GET':
-        members = Member.objects.all()
+        users = User.objects.all()
         context = {
-            'members': members
+            'users': users
         }
         return Response(context)
 
@@ -387,7 +387,7 @@ from django.contrib import admin
 from . import models
 
 
-class MemberAdmin(admin.ModelAdmin):
+class UserAdmin(admin.ModelAdmin):
     list_display = ['first_name', 'last_name',
                     'email', 'created_at', 'updated_at']
     search_fields = ['first_name', 'last_name', 'email']
@@ -395,7 +395,7 @@ class MemberAdmin(admin.ModelAdmin):
     list_per_page = 10
 
 
-admin.site.register(models.Member, MemberAdmin)
+admin.site.register(models.User, UserAdmin)
 
 ```
 
