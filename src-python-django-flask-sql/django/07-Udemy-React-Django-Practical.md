@@ -29,7 +29,13 @@ pip install django==5.0
 ## Install Other Project Dependencies: djangorestframework, markdown, django-filter, mock, Pillow, mysqlclient, django-mysql, python-decouple
 
 ```x
-pip install djangorestframework markdown django-filter mock pillow mysqlclient django-mysql python-decouple
+pip install djangorestframework markdown django-filter mock pillow django-mysql python-decouple
+```
+
+```x
+brew install mysql
+xcode-select --install
+pip install mysqlclient
 ```
 
 ## Get dependencies
@@ -76,6 +82,36 @@ deactivate
 django-admin startproject admin_project .
 ```
 
+## Create Django App - users
+
+```x
+python manage.py startapp users_app
+```
+
+### src-AI-Software/my_projects/07_react_django_practical/admin_project/settings.py:
+
+```py
+# Application definition
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # apps
+    'users_app'
+]
+```
+
+## Run Migrations
+
+```x
+python manage.py makemigrations
+python manage.py migrate
+```
+
 ## Start Local Server
 
 ```x
@@ -88,15 +124,10 @@ Watching for file changes with StatReloader
 Performing system checks...
 
 System check identified no issues (0 silenced).
-
-You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
-Run 'python manage.py migrate' to apply them.
-July 08, 2024 - 05:48:12
-Django version 5.0.6, using settings 'admin_project.settings'
+July 10, 2024 - 19:44:10
+Django version 5.0.7, using settings 'admin_project.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
-
-[08/Jul/2024 05:48:15] "GET / HTTP/1.1" 200 10629
 ```
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/e39eef9e-8179-4904-83ba-c12faed70e02)
@@ -293,11 +324,6 @@ sqlparse==0.5.0
 
 ```
 
-## Create Django App - users
-
-```x
-python manage.py startapp user
-```
 
 ## Run Migrations
 
