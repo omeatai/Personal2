@@ -271,12 +271,12 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include('user.urls')),
+    path('api/v1/', include('users_app.urls')),
 ]
 
 ```
 
-### src-AI-Software/my_projects/07_react_django_practical/user/urls.py:
+### src-AI-Software/my_projects/07_react_django_practical/users_app/urls.py:
 
 ```py
 from django.urls import path
@@ -288,7 +288,7 @@ urlpatterns = [
 
 ```
 
-### src-AI-Software/my_projects/07_react_django_practical/user/views.py:
+### src-AI-Software/my_projects/07_react_django_practical/users_app/views.py:
 
 ```py
 from django.shortcuts import render
@@ -319,6 +319,29 @@ def hello(request):
 <summary>4. Create Models </summary>
 
 # Create Models
+
+### src-AI-Software/my_projects/07_react_django_practical/user/models.py:
+
+```py
+from django.db import models
+
+
+class User(models.Model):
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200, unique=True)
+    password = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = 'Users'
+        verbose_name = 'User'
+
+    def __str__(self):
+        return "{} {}".format(self.first_name, self.last_name)
+
+```
 
 ### src-AI-Software/my_projects/07_react_django_practical/user/urls.py:
 
@@ -355,28 +378,7 @@ def members(request):
 
 ```
 
-### src-AI-Software/my_projects/07_react_django_practical/user/models.py:
 
-```py
-from django.db import models
-
-
-class Member(models.Model):
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
-    email = models.EmailField(max_length=200, unique=True)
-    password = models.CharField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name_plural = 'Members'
-        verbose_name = 'Member'
-
-    def __str__(self):
-        return "{} {}".format(self.first_name, self.last_name)
-
-```
 
 ### src-AI-Software/my_projects/07_react_django_practical/user/admin.py:
 
@@ -407,10 +409,6 @@ python manage.py migrate
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/5eff4ac2-4b2e-4900-8cdb-d172602e5c9a)
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/dfda5768-dd5b-4e5c-a14a-ab69bd82a57e)
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/1c00336a-dcd8-4d59-8628-db16d3cee5f9)
-
-<img width="1452" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/1e332e5d-15a8-4373-a580-5c8e770c38c1">
-<img width="1452" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c7f94211-a611-48ac-8a0d-7bf8defe4cf2">
-<img width="1408" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/9b3efde4-52d6-4ad9-9715-28a6a2a8a5b2">
 
 # #END</details>
 
