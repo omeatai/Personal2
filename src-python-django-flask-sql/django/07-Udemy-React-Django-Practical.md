@@ -321,6 +321,7 @@ python manage.py runserver
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/51c26f92-ece8-4a1f-a5dd-e2e829226b06)
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/86f70001-db48-409c-a4df-7f26d7db9eb8)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/d2c6896a-0b27-4a40-91b2-88119a0775d8)
 
 <img width="1452" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/fe94c7d6-9d4b-434b-82d9-b674bc0575d6">
 <img width="1452" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/6a9d93d1-2b36-458b-812c-87e8f8101a1f">
