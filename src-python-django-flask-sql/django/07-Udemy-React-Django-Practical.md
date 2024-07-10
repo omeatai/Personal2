@@ -474,7 +474,7 @@ def register(request):
     if data['password'] != data['password_confirm']:
         raise exceptions.ValidationError('Passwords do not match')
 
-    if Member.objects.filter(email=data['email']).exists():
+    if User.objects.filter(email=data['email']).exists():
         raise exceptions.ValidationError('Email already exists')
 
     serializer = UserSerializer(data=data)
@@ -553,15 +553,18 @@ class UserSerializer(serializers.ModelSerializer):
 
 ```
 
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/a95ce0a8-744f-4d4a-8f61-dcbdb4a79683)
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/779e85ca-4317-4b46-8779-8460b6663229)
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/a1aa15c0-329a-46d6-9eea-8cb763af89fd)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/4a604f5b-e770-4e08-bda2-a406e280e445)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/7014f6b1-321c-4ba4-9fee-560c66c730c6)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/0e3c9020-422e-49cc-894b-783d7c448b62)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/1653963a-6913-4508-ac21-b36e48b6607f)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/70971552-7ce9-41ba-b80c-6902f9dc4b3f)
 
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/7ddce496-b473-4799-8c20-2c7cced3e10e)
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/db8858cd-c26f-45d7-b716-01323eed32e4">
 
-<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/316a6f68-bc56-4500-a74d-37321e055a63">
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/7c0194c1-058d-4935-a824-0fac8bed4922)
 
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/10fa3077-f94f-46e9-a0b7-0a235eed5da2)
+<img width="1485" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/175e99a8-8094-4d0c-a59c-35c188b3572e">
+<img width="1485" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/6d3d2b37-5ce4-4916-8101-722df1bf1085">
 
 # #END</details>
 
