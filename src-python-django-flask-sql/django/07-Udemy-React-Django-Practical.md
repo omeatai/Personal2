@@ -161,6 +161,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # apps
+    'rest_framework',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -323,13 +326,97 @@ python manage.py runserver
 <img width="1452" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/fe94c7d6-9d4b-434b-82d9-b674bc0575d6">
 <img width="1452" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/6a9d93d1-2b36-458b-812c-87e8f8101a1f">
 
+# #END</details>
+
+<details>
+<summary>3. Create Rest API Endpoints with URLs and Views </summary>
+
+# Create Rest API Endpoints with URLs and Views
+
+## src-AI-Software/my_projects/07_react_django_practical/admin_project/urls.py:
+
+```py
+"""
+URL configuration for admin_project project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.0/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/v1/', include('user.urls')),
+]
+
+```
+
+### src-AI-Software/my_projects/07_react_django_practical/user/urls.py:
+
+```py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.hello, name='hello'),
+]
+
+```
+
+### src-AI-Software/my_projects/07_react_django_practical/user/views.py:
+
+```py
+from django.shortcuts import render
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+
+@api_view(['GET'])
+def hello(request):
+    return Response('This is the GET EndPoint')
+    # return render(request, 'index.html')
+
+
+@api_view(['POST'])
+def hello(request):
+    return Response('This is the POST EndPoint')
+
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/c181d371-f711-40a0-9a0e-fc82ec8d9199)
+
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/26bc0cd7-3b32-41dd-99a0-d152cfb1e58d">
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/17b999be-5a77-4270-a94d-32110a52e8cd">
 
 # #END</details>
 
 <details>
-<summary>3. Create Rest API </summary>
+<summary>4. Create Models </summary>
 
-# Create Rest API
+# Create Models
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
 
 ```py
 
@@ -347,11 +434,12 @@ python manage.py runserver
 
 ```
 
-## Make Migrations
+```py
 
-```x
-python manage.py makemigrations
-python manage.py migrate
+```
+
+```py
+
 ```
 
 # #END</details>
