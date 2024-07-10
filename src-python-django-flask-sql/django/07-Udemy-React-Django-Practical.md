@@ -460,7 +460,26 @@ class Member(models.Model):
         verbose_name = 'Member'
 
     def __str__(self):
-        return self.name
+        return "{} {}".format(self.first_name, self.last_name)
+
+```
+
+### src-AI-Software/my_projects/07_react_django_practical/user/admin.py:
+
+```py
+from django.contrib import admin
+from . import models
+
+
+class MemberAdmin(admin.ModelAdmin):
+    list_display = ['first_name', 'last_name',
+                    'email', 'created_at', 'updated_at']
+    search_fields = ['first_name', 'last_name', 'email']
+    list_filter = ['created_at', 'updated_at']
+    list_per_page = 10
+
+
+admin.site.register(models.Member, MemberAdmin)
 
 ```
 
@@ -477,13 +496,18 @@ python manage.py migrate
 
 <img width="1452" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/1e332e5d-15a8-4373-a580-5c8e770c38c1">
 <img width="1452" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/c7f94211-a611-48ac-8a0d-7bf8defe4cf2">
+<img width="1408" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/9b3efde4-52d6-4ad9-9715-28a6a2a8a5b2">
 
 # #END</details>
 
 <details>
-<summary>5. Create Serializers </summary>
+<summary>5. Create Serializers for Register Endpoint </summary>
 
-# Create Serializers
+# Create Serializers for Register Endpoint
+
+```py
+
+```
 
 ```py
 
@@ -492,6 +516,17 @@ python manage.py migrate
 ```py
 
 ```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/a95ce0a8-744f-4d4a-8f61-dcbdb4a79683)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/779e85ca-4317-4b46-8779-8460b6663229)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/a1aa15c0-329a-46d6-9eea-8cb763af89fd)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/10fa3077-f94f-46e9-a0b7-0a235eed5da2)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/7ddce496-b473-4799-8c20-2c7cced3e10e)
+
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/316a6f68-bc56-4500-a74d-37321e055a63">
+
+
+
 
 ```py
 
