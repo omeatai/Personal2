@@ -382,15 +382,14 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def hello(request):
-    return Response('This is the GET EndPoint')
-    # return render(request, 'index.html')
+    if request.method == 'GET':
+        return Response('This is the GET EndPoint')
+        # return render(request, 'index.html')
+    elif request.method == 'POST':
+        return Response('This is the POST EndPoint')
 
-
-@api_view(['POST'])
-def hello(request):
-    return Response('This is the POST EndPoint')
 
 ```
 
@@ -398,6 +397,7 @@ def hello(request):
 
 <img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/26bc0cd7-3b32-41dd-99a0-d152cfb1e58d">
 <img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/17b999be-5a77-4270-a94d-32110a52e8cd">
+<img width="1408" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/7c8aae14-f9f3-44b3-b08d-b5f1e5834270">
 
 # #END</details>
 
