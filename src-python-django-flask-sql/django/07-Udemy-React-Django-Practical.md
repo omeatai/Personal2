@@ -505,28 +505,191 @@ python manage.py migrate
 
 # Create Serializers for Register Endpoint
 
+### src-AI-Software/my_projects/07_react_django_practical/user/models.py:
+
 ```py
+from django.db import models
+
+
+class Member(models.Model):
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200, unique=True)
+    password = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = 'Members'
+        verbose_name = 'Member'
+
+    def __str__(self):
+        return "{} {}".format(self.first_name, self.last_name)
 
 ```
 
+### src-AI-Software/my_projects/07_react_django_practical/user/urls.py:
+
 ```py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.members, name='members'),
+    path('register', views.register, name='register'),
+]
 
 ```
 
+### src-AI-Software/my_projects/07_react_django_practical/user/views.py:
+
 ```py
+from django.shortcuts import render
+from rest_framework import exceptions
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import Member
+from .serializers import MemberSerializer
+
+
+@api_view(['POST'])
+def register(request):
+    data = request.data
+    if data['password'] != data['password_confirm']:
+        raise exceptions.ValidationError('Passwords do not match')
+
+    if Member.objects.filter(email=data['email']).exists():
+        raise exceptions.ValidationError('Email already exists')
+
+    serializer = MemberSerializer(data=data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response(serializer.data)
+
+    # member = Member.objects.create(
+    #     first_name=data['first_name'],
+    #     last_name=data['last_name'],
+    #     email=data['email'],
+    #     password=data['password']
+    # )
+    # return Response('Member was created successfully')
+
+
+@api_view(['GET'])
+def members(request):
+    if request.method == 'GET':
+        members = Member.objects.all()
+        serializer = MemberSerializer(members, many=True)
+        context = {
+            'members': serializer.data
+        }
+        return Response(context)
+
+```
+
+### src-AI-Software/my_projects/07_react_django_practical/user/serializers.py:
+
+```py
+from rest_framework import serializers
+from .models import Member
+
+
+class MemberSerializer(serializers.ModelSerializer):
+
+    password_confirm = serializers.CharField(
+        style={'input_type': 'password'}, write_only=True)
+
+    class Meta:
+        model = Member
+        fields = ['id', 'first_name', 'last_name',
+                  'email', 'password', 'password_confirm']  # '__all__'
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        password_confirm = validated_data.pop('password_confirm')
+
+        if password != password_confirm:
+            raise serializers.ValidationError("Passwords do not match")
+
+        member = Member.objects.create(**validated_data)
+        # member.set_password(password) # Need to hash Password
+        member.save()
+        return member
+
+    def update(self, instance, validated_data):
+        password = validated_data.pop('password', None)
+        password_confirm = validated_data.pop('password_confirm', None)
+
+        if password and password_confirm and password != password_confirm:
+            raise serializers.ValidationError("Passwords do not match")
+
+        for key, value in validated_data.items():
+            setattr(instance, key, value)
+
+        if password:
+            instance.set_password(password)
+
+        instance.save()
+        return instance
 
 ```
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/a95ce0a8-744f-4d4a-8f61-dcbdb4a79683)
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/779e85ca-4317-4b46-8779-8460b6663229)
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/a1aa15c0-329a-46d6-9eea-8cb763af89fd)
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/10fa3077-f94f-46e9-a0b7-0a235eed5da2)
+
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/7ddce496-b473-4799-8c20-2c7cced3e10e)
 
 <img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/316a6f68-bc56-4500-a74d-37321e055a63">
 
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/10fa3077-f94f-46e9-a0b7-0a235eed5da2)
+
+# #END</details>
+
+<details>
+<summary>6. Hash Passwords with Abstract Class </summary>
+
+# Hash Passwords with Abstract Class
 
 
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
 
 ```py
 
