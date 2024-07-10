@@ -380,7 +380,7 @@ def users(request):
 
 
 
-### src-AI-Software/my_projects/07_react_django_practical/user/admin.py:
+### src-AI-Software/my_projects/07_react_django_practical/users_app/admin.py:
 
 ```py
 from django.contrib import admin
@@ -406,9 +406,13 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/5eff4ac2-4b2e-4900-8cdb-d172602e5c9a)
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/dfda5768-dd5b-4e5c-a14a-ab69bd82a57e)
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/1c00336a-dcd8-4d59-8628-db16d3cee5f9)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/713b9025-fcac-4a15-b42b-aaee5ac8d2a5)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/be34981e-27cd-4677-8785-ba57532c15b6)
+
+<img width="1485" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/1ff2c827-8493-4374-bde8-baddba5a3e05">
+<img width="1485" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/1bd1b203-4da1-43a8-88b4-56aa4b9e759b">
+<img width="1485" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/7843894f-ea6b-4362-b920-fdf49010bc92">
+
 
 # #END</details>
 
@@ -417,13 +421,13 @@ python manage.py migrate
 
 # Create Serializers for Register Endpoint
 
-### src-AI-Software/my_projects/07_react_django_practical/user/models.py:
+### src-AI-Software/my_projects/07_react_django_practical/users_app/models.py:
 
 ```py
 from django.db import models
 
 
-class Member(models.Model):
+class User(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     email = models.EmailField(max_length=200, unique=True)
@@ -432,36 +436,36 @@ class Member(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name_plural = 'Members'
-        verbose_name = 'Member'
+        verbose_name_plural = 'Users'
+        verbose_name = 'User'
 
     def __str__(self):
         return "{} {}".format(self.first_name, self.last_name)
-
 ```
 
-### src-AI-Software/my_projects/07_react_django_practical/user/urls.py:
+### src-AI-Software/my_projects/07_react_django_practical/users_app/urls.py:
 
 ```py
 from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.members, name='members'),
+    path('', views.users, name='users'),
     path('register', views.register, name='register'),
 ]
 
 ```
 
-### src-AI-Software/my_projects/07_react_django_practical/user/views.py:
+### src-AI-Software/my_projects/07_react_django_practical/users_app/views.py:
 
 ```py
 from django.shortcuts import render
 from rest_framework import exceptions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Member
-from .serializers import MemberSerializer
+
+from .serializers import UserSerializer
+from .models import User
 
 
 @api_view(['POST'])
@@ -473,7 +477,7 @@ def register(request):
     if Member.objects.filter(email=data['email']).exists():
         raise exceptions.ValidationError('Email already exists')
 
-    serializer = MemberSerializer(data=data)
+    serializer = UserSerializer(data=data)
     serializer.is_valid(raise_exception=True)
     serializer.save()
     return Response(serializer.data)
@@ -488,31 +492,31 @@ def register(request):
 
 
 @api_view(['GET'])
-def members(request):
+def users(request):
     if request.method == 'GET':
-        members = Member.objects.all()
-        serializer = MemberSerializer(members, many=True)
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
         context = {
-            'members': serializer.data
+            'users': serializer.data
         }
         return Response(context)
 
 ```
 
-### src-AI-Software/my_projects/07_react_django_practical/user/serializers.py:
+### src-AI-Software/my_projects/07_react_django_practical/users_app/serializers.py:
 
 ```py
 from rest_framework import serializers
-from .models import Member
+from .models import User
 
 
-class MemberSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
 
     password_confirm = serializers.CharField(
         style={'input_type': 'password'}, write_only=True)
 
     class Meta:
-        model = Member
+        model = User
         fields = ['id', 'first_name', 'last_name',
                   'email', 'password', 'password_confirm']  # '__all__'
         extra_kwargs = {
@@ -526,10 +530,10 @@ class MemberSerializer(serializers.ModelSerializer):
         if password != password_confirm:
             raise serializers.ValidationError("Passwords do not match")
 
-        member = Member.objects.create(**validated_data)
-        # member.set_password(password) # Need to hash Password
-        member.save()
-        return member
+        user = User.objects.create(**validated_data)
+        # user.set_password(password) # Need to hash Password
+        user.save()
+        return user
 
     def update(self, instance, validated_data):
         password = validated_data.pop('password', None)
