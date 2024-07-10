@@ -172,7 +172,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # apps
     'rest_framework',
-    'user',
+    'users_app'
 ]
 
 # Database
