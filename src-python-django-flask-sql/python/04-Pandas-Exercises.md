@@ -287,21 +287,52 @@ df.head(10)
 
 # Solution: The summary statistics of numerical and categorical features
 
-```py
-
-```
+## Display the Summary Statistics for Non Class variables
 
 ```py
-
+df.describe()
 ```
+
+![image](https://github.com/user-attachments/assets/81b6bf6a-b6d9-4160-a9ce-9b82a7f3a5d7)
+
+## Display the Summary Statistics for Class Variables
 
 ```py
-
+df.describe(include='object')
 ```
+
+![image](https://github.com/user-attachments/assets/e9de6e07-e5c5-4f0a-a4cb-b7b8facb5517)
+
+## Display the Frequencies for Class Variables
 
 ```py
-
+df['Origin'].value_counts()
 ```
+
+![image](https://github.com/user-attachments/assets/3dadc060-0178-4004-80ff-57d9559df6f8)
+
+# Visualize distribution of frequencies for Class Variables
+
+```py
+import matplotlib
+
+df['Origin'].value_counts().plot(kind="bar")
+df['Origin'].value_counts().plot(kind="pie")
+df['Origin'].value_counts().plot(kind="line")
+df['Origin'].value_counts().plot(kind="area")
+```
+
+![image](https://github.com/user-attachments/assets/b8e29d1d-15a9-4125-bb3f-ff08840d571b)
+![image](https://github.com/user-attachments/assets/27ea5313-1a7d-4228-99c8-59790f85ab53)
+![image](https://github.com/user-attachments/assets/9e4d8b4b-d8d7-419d-9301-7804013c5efd)
+![image](https://github.com/user-attachments/assets/7777db7c-82c8-4aa9-aae2-7f4b58b9c46f)
+
+# #END</details>
+
+<details>
+<summary>5. Task: Add new columns to a DataFrame </summary>
+
+# Task: Add new columns to a DataFrame
 
 ```py
 
