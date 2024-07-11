@@ -1024,37 +1024,477 @@ class JWTAuth(BaseAuthentication):
 # #END</details>
 
 <details>
-<summary>10. Logout User </summary>
+<summary>10. Create Logout Endpoint </summary>
 
-# Logout user
+# Create Logout Endpoint
+
+### src-AI-Software/my_projects/07_react_django_practical/users_app/urls.py:
 
 ```py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.users, name='users'),
+    path('register', views.register, name='register'),
+    path('login', views.login, name='login'),
+    path('auth', views.AuthUser.as_view(), name='auth'),
+    path('logout', views.logout, name='logout'),
+]
 
 ```
 
+### src-AI-Software/my_projects/07_react_django_practical/users_app/views.py:
+
 ```py
+# from django.shortcuts import render
+from rest_framework import exceptions
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+# import jwt
+
+from .serializers import UserSerializer
+from .models import User
+from .auth import generate_access_token, JWTAuth
+
+
+@api_view(['POST'])
+def register(request):
+    data = request.data
+    if data['password'] != data['password_confirm']:
+        raise exceptions.ValidationError('Passwords do not match')
+
+    if User.objects.filter(email=data['email']).exists():
+        raise exceptions.ValidationError('Email already exists')
+
+    serializer = UserSerializer(data=data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def login(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    user = User.objects.filter(email=email).first()
+    if user is None:
+        raise exceptions.AuthenticationFailed('User not found')
+    if not user.check_password(password):
+        raise exceptions.AuthenticationFailed('Incorrect password')
+
+    token = generate_access_token(user)
+    # set token to http-only cookie
+    response = Response()
+    response.set_cookie(key='jwt', value=token, httponly=True)
+    response.data = {
+        'jwt': token
+    }
+    return response
+
+
+@api_view(['POST'])
+def logout(request):
+    response = Response()
+    response.delete_cookie('jwt')
+    response.data = {
+        'message': 'success'
+    }
+    return response
+
+
+class AuthUser(APIView):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response({'data': serializer.data})
+
+        # token = request.COOKIES.get('jwt')
+        # if not token:
+        #     raise exceptions.AuthenticationFailed('Unauthenticated')
+
+        # try:
+        #     payload = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
+        # except jwt.ExpiredSignatureError:
+        #     raise exceptions.AuthenticationFailed('Unauthenticated')
+
+        # user = User.objects.filter(id=payload['id']).first()
+        # serializer = UserSerializer(user)
+        # return Response(serializer.data)
+
+
+@api_view(['GET'])
+def users(request):
+    if request.method == 'GET':
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        context = {
+            'users': serializer.data
+        }
+        return Response(context)
 
 ```
 
+<img width="1497" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/0bfdd52a-c940-4dfd-ad9a-0efcf2e128cb">
+<img width="1497" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/5a209006-76c1-44c0-b065-2b7c8594ba55">
+<img width="1497" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/973ba258-40ee-4423-bdc4-82cb55e4a177">
+<img width="1497" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/096f7201-d2dd-4cc4-9975-cdb5082bf934">
+
+# #END</details>
+
+<details>
+<summary>11. Create Role and Permission Models </summary>
+
+# Create Role and Permission Models
+
+### src-AI-Software/my_projects/07_react_django_practical/users_app/models.py:
+
 ```py
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+
+class Permission(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    code = models.CharField(max_length=200, null=True, blank=True)
+
+    class Meta:
+        verbose_name_plural = 'Permissions'
+        verbose_name = 'Permission'
+
+    def __str__(self):
+        return self.name
+
+
+class Role(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    code = models.CharField(max_length=200, null=True, blank=True)
+    permissions = models.ManyToManyField(Permission)
+
+    class Meta:
+        verbose_name_plural = 'Roles'
+        verbose_name = 'Role'
+
+    def __str__(self):
+        return self.name
+
+
+class User(AbstractUser):
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200, unique=True)
+    password = models.CharField(max_length=200)
+    role = models.ForeignKey(
+        Role, on_delete=models.SET_NULL, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    username = None
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
+
+    class Meta:
+        verbose_name_plural = 'Users'
+        verbose_name = 'User'
+
+    def __str__(self):
+        return "{} {}".format(self.first_name, self.last_name)
 
 ```
 
+## Run Migrations
+
 ```py
+python manage.py makemigrations
+python manage.py migrate
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/f89327d9-113f-46ab-a904-e9e06fb536d3)
+
+<img width="1421" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/b3bdd63c-48af-431d-b8c7-2d9fcdf676f8">
+
+# #END</details>
+
+<details>
+<summary>12. Load Data into Permission, Role and User Models using Fixtures </summary>
+
+# Load Data into Permission, Role and User Models using Fixtures
+
+### src-AI-Software/my_projects/07_react_django_practical/users_app/models.py:
+
+```py
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+
+class Permission(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    code = models.CharField(max_length=200, null=True, blank=True)
+
+    class Meta:
+        verbose_name_plural = 'Permissions'
+        verbose_name = 'Permission'
+
+    def __str__(self):
+        return self.name
+
+
+class Role(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    code = models.CharField(max_length=200, null=True, blank=True)
+    permissions = models.ManyToManyField(Permission)
+
+    class Meta:
+        verbose_name_plural = 'Roles'
+        verbose_name = 'Role'
+
+    def __str__(self):
+        return self.name
+
+
+class User(AbstractUser):
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200, unique=True)
+    password = models.CharField(max_length=200)
+    role = models.ForeignKey(
+        Role, on_delete=models.SET_NULL, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+    username = None
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
+
+    class Meta:
+        verbose_name_plural = 'Users'
+        verbose_name = 'User'
+
+    def __str__(self):
+        return "{} {}".format(self.first_name, self.last_name)
 
 ```
 
-```py
-
-```
+### src-AI-Software/my_projects/07_react_django_practical/fixtures/permissions.json:
 
 ```py
-
+[
+    {
+        "model": "users_app.permission",
+        "pk": 1,
+        "fields": {
+            "name": "view_users_apps"
+        }
+    },
+    {
+        "model": "users_app.permission",
+        "pk": 2,
+        "fields": {
+            "name": "edit_users_apps"
+        }
+    },
+    {
+        "model": "users_app.permission",
+        "pk": 3,
+        "fields": {
+            "name": "view_roles"
+        }
+    },
+    {
+        "model": "users_app.permission",
+        "pk": 4,
+        "fields": {
+            "name": "edit_roles"
+        }
+    },
+    {
+        "model": "users_app.permission",
+        "pk": 5,
+        "fields": {
+            "name": "view_products"
+        }
+    },
+    {
+        "model": "users_app.permission",
+        "pk": 6,
+        "fields": {
+            "name": "edit_products"
+        }
+    },
+    {
+        "model": "users_app.permission",
+        "pk": 7,
+        "fields": {
+            "name": "view_orders"
+        }
+    },
+    {
+        "model": "users_app.permission",
+        "pk": 8,
+        "fields": {
+            "name": "edit_orders"
+        }
+    }
+]
 ```
+
+### src-AI-Software/my_projects/07_react_django_practical/fixtures/roles.json:
 
 ```py
-
+[
+    {
+        "model": "users_app.role",
+        "pk": 1,
+        "fields": {
+            "name": "Admin",
+            "permissions": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+            ]
+        }
+    },
+    {
+        "model": "users_app.role",
+        "pk": 2,
+        "fields": {
+            "name": "Editor",
+            "permissions": [
+                1,
+                2,
+                3,
+                5,
+                6,
+                7,
+                8
+            ]
+        }
+    },
+    {
+        "model": "users_app.role",
+        "pk": 3,
+        "fields": {
+            "name": "Viewer",
+            "permissions": [
+                1,
+                3,
+                5,
+                7
+            ]
+        }
+    }
+]
 ```
+
+### src-AI-Software/my_projects/07_react_django_practical/fixtures/users.json:
+
+```py
+[
+    {
+        "model": "users_app.user",
+        "pk": 2,
+        "fields": {
+            "last_login": null,
+            "is_superuser": true,
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2020-11-10T11:48:08.084Z",
+            "first_name": "Admin",
+            "last_name": "Admin",
+            "email": "admin@admin.com",
+            "password": "pbkdf2_sha256$720000$0iMHAjhkaTvdH975c3yplb$m0Ul71PcDmCZSehzGlCwTXvRlIT5Rn/25NlNxmZVKiI=",
+            "role": 1,
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "users_app.user",
+        "pk": 3,
+        "fields": {
+            "last_login": null,
+            "is_superuser": true,
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2020-11-10T11:48:08.084Z",
+            "first_name": "Editor",
+            "last_name": "Editor",
+            "email": "editor@editor.com",
+            "password": "pbkdf2_sha256$720000$0iMHAjhkaTvdH975c3yplb$m0Ul71PcDmCZSehzGlCwTXvRlIT5Rn/25NlNxmZVKiI=",
+            "role": 2,
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "users_app.user",
+        "pk": 4,
+        "fields": {
+            "last_login": null,
+            "is_superuser": true,
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2020-11-10T11:48:08.084Z",
+            "first_name": "Viewer",
+            "last_name": "Viewer",
+            "email": "viewer@viewer.com",
+            "password": "pbkdf2_sha256$720000$0iMHAjhkaTvdH975c3yplb$m0Ul71PcDmCZSehzGlCwTXvRlIT5Rn/25NlNxmZVKiI=",
+            "role": 3,
+            "groups": [],
+            "user_permissions": []
+        }
+    }
+]
+```
+
+## Run LoadData Permissions.json to Model
+
+```py
+python manage.py loaddata fixtures/permissions.json
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/82962020-0835-41b2-883c-3389ecffa499)
+
+<img width="1465" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/5593de39-ab72-4d22-aa39-5d3de2c5fb35">
+
+## Run LoadData roles.json to Model
+
+```py
+python manage.py loaddata fixtures/roles.json
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/9568c8e9-7d67-4c65-807a-32c7edd0ee6a)
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/83fad26b-ff44-49c5-9c16-94de3ebe1f40)
+
+<img width="1465" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/db982029-03dd-4f7f-aa91-443127232ff4">
+
+## Run LoadData users.json to Model
+
+```py
+python manage.py loaddata fixtures/users.json
+```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/92f9b199-2f70-467e-ad97-9bc08f529d8e)
+
+<img width="1465" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/5ff42ac8-6e73-4bf8-ab30-bffb3078a087">
+
+# #END</details>
+
+<details>
+<summary>13. Setup View and Serializer for Permission Model </summary>
+
+# Setup View and Serializer for Permission Model
+
 
 ```py
 
