@@ -63,7 +63,7 @@ pip install -r requirements.txt
 # #END</details>
 
 <details>
-<summary>2A. Task: Read Data from CSV and Excel files </summary>
+<summary>2. Task: Read Data from CSV and Excel files </summary>
 
 # Task: Read Data from CSV and Excel files
 
@@ -82,6 +82,151 @@ import pandas as pd
 <summary>2B. Solution: Read Data from CSV and Excel files </summary>
 
 # Task: Read Data from CSV and Excel files
+
+## Solution 1: Using Python
+
+```py
+with open("data/auto_mpg.csv", "r") as f:
+    lines = f.readlines()
+    print('MPG | Cylinders | Displacement | HorsePower | Weight | Acceleration | Model Year | Origin')
+    for line in lines[1:11]:
+        # line = line.strip().replace(',',' | ')
+        line = line.strip().split(",")
+        line = " | ".join(line)
+        print(line)
+```
+
+```x
+MPG | Cylinders | Displacement | HorsePower | Weight | Acceleration | Model Year | Origin
+18.0 | 8 | 307.0 | 130.0 | 3504.0 | 12.0 | 70 | India
+15.0 | 8 | 350.0 | 165.0 | 3693.0 | 11.5 | 70 | India
+18.0 | 8 | 318.0 | 150.0 | 3436.0 | 11.0 | 70 | India
+16.0 | 8 | 304.0 | 150.0 | 3433.0 | 12.0 | 70 | India
+17.0 | 8 | 302.0 | 140.0 | 3449.0 | 10.5 | 70 | India
+15.0 | 8 | 429.0 | 198.0 | 4341.0 | 10.0 | 70 | India
+14.0 | 8 | 454.0 | 220.0 | 4354.0 | 9.0 | 70 | India
+14.0 | 8 | 440.0 | 215.0 | 4312.0 | 8.5 | 70 | India
+14.0 | 8 | 455.0 | 225.0 | 4425.0 | 10.0 | 70 | India
+15.0 | 8 | 390.0 | 190.0 | 3850.0 | 8.5 | 70 | India
+```
+
+![image](https://github.com/user-attachments/assets/4b7671e3-6758-44c3-a8d1-9e779b2dcda0)
+
+## Solution 2: Using Pandas Basic
+
+```py
+import pandas as pd
+
+# Read the CSV file into a pandas DataFrame
+df = pd.read_csv("data/auto_mpg.csv")
+df.columns = ['MPG','Cylinders','Displacement','HorsePower','Weight','Acceleration','Model Year','Origin']
+df.head(10)
+
+# print(pd.options.display.max_rows)
+# To Print the first 10 rows (excluding the header row)
+# print(df.head(10).to_string(header=False, index=False))
+```
+
+![image](https://github.com/user-attachments/assets/1447e823-26c9-4b0b-96a3-6ca741b82f9f)
+
+
+## Solution 3: Using Pandas Advanced
+
+```py
+import pandas as pd
+
+df = pd.read_csv("./data/auto_mpg.csv", header=0, names=['MPG','Cylinders','Displacement','HorsePower','Weight','Acceleration','Model Year','Origin'])
+df.head(10)
+```
+
+![image](https://github.com/user-attachments/assets/3ea83ea8-67df-4ade-b526-da8d92acae2c)
+
+# #END</details>
+
+<details>
+<summary>3. Task: Check DataFrame information and identify types of columns </summary>
+
+# Task: Check DataFrame information and identify types of columns
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
 
 ```py
 
