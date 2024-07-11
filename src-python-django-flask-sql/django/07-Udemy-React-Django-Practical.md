@@ -703,6 +703,192 @@ admin.site.register(models.User, UserAdmin)
 
 # Create Login Endpoint
 
+### src-AI-Software/my_projects/07_react_django_practical/users_app/urls.py:
+
+```py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.users, name='users'),
+    path('register', views.register, name='register'),
+    path('login', views.login, name='login'),
+]
+
+```
+
+### src-AI-Software/my_projects/07_react_django_practical/users_app/views.py:
+
+```py
+from django.shortcuts import render
+from rest_framework import exceptions
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from .serializers import UserSerializer
+from .models import User
+
+
+@api_view(['POST'])
+def register(request):
+    data = request.data
+    if data['password'] != data['password_confirm']:
+        raise exceptions.ValidationError('Passwords do not match')
+
+    if User.objects.filter(email=data['email']).exists():
+        raise exceptions.ValidationError('Email already exists')
+
+    serializer = UserSerializer(data=data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def login(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    user = User.objects.filter(email=email).first()
+    if user is None:
+        raise exceptions.AuthenticationFailed('User not found')
+    if not user.check_password(password):
+        raise exceptions.AuthenticationFailed('Incorrect password')
+    serializer = UserSerializer(user)
+    return Response({'token': 'success', 'user': serializer.data})
+
+
+@api_view(['GET'])
+def users(request):
+    if request.method == 'GET':
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        context = {
+            'users': serializer.data
+        }
+        return Response(context)
+
+```
+
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/dae80357-866a-4667-92af-21bc4fc057ad">
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/e0e30590-31e9-4296-b291-1a90137df030">
+<img width="1400" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/593aaee9-48c6-42ed-ba23-af1db8859945">
+
+# #END</details>
+
+<details>
+<summary>8. Generate JWT Token </summary>
+
+# Generate JWT Token
+
+## Install JWT Package
+
+```py
+pip install PyJWT
+```
+
+### src-AI-Software/my_projects/07_react_django_practical/users_app/urls.py:
+
+```py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.users, name='users'),
+    path('register', views.register, name='register'),
+    path('login', views.login, name='login'),
+]
+
+```
+
+### src-AI-Software/my_projects/07_react_django_practical/users_app/views.py:
+
+```py
+from django.shortcuts import render
+from rest_framework import exceptions
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from .serializers import UserSerializer
+from .models import User
+from .auth import generate_access_token
+
+
+@api_view(['POST'])
+def register(request):
+    data = request.data
+    if data['password'] != data['password_confirm']:
+        raise exceptions.ValidationError('Passwords do not match')
+
+    if User.objects.filter(email=data['email']).exists():
+        raise exceptions.ValidationError('Email already exists')
+
+    serializer = UserSerializer(data=data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def login(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    user = User.objects.filter(email=email).first()
+    if user is None:
+        raise exceptions.AuthenticationFailed('User not found')
+    if not user.check_password(password):
+        raise exceptions.AuthenticationFailed('Incorrect password')
+
+    token = generate_access_token(user)
+    # set token to http-only cookie
+    response = Response()
+    response.set_cookie(key='jwt', value=token, httponly=True)
+    response.data = {
+        'jwt': token
+    }
+    return response
+
+
+@api_view(['GET'])
+def users(request):
+    if request.method == 'GET':
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        context = {
+            'users': serializer.data
+        }
+        return Response(context)
+
+```
+
+<img width="1491" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/59473f13-d1cd-4ff6-870f-ec2312465852">
+<img width="1491" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/40bdeb5e-87ed-474a-9d1c-9de8d62ddf8f">
+<img width="1421" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/9a867f8a-53b2-4c74-9946-10319e35c862">
+
+# #END</details>
+
+<details>
+<summary>9. Verify UserAuth - Getting Authenticated User </summary>
+
+# Verify UserAuth - Getting Authenticated User
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
 ```py
 
 ```
