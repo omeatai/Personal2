@@ -41,10 +41,11 @@ jupyter notebook
 pip freeze
 ```
 
-# Install Pandas
+# Install Pandas and matplotlib
 
 ```x
 pip install pandas
+pip install matplotlib
 ```
 
 # Uninstall all currently installed packages
@@ -264,7 +265,6 @@ memory usage: 25.0+ KB
 
 # Task: The summary statistics of numerical and categorical features
 
-![image](https://github.com/user-attachments/assets/71632380-b090-4218-9f75-d989d6e6dc08)
 ![image](https://github.com/user-attachments/assets/71f00dd8-1a88-4d72-bc5c-171eed386c61)
 
 ```py
@@ -277,6 +277,15 @@ df = pd.read_csv("./data/auto_mpg.csv",
 
 df.head(10)
 ```
+
+![image](https://github.com/user-attachments/assets/71632380-b090-4218-9f75-d989d6e6dc08)
+
+# #END</details>
+
+<details>
+<summary>4B. Solution: The summary statistics of numerical and categorical features </summary>
+
+# Solution: The summary statistics of numerical and categorical features
 
 ```py
 
