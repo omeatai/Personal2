@@ -35,6 +35,18 @@ pip install notebook
 jupyter notebook
 ```
 
+# Check Installed Packages
+
+```x
+pip freeze
+```
+
+# Install Pandas
+
+```x
+pip install pandas
+```
+
 # Uninstall all currently installed packages
 
 ```x
