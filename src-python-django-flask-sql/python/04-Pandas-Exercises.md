@@ -334,6 +334,11 @@ df['Origin'].value_counts().plot(kind="area")
 
 # Task: Add new columns to a DataFrame
 
+![image](https://github.com/user-attachments/assets/2580716c-66f7-41f8-9438-396d2ded3dbd)
+![image](https://github.com/user-attachments/assets/7c9f3192-e3b0-4e84-8aed-6c60a55343ac)
+![image](https://github.com/user-attachments/assets/da67c905-ec06-4d81-8a2c-8a42a85438ab)
+
+
 ```py
 
 ```
