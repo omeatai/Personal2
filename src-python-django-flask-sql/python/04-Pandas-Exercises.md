@@ -260,7 +260,7 @@ memory usage: 25.0+ KB
 # #END</details>
 
 <details>
-<summary>4.Task: The summary statistics of numerical and categorical features </summary>
+<summary>4. Task: The summary statistics of numerical and categorical features </summary>
 
 # Task: The summary statistics of numerical and categorical features
 
@@ -268,7 +268,14 @@ memory usage: 25.0+ KB
 ![image](https://github.com/user-attachments/assets/71f00dd8-1a88-4d72-bc5c-171eed386c61)
 
 ```py
+import pandas as pd
 
+df = pd.read_csv("./data/auto_mpg.csv",
+                 header=0,
+                 names = ['MPG', 'Cylinders', 'Displacement', 'Horsepower','Weight',\
+                          'Acceleration', 'Model Year', 'Origin'])
+
+df.head(10)
 ```
 
 ```py
