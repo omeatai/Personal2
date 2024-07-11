@@ -8,7 +8,7 @@
 
 ### [03-LinkedIn - Pandas Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src-python-django-flask-sql/python/03-Pandas-Essential-Training.md)
 
-### [04-LinkedIn - Pandas Exercises](https://github.com/omeatai/src-AI-Software/blob/main/src-python-django-flask-sql/python/03-Pandas-Exercises.md)
+### [04-LinkedIn - Pandas Exercises](https://github.com/omeatai/src-AI-Software/blob/main/src-python-django-flask-sql/python/04-Pandas-Exercises.md)
 
 ### [20-Youtube - Dave Gray Python-Flask Training](https://github.com/omeatai/src-AI-Software/blob/main/src-python-django-flask-sql/python/20-Dave-Gray-Python-Flask.md)
 
