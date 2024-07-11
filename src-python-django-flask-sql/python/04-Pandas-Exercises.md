@@ -366,12 +366,45 @@ for i in range(num_rows):
 ## Solution 2:
 
 ```py
-
+df['Dis_Power_Ratio'] = round(df['Displacement']/df['Horsepower'], 2)
+df['Weight_Per_Cylinder'] = round(df['Weight']/df['Cylinders'], 2)
+df['Acc_Per_UnitPower'] = round(df['Acceleration']/df['Horsepower'], 2)
+df.head(10)
 ```
+
+![image](https://github.com/user-attachments/assets/1f2acfc6-49ec-4c2f-a095-3358e3cc7934)
+
+# #END</details>
+
+<details>
+<summary>6. Task: Select specific columns in a DataFrame </summary>
+
+# Task: Select specific columns in a DataFrame
+
+![image](https://github.com/user-attachments/assets/086f0848-98c2-43c8-81f8-605e09416b23)
+![image](https://github.com/user-attachments/assets/0ed87996-efb4-4555-b4b9-6cb387c8c7a6)
+![image](https://github.com/user-attachments/assets/919b0173-b297-4f27-adaf-e70c7a02811d)
+![image](https://github.com/user-attachments/assets/e292b527-82cb-4fc1-b4f1-c0433e2bd060)
 
 ```py
+import pandas as pd
+import numpy as np
 
+camp_df = pd.read_csv("./data/marketing_campaign.csv", sep='\t')
+camp_df.head(10)
+
+camp_df.info()
 ```
+
+![image](https://github.com/user-attachments/assets/88024c10-d33f-401e-b383-fa30582741ec)
+![image](https://github.com/user-attachments/assets/baa972bc-a11b-4009-9aa6-692651b1f118)
+
+# #END</details>
+
+<details>
+<summary>6B. Solution: Select specific columns in a DataFrame </summary>
+
+# Solution: Select specific columns in a DataFrame
 
 ```py
 
