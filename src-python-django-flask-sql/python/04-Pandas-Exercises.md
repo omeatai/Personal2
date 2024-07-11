@@ -68,6 +68,9 @@ pip install -r requirements.txt
 # Task: Read Data from CSV and Excel files
 
 ![image](https://github.com/user-attachments/assets/48cb9650-aba3-40a4-a3d5-d2526d4fad80)
+
+<img width="1465" alt="image" src="https://github.com/user-attachments/assets/d77bbf90-b071-49f2-9ffa-b00908880009">
+
 ![image](https://github.com/user-attachments/assets/97501b97-c4c4-44a3-8ff8-73856549d66a)
 ![image](https://github.com/user-attachments/assets/df2a90fd-efd4-400d-97e1-1a015673e854)
 
