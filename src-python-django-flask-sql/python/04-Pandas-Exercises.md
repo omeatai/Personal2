@@ -152,7 +152,7 @@ df.head(10)
 
 # Task: Check DataFrame information and identify types of columns
 
-![image](https://github.com/user-attachments/assets/7a896604-7e49-4cbb-8f1d-bdb3fed5d2d5)
+![image](https://github.com/user-attachments/assets/1d58c264-5970-4245-90a1-94f0e3d2d637)
 
 ```py
 import pandas as pd
@@ -165,7 +165,7 @@ df = pd.read_csv("./data/auto_mpg.csv",
 df.head(10)
 ```
 
-![image](https://github.com/user-attachments/assets/1d58c264-5970-4245-90a1-94f0e3d2d637)
+![image](https://github.com/user-attachments/assets/7a896604-7e49-4cbb-8f1d-bdb3fed5d2d5)
 
 # #END</details>
 
