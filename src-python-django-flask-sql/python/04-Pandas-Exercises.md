@@ -341,10 +341,29 @@ df['Origin'].value_counts().plot(kind="area")
 ![image](https://github.com/user-attachments/assets/7c9f3192-e3b0-4e84-8aed-6c60a55343ac)
 ![image](https://github.com/user-attachments/assets/da67c905-ec06-4d81-8a2c-8a42a85438ab)
 
+# #END</details>
+
+<details>
+<summary>5B. Solution: Add new columns to a DataFrame </summary>
+
+# Solution: Add new columns to a DataFrame
+
+## Solution 1:
 
 ```py
+df['Displacement-Power Ratio'] = None
+# num_rows = df.index.stop
+num_rows = df.shape[0]
 
+for i in range(num_rows):
+    displacement_value = df.loc[i,'Displacement']
+    power_value = df.loc[i,'Horsepower']
+    df.loc[i,'Displacement-Power Ratio'] = "{:.2f}".format(round(displacement_value/power_value, 2))
 ```
+
+![image](https://github.com/user-attachments/assets/9f9b9059-4ad0-4d74-b66c-1685a777ae4d)
+
+## Solution 2:
 
 ```py
 
