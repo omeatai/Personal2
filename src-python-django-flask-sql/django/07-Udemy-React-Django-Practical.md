@@ -873,17 +873,160 @@ def users(request):
 
 # Verify UserAuth - Getting Authenticated User
 
+### src-AI-Software/my_projects/07_react_django_practical/users_app/urls.py:
+
 ```py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.users, name='users'),
+    path('register', views.register, name='register'),
+    path('login', views.login, name='login'),
+    path('auth', views.AuthUser.as_view(), name='auth'),
+]
 
 ```
 
+### src-AI-Software/my_projects/07_react_django_practical/users_app/views.py:
+
 ```py
+# from django.shortcuts import render
+from rest_framework import exceptions
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+# import jwt
+
+from .serializers import UserSerializer
+from .models import User
+from .auth import generate_access_token, JWTAuth
+
+
+@api_view(['POST'])
+def register(request):
+    data = request.data
+    if data['password'] != data['password_confirm']:
+        raise exceptions.ValidationError('Passwords do not match')
+
+    if User.objects.filter(email=data['email']).exists():
+        raise exceptions.ValidationError('Email already exists')
+
+    serializer = UserSerializer(data=data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def login(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    user = User.objects.filter(email=email).first()
+    if user is None:
+        raise exceptions.AuthenticationFailed('User not found')
+    if not user.check_password(password):
+        raise exceptions.AuthenticationFailed('Incorrect password')
+
+    token = generate_access_token(user)
+    # set token to http-only cookie
+    response = Response()
+    response.set_cookie(key='jwt', value=token, httponly=True)
+    response.data = {
+        'jwt': token
+    }
+    return response
+
+
+class AuthUser(APIView):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response({'data': serializer.data})
+
+        # token = request.COOKIES.get('jwt')
+        # if not token:
+        #     raise exceptions.AuthenticationFailed('Unauthenticated')
+
+        # try:
+        #     payload = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
+        # except jwt.ExpiredSignatureError:
+        #     raise exceptions.AuthenticationFailed('Unauthenticated')
+
+        # user = User.objects.filter(id=payload['id']).first()
+        # serializer = UserSerializer(user)
+        # return Response(serializer.data)
+
+
+@api_view(['GET'])
+def users(request):
+    if request.method == 'GET':
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        context = {
+            'users': serializer.data
+        }
+        return Response(context)
 
 ```
 
+### src-AI-Software/my_projects/07_react_django_practical/users_app/auth.py:
+
 ```py
+from django.conf import settings
+from django.contrib.auth import get_user_model
+from rest_framework import exceptions
+from rest_framework.authentication import BaseAuthentication
+
+import jwt
+import datetime
+
+
+def generate_access_token(user):
+    payload = {
+        'user_id': user.id,
+        'exp': datetime.datetime.now(datetime.UTC) + datetime.timedelta(minutes=60),
+        'iat': datetime.datetime.now(datetime.UTC)
+    }
+    return jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
+
+
+class JWTAuth(BaseAuthentication):
+
+    def authenticate(self, request):
+        token = request.COOKIES.get('jwt')
+        if not token:
+            return None
+
+        try:
+            payload = jwt.decode(
+                token, settings.SECRET_KEY, algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            raise exceptions.AuthenticationFailed('unauthenticated')
+
+        # user = User.objects.filter(id=payload['id']).first()
+        user = get_user_model().objects.filter(id=payload['user_id']).first()
+
+        if user is None:
+            raise exceptions.AuthenticationFailed('User not found')
+        return (user, None)
 
 ```
+
+![image](https://github.com/omeatai/src-AI-Software/assets/32337103/a8df1435-e312-47a3-bf31-bdcbdd6eb249)
+
+<img width="1497" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/d9118218-fe57-4150-9001-cefa5c0e51b8">
+
+# #END</details>
+
+<details>
+<summary>10. Logout User </summary>
+
+# Logout user
 
 ```py
 
