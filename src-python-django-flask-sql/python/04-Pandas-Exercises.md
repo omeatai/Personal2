@@ -5,34 +5,47 @@
 
 # Check Python version 
 
-```py
+```x
 python3 --version
 ```
 
 # Install Pip
 
-```py
+```x
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
 ```
 
 # Install Virtual Environment
 
-```py
+```x
 python3 -m venv venv
 source venv/bin/activate
 ```
 
 # Install Jupyter Notebook
 
-```py
+```x
 pip install notebook
 ```
 
 # Run Jupyter Notebook
 
-```py
+```x
 jupyter notebook
+```
+
+# Uninstall all currently installed packages
+
+```x
+pip freeze > installed_packages.txt
+pip uninstall -r installed_packages.txt -y
+```
+
+# Install packages from requirements.txt:
+
+```x
+pip install -r requirements.txt
 ```
 
 # #END</details>
