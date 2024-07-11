@@ -81,7 +81,7 @@ import pandas as pd
 <details>
 <summary>2B. Solution: Read Data from CSV and Excel files </summary>
 
-# Task: Read Data from CSV and Excel files
+# Solution: Read Data from CSV and Excel files
 
 ## Solution 1: Using Python
 
@@ -151,10 +151,25 @@ df.head(10)
 ![image](https://github.com/user-attachments/assets/7a896604-7e49-4cbb-8f1d-bdb3fed5d2d5)
 ![image](https://github.com/user-attachments/assets/e56867df-8962-429a-b05f-eba656736e4f)
 
-
 ```py
+import pandas as pd
 
+df = pd.read_csv("./data/auto_mpg.csv",
+                 header=0,
+                 names = ['MPG', 'Cylinders', 'Displacement', 'Horsepower','Weight',\
+                          'Acceleration', 'Model Year', 'Origin'])
+
+df.head(10)
 ```
+
+![image](https://github.com/user-attachments/assets/1d58c264-5970-4245-90a1-94f0e3d2d637)
+
+# #END</details>
+
+<details>
+<summary>3B. Solution: Check DataFrame information and identify types of columns </summary>
+
+# Solution: Check DataFrame information and identify types of columns
 
 ```py
 
