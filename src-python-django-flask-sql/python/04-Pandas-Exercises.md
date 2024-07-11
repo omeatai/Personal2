@@ -171,25 +171,99 @@ df.head(10)
 
 # Solution: Check DataFrame information and identify types of columns
 
-```py
+## Get only the number of Rows and Columns
 
+```py
+df.shape
+```
+
+```x
+(398, 8)
+```
+
+![image](https://github.com/user-attachments/assets/fb66a183-d831-4dc0-9341-6ab8af24d9dd)
+
+# Get only the columns
+
+```py
+df.columns
+```
+
+```x
+Index(['MPG', 'Cylinders', 'Displacement', 'Horsepower', 'Weight',
+       'Acceleration', 'Model Year', 'Origin'],
+      dtype='object')
 ```
 
 ```py
+list(df.columns)
+```
 
+```x
+['MPG',
+ 'Cylinders',
+ 'Displacement',
+ 'Horsepower',
+ 'Weight',
+ 'Acceleration',
+ 'Model Year',
+ 'Origin']
 ```
 
 ```py
-
+len(list(df.columns))
 ```
+
+```x
+8
+```
+
+![image](https://github.com/user-attachments/assets/7c9807c5-0b2e-40b1-9cf2-00feda042dbd)
+
+# Get only the Index of the Rows
 
 ```py
-
+df.index
 ```
+
+```x
+RangeIndex(start=0, stop=398, step=1)
+```
+
+![image](https://github.com/user-attachments/assets/cc58b15b-be5a-4f4d-a31b-5ac48ced326b)
+
+# Get all Info: the number of Rows and Columns, with Index, Names and DataType of Columns
 
 ```py
-
+df.info()
 ```
+
+```x
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 398 entries, 0 to 397
+Data columns (total 8 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   MPG           398 non-null    float64
+ 1   Cylinders     398 non-null    int64  
+ 2   Displacement  398 non-null    float64
+ 3   Horsepower    392 non-null    float64
+ 4   Weight        398 non-null    float64
+ 5   Acceleration  398 non-null    float64
+ 6   Model Year    398 non-null    int64  
+ 7   Origin        398 non-null    object 
+dtypes: float64(5), int64(2), object(1)
+memory usage: 25.0+ KB
+```
+
+![image](https://github.com/user-attachments/assets/263627ef-8493-4747-a602-e437c3a783d2)
+
+# #END</details>
+
+<details>
+<summary>4.Task: The summary statistics of numerical and categorical features </summary>
+
+# Task: The summary statistics of numerical and categorical features
 
 ```py
 
