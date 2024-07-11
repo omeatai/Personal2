@@ -148,6 +148,10 @@ df.head(10)
 
 # Task: Check DataFrame information and identify types of columns
 
+![image](https://github.com/user-attachments/assets/7a896604-7e49-4cbb-8f1d-bdb3fed5d2d5)
+![image](https://github.com/user-attachments/assets/e56867df-8962-429a-b05f-eba656736e4f)
+
+
 ```py
 
 ```
