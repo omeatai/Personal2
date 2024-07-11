@@ -1,4 +1,4 @@
-## +LinkedIn - Pandas Exercises
+## +LinkedIn - Pandas Essential Training
 
 <details>
 <summary>1. Install </summary>
