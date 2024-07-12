@@ -1308,23 +1308,3 @@ ORDER BY
 
 # #END </details>
 
-<details>
-<summary>+LinkedIn - SQL Essential Training </summary>
-
-## Install venv
-
-```sql
-
-```
-
-```sql
-
-```
-
-```sql
-
-```
-
-# #END
-
-</details>
