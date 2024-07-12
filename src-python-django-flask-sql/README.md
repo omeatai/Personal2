@@ -14,9 +14,9 @@
 
 ## DJANGO
 
-### [01-LinkedIn - Django Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src-python-django-flask-sql/django/01-LinkedIn-Django-Essential.md)
+### [01-LinkedIn - Django Essential Training*](https://github.com/omeatai/src-AI-Software/blob/main/src-python-django-flask-sql/django/01-LinkedIn-Django-Essential.md)
 
-### [02-LinkedIn - Building a Personal Portfolio with Django](https://github.com/omeatai/src-AI-Software/blob/main/src-python-django-flask-sql/django/02-LinkedIn-Django-Personal-Portfolio.md)
+### [02-LinkedIn - Building a Personal Portfolio with Django*](https://github.com/omeatai/src-AI-Software/blob/main/src-python-django-flask-sql/django/02-LinkedIn-Django-Personal-Portfolio.md)
 
 ### [03-LinkedIn - Django Forms](https://github.com/omeatai/src-AI-Software/blob/main/src-python-django-flask-sql/django/03-LinkedIn-Django-Forms.md)
 
