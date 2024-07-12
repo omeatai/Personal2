@@ -1,4 +1,6 @@
-## +Udemy - Building Restful Web APIs with Django
+## +Linkedin - Building Restful Web APIs with Django
+
+## [COURSE](https://www.linkedin.com/learning/building-restful-web-apis-with-django/create-a-rest-api-with-django-and-django-rest-framework)
 
 <details>
 <summary>1. Creating a New Django Project: demo_project </summary>
@@ -3472,11 +3474,6 @@ class ProductUpdateTestCase(APITestCase):
 ```
 
 <img width="1502" alt="image" src="https://github.com/omeatai/src-AI-Software/assets/32337103/fecc8b52-3fba-4202-86ab-49a977d11086">
-
-
-```py
-
-```
 
 
 # #END</details>
