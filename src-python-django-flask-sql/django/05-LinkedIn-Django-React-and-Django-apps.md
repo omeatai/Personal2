@@ -1,4 +1,4 @@
-# +Udemy - Django A-Z Build and Deploy Web Project
+# +Linkedin - Building React and Django Apps
 
 <details>
 <summary>1. Creating a New Django Project </summary>
