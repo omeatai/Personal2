@@ -1,6 +1,8 @@
 
 ## +LinkedIn - Django Forms
 
+## [COURSE](https://www.linkedin.com/learning/django-forms/deep-dive-into-django-forms)
+
 <details>
 <summary>1. Creating a New Django Project </summary>
 
