@@ -1,5 +1,7 @@
 ## +LinkedIn - Python Object Oriented Programming
 
+## [COURSE](https://www.linkedin.com/learning/python-object-oriented-programming-22888296/python-object-oriented-programming?contextUrn=urn%3Ali%3AlyndaLearningPath%3A655816f5498ee9797e4804ec&resume=false)
+
 <details>
 <summary>1. Introduction </summary>
 
