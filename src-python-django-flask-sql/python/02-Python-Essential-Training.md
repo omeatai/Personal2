@@ -1,5 +1,7 @@
 ## +LinkedIn - Python Essential Training
 
+## [COURSE](https://www.linkedin.com/learning/python-essential-training-18764650/getting-started-with-python?contextUrn=urn%3Ali%3AlyndaLearningPath%3A5f6cf9fe498e1b8929698639&resume=false)
+
 <details>
 <summary>1. Install Jupyter Notebook </summary>
 
