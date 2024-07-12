@@ -2,7 +2,7 @@
 
 ## PYTHON
 
-### [01-LinkedIn - Python Object Oriented Training](https://github.com/omeatai/src-AI-Software/blob/main/src-python-django-flask-sql/python/01-Python-Object-Oriented.md)
+### [01-LinkedIn - Python Object Oriented Training*](https://github.com/omeatai/src-AI-Software/blob/main/src-python-django-flask-sql/python/01-Python-Object-Oriented.md)
 
 ### [02-LinkedIn - Python Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src-python-django-flask-sql/python/02-Python-Essential-Training.md)
 
