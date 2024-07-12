@@ -1038,16 +1038,3 @@ print(obj.value2)
 ```
 
 # #END</details>
-
-<details>
-<summary>+LinkedIn - Python Essential Training </summary>
-
-```py
-
-```
-
-```py
-
-```
-
-</details>
