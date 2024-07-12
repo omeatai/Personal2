@@ -83,9 +83,9 @@ import pandas as pd
 # #END</details>
 
 <details>
-<summary>Solution: 2 </summary>
+<summary>Solution for 2 </summary>
 
-# Solution: 2
+# Solution for 2
 
 ## Solution 1: Using Python
 
@@ -170,9 +170,9 @@ df.head(10)
 # #END</details>
 
 <details>
-<summary>Solution: 3 </summary>
+<summary>Solution for 3 </summary>
 
-# Solution: 3
+# Solution for 3
 
 ## Get only the number of Rows and Columns
 
@@ -286,9 +286,9 @@ df.head(10)
 # #END</details>
 
 <details>
-<summary>Solution: 4 </summary>
+<summary>Solution for 4 </summary>
 
-# Solution: 4
+# Solution for 4
 
 ## Display the Summary Statistics for Non Class variables
 
@@ -344,9 +344,9 @@ df['Origin'].value_counts().plot(kind="area")
 # #END</details>
 
 <details>
-<summary>Solution: 5 </summary>
+<summary>Solution for 5 </summary>
 
-# Solution: 5
+# Solution for 5
 
 ## Solution 1:
 
@@ -402,9 +402,9 @@ camp_df.info()
 # #END</details>
 
 <details>
-<summary>Solution: 6 </summary>
+<summary>Solution for 6 </summary>
 
-# Solution: 6
+# Solution for 6
 
 ## Solution 1:
 
