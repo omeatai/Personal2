@@ -1,8 +1,6 @@
-
-<details>
-<summary>+Dave Gray - Python-Flask</summary>
-
 ## +Dave Gray - Python-Flask
+
+## [COURSE](https://www.youtube.com/playlist?list=PL0Zuz27SZ-6MQri81d012LwP5jvFZ_scc)
 
 <details>
 <summary>1. Python Operators </summary>
@@ -768,5 +766,4 @@ for name in names:
 
 # #END</details>
 
-# #END</details>
 
