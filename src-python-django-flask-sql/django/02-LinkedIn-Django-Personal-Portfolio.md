@@ -1,6 +1,8 @@
     
 ## +LinkedIn - Building a Personal Portfolio with Django
 
+## [COURSE](https://www.linkedin.com/learning/building-a-personal-portfolio-with-django/creating-a-website-with-python)
+
 <details>
 <summary>1. Creating a New Django Project </summary>
 
