@@ -1,5 +1,7 @@
 ## +LinkedIn - Pandas Exercises
 
+## [COURSE](https://www.linkedin.com/learning/coding-exercises-pandas/stretch-and-test-your-knowledge-with-pandas-code-challenges?resume=false)
+
 <details>
 <summary>1. Install Jupyter Notebook </summary>
 
