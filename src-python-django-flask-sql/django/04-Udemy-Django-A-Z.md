@@ -1,6 +1,8 @@
 
 ## +Udemy - Django A-Z Build and Deploy Web Project
 
+## [COURSE](https://www.udemy.com/course/complete-django-masterclass/)
+
 <details>
 <summary>1. Creating a New Django Project </summary>
 
