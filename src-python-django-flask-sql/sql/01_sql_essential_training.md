@@ -1,3 +1,7 @@
+## SQL Essential Training
+
+## [COURSE](https://www.linkedin.com/learning/sql-essential-training-20685933/the-data-driven-world-19067626?resume=false)
+
 <details>
 <summary>1. Introduction </summary>
 
