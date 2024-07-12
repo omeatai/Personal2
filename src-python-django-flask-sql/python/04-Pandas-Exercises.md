@@ -83,9 +83,9 @@ import pandas as pd
 # #END</details>
 
 <details>
-<summary>2B. Solution: Read Data from CSV and Excel files </summary>
+<summary>Solution: 2 </summary>
 
-# Solution: Read Data from CSV and Excel files
+# Solution: 2
 
 ## Solution 1: Using Python
 
@@ -170,9 +170,9 @@ df.head(10)
 # #END</details>
 
 <details>
-<summary>3B. Solution: Check DataFrame information and identify types of columns </summary>
+<summary>Solution: 3 </summary>
 
-# Solution: Check DataFrame information and identify types of columns
+# Solution: 3
 
 ## Get only the number of Rows and Columns
 
@@ -286,9 +286,9 @@ df.head(10)
 # #END</details>
 
 <details>
-<summary>4B. Solution: The summary statistics of numerical and categorical features </summary>
+<summary>Solution: 4 </summary>
 
-# Solution: The summary statistics of numerical and categorical features
+# Solution: 4
 
 ## Display the Summary Statistics for Non Class variables
 
@@ -344,9 +344,9 @@ df['Origin'].value_counts().plot(kind="area")
 # #END</details>
 
 <details>
-<summary>5B. Solution: Add new columns to a DataFrame </summary>
+<summary>Solution: 5 </summary>
 
-# Solution: Add new columns to a DataFrame
+# Solution: 5
 
 ## Solution 1:
 
@@ -402,9 +402,9 @@ camp_df.info()
 # #END</details>
 
 <details>
-<summary>6B. Solution: Select specific columns in a DataFrame </summary>
+<summary>Solution: 6 </summary>
 
-# Solution: Select specific columns in a DataFrame
+# Solution: 6
 
 ## Solution 1:
 
