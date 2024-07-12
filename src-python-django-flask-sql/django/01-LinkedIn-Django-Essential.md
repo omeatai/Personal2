@@ -1,6 +1,8 @@
 
 ## +LinkedIn - Django Essential Training
 
+## [COURSE](https://www.linkedin.com/learning/django-essential-training/what-is-django)
+
 <details>
 <summary>1. Creating a New Django Project </summary>
 
