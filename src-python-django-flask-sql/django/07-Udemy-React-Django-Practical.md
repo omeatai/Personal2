@@ -1,5 +1,7 @@
 ## +Udemy-React and Django: A Practical Guide with Docker
 
+## [COURSE](https://www.udemy.com/course/react-django-admin/)
+
 <details>
 <summary>1. Creating a New Django Project: admin_project </summary>
 
