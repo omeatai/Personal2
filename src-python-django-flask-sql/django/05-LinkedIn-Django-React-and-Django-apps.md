@@ -1,4 +1,6 @@
-# +Linkedin - Building React and Django Apps
+## +Linkedin - Building React and Django Apps
+
+## [COURSE](https://www.linkedin.com/learning/building-react-and-django-apps/create-a-full-stack-react-app-with-django-rest-framework)
 
 <details>
 <summary>1. Creating a New Django Project </summary>
