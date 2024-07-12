@@ -406,21 +406,53 @@ camp_df.info()
 
 # Solution: Select specific columns in a DataFrame
 
-```py
-
-```
+## Solution 1:
 
 ```py
+mnt_purchases = pd.DataFrame({
+    'MntWines': camp_df['MntWines'],
+    'MntFruits': camp_df['MntFruits'],
+    'MntMeatProducts': camp_df['MntMeatProducts'],
+    'MntFishProducts': camp_df['MntFishProducts'],
+    'MntSweetProducts': camp_df['MntSweetProducts'],
+    'MntGoldProds': camp_df['MntGoldProds'],
+})
 
+mnt_purchases
 ```
+
+## Solution 2:
 
 ```py
+mnt_purchases2 = camp_df[['MntWines','MntFruits','MntMeatProducts','MntFishProducts','MntSweetProducts','MntGoldProds']]
 
+mnt_purchases2
 ```
+
+![image](https://github.com/user-attachments/assets/8eea03db-9472-4949-b581-e36f654847aa)
+
+## Solution 3:
 
 ```py
+mnt_purchases3 = camp_df.loc[:,['MntWines','MntFruits','MntMeatProducts','MntFishProducts','MntSweetProducts','MntGoldProds']]
 
+mnt_purchases3
 ```
+
+## Solution 4:
+
+```py
+mnt_purchases4 = camp_df.filter(['MntWines','MntFruits','MntMeatProducts','MntFishProducts','MntSweetProducts','MntGoldProds'])
+
+mnt_purchases4
+```
+
+# #END</details>
+
+<details>
+<summary>7. Task: Subset the data from labels using .loc[] method </summary>
+
+# Task: Subset the data from labels using .loc[] method
 
 ```py
 
