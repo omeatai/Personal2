@@ -193,20 +193,74 @@ Goodbye.
 # Using SetTimeout - Creating a Delay
 
 ```js
+//setTimeout Global Method
+const waitTime = 3000;
+
+console.log(`setting a ${waitTime / 1000} second delay`);
+const timerFinished = () => console.log("done");
+
+setTimeout(timerFinished, waitTime);
 
 ```
+
+```x
+setting a 3 second delay
+done
+```
+
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/0cae78ba-a1c7-4ed5-bfcc-7342b60cbda4">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/59b54e2f-44d7-4f5e-aae1-8bee325dbb29">
+
+# #END</details>
+
+<details>
+<summary>5. Using SetInterval Method with SetTimeout </summary>
+
+# Using SetInterval Method with SetTimeout
 
 ```js
+//setTimeout Global Method
+const waitTime = 5000;
+console.log(`setting a ${waitTime / 1000} second delay`);
+
+const timerFinished = () => {
+  clearInterval(interval);
+  console.log(
+    "Sorry, Time Limit Exceeded. You have to hang up or call back later."
+  );
+};
+
+setTimeout(timerFinished, waitTime);
+
+//setInterval Global Method
+const waitInterval = 1000;
+let currentTime = 0;
+
+const incTime = () => {
+  currentTime += waitInterval;
+  console.log(`waiting on ${currentTime / 1000} seconds`);
+};
+
+const interval = setInterval(incTime, waitInterval);
 
 ```
 
-```js
-
+```x
+➜  APP git:(main) ✗ node global.js
+setting a 5 second delay
+waiting on 1 seconds
+waiting on 2 seconds
+waiting on 3 seconds
+waiting on 4 seconds
+Sorry, Time Limit Exceeded. You have to hang up or call back later.
 ```
 
-```js
+# #END</details>
 
-```
+<details>
+<summary>6. Reporting Progress for SetInterval </summary>
+
+# Reporting Progress for SetInterval
 
 ```js
 
