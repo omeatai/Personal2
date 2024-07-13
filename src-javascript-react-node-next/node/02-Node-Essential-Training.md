@@ -472,17 +472,56 @@ Thank you for your answers!
 
 # Exporting Custom Modules
 
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/myModule.js:
+
 ```js
+let count = 0;
+
+const inc = () => ++count;
+const dec = () => --count;
+
+const getCount = () => count;
+
+module.exports = {
+  anything: true,
+  who: "Bill",
+  count,
+  inc,
+  dec,
+  getCount,
+};
 
 ```
 
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
+
 ```js
+const myModule = require("./myModule");
+const { inc, dec, getCount } = require("./myModule");
+
+inc();
+inc();
+inc();
+
+console.log(myModule.anything);
+console.log(myModule.who);
+console.log(`the count is ${getCount()}`);
 
 ```
 
-```js
-
+```x
+➜  APP git:(main) ✗ node app
+true
+Bill
+the count is 3
 ```
+
+# #END</details>
+
+<details>
+<summary>10. Creating a Module </summary>
+
+# Creating a Module
 
 ```js
 
