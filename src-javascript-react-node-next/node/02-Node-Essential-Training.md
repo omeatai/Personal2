@@ -985,17 +985,55 @@ Creating new directory...
 # #END</details>
 
 <details>
-<summary>17. Files - Renaming and Removing Files </summary>
+<summary>17. Files - Renaming, Moving and Removing Files </summary>
 
-# Files - Renaming and Removing Files
+# Files - Renaming, Moving and Removing Files
+
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
 
 ```js
+const fs = require("fs");
+
+//Rename Files
+fs.renameSync("./newReadme.md", "./firstReadme.md");
+
+console.log("Markdown file renamed");
+
+//Move Files
+fs.rename("./readme.md", "./your-files-here/readme.md", function (err) {
+  if (err) {
+    throw err;
+  }
+  console.log("Markdown file moved");
+});
+
+//Remove Files
+fs.unlinkSync("./your-files-here/test1.txt");
+
+fs.unlink("./your-files-here/test2.txt", function (err) {
+  if (err) {
+    throw err;
+  }
+  console.log("Notes are gone");
+});
 
 ```
 
-```js
-
+```x
+➜  APP git:(main) ✗ node app
+Markdown file renamed
+Markdown file moved
+Notes are gone
 ```
+
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/6ae50f3f-256d-4404-888c-51cadced4022">
+
+# #END</details>
+
+<details>
+<summary>18. Files - Renaming, Moving and Removing Directories </summary>
+
+# Files - Renaming, Moving and Removing Directories
 
 ```js
 
