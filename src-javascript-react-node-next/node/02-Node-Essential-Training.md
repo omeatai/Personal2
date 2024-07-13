@@ -642,17 +642,82 @@ Thank you for your answers!
 
 # Setup Custom Event Modules with EventEmitters
 
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/lib/collectAnswers.js:
+
 ```js
+const readline = require("readline");
+const { EventEmitter } = require("events");
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+module.exports = (questions, done) => {
+  const answers = [];
+  const [firstQuestion] = questions;
+
+  const emitter = new EventEmitter();
+
+  const questionAnswered = (answer) => {
+    emitter.emit("answer", answer);
+    answers.push(answer.trim());
+    if (answers.length < questions.length) {
+      rl.question(questions[answers.length], questionAnswered);
+    } else {
+      return done(answers);
+    }
+  };
+
+  rl.question(firstQuestion, questionAnswered);
+  return emitter;
+};
 
 ```
 
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
+
 ```js
+const collectAnswers = require("./lib/collectAnswers");
+
+const questions = [
+  "What is your name?",
+  "Where do you live?",
+  "What are you going to do with Node.js?",
+];
+
+const answerEvents = collectAnswers(questions, (answers) => {
+  console.log("Thank you for your answers!");
+  console.log(answers);
+  process.exit();
+});
+
+answerEvents.on("answer", (answer) => console.log(`The answer is ${answer}`));
 
 ```
 
-```js
-
+```x
+➜  APP git:(main) ✗ node app
+What is your name? Ifeanyi
+The answer is  Ifeanyi
+Where do you live? Calgary
+The answer is  Calgary
+What are you going to do with Node.js? Code Everyday
+The answer is  Code Everyday
+Thank you for your answers!
+[ 'Ifeanyi', 'Calgary', 'Code Everyday' ]
 ```
+
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/7c6c12e1-f62c-4aed-bea1-ea429f5ea873">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/8b3ce17f-90e8-4d81-8e48-b499b8d0298b">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/f06f1203-9806-4e38-b01c-74ec76a56c57">
+
+# #END</details>
+
+<details>
+<summary>13. Files - Listing Directory Files </summary>
+
+# Files - Listing Directory Files
 
 ```js
 
