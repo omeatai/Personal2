@@ -766,6 +766,78 @@ listing files...
 
 # Files - Reading from Directory Files
 
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/readme.md:
+
+```md
+# Publisher: District Homes
+
+## Topic: The Ocean Tides Project
+
+Description: This project is a simple demonstration of how to use Node.js to read a file from the file system and write it to the console.
+The project uses the fs module to read the file and the console.log method to write it to the console.
+
+```
+
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
+
+```js
+const fs = require("fs");
+const { readFile } = fs.promises;
+
+async function readFiles() {
+  try {
+    let file = await readFile("./readme.md", "UTF-8");
+    console.log(file);
+  } catch (err) {
+    // console.log(err);
+    throw err;
+  }
+}
+
+readFiles();
+console.log("reading the file...");
+
+```
+
+### With Callback Function
+
+```js
+const fs = require("fs");
+
+// let ipsum = fs.readFileSync("./readme.md", "UTF-8");
+
+fs.readFile("./readme.md", "UTF-8", (err, ipsum) => {
+  if (err) {
+    throw err;
+  }
+  console.log(ipsum);
+});
+
+console.log("reading the file...");
+```
+
+```x
+➜  APP git:(main) ✗ node app
+reading the file...
+# Publisher: District Homes
+
+## Topic: The Ocean Tides Project
+
+Description: This project is a simple demonstration of how to use Node.js to read a file from the file system and write it to the console.
+The project uses the fs module to read the file and the console.log method to write it to the console.
+```
+
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/d3b1214a-75c5-43da-8d3e-4b5d5ff59e4b">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/bc5f75d4-8d36-4ddf-a400-4dc20f72ccc1">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/992a307a-af5c-4c7f-9a82-6cc72a57e135">
+
+# #END</details>
+
+<details>
+<summary>15. Files - Writing and Appending Files </summary>
+
+# Files - Writing and Appending Files
+
 ```js
 
 ```
@@ -802,4 +874,39 @@ listing files...
 
 ```
 
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
 # #END</details>
