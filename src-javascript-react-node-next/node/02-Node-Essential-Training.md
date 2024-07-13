@@ -926,17 +926,68 @@ This is a New File
 
 # Files - Creating Directories
 
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
+
 ```js
+const fs = require("fs");
+const path = require("path");
+const { access, mkdir } = fs.promises;
+
+async function createDir(dir) {
+  dir = path.join(__dirname, dir);
+  try {
+    await access(dir);
+    console.log("Directory is already there!");
+    return true;
+  } catch (err) {
+    try {
+      console.log("Creating new directory...");
+      return await mkdir(dir);
+    } catch (err) {
+      console.log(`ERROR: ${err}`);
+    }
+  }
+}
+
+createDir("your-files-here");
 
 ```
 
+### With CallBack Function
+
 ```js
+const fs = require("fs");
+
+if (fs.existsSync("your-files-here")) {
+  console.log("already there!");
+} else {
+  fs.mkdir("your-files-here", function (err) {
+    if (err) {
+      console.log(`ERROR: ${err}`);
+    } else {
+      console.log("directory created");
+    }
+  });
+}
 
 ```
 
-```js
-
+```x
+➜  APP git:(main) ✗ node app
+Directory is already there!
+➜  APP git:(main) ✗ node app
+Creating new directory...
 ```
+
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/32304031-25ec-45e3-8489-1fa4533468ef">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/55c0fd93-160b-440c-bb56-66fd41576099">
+
+# #END</details>
+
+<details>
+<summary>17. Files - Renaming and Removing Files </summary>
+
+# Files - Renaming and Removing Files
 
 ```js
 
