@@ -256,7 +256,6 @@ Sorry, Time Limit Exceeded. You have to hang up or call back later.
 ```
 
 <img width="1491" alt="image" src="https://github.com/user-attachments/assets/053d56b9-e53f-4616-831d-c985f1b76e01">
-
 <img width="1491" alt="image" src="https://github.com/user-attachments/assets/9ad27497-83a0-42e1-b5d3-81bda2758c8d">
 
 # #END</details>
@@ -265,6 +264,160 @@ Sorry, Time Limit Exceeded. You have to hang up or call back later.
 <summary>6. Reporting Progress for SetInterval </summary>
 
 # Reporting Progress for SetInterval
+
+```js
+//setTimeout Global Method
+const waitTime = 10000;
+console.log(`setting a ${waitTime / 1000} second delay`);
+
+const timerFinished = () => {
+  clearInterval(interval);
+  console.log("\nProcess Completed! Thank you!");
+};
+
+setTimeout(timerFinished, waitTime);
+
+//setInterval Global Method
+const waitInterval = 1000;
+let currentTime = 0;
+
+const incTime = () => {
+  currentTime += waitInterval;
+  const p = Math.floor((currentTime / waitTime) * 100);
+  process.stdout.clearLine();
+  process.stdout.cursorTo(0);
+  process.stdout.write(`waiting.... ${p}%`);
+};
+
+const interval = setInterval(incTime, waitInterval);
+
+```
+
+```x
+➜  APP git:(main) ✗ node global.js
+setting a 10 second delay
+waiting.... 90%
+Process Completed! Thank you!
+
+```
+
+# #END</details>
+
+<details>
+<summary>7. Understanding Core Node Modules </summary>
+
+# Understanding Core Node Modules
+
+```js
+const path = require("path");
+const util = require("util");
+const v8 = require("v8");
+
+console.log(path.basename(__filename));
+console.log(path.dirname(__filename));
+console.log(path.extname(__filename));
+console.log(path.parse(__filename));
+console.log(path.resolve(__filename));
+console.log(path.sep);
+console.log(path.delimiter);
+
+const dirUploads = path.join(__dirname, "www", "files", "uploads");
+
+console.log(dirUploads);
+util.log(dirUploads);
+util.log(path.basename(__filename));
+util.log(v8.getHeapStatistics());
+```
+
+### console.log(path.parse(__filename));
+
+```x
+{
+  root: '/',
+  dir: '/Users/ifeanyiomeata/Desktop/SERVER/projects/src-AI-Software/my_projects/10_Node_Essential_Training/APP',
+  base: 'global.js',
+  ext: '.js',
+  name: 'global'
+}
+```
+
+### console.log(path.basename(__filename));
+
+```x
+global.js
+```
+
+### console.log(path.dirname(__filename));
+
+```x
+/Users/ifeanyiomeata/Desktop/SERVER/projects/src-AI-Software/my_projects/10_Node_Essential_Training/APP
+```
+
+### console.log(path.extname(__filename));
+
+```x
+.js
+```
+
+### console.log(path.resolve(__filename));
+
+```x
+/Users/ifeanyiomeata/Desktop/SERVER/projects/src-AI-Software/my_projects/10_Node_Essential_Training/APP/global.js
+```
+
+### console.log(path.sep);
+
+```x
+/
+```
+
+### console.log(path.delimiter);
+
+```x
+:
+```
+
+```js
+const dirUploads = path.join(__dirname, "www", "files", "uploads");
+
+console.log(dirUploads);
+util.log(dirUploads);
+util.log(path.basename(__filename));
+util.log(v8.getHeapStatistics());
+```
+
+```x
+/Users/ifeanyiomeata/Desktop/SERVER/projects/src-AI-Software/my_projects/10_Node_Essential_Training/APP/www/files/uploads
+13 Jul 12:34:38 - /Users/ifeanyiomeata/Desktop/SERVER/projects/src-AI-Software/my_projects/10_Node_Essential_Training/APP/www/files/uploads
+13 Jul 12:34:38 - global.js
+13 Jul 12:34:38 - {
+  total_heap_size: 4947968,
+  total_heap_size_executable: 524288,
+  total_physical_size: 4702208,
+  total_available_size: 2195260616,
+  used_heap_size: 3386856,
+  heap_size_limit: 2197815296,
+  malloced_memory: 163968,
+  peak_malloced_memory: 253952,
+  does_zap_garbage: 0,
+  number_of_native_contexts: 1,
+  number_of_detached_contexts: 0,
+  total_global_handles_size: 8192,
+  used_global_handles_size: 2336,
+  external_memory: 1399967
+}
+```
+
+# #END</details>
+
+<details>
+<summary>8. Collecting Information with Readline </summary>
+
+# Collecting Information with Readline
+
+```js
+
+```
 
 ```js
 
