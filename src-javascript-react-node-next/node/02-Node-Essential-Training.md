@@ -516,28 +516,131 @@ Bill
 the count is 3
 ```
 
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/27215543-4159-4004-81c3-6e996ea1bef0">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/19977baf-2b46-470a-aeea-3a83c3a71a1c">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/392dad82-ded3-4582-a632-69e2c1922e0c">
+
 # #END</details>
 
 <details>
-<summary>10. Creating a Module </summary>
+<summary>10. Using EventEmmiters to create Listeners for Custom Events </summary>
 
-# Creating a Module
+# Using EventEmmiters to create Listeners for Custom Events
+
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
 
 ```js
+const events = require("events");
+
+let emitter = new events.EventEmitter();
+
+emitter.on("customEvent", (user, message) => {
+  console.log(`${user}: ${message}`);
+});
+
+emitter.emit("customEvent", "Computer", "Hello World");
+emitter.emit("customEvent", "Eve", "That's pretty cool");
+
+process.stdin.on("data", (data) => {
+  const input = data.toString().trim();
+  if (input === "exit") {
+    emitter.emit("customEvent", "process", "Goodbye!");
+    process.exit();
+  }
+  emitter.emit("customEvent", "terminal", data.toString().trim());
+});
 
 ```
 
+```x
+➜  APP git:(main) ✗ node app
+Computer: Hello World
+Eve: That's pretty cool
+Hello
+terminal: Hello
+How are you?
+terminal: How are you?
+It's me Ifeanyi
+terminal: It's me Ifeanyi
+exit
+process: Goodbye!
+```
+
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/ec494ec4-522c-4314-931c-e3e576826442">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/94799bff-9690-4213-932b-d85c87d293bc">
+
+# #END</details>
+
+<details>
+<summary>11. Setup Custom Modules with Exports </summary>
+
+# Setup Custom Modules with Exports
+
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/lib/collectAnswers.js:
+
 ```js
+const readline = require("readline");
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+module.exports = (questions, done) => {
+  const answers = [];
+  const [firstQuestion] = questions;
+
+  const questionAnswered = (answer) => {
+    answers.push(answer.trim());
+    if (answers.length < questions.length) {
+      rl.question(questions[answers.length], questionAnswered);
+    } else {
+      return done(answers);
+    }
+  };
+
+  rl.question(firstQuestion, questionAnswered);
+};
 
 ```
 
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
+
 ```js
+const collectAnswers = require("./lib/collectAnswers");
+
+const questions = [
+  "What is your name?",
+  "Where do you live?",
+  "What are you going to do with Node.js?",
+];
+
+collectAnswers(questions, (answers) => {
+  console.log("Thank you for your answers!");
+  console.log(answers);
+  process.exit();
+});
 
 ```
 
-```js
-
+```x
+➜  APP git:(main) ✗ node app
+What is your name? Ifeanyi
+Where do you live? Calgary
+What are you going to do with Node.js? Code all Day
+Thank you for your answers!
+[ 'Ifeanyi', 'Calgary', 'Code all Day' ]
 ```
+
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/a23335d9-c440-4489-b660-10fd5cf082c9">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/eabe455c-1ed1-4efe-9e90-71558d18ebe2">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/a91dd7a3-1884-4ccf-8aef-89dd50f806a4">
+
+# #END</details>
+
+<details>
+<summary>12. Setup Custom Event Modules with EventEmitters </summary>
+
+# Setup Custom Event Modules with EventEmitters
 
 ```js
 
