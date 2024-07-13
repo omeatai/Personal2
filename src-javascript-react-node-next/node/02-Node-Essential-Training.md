@@ -1035,13 +1035,51 @@ Notes are gone
 
 # Files - Renaming, Moving and Removing Directories
 
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
+
 ```js
+const fs = require("fs");
+
+//Move Folder
+fs.renameSync("./assets/logs", "accounts/logs");
+console.log("logs folder moved");
+
+//Remove Folder
+fs.rmdir("./assets", function (err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("assets directory removed");
+  }
+});
+
+//Remove Folder that has files or folders in it
+fs.readdirSync("./accounts").forEach((file) => {
+  fs.renameSync(`./accounts/${file}`, `./bin/${file}`);
+});
+console.log("Files Removed");
+fs.rmdirSync("./accounts");
+console.log("Folder Removed");
 
 ```
 
 ```js
-
+➜  APP git:(main) ✗ node app
+logs folder moved
+Files Removed
+Folder Removed
+assets directory removed
 ```
+
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/e97e4e6c-18a6-4e92-941d-3a026cbfec43">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/03193c83-c18e-4676-b414-be351c12d89c">
+
+# #END</details>
+
+<details>
+<summary>19. Files - Readable file streams </summary>
+
+# Files - Readable file streams
 
 ```js
 
