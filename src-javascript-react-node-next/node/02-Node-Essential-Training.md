@@ -719,17 +719,52 @@ Thank you for your answers!
 
 # Files - Listing Directory Files
 
-```js
-
-```
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
 
 ```js
+const fs = require("fs");
+const { readdir } = fs.promises;
 
+async function listFiles() {
+  try {
+    const files = await readdir("./");
+    console.log(files);
+  } catch (err) {
+    throw err;
+  }
+}
+
+listFiles();
+console.log("listing files...");
 ```
+
+### With CallBack Function
 
 ```js
+const fs = require("fs");
 
+fs.readdir("./", function (err, files) {
+  if (err) {
+    throw err;
+  }
+  console.log(files);
+});
+
+console.log("listing files...");
 ```
+
+```x
+➜  APP git:(main) ✗ node app
+listing files...
+[ 'app.js', 'lib', 'myModule.js' ]
+```
+
+# #END</details>
+
+<details>
+<summary>14. Files - Reading Directory Files </summary>
+
+# Files - Reading Directory Files
 
 ```js
 
