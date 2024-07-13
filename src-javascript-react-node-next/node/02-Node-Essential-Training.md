@@ -838,13 +838,93 @@ The project uses the fs module to read the file and the console.log method to wr
 
 # Files - Writing and Appending Files
 
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
+
 ```js
+const fs = require("fs");
+const { writeFile, appendFile } = fs.promises;
+
+let message = `
+    This is a New File
+    ==================
+
+    ES6 Template Strings are cool. They honor whitespace.
+
+    * Template Strings
+    * Node File System
+    * Readline CLIs
+`;
+
+async function createFile() {
+  try {
+    await writeFile("newReadme.md", message.trim());
+    console.log("Markdown Created");
+    await appendFile("newReadme.md", "\n\n### Node.js Everyone!");
+    console.log("Markdown Modified");
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+createFile();
 
 ```
 
+### With Callback Function
+
 ```js
+const fs = require("fs");
+
+let message = `
+    This is a New File
+    ==================
+
+    ES6 Template Strings are cool. They honor whitespace.
+
+    * Template Strings
+    * Node File System
+    * Readline CLIs
+`;
+
+fs.writeFile("newReadme.md", message.trim(), function (err) {
+  if (err) {
+    throw err;
+  }
+  fs.appendFileSync("newReadme.md", "\n\n### Node.js Everyone!");
+  console.log("Markdown Created");
+});
 
 ```
+
+```x
+➜  APP git:(main) ✗ node app
+Markdown Created
+Markdown Modified
+```
+
+```x
+This is a New File
+    ==================
+
+    ES6 Template Strings are cool. They honor whitespace.
+
+    * Template Strings
+    * Node File System
+    * Readline CLIs
+
+### Node.js Everyone!
+```
+
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/7aded802-861d-4e48-97f2-8f13adf4a277">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/3a3aab5f-71d1-4068-bfd9-7c74ed56cf87">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/684b3907-86db-4269-9b4c-129032cdf45e">
+
+# #END</details>
+
+<details>
+<summary>16. Files - Creating Directories </summary>
+
+# Files - Creating Directories
 
 ```js
 
