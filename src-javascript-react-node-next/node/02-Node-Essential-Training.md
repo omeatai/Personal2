@@ -762,9 +762,9 @@ listing files...
 # #END</details>
 
 <details>
-<summary>14. Files - Reading Directory Files </summary>
+<summary>14. Files - Reading from Directory Files </summary>
 
-# Files - Reading Directory Files
+# Files - Reading from Directory Files
 
 ```js
 
