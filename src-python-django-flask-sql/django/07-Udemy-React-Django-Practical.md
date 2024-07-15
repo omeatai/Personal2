@@ -1493,10 +1493,386 @@ python manage.py loaddata fixtures/users.json
 # #END</details>
 
 <details>
-<summary>13. Setup View and Serializer for Permission Model </summary>
+<summary>13. Setup URL, View and Serializer for Permission Model </summary>
 
-# Setup View and Serializer for Permission Model
+# Setup URL, View and Serializer for Permission Model
 
+### src-AI-Software/my_projects/07_react_django_practical/users_app/models.py:
+
+```py
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+
+class Permission(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    code = models.CharField(max_length=200, null=True, blank=True)
+
+    class Meta:
+        verbose_name_plural = 'Permissions'
+        verbose_name = 'Permission'
+
+    def __str__(self):
+        return self.name
+
+
+class Role(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    code = models.CharField(max_length=200, null=True, blank=True)
+    permissions = models.ManyToManyField(Permission)
+
+    class Meta:
+        verbose_name_plural = 'Roles'
+        verbose_name = 'Role'
+
+    def __str__(self):
+        return self.name
+
+
+class User(AbstractUser):
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200, unique=True)
+    password = models.CharField(max_length=200)
+    role = models.ForeignKey(
+        Role, on_delete=models.SET_NULL, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+    username = None
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
+
+    class Meta:
+        verbose_name_plural = 'Users'
+        verbose_name = 'User'
+
+    def __str__(self):
+        return "{} {}".format(self.first_name, self.last_name)
+
+```
+
+### src-AI-Software/my_projects/07_react_django_practical/users_app/urls.py:
+
+```py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.users, name='users'),
+    path('register', views.register, name='register'),
+    path('login', views.login, name='login'),
+    path('auth', views.AuthUser.as_view(), name='auth'),
+    path('logout', views.logout, name='logout'),
+    path('permissions', views.PermissionAPIView.as_view(), name='permissions'),
+]
+
+```
+
+### src-AI-Software/my_projects/07_react_django_practical/users_app/views.py:
+
+```py
+# from django.shortcuts import render
+from rest_framework import exceptions
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+
+from .serializers import PermissionSerializer, UserSerializer
+from .models import User, Permission
+from .auth import generate_access_token, JWTAuth
+
+
+class AuthUser(APIView):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response({'data': serializer.data})
+
+
+class PermissionAPIView(APIView):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = PermissionSerializer(Permission.objects.all(), many=True)
+        return Response({'data': serializer.data})
+
+
+@api_view(['POST'])
+def register(request):
+    data = request.data
+    if data['password'] != data['password_confirm']:
+        raise exceptions.ValidationError('Passwords do not match')
+
+    if User.objects.filter(email=data['email']).exists():
+        raise exceptions.ValidationError('Email already exists')
+
+    serializer = UserSerializer(data=data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def login(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    user = User.objects.filter(email=email).first()
+    if user is None:
+        raise exceptions.AuthenticationFailed('User not found')
+    if not user.check_password(password):
+        raise exceptions.AuthenticationFailed('Incorrect password')
+
+    token = generate_access_token(user)
+    # set token to http-only cookie
+    response = Response()
+    response.set_cookie(key='jwt', value=token, httponly=True)
+    response.data = {
+        'jwt': token
+    }
+    return response
+
+
+@api_view(['POST'])
+def logout(request):
+    response = Response()
+    response.delete_cookie('jwt')
+    response.data = {
+        'message': 'success'
+    }
+    return response
+
+
+@api_view(['GET'])
+def users(request):
+    if request.method == 'GET':
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        context = {
+            'users': serializer.data
+        }
+        return Response(context)
+
+```
+
+### src-AI-Software/my_projects/07_react_django_practical/users_app/serializers.py:
+
+```py
+from rest_framework import serializers
+from .models import User, Permission
+
+
+class PermissionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Permission
+        fields = "__all__"
+
+
+class UserSerializer(serializers.ModelSerializer):
+
+    password_confirm = serializers.CharField(
+        style={'input_type': 'password'}, write_only=True)
+
+    class Meta:
+        model = User
+        fields = ['id', 'first_name', 'last_name',
+                  'email', 'password', 'password_confirm']  # '__all__'
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        password_confirm = validated_data.pop('password_confirm')
+
+        if password != password_confirm:
+            raise serializers.ValidationError("Passwords do not match")
+
+        # user = User.objects.create(**validated_data)
+        instance = self.Meta.model(**validated_data)
+        if password is not None:
+            instance.set_password(password)  # Need to hash Password
+        instance.save()
+        return instance
+
+    def update(self, instance, validated_data):
+        password = validated_data.pop('password', None)
+        password_confirm = validated_data.pop('password_confirm', None)
+
+        if password and password_confirm and password != password_confirm:
+            raise serializers.ValidationError("Passwords do not match")
+
+        for key, value in validated_data.items():
+            setattr(instance, key, value)
+
+        if password:
+            instance.set_password(password)
+
+        instance.save()
+        return instance
+
+```
+
+![image](https://github.com/user-attachments/assets/63477cb2-b670-446f-8f1d-2c6aa4e9ce5c)
+![image](https://github.com/user-attachments/assets/20cac1f2-2909-43f5-b17e-f920f210aba4)
+
+<img width="1497" alt="image" src="https://github.com/user-attachments/assets/0ae855ae-99c3-48a8-933d-da5a7f4887ee">
+
+<img width="1368" alt="image" src="https://github.com/user-attachments/assets/b9b63ab7-5966-489f-a619-8ad652868423">
+<img width="1368" alt="image" src="https://github.com/user-attachments/assets/c859b59d-9850-4bd6-a45f-2899f1f38b6b">
+<img width="1368" alt="image" src="https://github.com/user-attachments/assets/bb62b212-f6c0-47a7-a73d-1e6d4ece4adb">
+
+# #END</details>
+
+<details>
+<summary>14. Using Viewsets </summary>
+
+# Using Viewsets
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
 
 ```py
 
