@@ -203,21 +203,63 @@ npm init -y
 
 ```
 
-```js
+## install Dependencies - Express and Nodemon, @babel/core, @babel/cli, @babel/preset-env and @babel/node
 
+```x
+npm install --save express nodemon
+npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/node
 ```
 
-```js
-
+```x
+{
+  "name": "express_project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.24.9",
+    "@babel/node": "^7.24.8",
+    "@babel/preset-env": "^7.24.8"
+  }
+}
 ```
 
-```js
+## Create babel file
 
+```x
+touch .babelrc
 ```
 
-```js
+### src-AI-Software/my_projects/01_Build_Powerful_Web_Apps_with_Node/express_project/.babelrc:
 
+```x
+{
+    "presets": [
+        "@babel/preset-env"
+    ]
+}
 ```
+
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/5fe7b8e8-ca9f-46e2-83d5-c23b8ee2b1eb">
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/05afcdc8-d29b-48aa-99f1-338ec35eb9be">
+
+# #END</details>
+
+<details>
+<summary>4. Setup Package.json file with scripts </summary>
+
+# Setup Package.json file with scripts
 
 ```js
 
