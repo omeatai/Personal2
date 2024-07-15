@@ -2501,13 +2501,9 @@ DELETE http://localhost:8000/api/v1/roles/4
 # #END</details>
 
 <details>
-<summary>16. Setup URL and View for User Model - CREATE, READ, RETRIEVE, UPDATE AND DESTROY using Generic Views </summary>
+<summary>16. Setup URL and View for User Model - READ and RETRIEVE using Generic API View and Mixins </summary>
 
-# Setup URL and View for User Model - CREATE, READ, RETRIEVE, UPDATE AND DESTROY using Generic Views
-
-```py
-
-```
+# Setup URL and View for User Model - READ and RETRIEVE using Generic API View and Mixins
 
 ```py
 
@@ -2524,6 +2520,17 @@ DELETE http://localhost:8000/api/v1/roles/4
 ```py
 
 ```
+
+```py
+
+```
+
+# #END</details>
+
+<details>
+<summary>17. Setup URL and View for User Model - CREATE, UPDATE AND DESTROY using Generic API View and Mixins </summary>
+
+# Setup URL and View for User Model - CREATE, UPDATE AND DESTROY using Generic API View and Mixins
 
 ```py
 
