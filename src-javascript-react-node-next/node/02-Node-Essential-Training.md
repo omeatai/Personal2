@@ -838,75 +838,424 @@ The project uses the fs module to read the file and the console.log method to wr
 
 # Files - Writing and Appending Files
 
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
+
 ```js
+const fs = require("fs");
+const { writeFile, appendFile } = fs.promises;
+
+let message = `
+    This is a New File
+    ==================
+
+    ES6 Template Strings are cool. They honor whitespace.
+
+    * Template Strings
+    * Node File System
+    * Readline CLIs
+`;
+
+async function createFile() {
+  try {
+    await writeFile("newReadme.md", message.trim());
+    console.log("Markdown Created");
+    await appendFile("newReadme.md", "\n\n### Node.js Everyone!");
+    console.log("Markdown Modified");
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+createFile();
 
 ```
 
+### With Callback Function
+
 ```js
+const fs = require("fs");
+
+let message = `
+    This is a New File
+    ==================
+
+    ES6 Template Strings are cool. They honor whitespace.
+
+    * Template Strings
+    * Node File System
+    * Readline CLIs
+`;
+
+fs.writeFile("newReadme.md", message.trim(), function (err) {
+  if (err) {
+    throw err;
+  }
+  fs.appendFileSync("newReadme.md", "\n\n### Node.js Everyone!");
+  console.log("Markdown Created");
+});
 
 ```
 
-```js
-
+```x
+➜  APP git:(main) ✗ node app
+Markdown Created
+Markdown Modified
 ```
 
-```js
+```x
+This is a New File
+    ==================
 
+    ES6 Template Strings are cool. They honor whitespace.
+
+    * Template Strings
+    * Node File System
+    * Readline CLIs
+
+### Node.js Everyone!
 ```
 
-```js
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/7aded802-861d-4e48-97f2-8f13adf4a277">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/3a3aab5f-71d1-4068-bfd9-7c74ed56cf87">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/684b3907-86db-4269-9b4c-129032cdf45e">
 
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
 # #END</details>
+
+<details>
+<summary>16. Files - Creating Directories </summary>
+
+# Files - Creating Directories
+
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
+
+```js
+const fs = require("fs");
+const path = require("path");
+const { access, mkdir } = fs.promises;
+
+async function createDir(dir) {
+  dir = path.join(__dirname, dir);
+  try {
+    await access(dir);
+    console.log("Directory is already there!");
+    return true;
+  } catch (err) {
+    try {
+      console.log("Creating new directory...");
+      return await mkdir(dir);
+    } catch (err) {
+      console.log(`ERROR: ${err}`);
+    }
+  }
+}
+
+createDir("your-files-here");
+
+```
+
+### With CallBack Function
+
+```js
+const fs = require("fs");
+
+if (fs.existsSync("your-files-here")) {
+  console.log("already there!");
+} else {
+  fs.mkdir("your-files-here", function (err) {
+    if (err) {
+      console.log(`ERROR: ${err}`);
+    } else {
+      console.log("directory created");
+    }
+  });
+}
+
+```
+
+```x
+➜  APP git:(main) ✗ node app
+Directory is already there!
+➜  APP git:(main) ✗ node app
+Creating new directory...
+```
+
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/32304031-25ec-45e3-8489-1fa4533468ef">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/55c0fd93-160b-440c-bb56-66fd41576099">
+
+# #END</details>
+
+<details>
+<summary>17. Files - Renaming, Moving and Removing Files </summary>
+
+# Files - Renaming, Moving and Removing Files
+
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
+
+```js
+const fs = require("fs");
+
+//Rename Files
+fs.renameSync("./newReadme.md", "./firstReadme.md");
+
+console.log("Markdown file renamed");
+
+//Move Files
+fs.rename("./readme.md", "./your-files-here/readme.md", function (err) {
+  if (err) {
+    throw err;
+  }
+  console.log("Markdown file moved");
+});
+
+//Remove Files
+fs.unlinkSync("./your-files-here/test1.txt");
+
+fs.unlink("./your-files-here/test2.txt", function (err) {
+  if (err) {
+    throw err;
+  }
+  console.log("Notes are gone");
+});
+
+```
+
+```x
+➜  APP git:(main) ✗ node app
+Markdown file renamed
+Markdown file moved
+Notes are gone
+```
+
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/6ae50f3f-256d-4404-888c-51cadced4022">
+
+# #END</details>
+
+<details>
+<summary>18. Files - Renaming, Moving and Removing Directories </summary>
+
+# Files - Renaming, Moving and Removing Directories
+
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
+
+```js
+const fs = require("fs");
+
+//Move Folder
+fs.renameSync("./assets/logs", "accounts/logs");
+console.log("logs folder moved");
+
+//Remove Folder
+fs.rmdir("./assets", function (err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("assets directory removed");
+  }
+});
+
+//Remove Folder that has files or folders in it
+fs.readdirSync("./accounts").forEach((file) => {
+  fs.renameSync(`./accounts/${file}`, `./bin/${file}`);
+});
+console.log("Files Removed");
+fs.rmdirSync("./accounts");
+console.log("Folder Removed");
+
+```
+
+```js
+➜  APP git:(main) ✗ node app
+logs folder moved
+Files Removed
+Folder Removed
+assets directory removed
+```
+
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/e97e4e6c-18a6-4e92-941d-3a026cbfec43">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/03193c83-c18e-4676-b414-be351c12d89c">
+
+# #END</details>
+
+<details>
+<summary>19. Files - Readable file streams </summary>
+
+# Files - Readable file streams
+
+## Reading Without Streams
+
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
+
+```js
+const fs = require("fs");
+
+fs.readFile("./chat-logs/team-chat.log", "UTF-8", (err, chatLog) => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  console.log(`File Read ${chatLog.length}`);
+  console.log("==========");
+  console.log(chatLog);
+});
+
+console.log("Reading the file");
+
+```
+
+```x
+➜  APP git:(main) ✗ node app
+Reading the file
+File Read 106
+==========
+Hello George!
+Hello Ben!
+What's happening?
+Not much, just discovering electricity.
+That's rad. Keep it up.
+```
+
+## Reading With Streams
+
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
+
+```js
+const fs = require("fs");
+
+let stream = fs.createReadStream("./chat-logs/team-chat.log", "UTF-8");
+
+let data;
+
+stream.once("data", (chunk) => {
+  console.log("read stream started");
+  console.log("==========");
+  console.log(chunk);
+});
+
+stream.on("data", (chunk) => {
+  console.log(`chunk: ${chunk.length}`);
+  data += chunk;
+});
+
+stream.on("end", () => {
+  console.log(`finished ${data.length}`);
+});
+
+console.log("Reading the file");
+
+```
+
+```x
+➜  APP git:(main) ✗ node app
+Reading the file
+read stream started
+==========
+Hello George!
+Hello Ben!
+What's happening?
+Not much, just discovering electricity.
+That's rad. Keep it up.
+chunk: 106
+finished 115
+```
+
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/48f318d3-f204-4f9d-b25c-b9e3c05e7753">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/1f37c179-946c-4ff9-ac82-d213d872afcf">
+
+# #END</details>
+
+<details>
+<summary>20. Files - Writable file streams </summary>
+
+# Files - Writable file streams
+
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
+
+```js
+const fs = require("fs");
+
+let answerStream;
+
+let questions = [
+  "What is your name?",
+  "What would you rather be doing?",
+  "What is your preferred programming language?",
+];
+
+let answers = [];
+
+function ask(i) {
+  process.stdout.write(`\n\n\n\n  ${questions[i]}`);
+  process.stdout.write(`  >  `);
+}
+
+process.stdin.once("data", (data) => {
+  let name = data.toString().trim();
+  let fileName = `./${name}.md`;
+  if (fs.existsSync(fileName)) {
+    fs.unlinkSync(fileName);
+  }
+  answerStream = fs.createWriteStream(fileName);
+  answerStream.write(`Question Answers for ${name}\n========\n`);
+});
+
+process.stdin.on("data", function (data) {
+  let answer = data.toString().trim();
+
+  answerStream.write(`Question: ${questions[answers.length]}\n`);
+
+  answerStream.write(`Answer: ${answer}\n`, function () {
+    if (answers.length < questions.length) {
+      ask(answers.length);
+    } else {
+      process.exit();
+    }
+  });
+
+  answers.push(answer);
+});
+
+process.on("exit", function () {
+  answerStream.close();
+  process.stdout.write("\n\n\n\n  ");
+  process.stdout.write(
+    `Go ${answers[1]} ${answers[0]} you can finish writing ${answers[2]} later!`
+  );
+  process.stdout.write("\n\n\n\n");
+});
+
+ask(answers.length);
+
+```
+
+```x
+➜  APP git:(main) ✗ node app
+
+  What is your name?  >  Ifeanyi
+
+  What would you rather be doing?  >  Studying
+
+  What is your preferred programming language?  >  Python
+
+  Go Studying Ifeanyi you can finish writing Python later!
+```
+
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/Ifeanyi.md:
+
+```md
+Question Answers for Ifeanyi
+========
+Question: What is your name?
+Answer: Ifeanyi
+Question: What would you rather be doing?
+Answer: Studying
+Question: What is your preferred programming language?
+Answer: Python
+```
+
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/cf205b95-5b12-45c0-b9fa-8bc167ec74e0">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/446e38ef-580a-4fa0-8be9-1c8c78da908d">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/dc98b147-6650-42ee-b1a6-ace5e2ac37f0">
+
+# #END</details>
+
+# #END

@@ -1258,11 +1258,6 @@ app.listen(PORT, () => console.log(`Your server is running on port ${PORT}`));
 
 ![image](https://github.com/omeatai/src-AI-Software/assets/32337103/edf351e4-d5e0-4496-8920-6d0d3aa41adc)
 
-
-```js
-
-```
-
 # #END</details>
 
 # #END
