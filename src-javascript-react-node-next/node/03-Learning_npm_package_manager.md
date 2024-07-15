@@ -107,7 +107,7 @@ npm outdated -g
 
 ### Installing latest versions
 
-```js
+```x
 npm install eslint@8.32.0
 npm install eslint@latest
  
@@ -122,7 +122,7 @@ npm install -g npm@latest
 
 # Removing a Dependency
 
-```js
+```x
 npm install eslint
 npm uninstall eslint
 
@@ -161,7 +161,7 @@ npm publish
 
 ## Publishing a scoped Package
 
-```js
+```x
 # Initializing npm package
 npm init -scope=@ifeanyiomeata
 npm publish -access public
@@ -169,7 +169,7 @@ npm publish -access public
 
 ## Publishing a private Package
 
-```js
+```x
 # Initializing npm package
 npm init -scope=@ifeanyiomeata
 npm publish
@@ -182,37 +182,110 @@ npm publish
 
 # Optimizing npm Cache
 
+## Verify that there is no problem with the cache
+
+```x
+npm cache verify
+```
+
+## Clean the Cache
+
+```x
+npm cache clean --force
+```
+
+# #END</details>
+
+<details>
+<summary>8. Audit npm </summary>
+
+# Audit npm
+
+```x
+npm install socket.io
+npm audit
+```
+
+```x
+npm audit fix
+```
+
+# #END</details>
+
+<details>
+<summary>9. Scripting in package.json </summary>
+
+# Scripting in package.json
+
+## Install babel Packages
+
 ```js
+npm uninstall --save-dev babel cli
+npm install --save-dev @babel/cli @babel/core @babel/node @babel/preset-env
+```
+
+## Install nodemon
+
+```js
+npm install --save-dev nodemon
+```
+
+### src-AI-Software/my_projects/01_learning_npm/package.json:
+
+```json
+{
+  "name": "01_learning_npm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./index.js --exec babel-node"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.24.9",
+    "@babel/node": "^7.24.8",
+    "@babel/preset-env": "^7.24.8",
+    "nodemon": "^3.1.4"
+  }
+}
+```
+
+### src-AI-Software/my_projects/01_learning_npm/index.js:
+
+```js
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("<h1>This is the Index App: Hello World!</h1>");
+});
+
+app.listen(3000, () => {
+  console.log("Index app listening on port 3000!");
+});
 
 ```
 
-```js
+![image](https://github.com/user-attachments/assets/b95dbeb3-be8c-4bac-8ff5-ae98a6912677)
 
-```
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/0a277873-9119-43a7-ba72-bc9799bd5216">
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/8f0fe5ed-e7ec-4aa9-99c3-bb98db637d56">
 
-```js
+# #END</details>
 
-```
+<details>
+<summary>10. Running npx </summary>
 
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
+# Running npx
 
 ```js
 
