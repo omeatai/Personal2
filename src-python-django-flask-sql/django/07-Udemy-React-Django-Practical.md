@@ -3176,6 +3176,10 @@ DELETE http://localhost:8000/api/v1/users/5
 
 ![image](https://github.com/user-attachments/assets/136d078e-d111-42f7-b27e-cb66001e7faa)
 
+<img width="1396" alt="image" src="https://github.com/user-attachments/assets/f64987d5-80bc-46f8-bffc-a091120f5f7a">
+<img width="1396" alt="image" src="https://github.com/user-attachments/assets/6efc3e6d-3ba3-43aa-8dcc-47f2f627695c">
+<img width="1396" alt="image" src="https://github.com/user-attachments/assets/f9d95fc5-a84a-4ccd-8467-f16dc839f08e">
+
 # #END</details>
 
 <details>
