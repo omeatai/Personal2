@@ -142,18 +142,45 @@ npm uninstall --save-dev nodemon
 ![image](https://github.com/user-attachments/assets/6369203a-e99a-46cd-9ac0-98b199548ed3)
 ![image](https://github.com/user-attachments/assets/93f9237a-1f26-4ffe-bf9e-0951c51e68df)
 
+# #END</details>
 
-```js
+<details>
+<summary>6. Publishing Packages to npm.js </summary>
 
+# Publishing Packages to npm.js
+
+## Publishing an unscoped Package
+
+```x
+# Check if the path installs on another directory in your local system
+npm install /Users/ifeanyiomeata/Desktop/SERVER/projects/src-AI-Software/my_projects/01_learning_npm/
+
+# Publish unscoped Package
+npm publish
 ```
 
-```js
-
-```
+## Publishing a scoped Package
 
 ```js
-
+# Initializing npm package
+npm init -scope=@ifeanyiomeata
+npm publish -access public
 ```
+
+## Publishing a private Package
+
+```js
+# Initializing npm package
+npm init -scope=@ifeanyiomeata
+npm publish
+```
+
+# #END</details>
+
+<details>
+<summary>7. Optimizing npm Cache </summary>
+
+# Optimizing npm Cache
 
 ```js
 
