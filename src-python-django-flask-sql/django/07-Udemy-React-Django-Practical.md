@@ -403,7 +403,7 @@ admin.site.register(models.User, UserAdmin)
 
 ## Run Migrations
 
-```py
+```x
 python manage.py makemigrations
 python manage.py migrate
 ```
@@ -615,7 +615,7 @@ class User(AbstractUser):
 
 ## Run Migrations
 
-```py
+```x
 python manage.py makemigrations
 python manage.py migrate
 ```
@@ -785,7 +785,7 @@ def users(request):
 
 ## Install JWT Package
 
-```py
+```x
 pip install PyJWT
 ```
 
@@ -1254,7 +1254,7 @@ class User(AbstractUser):
 
 ## Run Migrations
 
-```py
+```x
 python manage.py makemigrations
 python manage.py migrate
 ```
@@ -1327,7 +1327,7 @@ class User(AbstractUser):
 
 ### src-AI-Software/my_projects/07_react_django_practical/fixtures/permissions.json:
 
-```py
+```json
 [
     {
         "model": "users_app.permission",
@@ -1390,7 +1390,7 @@ class User(AbstractUser):
 
 ### src-AI-Software/my_projects/07_react_django_practical/fixtures/roles.json:
 
-```py
+```json
 [
     {
         "model": "users_app.role",
@@ -1443,7 +1443,7 @@ class User(AbstractUser):
 
 ### src-AI-Software/my_projects/07_react_django_practical/fixtures/users.json:
 
-```py
+```json
 [
     {
         "model": "users_app.user",
@@ -1504,7 +1504,7 @@ class User(AbstractUser):
 
 ## Run LoadData Permissions.json to Model
 
-```py
+```x
 python manage.py loaddata fixtures/permissions.json
 ```
 
@@ -1514,7 +1514,7 @@ python manage.py loaddata fixtures/permissions.json
 
 ## Run LoadData roles.json to Model
 
-```py
+```x
 python manage.py loaddata fixtures/roles.json
 ```
 
@@ -1525,7 +1525,7 @@ python manage.py loaddata fixtures/roles.json
 
 ## Run LoadData users.json to Model
 
-```py
+```x
 python manage.py loaddata fixtures/users.json
 ```
 
@@ -2014,7 +2014,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 ## LIST/GET All Roles
 
-```py
+```x
 GET http://localhost:8000/api/v1/roles
 ```
 
@@ -2461,7 +2461,7 @@ PUT http://localhost:8000/api/v1/roles/4
 <img width="1497" alt="image" src="https://github.com/user-attachments/assets/b4af6ae1-73f4-4717-8040-1d9ac4316c9a">
 <img width="1497" alt="image" src="https://github.com/user-attachments/assets/8299ffdc-7ec8-4b41-8dbf-adc954e03a77">
 
-```py
+```x
 {
     "data": {
         "id": 4,
