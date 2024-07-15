@@ -34,9 +34,9 @@ Wrote to /Users/ifeanyiomeata/Desktop/SERVER/projects/src-AI-Software/my_project
 # #END</details>
 
 <details>
-<summary>2. Initializing Dependencies </summary>
+<summary>2. Installing Dependencies </summary>
 
-# Initializing Dependencies
+# Installing Dependencies
 
 ## Installing Main Dependencies
 
@@ -53,12 +53,19 @@ npm install --save-dev babel cli
 npm install -D babel cli 
 ```
 
-```js
+## Installing Dependencies globally to use in your projects
 
+```js
+npm install -g create-react-app 
+create-react-app crud-app 
+cd crud-app
+npm install --save axios react-bootstrap bootstrap
 ```
 
-```js
+## Installing Dependencies globally temporarily (use once)
 
+```js
+npx create-react-app crud-app 
 ```
 
 ```js
