@@ -1773,9 +1773,9 @@ class UserSerializer(serializers.ModelSerializer):
 # #END</details>
 
 <details>
-<summary>14. Setup URL, View and Serializer for Role Model - LIST/GET and CREATE/POST ROLE using Viewsets </summary>
+<summary>14. Setup URL, View and Serializer for Role Model - READ and CREATE ROLE using Viewsets </summary>
 
-# Setup URL, View and Serializer for Role Model - LIST/GET and CREATE/POST ROLE using Viewsets
+# Setup URL, View and Serializer for Role Model - READ and CREATE ROLE using Viewsets
 
 ### src-AI-Software/my_projects/07_react_django_practical/users_app/urls.py:
 
@@ -2189,9 +2189,9 @@ POST http://localhost:8000/api/v1/roles
 # #END</details>
 
 <details>
-<summary>15. Setup URL, View and Serializer for Role Model - RETRIEVE/GET ROLE, UPDATE/PUT and DELETE/DESTROY ROLE using Viewsets </summary>
+<summary>15. Setup URL, View and Serializer for Role Model - RETRIEVE, UPDATE and DELETE ROLE using Viewsets </summary>
 
-# Setup URL, View and Serializer for Role Model - RETRIEVE/GET ROLE, UPDATE/PUT and DELETE/DESTROY ROLE using Viewsets
+# Setup URL, View and Serializer for Role Model - RETRIEVE, UPDATE and DELETE ROLE using Viewsets
 
 ### src-AI-Software/my_projects/07_react_django_practical/users_app/urls.py:
 
@@ -2875,9 +2875,9 @@ GET http://localhost:8000/api/v1/users/2
 # #END</details>
 
 <details>
-<summary>17. Setup URL and View for User Model - CREATE, UPDATE AND DESTROY using Generic API View and Mixins </summary>
+<summary>17. Setup URL and View for User Model - CREATE, UPDATE AND DELETE using Generic API View and Mixins </summary>
 
-# Setup URL and View for User Model - CREATE, UPDATE AND DESTROY using Generic API View and Mixins
+# Setup URL and View for User Model - CREATE, UPDATE AND DELETE using Generic API View and Mixins
 
 ### src-AI-Software/my_projects/07_react_django_practical/users_app/urls.py:
 
