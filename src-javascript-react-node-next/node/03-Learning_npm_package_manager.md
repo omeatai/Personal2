@@ -283,32 +283,51 @@ app.listen(3000, () => {
 # #END</details>
 
 <details>
-<summary>10. Running npx </summary>
+<summary>10. Running npx with package and scripts </summary>
 
-# Running npx
+# Running npx with package and scripts
 
-```js
+### src-AI-Software/my_projects/01_learning_npm/package.json:
 
+```json
+{
+  "name": "01_learning_npm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./index.js --exec babel-node",
+    "create-angular-app": "npx -p @angular/cli ng new myapp"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.24.9",
+    "@babel/node": "^7.24.8",
+    "@babel/preset-env": "^7.24.8",
+    "nodemon": "^3.1.4"
+  }
+}
+```
+
+```x
+npm run create-angular-app
 ```
 
 ```js
-
+npx -p @angular/cli ng new myapp
+cd myapp
 ```
 
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/f364ef74-bb70-4978-adcc-b266730e5b34">
 
 # #END</details>
+
+# #END
