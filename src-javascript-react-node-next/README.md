@@ -18,7 +18,7 @@
 
 ### [02-Node Essential Training\*](https://github.com/omeatai/src-AI-Software/blob/main/src-javascript-react-node-next/node/02-Node-Essential-Training.md)
 
-### [03-Learning NPM - A Package Manager](https://github.com/omeatai/src-AI-Software/blob/main/src-javascript-react-node-next/node/03-Learning_npm_package_manager.md)
+### [03-Learning NPM - A Package Manager*](https://github.com/omeatai/src-AI-Software/blob/main/src-javascript-react-node-next/node/03-Learning_npm_package_manager.md)
 
 ### [04-Build Powerful Web Apps with Node](https://github.com/omeatai/src-AI-Software/blob/main/src-javascript-react-node-next/node/04-Build_Powerful_Web_Apps_with_Node.md)
 
