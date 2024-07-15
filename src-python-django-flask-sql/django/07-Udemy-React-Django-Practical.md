@@ -2193,13 +2193,317 @@ POST http://localhost:8000/api/v1/roles
 
 # Setup URL, View and Serializer for Role Model - RETRIEVE/GET A ROLE, UPDATE/PUT and DELETE/DESTROY ROLE using Viewsets
 
+### src-AI-Software/my_projects/07_react_django_practical/users_app/urls.py:
+
 ```py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.users, name='users'),
+    path('register', views.register, name='register'),
+    path('login', views.login, name='login'),
+    path('auth', views.AuthUser.as_view(), name='auth'),
+    path('logout', views.logout, name='logout'),
+    path('permissions', views.PermissionAPIView.as_view(), name='permissions'),
+    path('roles', views.RoleViewSet.as_view(
+        {'get': 'list', 'post': 'create'}), name='roles'),
+    path('roles/<int:pk>', views.RoleViewSet.as_view(
+        {'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='roles-detail'),
+]
 
 ```
 
+### src-AI-Software/my_projects/07_react_django_practical/users_app/views.py:
+
 ```py
+from rest_framework import exceptions, viewsets, status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+
+from .serializers import PermissionSerializer, UserSerializer, RoleSerializer
+from .models import User, Permission, Role
+from .auth import generate_access_token, JWTAuth
+
+
+class AuthUser(APIView):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response({'data': serializer.data})
+
+
+class PermissionAPIView(APIView):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = PermissionSerializer(Permission.objects.all(), many=True)
+        return Response({'data': serializer.data})
+
+
+class RoleViewSet(viewsets.ViewSet):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def list(self, request):
+        queryset = Role.objects.all()
+        serializer = RoleSerializer(queryset, many=True)
+        return Response({"data": serializer.data})
+
+    def create(self, request):
+        serializer = RoleSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"data": serializer.data}, status=status.HTTP_201_CREATED)
+
+    def retrieve(self, request, pk=None):
+        role = Role.objects.get(id=pk)
+        serializer = RoleSerializer(role)
+        return Response({"data": serializer.data})
+
+    def update(self, request, pk=None):
+        role = Role.objects.get(id=pk)
+        serializer = RoleSerializer(instance=role, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"data": serializer.data}, status=status.HTTP_202_ACCEPTED)
+
+    def destroy(self, request, pk=None):
+        role = Role.objects.get(id=pk)
+        role.delete()
+        return Response({'message': 'Role deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['POST'])
+def register(request):
+    data = request.data
+    if data['password'] != data['password_confirm']:
+        raise exceptions.ValidationError('Passwords do not match')
+
+    if User.objects.filter(email=data['email']).exists():
+        raise exceptions.ValidationError('Email already exists')
+
+    serializer = UserSerializer(data=data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def login(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    user = User.objects.filter(email=email).first()
+    if user is None:
+        raise exceptions.AuthenticationFailed('User not found')
+    if not user.check_password(password):
+        raise exceptions.AuthenticationFailed('Incorrect password')
+
+    token = generate_access_token(user)
+    # set token to http-only cookie
+    response = Response()
+    response.set_cookie(key='jwt', value=token, httponly=True)
+    response.data = {
+        'jwt': token
+    }
+    return response
+
+
+@api_view(['POST'])
+def logout(request):
+    response = Response()
+    response.delete_cookie('jwt')
+    response.data = {
+        'message': 'success'
+    }
+    return response
+
+
+@api_view(['GET'])
+def users(request):
+    if request.method == 'GET':
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        context = {
+            'users': serializer.data
+        }
+        return Response(context)
 
 ```
+
+### src-AI-Software/my_projects/07_react_django_practical/users_app/serializers.py:
+
+```py
+from rest_framework import serializers
+from .models import User, Permission, Role
+
+
+class PermissionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Permission
+        fields = "__all__"
+
+
+class PermissionRelatedField(serializers.StringRelatedField):
+    def to_representation(self, value):
+        return PermissionSerializer(value).data
+
+    def to_internal_value(self, data):
+        return data
+
+
+class RoleSerializer(serializers.ModelSerializer):
+    # permissions = PermissionSerializer(many=True)
+    permissions = PermissionRelatedField(many=True)
+
+    class Meta:
+        model = Role
+        fields = "__all__"
+
+    def create(self, validated_data):
+        permissions = validated_data.pop('permissions', None)
+
+        if permissions == None:
+            raise serializers.ValidationError(
+                "You must set Permissions for the Role.")
+
+        instance = self.Meta.model(**validated_data)
+        instance.save()
+        instance.permissions.add(*permissions)
+        instance.save()
+        return instance
+
+
+class UserSerializer(serializers.ModelSerializer):
+
+    password_confirm = serializers.CharField(
+        style={'input_type': 'password'}, write_only=True)
+
+    class Meta:
+        model = User
+        fields = ['id', 'first_name', 'last_name',
+                  'email', 'password', 'password_confirm']  # '__all__'
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        password_confirm = validated_data.pop('password_confirm')
+
+        if password != password_confirm:
+            raise serializers.ValidationError("Passwords do not match")
+
+        # user = User.objects.create(**validated_data)
+        instance = self.Meta.model(**validated_data)
+        if password is not None:
+            instance.set_password(password)  # Need to hash Password
+        instance.save()
+        return instance
+
+    def update(self, instance, validated_data):
+        password = validated_data.pop('password', None)
+        password_confirm = validated_data.pop('password_confirm', None)
+
+        if password and password_confirm and password != password_confirm:
+            raise serializers.ValidationError("Passwords do not match")
+
+        for key, value in validated_data.items():
+            setattr(instance, key, value)
+
+        if password:
+            instance.set_password(password)
+
+        instance.save()
+        return instance
+
+```
+
+## GET/RETRIEVE a Role
+
+```x
+GET http://localhost:8000/api/v1/roles/4
+```
+
+<img width="1497" alt="image" src="https://github.com/user-attachments/assets/ce8295dd-9eaa-4e17-b7af-9e53d094d007">
+<img width="1497" alt="image" src="https://github.com/user-attachments/assets/29b978bd-b985-4609-bf53-44a85736038c">
+
+```x
+{
+    "data": {
+        "id": 4,
+        "permissions": [],
+        "name": "new role",
+        "code": null
+    }
+}
+```
+
+## UPDATE/PUT a Role
+
+```x
+PUT http://localhost:8000/api/v1/roles/4
+```
+
+```x
+{
+    "name": "updated name",
+    "permissions": [3,4]
+}
+```
+
+<img width="1497" alt="image" src="https://github.com/user-attachments/assets/b4af6ae1-73f4-4717-8040-1d9ac4316c9a">
+<img width="1497" alt="image" src="https://github.com/user-attachments/assets/8299ffdc-7ec8-4b41-8dbf-adc954e03a77">
+
+```py
+{
+    "data": {
+        "id": 4,
+        "permissions": [
+            {
+                "id": 3,
+                "name": "view_roles",
+                "code": null
+            },
+            {
+                "id": 4,
+                "name": "edit_roles",
+                "code": null
+            }
+        ],
+        "name": "updated name",
+        "code": null
+    }
+}
+```
+
+## DELETE/DESTROY a Role
+
+```x
+DELETE http://localhost:8000/api/v1/roles/4
+```
+
+<img width="1497" alt="image" src="https://github.com/user-attachments/assets/e40cbc9b-fd4b-48e7-96d7-0b7aa83a08dd">
+<img width="1497" alt="image" src="https://github.com/user-attachments/assets/a4f6edc2-e5ba-45ac-b63c-8d2c97bbbc82">
+
+![image](https://github.com/user-attachments/assets/83e91fca-910e-482d-a230-305edbc467c7)
+
+<img width="1368" alt="image" src="https://github.com/user-attachments/assets/08ece7d5-5ec3-4a2e-ac56-8e81a1b403a0">
+<img width="1368" alt="image" src="https://github.com/user-attachments/assets/d1cf10ea-dc3e-4c04-bb42-26c86eb1b885">
+<img width="1368" alt="image" src="https://github.com/user-attachments/assets/382e3b7f-9db9-4836-bb25-6da8cc073217">
+
+# #END</details>
+
+<details>
+<summary>16. Setup URL and View for User Model CRUD - CREATE, READ, RETRIEVE, UPDATE AND DESTROY using Generic Views </summary>
+
+# Setup URL and View for User Model CRUD - CREATE, READ, RETRIEVE, UPDATE AND DESTROY using Generic Views
 
 ```py
 
