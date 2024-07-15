@@ -43,4 +43,4 @@
 
 ```
 
-# #END<details>
+# #END</details>
