@@ -1081,39 +1081,181 @@ assets directory removed
 
 # Files - Readable file streams
 
+## Reading Without Streams
+
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
+
 ```js
+const fs = require("fs");
+
+fs.readFile("./chat-logs/team-chat.log", "UTF-8", (err, chatLog) => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  console.log(`File Read ${chatLog.length}`);
+  console.log("==========");
+  console.log(chatLog);
+});
+
+console.log("Reading the file");
 
 ```
 
+```x
+➜  APP git:(main) ✗ node app
+Reading the file
+File Read 106
+==========
+Hello George!
+Hello Ben!
+What's happening?
+Not much, just discovering electricity.
+That's rad. Keep it up.
+```
+
+## Reading With Streams
+
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
+
 ```js
+const fs = require("fs");
+
+let stream = fs.createReadStream("./chat-logs/team-chat.log", "UTF-8");
+
+let data;
+
+stream.once("data", (chunk) => {
+  console.log("read stream started");
+  console.log("==========");
+  console.log(chunk);
+});
+
+stream.on("data", (chunk) => {
+  console.log(`chunk: ${chunk.length}`);
+  data += chunk;
+});
+
+stream.on("end", () => {
+  console.log(`finished ${data.length}`);
+});
+
+console.log("Reading the file");
 
 ```
 
-```js
-
+```x
+➜  APP git:(main) ✗ node app
+Reading the file
+read stream started
+==========
+Hello George!
+Hello Ben!
+What's happening?
+Not much, just discovering electricity.
+That's rad. Keep it up.
+chunk: 106
+finished 115
 ```
 
-```js
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/48f318d3-f204-4f9d-b25c-b9e3c05e7753">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/1f37c179-946c-4ff9-ac82-d213d872afcf">
 
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
 # #END</details>
+
+<details>
+<summary>20. Files - Writable file streams </summary>
+
+# Files - Writable file streams
+
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/app.js:
+
+```js
+const fs = require("fs");
+
+let answerStream;
+
+let questions = [
+  "What is your name?",
+  "What would you rather be doing?",
+  "What is your preferred programming language?",
+];
+
+let answers = [];
+
+function ask(i) {
+  process.stdout.write(`\n\n\n\n  ${questions[i]}`);
+  process.stdout.write(`  >  `);
+}
+
+process.stdin.once("data", (data) => {
+  let name = data.toString().trim();
+  let fileName = `./${name}.md`;
+  if (fs.existsSync(fileName)) {
+    fs.unlinkSync(fileName);
+  }
+  answerStream = fs.createWriteStream(fileName);
+  answerStream.write(`Question Answers for ${name}\n========\n`);
+});
+
+process.stdin.on("data", function (data) {
+  let answer = data.toString().trim();
+
+  answerStream.write(`Question: ${questions[answers.length]}\n`);
+
+  answerStream.write(`Answer: ${answer}\n`, function () {
+    if (answers.length < questions.length) {
+      ask(answers.length);
+    } else {
+      process.exit();
+    }
+  });
+
+  answers.push(answer);
+});
+
+process.on("exit", function () {
+  answerStream.close();
+  process.stdout.write("\n\n\n\n  ");
+  process.stdout.write(
+    `Go ${answers[1]} ${answers[0]} you can finish writing ${answers[2]} later!`
+  );
+  process.stdout.write("\n\n\n\n");
+});
+
+ask(answers.length);
+
+```
+
+```x
+➜  APP git:(main) ✗ node app
+
+  What is your name?  >  Ifeanyi
+
+  What would you rather be doing?  >  Studying
+
+  What is your preferred programming language?  >  Python
+
+  Go Studying Ifeanyi you can finish writing Python later!
+```
+
+### src-AI-Software/my_projects/10_Node_Essential_Training/APP/Ifeanyi.md:
+
+```md
+Question Answers for Ifeanyi
+========
+Question: What is your name?
+Answer: Ifeanyi
+Question: What would you rather be doing?
+Answer: Studying
+Question: What is your preferred programming language?
+Answer: Python
+```
+
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/cf205b95-5b12-45c0-b9fa-8bc167ec74e0">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/446e38ef-580a-4fa0-8be9-1c8c78da908d">
+<img width="1491" alt="image" src="https://github.com/user-attachments/assets/dc98b147-6650-42ee-b1a6-ace5e2ac37f0">
+
+# #END</details>
+
+# #END
