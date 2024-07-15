@@ -2146,8 +2146,15 @@ GET http://localhost:8000/api/v1/roles
 
 ## CREATE/POST a new Role
 
-```py
-GET http://localhost:8000/api/v1/roles
+```x
+POST http://localhost:8000/api/v1/roles
+```
+
+```x
+{
+    "name": "new role2",
+    "permissions": [1, 2]
+}
 ```
 
 <img width="1497" alt="image" src="https://github.com/user-attachments/assets/5efce313-05e0-4dfa-92c9-f75f8e4c5756">
