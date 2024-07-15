@@ -2189,9 +2189,9 @@ POST http://localhost:8000/api/v1/roles
 # #END</details>
 
 <details>
-<summary>15. Setup URL, View and Serializer for Role Model - RETRIEVE/GET A ROLE, UPDATE/PUT and DELETE/DESTROY ROLE using Viewsets </summary>
+<summary>15. Setup URL, View and Serializer for Role Model - RETRIEVE/GET ROLE, UPDATE/PUT and DELETE/DESTROY ROLE using Viewsets </summary>
 
-# Setup URL, View and Serializer for Role Model - RETRIEVE/GET A ROLE, UPDATE/PUT and DELETE/DESTROY ROLE using Viewsets
+# Setup URL, View and Serializer for Role Model - RETRIEVE/GET ROLE, UPDATE/PUT and DELETE/DESTROY ROLE using Viewsets
 
 ### src-AI-Software/my_projects/07_react_django_practical/users_app/urls.py:
 
