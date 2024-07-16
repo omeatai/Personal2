@@ -677,6 +677,137 @@ DELETE http://localhost:3000/users/3
 
 # Serving Static Files with Express
 
+### src-AI-Software/my_projects/01_Build_Powerful_Web_Apps_with_Node/express_project/index.js:
+
+```js
+import express from "express";
+import data from "./data/mock.json" with { type: "json" };
+
+const app = express();
+const PORT = 3000;
+let db = data;
+
+//Using the Public folder
+app.use(express.static("public"));
+
+//Using the images folder with route: /images
+app.use("/images", express.static("images"));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+//GET
+app.get("/", (req, res) => {
+  res.send("This is a GET request at '/'!");
+});
+
+//POST
+app.post("/", (req, res) => {
+  res.send("This is a POST request at '/'!");
+});
+
+//PUT
+app.put("/:id", (req, res) => {
+  const id = req.params.id;
+  res.send(`This is a PUT request with id ${id}`);
+});
+
+//DELETE
+app.delete("/:id", (req, res) => {
+  const id = req.params.id;
+  res.send(`This is a DELETE request with id ${id}`);
+});
+
+// USERS CRUD
+
+app
+  .route("/users")
+  .get((req, res) => {
+    res.json({"db": db});
+  })
+  .post((req, res) => {
+    const lastDataId = db[db.length - 1].id;
+    const new_id = lastDataId + 1;
+    let user = req.body;
+    user.id = new_id;
+    db.push(user);
+    res.json({"user": user});
+  });
+
+app
+  .route("/users/:id")
+  .put((req, res) => {
+    const id = req.params.id;
+    let new_user = req.body;
+    if(!new_user.first_name || !new_user.last_name ||!new_user.email) {
+        res.json({"msg": "Please enter all the fields!"});
+    }
+    req.body.id = id;
+    db = db.map((user) => {
+        if (user.id === parseInt(id)) {
+            return req.body;
+        } else {
+            return user;
+        }
+    });
+    res.json({"msg": "User updated successfully!", "user": new_user});
+  })
+  .delete((req, res) => {
+    const id = req.params.id;
+    db = db.filter((user) => user.id !== parseInt(id));
+    res.json({"msg": "User deleted successfully!"});
+  });
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log("Press CTRL+C to stop server");
+  //   console.log(db);
+});
+
+```
+
+```x
+http://localhost:3000/mountains_1.jpeg
+```
+
+![image](https://github.com/user-attachments/assets/4a0dabba-071f-4935-a0c2-96f427548749)
+
+```x
+http://localhost:3000/images/mountains_2.jpeg
+```
+
+![image](https://github.com/user-attachments/assets/16e4dc5e-84e8-4c26-bc38-f327e63b785c)
+
+<img width="1353" alt="image" src="https://github.com/user-attachments/assets/ca54d338-b07b-4e30-80bb-02daf76bbc7e">
+
+# #END</details>
+
+<details>
+<summary>9. Routing with Express </summary>
+
+# Routing with Express
+
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
 ```js
 
 ```
