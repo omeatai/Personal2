@@ -437,37 +437,120 @@ Press CTRL+C to stop server
 # #END</details>
 
 <details>
-<summary>6. Create HTTP Routes for Server </summary>
+<summary>6. Create Basic HTTP Routes for Server Endpoints </summary>
 
-# Create HTTP Routes for Server
+# Create Basic HTTP Routes for Server Endpoints
+
+### src-AI-Software/my_projects/01_Build_Powerful_Web_Apps_with_Node/express_project/index.js:
 
 ```js
+import express from "express";
+// import data from "./data/mock.json" with { type: "json" };
+
+const app = express();
+
+const PORT = 3000;
+
+//GET
+app.get("/", (req, res) => {
+  res.send("This is a GET request at '/'!");
+});
+
+//POST
+app.post("/", (req, res) => {
+  res.send("This is a POST request at '/'!");
+});
+
+//PUT
+app.put("/:id", (req, res) => {
+  const id = req.params.id;
+  res.send(`This is a PUT request with id ${id}`);
+});
+
+//DELETE
+app.delete("/:id", (req, res) => {
+  const id = req.params.id;
+  res.send(`This is a DELETE request with id ${id}`);
+});
+
+// USERS CRUD
+
+app
+  .route("/users")
+  .get((req, res) => {
+    res.send("GET ALL USERS at '/'!");
+  })
+  .post((req, res) => {
+    res.send("CREATE A USER at '/'!");
+  });
+
+app
+  .route("/users/:id")
+  .put((req, res) => {
+    const id = req.params.id;
+    res.send(`UPDATE USER at '/users/:id' with id ${id}!`);
+  })
+  .delete((req, res) => {
+    const id = req.params.id;
+    res.send(`DELETE USER at '/users/:id' with id ${id}!`);
+  });
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log("Press CTRL+C to stop server");
+  //   console.log(data);
+});
 
 ```
 
-```js
-
+```x
+GET http://localhost:3000
 ```
 
-```js
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/b2aa7a44-2e42-4820-8e00-99e3b690d78d">
 
+![image](https://github.com/user-attachments/assets/13f5d170-eb31-4902-8fa2-c01ab37c6d97)
+
+```x
+POST http://localhost:3000
 ```
 
-```js
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/519e1d55-5109-4f66-8d27-dd0865bcd9d4">
 
+
+```x
+http://localhost:3000/2
 ```
 
-```js
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/4f058006-0572-45ae-bf9e-993c8a852a48">
 
+
+```x
+http://localhost:3000/4
 ```
 
-```js
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/fb130b1f-b2fa-4092-9c52-087d0a93d299">
 
+
+```x
+http://localhost:3000/users
 ```
 
-```js
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/27f91a91-b40c-45b1-9185-ad8203037acd">
 
+
+```x
+http://localhost:3000/users/2
 ```
+
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/62ecdbaa-4959-4d81-b92d-23580f4c31b1">
+
+# #END</details>
+
+<details>
+<summary>7. Create HTTP Routes for Data Endpoints </summary>
+
+# Create HTTP Routes for Data Endpoints
 
 ```js
 
