@@ -554,21 +554,128 @@ PUT http://localhost:3000/users/2
 
 # Create HTTP Routes for Data Endpoints
 
+### src-AI-Software/my_projects/01_Build_Powerful_Web_Apps_with_Node/express_project/index.js:
+
 ```js
+import express from "express";
+import data from "./data/mock.json" with { type: "json" };
+
+const app = express();
+const PORT = 3000;
+let db = data;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+//GET
+app.get("/", (req, res) => {
+  res.send("This is a GET request at '/'!");
+});
+
+//POST
+app.post("/", (req, res) => {
+  res.send("This is a POST request at '/'!");
+});
+
+//PUT
+app.put("/:id", (req, res) => {
+  const id = req.params.id;
+  res.send(`This is a PUT request with id ${id}`);
+});
+
+//DELETE
+app.delete("/:id", (req, res) => {
+  const id = req.params.id;
+  res.send(`This is a DELETE request with id ${id}`);
+});
+
+// USERS CRUD
+
+app
+  .route("/users")
+  .get((req, res) => {
+    res.json({"db": db});
+  })
+  .post((req, res) => {
+    const lastDataId = db[db.length - 1].id;
+    const new_id = lastDataId + 1;
+    let user = req.body;
+    user.id = new_id;
+    db.push(user);
+    res.json({"user": user});
+  });
+
+app
+  .route("/users/:id")
+  .put((req, res) => {
+    const id = req.params.id;
+    let new_user = req.body;
+    if(!new_user.first_name || !new_user.last_name ||!new_user.email) {
+        res.json({"msg": "Please enter all the fields!"});
+    }
+    req.body.id = id;
+    db = db.map((user) => {
+        if (user.id === parseInt(id)) {
+            return req.body;
+        } else {
+            return user;
+        }
+    });
+    res.json({"msg": "User updated successfully!", "user": new_user});
+  })
+  .delete((req, res) => {
+    const id = req.params.id;
+    db = db.filter((user) => user.id !== parseInt(id));
+    res.json({"msg": "User deleted successfully!"});
+  });
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log("Press CTRL+C to stop server");
+  //   console.log(db);
+});
 
 ```
 
-```js
-
+```x
+GET http://localhost:3000/users
 ```
 
-```js
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/5ffb9854-df67-4aa1-9312-a12fde7176cb">
 
+![image](https://github.com/user-attachments/assets/b68eb79e-789a-4f55-948c-3bd0dd5df566)
+
+
+```x
+POST http://localhost:3000/users
 ```
 
-```js
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/388c179f-8136-4e83-8da6-cfc7518429ce">
 
+![image](https://github.com/user-attachments/assets/6053312b-f72a-491f-8fad-9a5651892b33)
+
+```x
+PUT http://localhost:3000/users/2
 ```
+
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/3f30c7c7-3042-4396-9cb6-e58c1ef953b8">
+
+![image](https://github.com/user-attachments/assets/874f59fc-7149-47ce-8e57-10de2a014bb5)
+
+```x
+DELETE http://localhost:3000/users/3
+```
+
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/54a3648f-f1ca-448a-a84a-84587e67a254">
+
+![image](https://github.com/user-attachments/assets/5a073fa8-af0b-41c3-9e42-0f834a4d5708)
+
+# #END</details>
+
+<details>
+<summary>8. Serving Static Files with Express </summary>
+
+# Serving Static Files with Express
 
 ```js
 
