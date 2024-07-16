@@ -257,9 +257,189 @@ touch .babelrc
 # #END</details>
 
 <details>
-<summary>4. Setup Package.json file with scripts </summary>
+<summary>4. Setup Package.json file with ES6 module and scripts </summary>
 
-# Setup Package.json file with scripts
+# Setup Package.json file with ES6 module and scripts
+
+### src-AI-Software/my_projects/01_Build_Powerful_Web_Apps_with_Node/express_project/package.json:
+
+```js
+{
+  "name": "express_project",
+  "type": "module",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --experimental-json-modules --exec babel-node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.24.9",
+    "@babel/node": "^7.24.8",
+    "@babel/preset-env": "^7.24.8"
+  }
+}
+```
+
+## Create Entry File: index.js
+
+```x
+touch index.js
+```
+
+### src-AI-Software/my_projects/01_Build_Powerful_Web_Apps_with_Node/express_project/index.js:
+
+```js
+import express from "express";
+
+const app = express();
+
+const PORT = 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+```
+
+## Run Server:
+
+```x
+npm run start
+```
+
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/f91afc08-cb4b-479c-aa82-d6656f20fa67">
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/9929c67d-d63e-4544-a601-bf08155941b1">
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/867a7fdf-3be7-4695-88e9-c9f975ff4dcf">
+
+# #END</details>
+
+<details>
+<summary>5. Generating Mock Data for Server </summary>
+
+# Generating Mock Data for Server
+
+[https://www.mockaroo.com/](https://www.mockaroo.com/)
+
+![image](https://github.com/user-attachments/assets/0d716a52-796d-49a3-aabd-c263da6b3a10)
+
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/3b15ad81-6c6e-4b48-a2b1-d589462982fc">
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/c2588be1-677a-43de-9837-cb021dc2351f">
+
+### src-AI-Software/my_projects/01_Build_Powerful_Web_Apps_with_Node/express_project/data/mock.json:
+
+```x
+[
+    {
+        "id": 1,
+        "first_name": "Eada",
+        "last_name": "Parren",
+        "email": "eparren0@tuttocitta.it"
+    },
+    {
+        "id": 2,
+        "first_name": "Renato",
+        "last_name": "Sutherby",
+        "email": "rsutherby1@bigcartel.com"
+    },
+    {
+        "id": 3,
+        "first_name": "Joshuah",
+        "last_name": "Abercrombie",
+        "email": "jabercrombie2@blog.com"
+    },
+    {
+        "id": 4,
+        "first_name": "Sutton",
+        "last_name": "Ferronier",
+        "email": "sferronier3@yale.edu"
+    },
+    ...........
+]
+```
+
+### src-AI-Software/my_projects/01_Build_Powerful_Web_Apps_with_Node/express_project/index.js:
+
+```js
+import express from "express";
+import data from "./data/mock.json" with { type: "json" };
+
+const app = express();
+
+const PORT = 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log("Press CTRL+C to stop server");
+  console.log(data);
+});
+
+```
+
+```x
+➜  express_project git:(main) ✗ npm run start
+
+> express_project@1.0.0 start
+> nodemon --experimental-json-modules --exec babel-node index.js
+
+[nodemon] 3.1.4
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,cjs,json
+[nodemon] starting `babel-node --experimental-json-modules index.js`
+(node:31564) ExperimentalWarning: Importing JSON modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Server running on port 3000
+Press CTRL+C to stop server
+[
+  {
+    id: 1,
+    first_name: 'Eada',
+    last_name: 'Parren',
+    email: 'eparren0@tuttocitta.it'
+  },
+  {
+    id: 2,
+    first_name: 'Renato',
+    last_name: 'Sutherby',
+    email: 'rsutherby1@bigcartel.com'
+  },
+  {
+    id: 3,
+    first_name: 'Joshuah',
+    last_name: 'Abercrombie',
+    email: 'jabercrombie2@blog.com'
+  },
+  {
+    id: 4,
+    first_name: 'Sutton',
+    last_name: 'Ferronier',
+    email: 'sferronier3@yale.edu'
+  },
+  ..........
+]
+```
+
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/7709ec54-6201-4eec-a4ca-decf6f350d4a">
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/431e37e6-cfc2-4a56-b984-ea2bb6a8d1f7">
+
+![image](https://github.com/user-attachments/assets/a51f9afd-23d2-4350-b866-be1c27ed48d7)
+
+# #END</details>
+
+<details>
+<summary>6. Create HTTP Routes for Server </summary>
+
+# Create HTTP Routes for Server
 
 ```js
 
@@ -281,6 +461,57 @@ touch .babelrc
 
 ```
 
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
 
 # #END</details>
 
