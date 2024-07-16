@@ -519,28 +519,30 @@ POST http://localhost:3000
 
 
 ```x
-http://localhost:3000/2
+PUT http://localhost:3000/2
 ```
 
 <img width="1313" alt="image" src="https://github.com/user-attachments/assets/4f058006-0572-45ae-bf9e-993c8a852a48">
 
 
 ```x
-http://localhost:3000/4
+DELETE http://localhost:3000/4
 ```
 
 <img width="1313" alt="image" src="https://github.com/user-attachments/assets/fb130b1f-b2fa-4092-9c52-087d0a93d299">
 
 
 ```x
-http://localhost:3000/users
+GET http://localhost:3000/users
 ```
 
 <img width="1313" alt="image" src="https://github.com/user-attachments/assets/27f91a91-b40c-45b1-9185-ad8203037acd">
 
+![image](https://github.com/user-attachments/assets/36946cf0-84ab-43da-b5d5-d3ef49ba6f63)
+
 
 ```x
-http://localhost:3000/users/2
+PUT http://localhost:3000/users/2
 ```
 
 <img width="1313" alt="image" src="https://github.com/user-attachments/assets/62ecdbaa-4959-4d81-b92d-23580f4c31b1">
