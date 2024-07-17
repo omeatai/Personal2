@@ -1180,17 +1180,67 @@ app.listen(PORT, () => {
 # #END</details>
 
 <details>
-<summary>7. Setup Express Routes and Middleware </summary>
+<summary>7. Setup Express Route for HomePage </summary>
 
-# Setup Express Routes and Middleware
+# Setup Express Route for HomePage
+
+### src-AI-Software/my_projects/01_building_a_website/server.js:
 
 ```js
+const express = require('express');
+const path = require('path');
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.use('/', routes());
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log('Ctrl + C to stop');
+});
 
 ```
 
+### src-AI-Software/my_projects/01_building_a_website/routes/homeRoutes.js:
+
 ```js
+const express = require('express');
+
+const router = express.Router();
+
+module.exports = () => {
+  router.get('/', (req, res) => {
+    const context = {
+      pageTitle: 'Welcome',
+      name: 'Roux Meetups',
+    };
+    res.render('pages/index', context);
+  });
+
+  return router;
+};
 
 ```
+
+![image](https://github.com/user-attachments/assets/9559a394-f76b-483d-8f57-d96ab54232eb)
+
+<img width="1349" alt="image" src="https://github.com/user-attachments/assets/d593c096-9852-4258-b276-cac520e6fc4d">
+<img width="1349" alt="image" src="https://github.com/user-attachments/assets/e909b1f2-8dbf-43f7-9cfa-988228a58b1f">
+
+# #END</details>
+
+<details>
+<summary>8. Setup Express Routes for Sub Pages </summary>
+
+# Setup Express Routes for Sub Pages
 
 ```js
 
