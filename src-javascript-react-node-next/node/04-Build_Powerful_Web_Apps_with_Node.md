@@ -1419,9 +1419,97 @@ GET http://localhost:3000/class
 
 ![image](https://github.com/user-attachments/assets/695dddc0-0379-4366-b0e5-5a75b4d6bb72)
 
-### src-AI-Software/my_projects/01_Build_Powerful_Web_Apps_with_Node/express_project/package.json:
+### src-AI-Software/my_projects/01_Build_Powerful_Web_Apps_with_Node/express_project/index.js:
 
 ```js
+import express from "express";
+// import data from "./data/mock.json" with { type: "json" };
+
+const app = express();
+const PORT = 3000;
+// let db = data;
+
+//Using the Public folder
+app.use(express.static("public"));
+
+//Using the images folder with route: /images
+app.use("/images", express.static("images"));
+
+//Built-in Middlewares using express.json() and express.urlencoded()
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+//POST - testing middlewares express.json() and express.urlencoded()
+app.post("/item", (req, res) => {
+  console.log(req.body);
+  res.send(req.body);
+});
+
+//GET, POST
+app
+  .route("/class")
+  .get((req, res) => {
+    res.send("This is a GET request at '/class'!");
+    //Throw new Error to test error handling in middleware
+    // throw new Error("Error in GET request at '/class'!");
+  })
+  .post((req, res) => {
+    res.send("This is a POST request at '/class'!");
+  });
+
+//PUT & DELETE
+app
+  .route("/class/:id")
+  .put((req, res) => {
+    const id = req.params.id;
+    res.send(`This is a PUT request with id ${id}`);
+  })
+  .delete((req, res) => {
+    const id = req.params.id;
+    res.send(`This is a DELETE request with id ${id}`);
+  });
+
+//GET - download method
+app.get("/download", (req, res) => {
+  res.download("images/mountains_2.jpeg");
+});
+
+//GET - redirect method
+app.get("/redirect", (req, res) => {
+  res.redirect("https://www.google.com/");
+});
+
+//GET with next()
+app.get(
+  "/next",
+  (req, res, next) => {
+    console.log("The response will be sent by the next function");
+    next();
+  },
+  (req, res) => {
+    res.send("This is a GET request callback at '/next'!");
+  }
+);
+
+// Catching Errors with Middleware
+app.use((err, req, res, next) => {
+  //   const error = new Error("Not Found");
+  //   error.status = 404;
+  //   next(error);
+  console.error(err.stack);
+  res.status(500).send("Something is broken!");
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log("Press CTRL+C to stop server");
+});
+
+```
+
+### src-AI-Software/my_projects/01_Build_Powerful_Web_Apps_with_Node/express_project/package.json:
+
+```json
 {
   "name": "express_project",
   "type": "module",
@@ -1430,7 +1518,7 @@ GET http://localhost:3000/class
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --experimental-json-modules --exec babel-node index.js",
-    "debug": "DEBUG=express:* node --experimental-json-modules --exec babel-node index.js"
+    "debug": "DEBUG=express:* nodemon --experimental-json-modules index.js"
   },
   "keywords": [],
   "author": "",
@@ -1451,66 +1539,34 @@ GET http://localhost:3000/class
 
 ## Debug Application
 
-```js
+```x
 npm run debug
 ```
 
-```js
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/eb6290f5-85d7-4519-81b3-7d5377e6ae12">
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/4c9f7ff2-6ca6-4b3e-ade8-1b0a8be397fd">
 
-```
+![image](https://github.com/user-attachments/assets/5dad5adf-8a91-4639-b344-d883f33afca2)
 
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/176ae746-fdf4-440a-b796-0f61d389199e">
 
 # #END</details>
+
+<details>
+<summary>16. Using Express with a Database </summary>
+
+# Using Express with a Database
+
+## [https://expressjs.com/en/guide/database-integration.html](https://expressjs.com/en/guide/database-integration.html)
+
+![image](https://github.com/user-attachments/assets/76e8deb3-d71f-42bc-a93c-8a0c1391e3bf)
+
+![image](https://github.com/user-attachments/assets/63021b77-b2f8-43ca-a7e3-9401b9842715)
+
+![image](https://github.com/user-attachments/assets/6b5622d5-cf68-4c3d-9535-d61b7f568ae6)
+
+# #END</details>
+
+# #END
 
 
