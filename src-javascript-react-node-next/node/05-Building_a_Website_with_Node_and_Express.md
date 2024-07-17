@@ -7,16 +7,14 @@
 
 # Clone Project Directory
 
-```x
-
-```
+## [https://github.com/danielkhan/building-website-nodejs-express/tree/master](https://github.com/danielkhan/building-website-nodejs-express/tree/master)
 
 ```x
-
-```
-
-```x
-
+git clone --bare https://github.com/danielkhan/building-website-nodejs-express.git
+cd building-website-nodejs-express.git
+git config --bool core.bare false
+git reset --hard
+git branch
 ```
 
 # #END</details>
@@ -25,6 +23,16 @@
 <summary>2. Setup Node Environment </summary>
 
 # Setup Node Environment
+
+## Install Express
+
+```x
+npm install --save express 
+```
+
+```x
+
+```
 
 ```js
 
