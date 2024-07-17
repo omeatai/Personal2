@@ -1296,17 +1296,113 @@ app.listen(PORT, () => {
 # #END</details>
 
 <details>
-<summary>13. Using Middlewares - Handling Errors with Middlewares </summary>
+<summary>13. Using Middlewares - Catching Errors with Middlewares </summary>
 
-# Using Middlewares - Handling Errors with Middlewares
+# Using Middlewares - Catching Errors with Middlewares
+
+### src-AI-Software/my_projects/01_Build_Powerful_Web_Apps_with_Node/express_project/index.js:
 
 ```js
+import express from "express";
+// import data from "./data/mock.json" with { type: "json" };
+
+const app = express();
+const PORT = 3000;
+// let db = data;
+
+//Using the Public folder
+app.use(express.static("public"));
+
+//Using the images folder with route: /images
+app.use("/images", express.static("images"));
+
+//Built-in Middlewares using express.json() and express.urlencoded()
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+//POST - testing middlewares express.json() and express.urlencoded()
+app.post("/item", (req, res) => {
+  console.log(req.body);
+  res.send(req.body);
+});
+
+//GET, POST
+app
+  .route("/class")
+  .get((req, res) => {
+    // res.send("This is a GET request at '/class'!");
+    //Throw new Error to test error handling in middleware
+    throw new Error("Error in GET request at '/class'!");
+  })
+  .post((req, res) => {
+    res.send("This is a POST request at '/class'!");
+  });
+
+//PUT & DELETE
+app
+  .route("/class/:id")
+  .put((req, res) => {
+    const id = req.params.id;
+    res.send(`This is a PUT request with id ${id}`);
+  })
+  .delete((req, res) => {
+    const id = req.params.id;
+    res.send(`This is a DELETE request with id ${id}`);
+  });
+
+//GET - download method
+app.get("/download", (req, res) => {
+  res.download("images/mountains_2.jpeg");
+});
+
+//GET - redirect method
+app.get("/redirect", (req, res) => {
+  res.redirect("https://www.google.com/");
+});
+
+//GET with next()
+app.get(
+  "/next",
+  (req, res, next) => {
+    console.log("The response will be sent by the next function");
+    next();
+  },
+  (req, res) => {
+    res.send("This is a GET request callback at '/next'!");
+  }
+);
+
+// Catching Errors with Middleware
+app.use((err, req, res, next) => {
+  //   const error = new Error("Not Found");
+  //   error.status = 404;
+  //   next(error);
+  console.error(err.stack);
+  res.status(500).send("Something is broken!");
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log("Press CTRL+C to stop server");
+});
 
 ```
 
-```js
-
+```x
+GET http://localhost:3000/class
 ```
+
+![image](https://github.com/user-attachments/assets/3a9cbeae-3220-4a86-817c-51b157f25eb8)
+
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/31a5d686-8f14-499b-a059-d081da3e2335">
+<img width="1353" alt="image" src="https://github.com/user-attachments/assets/7874a32e-78cc-4fb9-82e5-2dc10b03d356">
+
+# #END</details>
+
+<details>
+<summary>14. Using Middlewares - Third Party Middlewares </summary>
+
+# Using Middlewares - Third Party Middlewares
 
 ```js
 
