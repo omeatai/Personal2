@@ -15,6 +15,7 @@ cd building-website-nodejs-express.git
 git config --bool core.bare false
 git reset --hard
 git branch
+q
 ```
 
 # #END</details>
@@ -30,10 +31,10 @@ git branch
 npm init -y
 ```
 
-## Install Express
+## Install Express and Nodemon
 
 ```x
-npm install --save express 
+npm install --save express nodemon
 ```
 
 ### src-AI-Software/my_projects/01_building_a_website/package.json:
@@ -50,13 +51,12 @@ npm install --save express
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
   }
 }
 
 ```
-
-<img width="1397" alt="image" src="https://github.com/user-attachments/assets/4f5aa3ee-a374-41a1-b6aa-0acf3c868ba1">
 
 # #END</details>
 
@@ -94,13 +94,14 @@ app.listen(PORT, () => {
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
   }
 }
 ```
@@ -115,8 +116,13 @@ npm run start
 ➜  01_building_a_website git:(main) ✗ npm run start
 
 > 01_building_a_website@1.0.0 start
-> node server.js
+> nodemon server.js
 
+[nodemon] 3.1.4
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,cjs,json
+[nodemon] starting `node server.js`
 Server running on port 3000
 Ctrl + C to stop
 ```
@@ -132,6 +138,26 @@ Ctrl + C to stop
 <summary>4. Setup HTML Static Template </summary>
 
 # Setup HTML Static Template
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+![image](https://github.com/user-attachments/assets/cf39ed10-111a-4675-ae30-114d7cf4b5c1)
+
+
+![image](https://github.com/user-attachments/assets/1af87bb2-3cd8-4a00-b4cb-5a4b7d97f4e9)
+![image](https://github.com/user-attachments/assets/08641379-d1a2-44e7-bb17-e52ab6d47e6b)
+![image](https://github.com/user-attachments/assets/1821684e-8684-426c-a499-4564df2afdab)
+![image](https://github.com/user-attachments/assets/9530e051-75e6-4ab2-a25d-b7b1e9618f00)
 
 ```js
 
