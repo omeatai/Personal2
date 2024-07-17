@@ -575,17 +575,128 @@ app.listen(PORT, () => {
 # #END</details>
 
 <details>
-<summary>5. Express Template Engine </summary>
+<summary>5. Install and Initialize ESLint and Prettier </summary>
 
-# Express Template Engine
+# Install and Initialize ESLint and Prettier
 
 ```js
+npm install --save-dev eslint
+```
+
+## Initialize eslint
+
+```js
+npx eslint --init
+```
+
+<img width="733" alt="image" src="https://github.com/user-attachments/assets/39d77d18-b2e0-4ce2-b071-cf2c81aa49ad">
+
+## Install Prettier
+
+```x
+npm install --save-dev prettier eslint-config-prettier eslint-plugin-prettier
+#npm install --save-dev eslint-airbnb-base eslint-plugin-import
+```
+
+### src-AI-Software/my_projects/01_building_a_website/eslint.config.mjs:
+
+```mjs
+import globals from "globals";
+import pluginJs from "@eslint/js";
+
+export default [
+  {
+    files: ["**/*.js"],
+    languageOptions: { sourceType: "commonjs" },
+    plugins: ["prettier"],
+    extends: ["prettier"],
+  },
+  { languageOptions: { globals: globals.browser } },
+  pluginJs.configs.recommended,
+];
 
 ```
 
+### src-AI-Software/my_projects/01_building_a_website/.prettierrc:
+
+```prettierrc
+{
+    "trailingComma": "es5",
+    "printWidth": 100,
+    "singleQuote": true
+}
+```
+
+### src-AI-Software/my_projects/01_building_a_website/package.json:
+
 ```js
+{
+  "name": "01_building_a_website",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.7.0",
+    "eslint": "^9.7.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.8.0",
+    "prettier": "^3.3.3"
+  }
+}
+```
+
+### src-AI-Software/my_projects/01_building_a_website/server.js:
+
+```js
+const express = require('express');
+const path = require('path');
+
+const app = express();
+
+const PORT = 3000;
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './static/index.html'));
+});
+
+app.get('/speakers', (req, res) => {
+  res.sendFile(path.join(__dirname, './static/speakers.html'));
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log('Ctrl + C to stop');
+});
 
 ```
+
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/35db9c25-11d7-447f-84df-35470287dff1">
+<img width="1353" alt="image" src="https://github.com/user-attachments/assets/ed8701a8-4ac8-4aeb-b62f-7bfc6a3cd4c0">
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/0da1c614-1dce-45d8-8def-3790274c6f22">
+
+<img width="1353" alt="image" src="https://github.com/user-attachments/assets/21177cbc-4fe6-4e52-aeae-d9e46f545053">
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/b1e3ae4b-99b2-4994-9835-0d5c902f88df">
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/88e19c11-88de-4e6c-ba65-848d2668602c">
+
+# #END</details>
+
+<details>
+<summary>6. Using Express Template Engine </summary>
+
+# Using Express Template Engine
 
 ```js
 
