@@ -94,7 +94,7 @@ app.listen(PORT, () => {
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon --ignore feedback.json server.js"
   },
   "author": "",
   "license": "ISC",
@@ -579,13 +579,13 @@ app.listen(PORT, () => {
 
 # Install and Initialize ESLint and Prettier
 
-```js
+```x
 npm install --save-dev eslint
 ```
 
 ## Initialize eslint
 
-```js
+```x
 npx eslint --init
 ```
 
@@ -636,7 +636,7 @@ export default [
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon --ignore feedback.json server.js"
   },
   "author": "",
   "license": "ISC",
