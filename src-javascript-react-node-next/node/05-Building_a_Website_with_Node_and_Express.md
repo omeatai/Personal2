@@ -65,17 +65,73 @@ npm install --save express
 
 # Setup Express Server
 
+### src-AI-Software/my_projects/01_building_a_website/server.js:
+
+```js
+const express = require("express");
+
+const app = express();
+
+const PORT = 3000;
+
+app.get("/", (req, res) => {
+  res.send("Hello Express :)");
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log("Ctrl + C to stop");
+});
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/package.json:
+
 ```x
-
+{
+  "name": "01_building_a_website",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
 ```
 
-```js
+## Run Server
 
+```x
+npm run start
 ```
 
-```js
+```x
+➜  01_building_a_website git:(main) ✗ npm run start
 
+> 01_building_a_website@1.0.0 start
+> node server.js
+
+Server running on port 3000
+Ctrl + C to stop
 ```
+
+![image](https://github.com/user-attachments/assets/61bc6bf1-d244-466e-ab70-4d7b63bace60)
+
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/73d72bb0-fb1b-4033-86a5-e495d60c32ad">
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/64792e2c-997d-4075-9974-2db4d7f73616">
+
+# #END</details>
+
+<details>
+<summary>4. Setup HTML Template </summary>
+
+# Setup HTML Template
 
 ```js
 
