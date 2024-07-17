@@ -129,9 +129,9 @@ Ctrl + C to stop
 # #END</details>
 
 <details>
-<summary>4. Setup HTML Template </summary>
+<summary>4. Setup HTML Static Template </summary>
 
-# Setup HTML Template
+# Setup HTML Static Template
 
 ```js
 
