@@ -1180,9 +1180,9 @@ app.listen(PORT, () => {
 # #END</details>
 
 <details>
-<summary>7. Using Express Template Engine - EJS </summary>
+<summary>7. Setup Express Routes and Middleware </summary>
 
-# Using Express Template Engine - EJS
+# Setup Express Routes and Middleware
 
 ```js
 
