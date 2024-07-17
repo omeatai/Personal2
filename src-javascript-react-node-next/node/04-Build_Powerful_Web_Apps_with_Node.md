@@ -1404,6 +1404,17 @@ GET http://localhost:3000/class
 
 # Using Middlewares - Third Party Middlewares
 
+## [https://expressjs.com/en/resources/middleware.html](https://expressjs.com/en/resources/middleware.html)
+
+![image](https://github.com/user-attachments/assets/8c3a3441-ac3f-467b-af77-e22d18d3f2b4)
+
+# #END</details>
+
+<details>
+<summary>15. Debugging Express Applications </summary>
+
+# Debugging Express Applications
+
 ```js
 
 ```
