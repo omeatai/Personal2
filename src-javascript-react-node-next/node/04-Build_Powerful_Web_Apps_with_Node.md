@@ -1023,25 +1023,148 @@ GET http://localhost:3000/redirect
 
 # Route Chaining in Express
 
+### src-AI-Software/my_projects/01_Build_Powerful_Web_Apps_with_Node/express_project/index.js:
+
 ```js
+import express from "express";
+import data from "./data/mock.json" with { type: "json" };
+
+const app = express();
+const PORT = 3000;
+let db = data;
+
+//Using the Public folder
+app.use(express.static("public"));
+
+//Using the images folder with route: /images
+app.use("/images", express.static("images"));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+//GET, POST
+app
+  .route("/class")
+  .get((req, res) => {
+    res.send("This is a GET request at '/class'!");
+  })
+  .post((req, res) => {
+    res.send("This is a POST request at '/class'!");
+  });
+
+//PUT & DELETE
+app
+  .route("/class/:id")
+  .put((req, res) => {
+    const id = req.params.id;
+    res.send(`This is a PUT request with id ${id}`);
+  })
+  .delete((req, res) => {
+    const id = req.params.id;
+    res.send(`This is a DELETE request with id ${id}`);
+  });
+
+//GET - download method
+app.get("/download", (req, res) => {
+  res.download("images/mountains_2.jpeg");
+});
+
+//GET - redirect method
+app.get("/redirect", (req, res) => {
+  res.redirect("https://www.google.com/");
+});
+
+//GET with next()
+app.get(
+  "/next",
+  (req, res, next) => {
+    console.log("The response will be sent by the next function");
+    next();
+  },
+  (req, res) => {
+    res.send("This is a GET request callback at '/next'!");
+  }
+);
+
+// USERS CRUD
+
+app
+  .route("/users")
+  .get((req, res) => {
+    res.json({ db: db });
+  })
+  .post((req, res) => {
+    const lastDataId = db[db.length - 1].id;
+    const new_id = lastDataId + 1;
+    let user = req.body;
+    user.id = new_id;
+    db.push(user);
+    res.json({ user: user });
+  });
+
+app
+  .route("/users/:id")
+  .put((req, res) => {
+    const id = req.params.id;
+    let new_user = req.body;
+    if (!new_user.first_name || !new_user.last_name || !new_user.email) {
+      res.json({ msg: "Please enter all the fields!" });
+    }
+    req.body.id = Number(id);
+    db = db.map((user) => {
+      if (user.id === parseInt(id)) {
+        return req.body;
+      } else {
+        return user;
+      }
+    });
+    res.json({ msg: "User updated successfully!", user: new_user });
+  })
+  .delete((req, res) => {
+    const id = req.params.id;
+    db = db.filter((user) => user.id !== parseInt(id));
+    res.json({ msg: "User deleted successfully!" });
+  });
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log("Press CTRL+C to stop server");
+  //   console.log(db);
+});
 
 ```
 
-```js
-
+```x
+GET http://localhost:3000/class
 ```
 
-```js
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/c1d4fd70-4678-4ee5-a5a5-5eb7722ce0ad">
 
+
+```x
+POST http://localhost:3000/class
 ```
 
-```js
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/544e7a2f-1ca7-46a5-b6a2-1b3216fc5977">
 
+```x
+PUT http://localhost:3000/class/2
 ```
 
-```js
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/0f7e1555-5e30-43da-a21d-45c2460b1631">
 
+```x
+DELETE http://localhost:3000/4
 ```
+
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/a007f0a9-768a-40ad-8639-02145969ea04">
+
+# #END</details>
+
+<details>
+<summary>12. Using Middlewares - </summary>
+
+# Using Middlewares -
 
 ```js
 
