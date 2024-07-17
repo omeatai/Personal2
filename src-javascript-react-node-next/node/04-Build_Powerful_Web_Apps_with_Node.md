@@ -1415,12 +1415,44 @@ GET http://localhost:3000/class
 
 # Debugging Express Applications
 
-```js
+## [https://expressjs.com/en/guide/debugging.html](https://expressjs.com/en/guide/debugging.html) 
 
+![image](https://github.com/user-attachments/assets/695dddc0-0379-4366-b0e5-5a75b4d6bb72)
+
+### src-AI-Software/my_projects/01_Build_Powerful_Web_Apps_with_Node/express_project/package.json:
+
+```js
+{
+  "name": "express_project",
+  "type": "module",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --experimental-json-modules --exec babel-node index.js",
+    "debug": "DEBUG=express:* node --experimental-json-modules --exec babel-node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.24.9",
+    "@babel/node": "^7.24.8",
+    "@babel/preset-env": "^7.24.8"
+  }
+}
 ```
 
-```js
+## Debug Application
 
+```js
+npm run debug
 ```
 
 ```js
