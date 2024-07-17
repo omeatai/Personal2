@@ -1162,13 +1162,143 @@ DELETE http://localhost:3000/4
 # #END</details>
 
 <details>
-<summary>12. Using Middlewares - </summary>
+<summary>12. Using Middlewares - Built-in Middlewares </summary>
 
-# Using Middlewares -
+# Using Middlewares - Built-in Middlewares
+
+### src-AI-Software/my_projects/01_Build_Powerful_Web_Apps_with_Node/express_project/index.js:
 
 ```js
+import express from "express";
+import data from "./data/mock.json" with { type: "json" };
+
+const app = express();
+const PORT = 3000;
+let db = data;
+
+//Using the Public folder
+app.use(express.static("public"));
+
+//Using the images folder with route: /images
+app.use("/images", express.static("images"));
+
+//Built-in Middlewares using express.json() and express.urlencoded()
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+//POST - testing middlewares express.json() and express.urlencoded()
+app.post("/item", (req, res) => {
+  console.log(req.body);
+  res.send(req.body);
+});
+
+//GET, POST
+app
+  .route("/class")
+  .get((req, res) => {
+    res.send("This is a GET request at '/class'!");
+  })
+  .post((req, res) => {
+    res.send("This is a POST request at '/class'!");
+  });
+
+//PUT & DELETE
+app
+  .route("/class/:id")
+  .put((req, res) => {
+    const id = req.params.id;
+    res.send(`This is a PUT request with id ${id}`);
+  })
+  .delete((req, res) => {
+    const id = req.params.id;
+    res.send(`This is a DELETE request with id ${id}`);
+  });
+
+//GET - download method
+app.get("/download", (req, res) => {
+  res.download("images/mountains_2.jpeg");
+});
+
+//GET - redirect method
+app.get("/redirect", (req, res) => {
+  res.redirect("https://www.google.com/");
+});
+
+//GET with next()
+app.get(
+  "/next",
+  (req, res, next) => {
+    console.log("The response will be sent by the next function");
+    next();
+  },
+  (req, res) => {
+    res.send("This is a GET request callback at '/next'!");
+  }
+);
+
+// USERS CRUD
+
+app
+  .route("/users")
+  .get((req, res) => {
+    res.json({ db: db });
+  })
+  .post((req, res) => {
+    const lastDataId = db[db.length - 1].id;
+    const new_id = lastDataId + 1;
+    let user = req.body;
+    user.id = new_id;
+    db.push(user);
+    res.json({ user: user });
+  });
+
+app
+  .route("/users/:id")
+  .put((req, res) => {
+    const id = req.params.id;
+    let new_user = req.body;
+    if (!new_user.first_name || !new_user.last_name || !new_user.email) {
+      res.json({ msg: "Please enter all the fields!" });
+    }
+    req.body.id = Number(id);
+    db = db.map((user) => {
+      if (user.id === parseInt(id)) {
+        return req.body;
+      } else {
+        return user;
+      }
+    });
+    res.json({ msg: "User updated successfully!", user: new_user });
+  })
+  .delete((req, res) => {
+    const id = req.params.id;
+    db = db.filter((user) => user.id !== parseInt(id));
+    res.json({ msg: "User deleted successfully!" });
+  });
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log("Press CTRL+C to stop server");
+  //   console.log(db);
+});
 
 ```
+
+![image](https://github.com/user-attachments/assets/fc4ee7fd-51b3-4975-a385-a912da22db7b)
+![image](https://github.com/user-attachments/assets/9481f169-7c02-4a67-8b25-7c4e0f8cc4d8)
+
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/49385b98-84e8-4508-8c45-4fcc39f6ea73">
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/237b8d31-de21-4f3d-bebc-f33876fdfda0">
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/60d14bb2-49a7-4d6f-b988-7acebf73eb1d">
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/509519da-3ad3-427e-a792-fec65f21a2c1">
+<img width="241" alt="image" src="https://github.com/user-attachments/assets/8c2bd321-e5a9-4717-afcf-836c49a679f7">
+
+# #END</details>
+
+<details>
+<summary>13. Using Middlewares - Handling Errors with Middlewares </summary>
+
+# Using Middlewares - Handling Errors with Middlewares
 
 ```js
 
