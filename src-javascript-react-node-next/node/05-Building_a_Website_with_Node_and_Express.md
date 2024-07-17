@@ -24,11 +24,46 @@ git branch
 
 # Setup Node Environment
 
+## Initialize npm
+
+```x
+npm init -y
+```
+
 ## Install Express
 
 ```x
 npm install --save express 
 ```
+
+### src-AI-Software/my_projects/01_building_a_website/package.json:
+
+```x
+{
+  "name": "01_building_a_website",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
+
+```
+
+<img width="1397" alt="image" src="https://github.com/user-attachments/assets/4f5aa3ee-a374-41a1-b6aa-0acf3c868ba1">
+
+# #END</details>
+
+<details>
+<summary>3. Setup Express Server </summary>
+
+# Setup Express Server
 
 ```x
 
