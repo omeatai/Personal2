@@ -1874,35 +1874,376 @@ module.exports = (db) => {
 # #END</details>
 
 <details>
-<summary>11. EJS - Create a Base Template </summary>
+<summary>11. EJS - Create a Base Template with Partials </summary>
 
-# EJS - Create a Base Template
+# EJS - Create a Base Template with Partials
+
+### src-AI-Software/my_projects/01_building_a_website/server.js:
 
 ```js
+const express = require('express');
+const path = require('path');
+const cookieSession = require('cookie-session');
+
+const FeedbackModel = require('./models/FeedbackModel');
+const SpeakerModel = require('./models/SpeakerModel');
+
+const feedbackModel = new FeedbackModel('./data/feedback.json');
+const speakersModel = new SpeakerModel('./data/speakers.json');
+
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.set('trust proxy', 1);
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key14842784278', 'key232423423424'],
+  })
+);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.use('/', routes({ feedbackModel, speakersModel }));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log('Ctrl + C to stop');
+});
 
 ```
 
+### src-AI-Software/my_projects/01_building_a_website/routes/homeRoutes.js:
+
 ```js
+const express = require('express');
+
+const speakersRoutes = require('./speakersRoutes');
+const feedbackRoutes = require('./feedbackRoutes');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  router.get('/', (req, res) => {
+    const context = {
+      pageTitle: 'Welcome',
+      name: 'Roux Meetups',
+      template: 'index',
+    };
+    res.render('layouts/base', context);
+  });
+
+  router.use('/speakers', speakersRoutes(db));
+  router.use('/feedback', feedbackRoutes(db));
+
+  return router;
+};
 
 ```
 
-```js
+### src-AI-Software/my_projects/01_building_a_website/views/layouts/base.ejs:
+
+```ejs
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <script src="/assets/js/color-modes.js"></script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= name %>--<%= pageTitle %></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+    <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="/css/carousel.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!--
+    ==================================================
+    block - Toggle Button
+    ==================================================
+    -->
+
+    <%- include(`./base__partials/base__toggle`) %>
+
+    <!--
+    ==================================================
+    endblock - Toggle Button
+    ==================================================
+    -->
+
+    <!--
+    ==================================================
+    block - Navbar
+    ==================================================
+    -->
+
+    <%- include(`./base__partials/base__nav`) %>
+
+    <!--
+    ==================================================
+    endblock - Navbar
+    ==================================================
+    -->
+
+    <main>
+      <!--
+    ==================================================
+    block - Content
+    ==================================================
+    -->
+
+    <%- include(`../pages/${template}`) %>
+
+      <!--
+    ==================================================
+    endblock - Content
+    ==================================================
+    -->
+
+      <!--
+    ==================================================
+    block - Footer
+    ==================================================
+    -->
+
+    <%- include(`./base__partials/base__footer`) %>
+
+      <!--
+    ==================================================
+    endblock - Footer
+    ==================================================
+    --></main>
+    <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
 
 ```
 
-```js
+### src-AI-Software/my_projects/01_building_a_website/views/pages/index.ejs:
+
+```ejs
+<!--
+==================================================
+block - Carousel Slider
+==================================================
+-->
+
+<%- include(`./index__partials/index__carousel`) %>
+
+<!--
+==================================================
+endblock - Carousel Slider
+==================================================
+-->
+
+<!--
+==================================================
+block - Speakers
+==================================================
+-->
+
+<%- include(`./index__partials/index__speakers.ejs`) %>
+
+<!--
+==================================================
+endblock - Speakers
+==================================================
+-->
 
 ```
 
-```js
+### src-AI-Software/my_projects/01_building_a_website/views/pages/index__partials/index__speakers.ejs:
+
+```ejs
+<!--
+==================================================
+block - Speakers
+==================================================
+-->
+
+<div class="container marketing">
+  <!-- Three columns of text below the carousel -->
+  <div class="row">
+    <!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+      <img
+        src="./images/Hillary_Goldwynn_tn.jpg"
+        alt="carousel 2"
+        width="50%"
+        class="bd-placeholder-img rounded-circle"
+      />
+      <h2 class="fw-normal">Hilliary Goldwynn</h2>
+      <p>
+        Some representative placeholder content for the three columns of text below the carousel.
+        This is the first column.
+      </p>
+      <p>
+        <a class="btn btn-secondary" href="#">View details &raquo;</a>
+      </p>
+    </div>
+    <!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+      <img
+        src="./images/Lorenzo_Garcia_tn.jpg"
+        alt="carousel 2"
+        width="50%"
+        class="bd-placeholder-img rounded-circle"
+      />
+      <h2 class="fw-normal">Lorenzo Garcia</h2>
+      <p>
+        Another exciting bit of representative placeholder content. This time, we've moved on to the
+        second column.
+      </p>
+      <p>
+        <a class="btn btn-secondary" href="#">View details &raquo;</a>
+      </p>
+    </div>
+    <!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+      <img
+        src="./images/Riley_Rewington_tn.jpg"
+        alt="carousel 2"
+        width="50%"
+        class="bd-placeholder-img rounded-circle"
+      />
+      <h2 class="fw-normal">Riley Rewington</h2>
+      <p>And lastly this, the third column of representative placeholder content.</p>
+      <p>
+        <a class="btn btn-secondary" href="#">View details &raquo;</a>
+      </p>
+    </div>
+  </div>
+
+  <!--
+  ==================================================
+  block - Features
+  ==================================================
+  -->
+
+  <%- include(`./index__features`) %>
+
+  <!--
+  ==================================================
+  endblock - Features
+  ==================================================
+  -->
+</div>
+<!--
+==================================================
+endblock - Speakers
+==================================================
+-->
 
 ```
 
-```js
+### src-AI-Software/my_projects/01_building_a_website/views/pages/index__partials/index__features.ejs:
 
+```ejs
+<!--
+  ==================================================
+  block - Features
+  ==================================================
+  -->
+  <hr class="featurette-divider" />
+
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading fw-normal lh-1">
+        Who are we?
+        <span class="text-body-secondary">It’ll blow your mind.</span>
+      </h2>
+      <p class="lead">
+        The Roux Academy gets thousands of submissions every year for
+        artists interesting in participating in the CAC exhibits, and
+        selects approximately 200 distinct pieces of contemporary art for
+        display in their collective exhibit.
+      </p>
+    </div>
+    <div class="col-md-5">
+      <img src="./images/artwork/Hillary_Goldwynn_03.jpg" alt="carousel 1" width="500" height="500"  class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"/>
+    </div>
+  </div>
+
+  <hr class="featurette-divider" />
+
+  <div class="row featurette">
+    <div class="col-md-7 order-md-2">
+      <h2 class="featurette-heading fw-normal lh-1">
+        What we do.
+        <span class="text-body-secondary">See for yourself.</span>
+      </h2>
+      <p class="lead">
+        Each Featured Artist has an opportunity to speak at one of our
+        meetups and share his or her vision, perspective, and techniques
+        with attendees on a more personal level than at our large
+        conference. While you attend the conference, head over to our gallery where you can check out some
+      of the work from our speakers.
+      </p>
+    </div>
+    <div class="col-md-5">
+      <img src="./images/artwork/Hillary_Goldwynn_07.jpg" alt="carousel 1" width="500" height="500"  class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"/>
+    </div>
+  </div>
+
+  <hr class="featurette-divider" />
+
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading fw-normal lh-1">
+        And lastly, Who should come?
+        <span class="text-body-secondary">Checkmate.</span>
+      </h2>
+      <p class="lead">
+      <ul class="sidebar-body">
+          <li>Anybody interested in art and the creative industry</li>
+          <li>Painters, sculptors, photographers and graphic artists</li>
+          <li>Those interested in meeting and making a connection with others in the local art scene.</li>
+      </ul>
+      </p>
+    </div>
+      <div class="col-md-5">
+          <img src="./images/artwork/Hillary_Goldwynn_02.jpg" alt="carousel 1" width="500" height="500"  class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"/>
+      </div>
+      </div>
+
+  <hr class="featurette-divider" />
+
+  <!--
+  ==================================================
+  endblock - Features
+  ==================================================
+  -->
 ```
 
-```js
+![image](https://github.com/user-attachments/assets/c9ac5612-e4ff-4e0f-8c04-4eafe185cbcd)
+![image](https://github.com/user-attachments/assets/fe5b2ba9-60dd-495f-9106-e511b7a39503)
+
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/ab547ee5-5dc0-4afb-96bc-0e03a49835e4">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/8a35d699-5c1b-4a0b-8b47-51218d6138a9">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/a9be5e53-015a-44e4-9035-52fde6b0634b">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/a0ccd4ad-b071-4912-8cab-57bdbb0290af">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/897ce6cf-0df0-4daa-ab05-e7b2441782a3">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/973e5174-5616-4817-a73e-5208b4a11770">
+
+# #END</details>
+
+<details>
+<summary>12. EJS - Using Template Variables </summary>
+
+# EJS - Using Template Variables
+
+```ejs
 
 ```
 
