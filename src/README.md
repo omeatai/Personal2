@@ -1,18 +1,33 @@
 #SRC-SOFTWARE-DEVELOPMENT
 
-## JAVASCRIPT
+<details>
+<summary> JAVASCRIPT </summary>
 
 ### [01-Linkedin-Learning Javascript Language](https://github.com/omeatai/src-AI-Software/blob/main/src/js/01-js-learning-js-lang.md)
 
 ### [02-Linkedin-Javascript Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src/js/02-js-ess-training.md)
 
-## TYPESCRIPT
+</details>
 
-## REACT
+<details>
+<summary> TYPESCRIPT </summary>
+
+</details>
+
+<details>
+<summary> REACT </summary>
 
 ### [01-React Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src/react/01-react-ess-training.md)
 
-## NODEJS
+</details>
+
+<details>
+<summary> ANGULAR </summary>
+
+</details>
+
+<details>
+<summary> NODEJS </summary>
 
 ### [01-Building APIs with Node and Express\*](https://github.com/omeatai/src-AI-Software/blob/main/src/node/01-Linkedin-APIs-with-Node-Express.md)
 
@@ -24,15 +39,15 @@
 
 ### [05-Building a Website with Node.js and Express.js](https://github.com/omeatai/src-AI-Software/blob/main/src/node/05-Building_a_Website_with_Node_and_Express.md)
 
-## NEXTJS
+</details>
 
-## ANGULAR
+<details>
+<summary> NEXTJS </summary>
 
-## HTML
+</details>
 
-## CSS
-
-## PYTHON
+<details>
+<summary> PYTHON </summary>
 
 ### [01-LinkedIn - Python Object Oriented Training*](https://github.com/omeatai/src-AI-Software/blob/main/src/python/01-Python-Object-Oriented.md)
 
@@ -44,7 +59,10 @@
 
 ### [20-Youtube - Dave Gray Python-Flask Training](https://github.com/omeatai/src-AI-Software/blob/main/src/python/20-Dave-Gray-Python-Flask.md)
 
-## DJANGO
+</details>
+
+<details>
+<summary> DJANGO </summary>
 
 ### [01-LinkedIn - Django Essential Training*](https://github.com/omeatai/src-AI-Software/blob/main/src/django/01-LinkedIn-Django-Essential.md)
 
@@ -60,8 +78,26 @@
 
 ### [07-Udemy-React-Django-Practical](https://github.com/omeatai/src-AI-Software/blob/main/src/django/07-Udemy-React-Django-Practical.md)
 
-## FLASK
+</details>
 
-## SQL
+<details>
+<summary> FLASK </summary>
+
+</details>
+
+<details>
+<summary> SQL </summary>
 
 ### [01-LinkedIn - SQL Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src/sql/01_sql_essential_training.md)
+
+</details>
+
+<details>
+<summary> HTML </summary>
+
+</details>
+
+<details>
+<summary> CSS </summary>
+
+</details>
