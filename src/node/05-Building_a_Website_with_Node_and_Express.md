@@ -2239,25 +2239,225 @@ endblock - Speakers
 # #END</details>
 
 <details>
-<summary>12. EJS - Using Template Variables </summary>
+<summary>12. EJS - Create Global Template Variables using Middlewares and app.locals </summary>
 
-# EJS - Using Template Variables
+# EJS - Create Global Template Variables using Middlewares and app.locals
+
+### src-AI-Software/my_projects/01_building_a_website/server.js:
 
 ```ejs
+const express = require('express');
+const path = require('path');
+const cookieSession = require('cookie-session');
+
+const FeedbackModel = require('./models/FeedbackModel');
+const SpeakerModel = require('./models/SpeakerModel');
+
+const feedbackModel = new FeedbackModel('./data/feedback.json');
+const speakersModel = new SpeakerModel('./data/speakers.json');
+
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.set('trust proxy', 1);
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key14842784278', 'key232423423424'],
+  })
+);
+
+app.locals.siteName = 'Global ROUX Meetups';
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.use(async (req, res, next) => {
+  res.locals.newGreeting = 'Hello World';
+
+  try {
+    const names = await speakersModel.getNames();
+    res.locals.speakersNames = names;
+    console.log(res.locals.speakersNames);
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
+
+app.use('/', routes({ feedbackModel, speakersModel }));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log('Ctrl + C to stop');
+});
 
 ```
+
+### src-AI-Software/my_projects/01_building_a_website/routes/homeRoutes.js:
 
 ```js
+const express = require('express');
+
+const speakersRoutes = require('./speakersRoutes');
+const feedbackRoutes = require('./feedbackRoutes');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  router.get('/', (req, res) => {
+    const context = {
+      pageTitle: 'Welcome',
+      name: 'Roux Meetups',
+      template: 'index',
+    };
+    res.render('layouts/base', context);
+  });
+
+  router.use('/speakers', speakersRoutes(db));
+  router.use('/feedback', feedbackRoutes(db));
+
+  return router;
+};
 
 ```
 
-```js
+### src-AI-Software/my_projects/01_building_a_website/views/layouts/base.ejs:
+
+```ejs
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <script src="/assets/js/color-modes.js"></script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= siteName %>--<%= pageTitle %></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+    <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="/css/carousel.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!--
+    ==================================================
+    block - Toggle Button
+    ==================================================
+    -->
+
+    <%- include(`./base__partials/base__toggle`) %>
+
+    <!--
+    ==================================================
+    endblock - Toggle Button
+    ==================================================
+    -->
+
+    <!--
+    ==================================================
+    block - Navbar
+    ==================================================
+    -->
+
+    <%- include(`./base__partials/base__nav`) %>
+
+    <!--
+    ==================================================
+    endblock - Navbar
+    ==================================================
+    -->
+
+    <main>
+      <!--
+    ==================================================
+    block - Content
+    ==================================================
+    -->
+
+    <%- include(`../pages/${template}`) %>
+
+      <!--
+    ==================================================
+    endblock - Content
+    ==================================================
+    -->
+
+      <!--
+    ==================================================
+    block - Footer
+    ==================================================
+    -->
+
+    <%- include(`./base__partials/base__footer`) %>
+
+      <!--
+    ==================================================
+    endblock - Footer
+    ==================================================
+    --></main>
+    <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
 
 ```
 
-```js
+### src-AI-Software/my_projects/01_building_a_website/views/pages/index.ejs:
+
+```ejs
+<!--
+==================================================
+block - Carousel Slider
+==================================================
+-->
+
+<%- include(`./index__partials/index__carousel`) %>
+
+<!--
+==================================================
+endblock - Carousel Slider
+==================================================
+-->
+
+<h2><%= siteName %></h2>
+<h3><%= newGreeting %>, Welcome to our site!</h3>
+
+<!--
+==================================================
+block - Speakers
+==================================================
+-->
+
+<%- include(`./index__partials/index__speakers.ejs`) %>
+
+<!--
+==================================================
+endblock - Speakers
+==================================================
+-->
 
 ```
+
+![image](https://github.com/user-attachments/assets/7b65e79c-bbe5-4e28-b9f0-1f3369578897)
+
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/a3167d4a-4a66-4fb6-a475-b892f9e4299c">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/305b68b0-9e16-4922-b067-eaaab17ba603">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/4857d046-c970-4dca-8df8-84924042680c">
+
+# #END</details>
+
+<details>
+<summary>13. EJS - Looping through Lists in Templates </summary>
+
+# EJS - Looping through Lists in Templates
 
 ```js
 
