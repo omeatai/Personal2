@@ -8,15 +8,10 @@
 
 ###### [ALGORITHM CHALLENGES](https://github.com/omeatai/src-AI-Software/tree/main/src-algorithms)
 
-###### [PYTHON | DJANGO | FLASK | SQL](https://github.com/omeatai/src-AI-Software/tree/main/src-python-django-flask-sql)
+###### [SOFTWARE DEVELOPMENT](https://github.com/omeatai/src-AI-Software/tree/main/src)
 
-###### [JAVASCRIPT | REACT | NODE | NEXT](https://github.com/omeatai/src-AI-Software/tree/main/src-javascript-react-node-next)
-
----
-
-## PROJECTS
-
----
+<details>
+<summary> PROJECTS </summary>
 
 ###### [1-DJANGO-BLOG-APP](https://github.com/omeatai/Django-Blog-App)
 
@@ -36,11 +31,8 @@
 
 ###### [9-MERN-PROJECT-AUTH-REDUX-TOOLKIT-APP](https://github.com/omeatai/mern-project-auth-redux)
 
----
+</details>
 
-## TOOLS
-
----
 
 <details>
   <summary>HOSTS</summary>
