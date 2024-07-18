@@ -1238,25 +1238,158 @@ module.exports = () => {
 # #END</details>
 
 <details>
-<summary>8. Setup Express Routes for Sub Pages </summary>
+<summary>8. Setup Express Routes for Sub Pages - feedback and speakers </summary>
 
-# Setup Express Routes for Sub Pages
+# Setup Express Routes for Sub Pages - feedback and speakers
+
+### src-AI-Software/my_projects/01_building_a_website/server.js:
 
 ```js
+const express = require('express');
+const path = require('path');
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.use('/', routes());
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log('Ctrl + C to stop');
+});
 
 ```
 
+### src-AI-Software/my_projects/01_building_a_website/routes/homeRoutes.js:
+
 ```js
+const express = require('express');
+
+const speakersRoutes = require('./speakersRoutes');
+const feedbackRoutes = require('./feedbackRoutes');
+
+const router = express.Router();
+
+module.exports = () => {
+  router.get('/', (req, res) => {
+    const context = {
+      pageTitle: 'Welcome',
+      name: 'Roux Meetups',
+    };
+    res.render('pages/index', context);
+  });
+
+  router.use('/speakers', speakersRoutes());
+  router.use('/feedback', feedbackRoutes());
+
+  return router;
+};
 
 ```
 
+### src-AI-Software/my_projects/01_building_a_website/routes/speakersRoutes.js:
+
 ```js
+const express = require('express');
+
+const router = express.Router();
+
+module.exports = () => {
+  router.get('/', (req, res) => {
+    // const context = {
+    //   pageTitle: 'Welcome',
+    //   name: 'Roux Meetups',
+    // };
+    // res.render('pages/index', context);
+    return res.send('This is the Speakers List Page.');
+  });
+
+  router.get('/:shortname', (req, res) => {
+    const speakerName = req.params.shortname;
+    return res.send(`This is the Speakers Detail Page for speaker: ${speakerName}.`);
+  });
+
+  return router;
+};
 
 ```
 
+### src-AI-Software/my_projects/01_building_a_website/routes/feedbackRoutes.js:
+
 ```js
+const express = require('express');
+
+const router = express.Router();
+
+module.exports = () => {
+  router.get('/', (req, res) => {
+    // const context = {
+    //   pageTitle: 'Welcome',
+    //   name: 'Roux Meetups',
+    // };
+    // res.render('pages/index', context);
+    return res.send('This is the Feedback Page.');
+  });
+
+  router.post('/', (req, res) => {
+    const feedback = req.body.feedback;
+    return res.send(`Thanks for your posted feedback: ${feedback}`);
+  });
+
+  return router;
+};
 
 ```
+
+```x
+GET http://localhost:3000/
+```
+
+![image](https://github.com/user-attachments/assets/4cc7ef60-179c-4da0-b1d7-ffd0f8001061)
+
+```x
+GET http://localhost:3000/speakers
+```
+
+![image](https://github.com/user-attachments/assets/afae2ce5-04e9-4429-8986-a2d0200745a9)
+
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/4452ab35-9986-42fc-8362-cf1e16eef863">
+
+```x
+GET http://localhost:3000/speakers/Ifeanyi
+```
+
+![image](https://github.com/user-attachments/assets/be113e7e-5658-49a4-8e39-22b7a787e5ea)
+
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/d2a40a03-5774-438c-8548-20af2fc8e93c">
+
+```x
+GET http://localhost:3000/feedback
+```
+
+![image](https://github.com/user-attachments/assets/e40fbf19-d66e-4542-9208-d0dc00e78fb1)
+
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/0c16c925-4395-44fb-83b5-086c8792215a">
+
+```x
+POST http://localhost:3000/feedback
+```
+
+<img width="1313" alt="image" src="https://github.com/user-attachments/assets/ce3d7318-f859-43de-b6ef-41c9b8d5fbf6">
+
+# #END</details>
+
+<details>
+<summary>9. Setup Business Logic for feedback and speakers routes </summary>
+
+# Setup Business Logic for feedback and speakers routes
 
 ```js
 
