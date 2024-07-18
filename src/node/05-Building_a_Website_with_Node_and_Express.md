@@ -1387,9 +1387,452 @@ POST http://localhost:3000/feedback
 # #END</details>
 
 <details>
-<summary>9. Setup Business Logic for feedback and speakers routes </summary>
+<summary>9. Setup Model (Business Logic) for feedback and speakers routes </summary>
 
-# Setup Business Logic for feedback and speakers routes
+# Setup Model (Business Logic) for feedback and speakers routes
+
+### src-AI-Software/my_projects/01_building_a_website/server.js:
+
+```js
+const express = require('express');
+const path = require('path');
+
+const FeedbackModel = require('./models/FeedbackModel');
+const SpeakerModel = require('./models/SpeakerModel');
+
+const feedbackModel = new FeedbackModel('./data/feedback.json');
+const speakersModel = new SpeakerModel('./data/speakers.json');
+
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.use('/', routes({ feedbackModel, speakersModel }));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log('Ctrl + C to stop');
+});
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/routes/homeRoutes.js:
+
+```js
+const express = require('express');
+
+const speakersRoutes = require('./speakersRoutes');
+const feedbackRoutes = require('./feedbackRoutes');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  router.get('/', (req, res) => {
+    const context = {
+      pageTitle: 'Welcome',
+      name: 'Roux Meetups',
+    };
+    res.render('pages/index', context);
+  });
+
+  router.use('/speakers', speakersRoutes(db));
+  router.use('/feedback', feedbackRoutes(db));
+
+  return router;
+};
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/routes/speakersRoutes.js:
+
+```js
+const express = require('express');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  const { speakersModel } = db;
+
+  router.get('/', async (req, res) => {
+    const speakers = await speakersModel.getList();
+    return res.json({ data: speakers });
+  });
+
+  router.get('/:shortname', (req, res) => {
+    const speakerName = req.params.shortname;
+    return res.send(`This is the Speakers Detail Page for speaker: ${speakerName}.`);
+  });
+
+  return router;
+};
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/routes/feedbackRoutes.js:
+
+```js
+const express = require('express');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  const { feedbackModel } = db;
+
+  router.get('/', async (req, res) => {
+    const feedback = await feedbackModel.getList();
+    return res.json({ data: feedback });
+  });
+
+  router.post('/', (req, res) => {
+    const feedback = req.body.feedback;
+    if (!feedback) {
+      return res.send('You must provide feedback.');
+    }
+    return res.send(`Thanks for your posted feedback: ${feedback}`);
+  });
+
+  return router;
+};
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/models/FeedbackModel.js:
+
+```js
+const fs = require('fs');
+const util = require('util');
+
+const readFile = util.promisify(fs.readFile);
+const writeFile = util.promisify(fs.writeFile);
+
+/**
+ * Logic for reading and writing feedback data
+ */
+class FeedbackModel {
+  /**
+   * Constructor
+   * @param {*} datafile Path to a JSOn file that contains the feedback data
+   */
+  constructor(datafile) {
+    this.datafile = datafile;
+  }
+
+  /**
+   * Get all feedback items
+   */
+  async getList() {
+    const data = await this.getData();
+    return data;
+  }
+
+  /**
+   * Add a new feedback item
+   * @param {*} name The name of the user
+   * @param {*} title The title of the feedback message
+   * @param {*} message The feedback message
+   */
+  async addEntry(name, email, title, message) {
+    const data = (await this.getData()) || [];
+    data.unshift({ name, email, title, message });
+    return writeFile(this.datafile, JSON.stringify(data));
+  }
+
+  /**
+   * Fetches feedback data from the JSON file provided to the constructor
+   */
+  async getData() {
+    const data = await readFile(this.datafile, 'utf8');
+    if (!data) return [];
+    return JSON.parse(data);
+  }
+}
+
+module.exports = FeedbackModel;
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/models/SpeakerModel.js:
+
+```js
+const fs = require('fs');
+const util = require('util');
+
+/**
+ * We want to use async/await with fs.readFile - util.promisfy gives us that
+ */
+const readFile = util.promisify(fs.readFile);
+
+/**
+ * Logic for fetching speakers information
+ */
+class SpeakerModel {
+  /**
+   * Constructor
+   * @param {*} datafile Path to a JSOn file that contains the speakers data
+   */
+  constructor(datafile) {
+    this.datafile = datafile;
+  }
+
+  /**
+   * Returns a list of speakers name and short name
+   */
+  async getNames() {
+    const data = await this.getData();
+
+    // We are using map() to transform the array we get into another one
+    return data.map((speaker) => {
+      return { name: speaker.name, shortname: speaker.shortname };
+    });
+  }
+
+  /**
+   * Get all artwork
+   */
+  async getAllArtwork() {
+    const data = await this.getData();
+
+    // Array.reduce() is used to traverse all speakers and
+    // create an array that contains all artwork
+    const artwork = data.reduce((acc, elm) => {
+      if (elm.artwork) {
+        // eslint-disable-next-line no-param-reassign
+        acc = [...acc, ...elm.artwork];
+      }
+      return acc;
+    }, []);
+    return artwork;
+  }
+
+  /**
+   * Get all artwork of a given speaker
+   * @param {*} shortname The speakers short name
+   */
+  async getArtworkForSpeaker(shortname) {
+    const data = await this.getData();
+    const speaker = data.find((elm) => {
+      return elm.shortname === shortname;
+    });
+    if (!speaker || !speaker.artwork) return null;
+    return speaker.artwork;
+  }
+
+  /**
+   * Get speaker information provided a shortname
+   * @param {*} shortname
+   */
+  async getSpeaker(shortname) {
+    const data = await this.getData();
+    const speaker = data.find((elm) => {
+      return elm.shortname === shortname;
+    });
+    if (!speaker) return null;
+    return {
+      title: speaker.title,
+      name: speaker.name,
+      shortname: speaker.shortname,
+      description: speaker.description,
+    };
+  }
+
+  /**
+   * Returns a list of speakers with only the basic information
+   */
+  async getListShort() {
+    const data = await this.getData();
+    return data.map((speaker) => {
+      return {
+        name: speaker.name,
+        shortname: speaker.shortname,
+        title: speaker.title,
+      };
+    });
+  }
+
+  /**
+   * Get a list of speakers
+   */
+  async getList() {
+    const data = await this.getData();
+    return data.map((speaker) => {
+      return {
+        name: speaker.name,
+        shortname: speaker.shortname,
+        title: speaker.title,
+        summary: speaker.summary,
+      };
+    });
+  }
+
+  /**
+   * Fetches speakers data from the JSON file provided to the constructor
+   */
+  async getData() {
+    const data = await readFile(this.datafile, 'utf8');
+    return JSON.parse(data).speakers;
+  }
+}
+
+module.exports = SpeakerModel;
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/data/feedback.json:
+
+```json
+[
+    {
+        "name": "Frank",
+        "email": "frank-smith@gmail.com",
+        "title": "Best Meetup Ever",
+        "message": "I really love this meetup. Please don't let it end."
+    },
+    {
+        "name": "Jane",
+        "email": "jane-miller@gmail.com",
+        "title": "Meeting Time",
+        "message": "Would you consider moving the meeting time 30 minutes to about 6pm. It's tough to make it to the meetings on time right after work."
+    },
+    {
+        "name": "Roy",
+        "email": "roy-jones@gmail.com",
+        "title": "Great Speaker",
+        "message": "I really enjoyed the speaker this month. Would love to hear another presentation."
+    }
+]
+```
+
+### src-AI-Software/my_projects/01_building_a_website/data/speakers.json:
+
+```json
+{
+    "speakers": [
+        {
+            "title": "Art in Full Bloom",
+            "name": "Lorenzo Garcia",
+            "shortname": "Lorenzo_Garcia",
+            "summary": "Drawing and painting flowers may seem like a first-year art student's assignment, but Lorenzo Garcia brings depth, shadows, light, form and color to new heights with his unique and revolutionary technique of painting on canvas with ceramic glaze. This session is sure to be a hit with mixed media buffs.",
+            "description": "<p>Lorenzo was born in Mexico, but grew up in Southern California after his mother immigrated to Los Angeles when he was a year old. His mother worked as a seamstress in the Fashion District and brought home scrap materials for Lorenzo to create his early mixed media art. From that point on, Lorenzo became hooked on creating art from scrap metals, fabrics, wood, canvas, and many others. During his junior year at Bischon Art School in Los Angeles, he perfected his own proprietary method of painting on canvas with ceramic glaze, which he will demonstrate on Monday in his session, 'Art in Full Bloom'.</p><p>Lorenzo paints with an extraordinary amount of color, and prefers to create art centered around nature, animals, and science. Now in his senior year at Bischon, Lorenzo has been creating mixed media totem poles made from old telephone poles, and other recycled materials, and is already planning his next new technique that will likely inspire a trend for years to come.</p>",
+            "artwork": [
+                "Lorenzo_Garcia_01_tn.jpg",
+                "Lorenzo_Garcia_02_tn.jpg",
+                "Lorenzo_Garcia_03_tn.jpg",
+                "Lorenzo_Garcia_04_tn.jpg"
+            ]
+        },
+        {
+            "title": "Deep Sea Wonders",
+            "name": "Hilary Goldywynn Post",
+            "shortname": "Hillary_Goldwynn",
+            "summary": "Hillary is a sophomore art sculpture student at New York University, and has won the major international prizes for painters, including the Divinity Circle and the International Painter's Medal. Hillary's exhibit features paintings that contain only water including waves, deep sea, and river.",
+            "description": "<p>Hillary is a sophomore art sculpture student at New York University, and has already won all the major international prizes for new painters, including the Divinity Circle, the International Painter's Medal, and the Academy of Paris Award. Hillary's CAC exhibit features paintings that contain only water images including waves, deep sea, and river.</p><p>An avid water sports participant, Hillary understands the water in many ways in which others do not, or may not ever have the opportunity. Her goal in creating the CAC exhibit was to share with others the beauty, power, and flow of natural bodies of water throughout the world. In addition to the display, Hilary also hosts a session on Tuesday called Deep Sea Wonders, which combines her love of deep sea diving and snorkeling, with instruction for capturing the beauty of underwater explorations on canvas.</p>",
+            "artwork": [
+                "Hillary_Goldwynn_01_tn.jpg",
+                "Hillary_Goldwynn_02_tn.jpg",
+                "Hillary_Goldwynn_03_tn.jpg",
+                "Hillary_Goldwynn_04_tn.jpg",
+                "Hillary_Goldwynn_05_tn.jpg",
+                "Hillary_Goldwynn_06_tn.jpg",
+                "Hillary_Goldwynn_07_tn.jpg"
+            ]
+        },
+        {
+            "title": "The Art of Abstract",
+            "name": "Riley Rudolph Rewington",
+            "shortname": "Riley_Rewington",
+            "summary": "The leader of the MMA artistic movement in his hometown of Portland, Riley Rudolph Rewington draws a crowd wherever he goes. Mixing street performance, video, music, and traditional art, Riley has created some of the most unique and deeply poignant abstract works of his generation.",
+            "description": "<p>Riley started out as musician and street performance artist, and now blends painting and photography with audio, video, and computer multimedia to create what he calls 'Music and Multimedia Artworks.' Riley's innovations in using multimedia to express art have created a youth culture movement in his town of Portland, in which he remains at the forefront. In his role as the founder of the MMA art form, Riley has become an inspiration to many up and coming artists. However, the part Riley insists is most important to him, is that he's helped many troubled youth take control of their lives, and create their own unique, positive futuresponse. Seeing kids he's mentored graduate from high school and enroll in college, gives art the purpose that Riley so craves.</p><p>A first-year student at the Roux Academy of Art, Media, and Design, Riley is already changing the face of modern art at the university. Riley's exquisite abstract pieces have no intention of ever being understood, but instead beg the viewer to dream, create, pretend, and envision with their mind's eye. Riley will be speaking on the 'Art of Abstract' during Thursday's schedule.</p>",
+            "artwork": [
+                "Riley_Rewington_01_tn.jpg",
+                "Riley_Rewington_02_tn.jpg",
+                "Riley_Rewington_03_tn.jpg",
+                "Riley_Rewington_04_tn.jpg",
+                "Riley_Rewington_05_tn.jpg",
+                "Riley_Rewington_06_tn.jpg"
+            ]
+        }
+    ]
+}
+```
+
+![image](https://github.com/user-attachments/assets/a6f2fc32-7ba0-4f46-9bdb-342078bf08fa)
+![image](https://github.com/user-attachments/assets/eac92e6e-069a-4472-a0ef-adbff6602620)
+
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/3890dc07-eec2-4fd3-8b34-1e266af0ba26">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/81064c5b-fdc4-4504-846a-784b3c80005b">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/d647ef1e-0e9d-45da-b86b-469af2dde404">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/834b7ca1-29ae-4080-94ec-4e0382ae18bc">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/16936dac-8573-467a-a200-a0dbd1d67769">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/de4ff443-3877-4e0c-8562-2573d954c9a2">
+
+# #END</details>
+
+<details>
+<summary>10. Add a Session Management Middleware </summary>
+
+# Add a Session Management Middleware
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
 
 ```js
 
