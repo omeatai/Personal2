@@ -2773,9 +2773,9 @@ endblock - Speakers
 # #END</details>
 
 <details>
-<summary>14. EJS - Creating a Speakers List Page </summary>
+<summary>14. EJS - Create a Speakers List Page </summary>
 
-# EJS - Creating a Speakers List Page
+# EJS - Create a Speakers List Page
 
 ```js
 
