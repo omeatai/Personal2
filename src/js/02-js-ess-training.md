@@ -1,4 +1,6 @@
-# 03-Javascript Essential Training
+## 03-Javascript Essential Training
+
+## [COURSE](https://www.linkedin.com/learning/javascript-essential-training/javascript-the-soil-from-which-the-modern-web-grows?resume=false)
 
 <details>
 <summary>1-JS Comments</summary>
