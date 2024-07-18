@@ -1,5 +1,7 @@
 ## +LinkedIn - React Essential Training
 
+## [COURSE](https://www.linkedin.com/learning/react-js-essential-training-14836121/building-modern-user-interfaces-with-react?resume=false)
+
 <details>
 <summary>1. Spin up React Dev Environment with React.new </summary>
 
