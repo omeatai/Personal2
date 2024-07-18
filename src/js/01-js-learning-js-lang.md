@@ -1,5 +1,7 @@
 # 01-Learning Javascript Language
 
+## [COURSE](https://www.linkedin.com/learning/learning-the-javascript-language-22309208/become-conversant-in-javascript?resume=false)
+
 <details>
 <summary>1-Declaring and Assigning Variables</summary>
 
