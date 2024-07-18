@@ -2459,6 +2459,372 @@ endblock - Speakers
 
 # EJS - Looping through Lists in Templates
 
+### src-AI-Software/my_projects/01_building_a_website/server.js:
+
+```js
+const express = require('express');
+const path = require('path');
+const cookieSession = require('cookie-session');
+
+const FeedbackModel = require('./models/FeedbackModel');
+const SpeakerModel = require('./models/SpeakerModel');
+
+const feedbackModel = new FeedbackModel('./data/feedback.json');
+const speakersModel = new SpeakerModel('./data/speakers.json');
+
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.set('trust proxy', 1);
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key14842784278', 'key232423423424'],
+  })
+);
+
+app.locals.siteName = 'Global ROUX Meetups';
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.use(async (req, res, next) => {
+  res.locals.newGreeting = 'Hello World';
+
+  try {
+    const names = await speakersModel.getNames();
+    res.locals.speakersNames = names;
+    // console.log(res.locals.speakersNames);
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
+
+app.use('/', routes({ feedbackModel, speakersModel }));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log('Ctrl + C to stop');
+});
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/routes/homeRoutes.js:
+
+```js
+const express = require('express');
+
+const speakersRoutes = require('./speakersRoutes');
+const feedbackRoutes = require('./feedbackRoutes');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  const { speakersModel } = db;
+
+  router.get('/', async (req, res) => {
+    const topSpeakers = await speakersModel.getList();
+    console.log(topSpeakers);
+
+    const context = {
+      pageTitle: 'Welcome',
+      name: 'Roux Meetups',
+      template: 'index',
+      topSpeakers,
+    };
+    res.render('layouts/base', context);
+  });
+
+  router.use('/speakers', speakersRoutes(db));
+  router.use('/feedback', feedbackRoutes(db));
+
+  return router;
+};
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/views/layouts/base__partials/base__nav.ejs:
+
+```ejs
+<!--
+    ==================================================
+    block - Navbar
+    ==================================================
+    -->
+
+<header data-bs-theme="dark">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><%= name %></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+        aria-controls="navbarCollapse"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Speakers
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/speakers">All Speakers</a></li>
+              <li><hr class="dropdown-divider" /></li>
+
+              <% speakersNames.forEach(speaker => { %>
+                <li><a class="dropdown-item" href="/speakers/<%= speaker.shortname %>"><%= speaker.name %></a></li>
+              <% }) %>
+
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Feedback</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+<!--
+    ==================================================
+    endblock - Navbar
+    ==================================================
+    -->
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/views/pages/index__partials/index__speakers.ejs:
+
+```ejs
+<!--
+==================================================
+block - Speakers
+==================================================
+-->
+
+<div class="container marketing">
+  <!-- Three columns of text below the carousel -->
+  <div class="row">
+    <% topSpeakers.forEach(speaker => { %>
+    <!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+      <a href="/speakers/<%= speaker.shortname %>">
+        <img
+          src="/images/<%= speaker.shortname %>_tn.jpg"
+          alt="Photo of <%= speaker.name %>"
+          width="50%"
+          class="bd-placeholder-img rounded-circle"
+        />
+      </a>
+
+      <h2 class="fw-normal"><%= speaker.name %></h2>
+      <p>
+        <%= speaker.summary %>
+      </p>
+      <p>
+        <a class="btn btn-secondary" href="/speakers/<%= speaker.shortname %>">View details &raquo;</a>
+      </p>
+    </div>
+    <% }) %>
+  </div>
+
+  <!--
+  ==================================================
+  block - Features
+  ==================================================
+  -->
+
+  <%- include(`./index__features`) %>
+
+  <!--
+  ==================================================
+  endblock - Features
+  ==================================================
+  -->
+</div>
+<!--
+==================================================
+endblock - Speakers
+==================================================
+-->
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/views/pages/index.ejs:
+
+```ejs
+<!--
+==================================================
+block - Carousel Slider
+==================================================
+-->
+
+<%- include(`./index__partials/index__carousel`) %>
+
+<!--
+==================================================
+endblock - Carousel Slider
+==================================================
+-->
+
+<!--
+==================================================
+block - Speakers
+==================================================
+-->
+
+<%- include(`./index__partials/index__speakers.ejs`) %>
+
+<!--
+==================================================
+endblock - Speakers
+==================================================
+-->
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/data/speakers.json:
+
+```json
+{
+    "speakers": [
+        {
+            "title": "Art in Full Bloom",
+            "name": "Lorenzo Garcia III",
+            "shortname": "Lorenzo_Garcia",
+            "summary": "Drawing and painting flowers may seem like a first-year art student's assignment, but Lorenzo Garcia brings depth, shadows, light, form and color to new heights with his unique and revolutionary technique of painting on canvas with ceramic glaze. This session is sure to be a hit with mixed media buffs.",
+            "description": "<p>Lorenzo was born in Mexico, but grew up in Southern California after his mother immigrated to Los Angeles when he was a year old. His mother worked as a seamstress in the Fashion District and brought home scrap materials for Lorenzo to create his early mixed media art. From that point on, Lorenzo became hooked on creating art from scrap metals, fabrics, wood, canvas, and many others. During his junior year at Bischon Art School in Los Angeles, he perfected his own proprietary method of painting on canvas with ceramic glaze, which he will demonstrate on Monday in his session, 'Art in Full Bloom'.</p><p>Lorenzo paints with an extraordinary amount of color, and prefers to create art centered around nature, animals, and science. Now in his senior year at Bischon, Lorenzo has been creating mixed media totem poles made from old telephone poles, and other recycled materials, and is already planning his next new technique that will likely inspire a trend for years to come.</p>",
+            "artwork": [
+                "Lorenzo_Garcia_01_tn.jpg",
+                "Lorenzo_Garcia_02_tn.jpg",
+                "Lorenzo_Garcia_03_tn.jpg",
+                "Lorenzo_Garcia_04_tn.jpg"
+            ]
+        },
+        {
+            "title": "Deep Sea Wonders",
+            "name": "Hilary Goldywynn Post",
+            "shortname": "Hillary_Goldwynn",
+            "summary": "Hillary is a sophomore art sculpture student at New York University, and has won the major international prizes for painters, including the Divinity Circle and the International Painter's Medal. Hillary's exhibit features paintings that contain only water including waves, deep sea, and river.",
+            "description": "<p>Hillary is a sophomore art sculpture student at New York University, and has already won all the major international prizes for new painters, including the Divinity Circle, the International Painter's Medal, and the Academy of Paris Award. Hillary's CAC exhibit features paintings that contain only water images including waves, deep sea, and river.</p><p>An avid water sports participant, Hillary understands the water in many ways in which others do not, or may not ever have the opportunity. Her goal in creating the CAC exhibit was to share with others the beauty, power, and flow of natural bodies of water throughout the world. In addition to the display, Hilary also hosts a session on Tuesday called Deep Sea Wonders, which combines her love of deep sea diving and snorkeling, with instruction for capturing the beauty of underwater explorations on canvas.</p>",
+            "artwork": [
+                "Hillary_Goldwynn_01_tn.jpg",
+                "Hillary_Goldwynn_02_tn.jpg",
+                "Hillary_Goldwynn_03_tn.jpg",
+                "Hillary_Goldwynn_04_tn.jpg",
+                "Hillary_Goldwynn_05_tn.jpg",
+                "Hillary_Goldwynn_06_tn.jpg",
+                "Hillary_Goldwynn_07_tn.jpg"
+            ]
+        },
+        {
+            "title": "The Art of Abstract",
+            "name": "Riley Rudolph Rewington",
+            "shortname": "Riley_Rewington",
+            "summary": "The leader of the MMA artistic movement in his hometown of Portland, Riley Rudolph Rewington draws a crowd wherever he goes. Mixing street performance, video, music, and traditional art, Riley has created some of the most unique and deeply poignant abstract works of his generation.",
+            "description": "<p>Riley started out as musician and street performance artist, and now blends painting and photography with audio, video, and computer multimedia to create what he calls 'Music and Multimedia Artworks.' Riley's innovations in using multimedia to express art have created a youth culture movement in his town of Portland, in which he remains at the forefront. In his role as the founder of the MMA art form, Riley has become an inspiration to many up and coming artists. However, the part Riley insists is most important to him, is that he's helped many troubled youth take control of their lives, and create their own unique, positive futuresponse. Seeing kids he's mentored graduate from high school and enroll in college, gives art the purpose that Riley so craves.</p><p>A first-year student at the Roux Academy of Art, Media, and Design, Riley is already changing the face of modern art at the university. Riley's exquisite abstract pieces have no intention of ever being understood, but instead beg the viewer to dream, create, pretend, and envision with their mind's eye. Riley will be speaking on the 'Art of Abstract' during Thursday's schedule.</p>",
+            "artwork": [
+                "Riley_Rewington_01_tn.jpg",
+                "Riley_Rewington_02_tn.jpg",
+                "Riley_Rewington_03_tn.jpg",
+                "Riley_Rewington_04_tn.jpg",
+                "Riley_Rewington_05_tn.jpg",
+                "Riley_Rewington_06_tn.jpg"
+            ]
+        }
+    ]
+}
+```
+
+![image](https://github.com/user-attachments/assets/2784800d-c283-4b6d-8aab-f74b2901335b)
+
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/cfd2626f-bd45-4ae5-a84e-dd631c49e75a">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/5825644b-b6ea-4577-a911-3c0640f87b92">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/96fd5f56-a296-4154-97a7-c8db16cc6e5a">
+
+# #END</details>
+
+<details>
+<summary>14. EJS - Creating a Speakers List Page </summary>
+
+# EJS - Creating a Speakers List Page
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
 ```js
 
 ```
