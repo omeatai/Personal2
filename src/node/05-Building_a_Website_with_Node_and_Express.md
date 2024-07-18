@@ -1782,17 +1782,101 @@ module.exports = SpeakerModel;
 
 # Add a Session Management Middleware
 
+## Install cookie-session
+
 ```js
+npm install cookie-session
+```
+
+### src-AI-Software/my_projects/01_building_a_website/server.js:
+
+```js
+const express = require('express');
+const path = require('path');
+const cookieSession = require('cookie-session');
+
+const FeedbackModel = require('./models/FeedbackModel');
+const SpeakerModel = require('./models/SpeakerModel');
+
+const feedbackModel = new FeedbackModel('./data/feedback.json');
+const speakersModel = new SpeakerModel('./data/speakers.json');
+
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.set('trust proxy', 1);
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key14842784278', 'key232423423424'],
+  })
+);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.use('/', routes({ feedbackModel, speakersModel }));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log('Ctrl + C to stop');
+});
 
 ```
 
+### src-AI-Software/my_projects/01_building_a_website/routes/homeRoutes.js:
+
 ```js
+const express = require('express');
+
+const speakersRoutes = require('./speakersRoutes');
+const feedbackRoutes = require('./feedbackRoutes');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  router.get('/', (req, res) => {
+    if (!req.session.visitcount) {
+      req.session.visitcount = 0;
+    }
+    req.session.visitcount += 1;
+    console.log(`Number of visits: ${req.session.visitcount}`);
+
+    const context = {
+      pageTitle: 'Welcome',
+      name: 'Roux Meetups',
+    };
+    res.render('pages/index', context);
+  });
+
+  router.use('/speakers', speakersRoutes(db));
+  router.use('/feedback', feedbackRoutes(db));
+
+  return router;
+};
 
 ```
 
-```js
+![image](https://github.com/user-attachments/assets/765e3f6b-23ac-4a8a-86e0-1c74f3e95e88)
 
-```
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/4827a3c6-588e-4d07-bb42-edfc54cbc26c">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/ad304c1d-1b9f-4661-8828-8210b1898251">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/899e3649-a49c-4cd3-8557-1b12d3fa072e">
+
+# #END</details>
+
+<details>
+<summary>11. EJS - Create a Base Template </summary>
+
+# EJS - Create a Base Template
 
 ```js
 
