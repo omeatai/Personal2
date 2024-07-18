@@ -2245,7 +2245,7 @@ endblock - Speakers
 
 ### src-AI-Software/my_projects/01_building_a_website/server.js:
 
-```ejs
+```js
 const express = require('express');
 const path = require('path');
 const cookieSession = require('cookie-session');
