@@ -3480,13 +3480,208 @@ module.exports = SpeakerModel;
 
 # Error Handling in Express
 
+### src-AI-Software/my_projects/01_building_a_website/server.js:
+
 ```js
+const express = require('express');
+const path = require('path');
+const cookieSession = require('cookie-session');
+
+const FeedbackModel = require('./models/FeedbackModel');
+const SpeakerModel = require('./models/SpeakerModel');
+
+const feedbackModel = new FeedbackModel('./data/feedback.json');
+const speakersModel = new SpeakerModel('./data/speakers.json');
+
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.set('trust proxy', 1);
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key14842784278', 'key232423423424'],
+  })
+);
+
+app.locals.siteName = 'Global ROUX Meetups';
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.get('/throw', (req, res, next) => {
+  // const err = new Error('Not Found');
+  // err.status = 404;
+  // next(err);
+
+  // throw new Error('This is a test error'); // This will crash the server, don't throw errors directly without next
+
+  setTimeout(() => {
+    return next(new Error('This is a test error'));
+  }, 500);
+});
+
+app.use(async (req, res, next) => {
+  res.locals.newGreeting = 'Hello World';
+
+  try {
+    const names = await speakersModel.getNames();
+    res.locals.speakersNames = names;
+    return next();
+  } catch (err) {
+    return next(err); // Good practice to catch errors and pass them to the next middleware
+  }
+});
+
+app.use('/', routes({ feedbackModel, speakersModel }));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log('Ctrl + C to stop');
+});
 
 ```
 
+### src-AI-Software/my_projects/01_building_a_website/routes/homeRoutes.js:
+
 ```js
+const express = require('express');
+
+const speakersRoutes = require('./speakersRoutes');
+const feedbackRoutes = require('./feedbackRoutes');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  const { speakersModel } = db;
+
+  router.get('/', async (req, res, next) => {
+    try {
+      const topSpeakers = await speakersModel.getList();
+      const context = {
+        pageTitle: 'Welcome',
+        name: 'Roux Meetups',
+        template: 'index',
+        topSpeakers,
+      };
+      return res.render('layouts/base', context);
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  router.use('/speakers', speakersRoutes(db));
+  router.use('/feedback', feedbackRoutes(db));
+
+  return router;
+};
 
 ```
+
+### src-AI-Software/my_projects/01_building_a_website/routes/speakersRoutes.js:
+
+```js
+const express = require('express');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  const { speakersModel } = db;
+
+  router.get('/', async (req, res, next) => {
+    try {
+      const speakers = await speakersModel.getList();
+      const context = {
+        pageTitle: 'Speakers',
+        name: 'Roux Meetups',
+        template: 'speakers',
+        speakers,
+      };
+      return res.render('layouts/base', context);
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  router.get('/:shortname', async (req, res, next) => {
+    try {
+      const speaker = await speakersModel.getSpeaker(req.params.shortname);
+      console.log(speaker);
+      const context = {
+        pageTitle: 'Speaker Detail',
+        name: 'Roux Meetups',
+        template: 'speaker-detail',
+        speaker,
+      };
+      return res.render('layouts/base', context);
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  return router;
+};
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/routes/feedbackRoutes.js:
+
+```js
+const express = require('express');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  const { feedbackModel } = db;
+
+  router.get('/', async (req, res, next) => {
+    try {
+      const feedback = await feedbackModel.getList();
+      return res.json({ data: feedback });
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  router.post('/', (req, res, next) => {
+    try {
+      const feedback = req.body.feedback;
+      if (!feedback) {
+        return res.send('You must provide feedback.');
+      }
+      return res.send(`Thanks for your posted feedback: ${feedback}`);
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  return router;
+};
+
+```
+
+![image](https://github.com/user-attachments/assets/7f714261-7491-43d9-af8f-6484821e3f4e)
+
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/e8a2e0c8-aad7-4237-8ee4-712dd871570d">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/604443a6-75f8-494c-a704-a1b51929617a">
+<img width="1442" alt="image" src="https://github.com/user-attachments/assets/ea4b2af4-b778-40bc-aab5-8b50ec0e9226">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/9b1ee10e-253d-49ed-bd54-8aacaeabe129">
+
+# #END</details>
+
+<details>
+<summary>17. Create an Error Page </summary>
+
+# Create an Error Page
+
 
 ```js
 
