@@ -1782,9 +1782,1000 @@ module.exports = SpeakerModel;
 
 # Add a Session Management Middleware
 
+## Install cookie-session
+
 ```js
+npm install cookie-session
+```
+
+### src-AI-Software/my_projects/01_building_a_website/server.js:
+
+```js
+const express = require('express');
+const path = require('path');
+const cookieSession = require('cookie-session');
+
+const FeedbackModel = require('./models/FeedbackModel');
+const SpeakerModel = require('./models/SpeakerModel');
+
+const feedbackModel = new FeedbackModel('./data/feedback.json');
+const speakersModel = new SpeakerModel('./data/speakers.json');
+
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.set('trust proxy', 1);
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key14842784278', 'key232423423424'],
+  })
+);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.use('/', routes({ feedbackModel, speakersModel }));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log('Ctrl + C to stop');
+});
 
 ```
+
+### src-AI-Software/my_projects/01_building_a_website/routes/homeRoutes.js:
+
+```js
+const express = require('express');
+
+const speakersRoutes = require('./speakersRoutes');
+const feedbackRoutes = require('./feedbackRoutes');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  router.get('/', (req, res) => {
+    if (!req.session.visitcount) {
+      req.session.visitcount = 0;
+    }
+    req.session.visitcount += 1;
+    console.log(`Number of visits: ${req.session.visitcount}`);
+
+    const context = {
+      pageTitle: 'Welcome',
+      name: 'Roux Meetups',
+    };
+    res.render('pages/index', context);
+  });
+
+  router.use('/speakers', speakersRoutes(db));
+  router.use('/feedback', feedbackRoutes(db));
+
+  return router;
+};
+
+```
+
+![image](https://github.com/user-attachments/assets/765e3f6b-23ac-4a8a-86e0-1c74f3e95e88)
+
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/4827a3c6-588e-4d07-bb42-edfc54cbc26c">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/ad304c1d-1b9f-4661-8828-8210b1898251">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/899e3649-a49c-4cd3-8557-1b12d3fa072e">
+
+# #END</details>
+
+<details>
+<summary>11. EJS - Create a Base Template with Partials </summary>
+
+# EJS - Create a Base Template with Partials
+
+### src-AI-Software/my_projects/01_building_a_website/server.js:
+
+```js
+const express = require('express');
+const path = require('path');
+const cookieSession = require('cookie-session');
+
+const FeedbackModel = require('./models/FeedbackModel');
+const SpeakerModel = require('./models/SpeakerModel');
+
+const feedbackModel = new FeedbackModel('./data/feedback.json');
+const speakersModel = new SpeakerModel('./data/speakers.json');
+
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.set('trust proxy', 1);
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key14842784278', 'key232423423424'],
+  })
+);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.use('/', routes({ feedbackModel, speakersModel }));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log('Ctrl + C to stop');
+});
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/routes/homeRoutes.js:
+
+```js
+const express = require('express');
+
+const speakersRoutes = require('./speakersRoutes');
+const feedbackRoutes = require('./feedbackRoutes');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  router.get('/', (req, res) => {
+    const context = {
+      pageTitle: 'Welcome',
+      name: 'Roux Meetups',
+      template: 'index',
+    };
+    res.render('layouts/base', context);
+  });
+
+  router.use('/speakers', speakersRoutes(db));
+  router.use('/feedback', feedbackRoutes(db));
+
+  return router;
+};
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/views/layouts/base.ejs:
+
+```ejs
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <script src="/assets/js/color-modes.js"></script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= name %>--<%= pageTitle %></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+    <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="/css/carousel.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!--
+    ==================================================
+    block - Toggle Button
+    ==================================================
+    -->
+
+    <%- include(`./base__partials/base__toggle`) %>
+
+    <!--
+    ==================================================
+    endblock - Toggle Button
+    ==================================================
+    -->
+
+    <!--
+    ==================================================
+    block - Navbar
+    ==================================================
+    -->
+
+    <%- include(`./base__partials/base__nav`) %>
+
+    <!--
+    ==================================================
+    endblock - Navbar
+    ==================================================
+    -->
+
+    <main>
+      <!--
+    ==================================================
+    block - Content
+    ==================================================
+    -->
+
+    <%- include(`../pages/${template}`) %>
+
+      <!--
+    ==================================================
+    endblock - Content
+    ==================================================
+    -->
+
+      <!--
+    ==================================================
+    block - Footer
+    ==================================================
+    -->
+
+    <%- include(`./base__partials/base__footer`) %>
+
+      <!--
+    ==================================================
+    endblock - Footer
+    ==================================================
+    --></main>
+    <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/views/pages/index.ejs:
+
+```ejs
+<!--
+==================================================
+block - Carousel Slider
+==================================================
+-->
+
+<%- include(`./index__partials/index__carousel`) %>
+
+<!--
+==================================================
+endblock - Carousel Slider
+==================================================
+-->
+
+<!--
+==================================================
+block - Speakers
+==================================================
+-->
+
+<%- include(`./index__partials/index__speakers.ejs`) %>
+
+<!--
+==================================================
+endblock - Speakers
+==================================================
+-->
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/views/pages/index__partials/index__speakers.ejs:
+
+```ejs
+<!--
+==================================================
+block - Speakers
+==================================================
+-->
+
+<div class="container marketing">
+  <!-- Three columns of text below the carousel -->
+  <div class="row">
+    <!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+      <img
+        src="./images/Hillary_Goldwynn_tn.jpg"
+        alt="carousel 2"
+        width="50%"
+        class="bd-placeholder-img rounded-circle"
+      />
+      <h2 class="fw-normal">Hilliary Goldwynn</h2>
+      <p>
+        Some representative placeholder content for the three columns of text below the carousel.
+        This is the first column.
+      </p>
+      <p>
+        <a class="btn btn-secondary" href="#">View details &raquo;</a>
+      </p>
+    </div>
+    <!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+      <img
+        src="./images/Lorenzo_Garcia_tn.jpg"
+        alt="carousel 2"
+        width="50%"
+        class="bd-placeholder-img rounded-circle"
+      />
+      <h2 class="fw-normal">Lorenzo Garcia</h2>
+      <p>
+        Another exciting bit of representative placeholder content. This time, we've moved on to the
+        second column.
+      </p>
+      <p>
+        <a class="btn btn-secondary" href="#">View details &raquo;</a>
+      </p>
+    </div>
+    <!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+      <img
+        src="./images/Riley_Rewington_tn.jpg"
+        alt="carousel 2"
+        width="50%"
+        class="bd-placeholder-img rounded-circle"
+      />
+      <h2 class="fw-normal">Riley Rewington</h2>
+      <p>And lastly this, the third column of representative placeholder content.</p>
+      <p>
+        <a class="btn btn-secondary" href="#">View details &raquo;</a>
+      </p>
+    </div>
+  </div>
+
+  <!--
+  ==================================================
+  block - Features
+  ==================================================
+  -->
+
+  <%- include(`./index__features`) %>
+
+  <!--
+  ==================================================
+  endblock - Features
+  ==================================================
+  -->
+</div>
+<!--
+==================================================
+endblock - Speakers
+==================================================
+-->
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/views/pages/index__partials/index__features.ejs:
+
+```ejs
+<!--
+  ==================================================
+  block - Features
+  ==================================================
+  -->
+  <hr class="featurette-divider" />
+
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading fw-normal lh-1">
+        Who are we?
+        <span class="text-body-secondary">It’ll blow your mind.</span>
+      </h2>
+      <p class="lead">
+        The Roux Academy gets thousands of submissions every year for
+        artists interesting in participating in the CAC exhibits, and
+        selects approximately 200 distinct pieces of contemporary art for
+        display in their collective exhibit.
+      </p>
+    </div>
+    <div class="col-md-5">
+      <img src="./images/artwork/Hillary_Goldwynn_03.jpg" alt="carousel 1" width="500" height="500"  class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"/>
+    </div>
+  </div>
+
+  <hr class="featurette-divider" />
+
+  <div class="row featurette">
+    <div class="col-md-7 order-md-2">
+      <h2 class="featurette-heading fw-normal lh-1">
+        What we do.
+        <span class="text-body-secondary">See for yourself.</span>
+      </h2>
+      <p class="lead">
+        Each Featured Artist has an opportunity to speak at one of our
+        meetups and share his or her vision, perspective, and techniques
+        with attendees on a more personal level than at our large
+        conference. While you attend the conference, head over to our gallery where you can check out some
+      of the work from our speakers.
+      </p>
+    </div>
+    <div class="col-md-5">
+      <img src="./images/artwork/Hillary_Goldwynn_07.jpg" alt="carousel 1" width="500" height="500"  class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"/>
+    </div>
+  </div>
+
+  <hr class="featurette-divider" />
+
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading fw-normal lh-1">
+        And lastly, Who should come?
+        <span class="text-body-secondary">Checkmate.</span>
+      </h2>
+      <p class="lead">
+      <ul class="sidebar-body">
+          <li>Anybody interested in art and the creative industry</li>
+          <li>Painters, sculptors, photographers and graphic artists</li>
+          <li>Those interested in meeting and making a connection with others in the local art scene.</li>
+      </ul>
+      </p>
+    </div>
+      <div class="col-md-5">
+          <img src="./images/artwork/Hillary_Goldwynn_02.jpg" alt="carousel 1" width="500" height="500"  class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"/>
+      </div>
+      </div>
+
+  <hr class="featurette-divider" />
+
+  <!--
+  ==================================================
+  endblock - Features
+  ==================================================
+  -->
+```
+
+![image](https://github.com/user-attachments/assets/c9ac5612-e4ff-4e0f-8c04-4eafe185cbcd)
+![image](https://github.com/user-attachments/assets/fe5b2ba9-60dd-495f-9106-e511b7a39503)
+
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/ab547ee5-5dc0-4afb-96bc-0e03a49835e4">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/8a35d699-5c1b-4a0b-8b47-51218d6138a9">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/a9be5e53-015a-44e4-9035-52fde6b0634b">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/a0ccd4ad-b071-4912-8cab-57bdbb0290af">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/897ce6cf-0df0-4daa-ab05-e7b2441782a3">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/973e5174-5616-4817-a73e-5208b4a11770">
+
+# #END</details>
+
+<details>
+<summary>12. EJS - Create Global Template Variables using Middlewares and app.locals </summary>
+
+# EJS - Create Global Template Variables using Middlewares and app.locals
+
+### src-AI-Software/my_projects/01_building_a_website/server.js:
+
+```js
+const express = require('express');
+const path = require('path');
+const cookieSession = require('cookie-session');
+
+const FeedbackModel = require('./models/FeedbackModel');
+const SpeakerModel = require('./models/SpeakerModel');
+
+const feedbackModel = new FeedbackModel('./data/feedback.json');
+const speakersModel = new SpeakerModel('./data/speakers.json');
+
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.set('trust proxy', 1);
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key14842784278', 'key232423423424'],
+  })
+);
+
+app.locals.siteName = 'Global ROUX Meetups';
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.use(async (req, res, next) => {
+  res.locals.newGreeting = 'Hello World';
+
+  try {
+    const names = await speakersModel.getNames();
+    res.locals.speakersNames = names;
+    console.log(res.locals.speakersNames);
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
+
+app.use('/', routes({ feedbackModel, speakersModel }));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log('Ctrl + C to stop');
+});
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/routes/homeRoutes.js:
+
+```js
+const express = require('express');
+
+const speakersRoutes = require('./speakersRoutes');
+const feedbackRoutes = require('./feedbackRoutes');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  router.get('/', (req, res) => {
+    const context = {
+      pageTitle: 'Welcome',
+      name: 'Roux Meetups',
+      template: 'index',
+    };
+    res.render('layouts/base', context);
+  });
+
+  router.use('/speakers', speakersRoutes(db));
+  router.use('/feedback', feedbackRoutes(db));
+
+  return router;
+};
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/views/layouts/base.ejs:
+
+```ejs
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <script src="/assets/js/color-modes.js"></script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= siteName %>--<%= pageTitle %></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+    <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="/css/carousel.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!--
+    ==================================================
+    block - Toggle Button
+    ==================================================
+    -->
+
+    <%- include(`./base__partials/base__toggle`) %>
+
+    <!--
+    ==================================================
+    endblock - Toggle Button
+    ==================================================
+    -->
+
+    <!--
+    ==================================================
+    block - Navbar
+    ==================================================
+    -->
+
+    <%- include(`./base__partials/base__nav`) %>
+
+    <!--
+    ==================================================
+    endblock - Navbar
+    ==================================================
+    -->
+
+    <main>
+      <!--
+    ==================================================
+    block - Content
+    ==================================================
+    -->
+
+    <%- include(`../pages/${template}`) %>
+
+      <!--
+    ==================================================
+    endblock - Content
+    ==================================================
+    -->
+
+      <!--
+    ==================================================
+    block - Footer
+    ==================================================
+    -->
+
+    <%- include(`./base__partials/base__footer`) %>
+
+      <!--
+    ==================================================
+    endblock - Footer
+    ==================================================
+    --></main>
+    <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/views/pages/index.ejs:
+
+```ejs
+<!--
+==================================================
+block - Carousel Slider
+==================================================
+-->
+
+<%- include(`./index__partials/index__carousel`) %>
+
+<!--
+==================================================
+endblock - Carousel Slider
+==================================================
+-->
+
+<h2><%= siteName %></h2>
+<h3><%= newGreeting %>, Welcome to our site!</h3>
+
+<!--
+==================================================
+block - Speakers
+==================================================
+-->
+
+<%- include(`./index__partials/index__speakers.ejs`) %>
+
+<!--
+==================================================
+endblock - Speakers
+==================================================
+-->
+
+```
+
+![image](https://github.com/user-attachments/assets/7b65e79c-bbe5-4e28-b9f0-1f3369578897)
+
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/a3167d4a-4a66-4fb6-a475-b892f9e4299c">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/305b68b0-9e16-4922-b067-eaaab17ba603">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/4857d046-c970-4dca-8df8-84924042680c">
+
+# #END</details>
+
+<details>
+<summary>13. EJS - Looping through Lists in Templates </summary>
+
+# EJS - Looping through Lists in Templates
+
+### src-AI-Software/my_projects/01_building_a_website/server.js:
+
+```js
+const express = require('express');
+const path = require('path');
+const cookieSession = require('cookie-session');
+
+const FeedbackModel = require('./models/FeedbackModel');
+const SpeakerModel = require('./models/SpeakerModel');
+
+const feedbackModel = new FeedbackModel('./data/feedback.json');
+const speakersModel = new SpeakerModel('./data/speakers.json');
+
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.set('trust proxy', 1);
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key14842784278', 'key232423423424'],
+  })
+);
+
+app.locals.siteName = 'Global ROUX Meetups';
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.use(async (req, res, next) => {
+  res.locals.newGreeting = 'Hello World';
+
+  try {
+    const names = await speakersModel.getNames();
+    res.locals.speakersNames = names;
+    // console.log(res.locals.speakersNames);
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
+
+app.use('/', routes({ feedbackModel, speakersModel }));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log('Ctrl + C to stop');
+});
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/routes/homeRoutes.js:
+
+```js
+const express = require('express');
+
+const speakersRoutes = require('./speakersRoutes');
+const feedbackRoutes = require('./feedbackRoutes');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  const { speakersModel } = db;
+
+  router.get('/', async (req, res) => {
+    const topSpeakers = await speakersModel.getList();
+    console.log(topSpeakers);
+
+    const context = {
+      pageTitle: 'Welcome',
+      name: 'Roux Meetups',
+      template: 'index',
+      topSpeakers,
+    };
+    res.render('layouts/base', context);
+  });
+
+  router.use('/speakers', speakersRoutes(db));
+  router.use('/feedback', feedbackRoutes(db));
+
+  return router;
+};
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/views/layouts/base__partials/base__nav.ejs:
+
+```ejs
+<!--
+    ==================================================
+    block - Navbar
+    ==================================================
+    -->
+
+<header data-bs-theme="dark">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><%= name %></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+        aria-controls="navbarCollapse"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Speakers
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/speakers">All Speakers</a></li>
+              <li><hr class="dropdown-divider" /></li>
+
+              <% speakersNames.forEach(speaker => { %>
+                <li><a class="dropdown-item" href="/speakers/<%= speaker.shortname %>"><%= speaker.name %></a></li>
+              <% }) %>
+
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Feedback</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+<!--
+    ==================================================
+    endblock - Navbar
+    ==================================================
+    -->
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/views/pages/index__partials/index__speakers.ejs:
+
+```ejs
+<!--
+==================================================
+block - Speakers
+==================================================
+-->
+
+<div class="container marketing">
+  <!-- Three columns of text below the carousel -->
+  <div class="row">
+    <% topSpeakers.forEach(speaker => { %>
+    <!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+      <a href="/speakers/<%= speaker.shortname %>">
+        <img
+          src="/images/<%= speaker.shortname %>_tn.jpg"
+          alt="Photo of <%= speaker.name %>"
+          width="50%"
+          class="bd-placeholder-img rounded-circle"
+        />
+      </a>
+
+      <h2 class="fw-normal"><%= speaker.name %></h2>
+      <p>
+        <%= speaker.summary %>
+      </p>
+      <p>
+        <a class="btn btn-secondary" href="/speakers/<%= speaker.shortname %>">View details &raquo;</a>
+      </p>
+    </div>
+    <% }) %>
+  </div>
+
+  <!--
+  ==================================================
+  block - Features
+  ==================================================
+  -->
+
+  <%- include(`./index__features`) %>
+
+  <!--
+  ==================================================
+  endblock - Features
+  ==================================================
+  -->
+</div>
+<!--
+==================================================
+endblock - Speakers
+==================================================
+-->
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/views/pages/index.ejs:
+
+```ejs
+<!--
+==================================================
+block - Carousel Slider
+==================================================
+-->
+
+<%- include(`./index__partials/index__carousel`) %>
+
+<!--
+==================================================
+endblock - Carousel Slider
+==================================================
+-->
+
+<!--
+==================================================
+block - Speakers
+==================================================
+-->
+
+<%- include(`./index__partials/index__speakers.ejs`) %>
+
+<!--
+==================================================
+endblock - Speakers
+==================================================
+-->
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/data/speakers.json:
+
+```json
+{
+    "speakers": [
+        {
+            "title": "Art in Full Bloom",
+            "name": "Lorenzo Garcia III",
+            "shortname": "Lorenzo_Garcia",
+            "summary": "Drawing and painting flowers may seem like a first-year art student's assignment, but Lorenzo Garcia brings depth, shadows, light, form and color to new heights with his unique and revolutionary technique of painting on canvas with ceramic glaze. This session is sure to be a hit with mixed media buffs.",
+            "description": "<p>Lorenzo was born in Mexico, but grew up in Southern California after his mother immigrated to Los Angeles when he was a year old. His mother worked as a seamstress in the Fashion District and brought home scrap materials for Lorenzo to create his early mixed media art. From that point on, Lorenzo became hooked on creating art from scrap metals, fabrics, wood, canvas, and many others. During his junior year at Bischon Art School in Los Angeles, he perfected his own proprietary method of painting on canvas with ceramic glaze, which he will demonstrate on Monday in his session, 'Art in Full Bloom'.</p><p>Lorenzo paints with an extraordinary amount of color, and prefers to create art centered around nature, animals, and science. Now in his senior year at Bischon, Lorenzo has been creating mixed media totem poles made from old telephone poles, and other recycled materials, and is already planning his next new technique that will likely inspire a trend for years to come.</p>",
+            "artwork": [
+                "Lorenzo_Garcia_01_tn.jpg",
+                "Lorenzo_Garcia_02_tn.jpg",
+                "Lorenzo_Garcia_03_tn.jpg",
+                "Lorenzo_Garcia_04_tn.jpg"
+            ]
+        },
+        {
+            "title": "Deep Sea Wonders",
+            "name": "Hilary Goldywynn Post",
+            "shortname": "Hillary_Goldwynn",
+            "summary": "Hillary is a sophomore art sculpture student at New York University, and has won the major international prizes for painters, including the Divinity Circle and the International Painter's Medal. Hillary's exhibit features paintings that contain only water including waves, deep sea, and river.",
+            "description": "<p>Hillary is a sophomore art sculpture student at New York University, and has already won all the major international prizes for new painters, including the Divinity Circle, the International Painter's Medal, and the Academy of Paris Award. Hillary's CAC exhibit features paintings that contain only water images including waves, deep sea, and river.</p><p>An avid water sports participant, Hillary understands the water in many ways in which others do not, or may not ever have the opportunity. Her goal in creating the CAC exhibit was to share with others the beauty, power, and flow of natural bodies of water throughout the world. In addition to the display, Hilary also hosts a session on Tuesday called Deep Sea Wonders, which combines her love of deep sea diving and snorkeling, with instruction for capturing the beauty of underwater explorations on canvas.</p>",
+            "artwork": [
+                "Hillary_Goldwynn_01_tn.jpg",
+                "Hillary_Goldwynn_02_tn.jpg",
+                "Hillary_Goldwynn_03_tn.jpg",
+                "Hillary_Goldwynn_04_tn.jpg",
+                "Hillary_Goldwynn_05_tn.jpg",
+                "Hillary_Goldwynn_06_tn.jpg",
+                "Hillary_Goldwynn_07_tn.jpg"
+            ]
+        },
+        {
+            "title": "The Art of Abstract",
+            "name": "Riley Rudolph Rewington",
+            "shortname": "Riley_Rewington",
+            "summary": "The leader of the MMA artistic movement in his hometown of Portland, Riley Rudolph Rewington draws a crowd wherever he goes. Mixing street performance, video, music, and traditional art, Riley has created some of the most unique and deeply poignant abstract works of his generation.",
+            "description": "<p>Riley started out as musician and street performance artist, and now blends painting and photography with audio, video, and computer multimedia to create what he calls 'Music and Multimedia Artworks.' Riley's innovations in using multimedia to express art have created a youth culture movement in his town of Portland, in which he remains at the forefront. In his role as the founder of the MMA art form, Riley has become an inspiration to many up and coming artists. However, the part Riley insists is most important to him, is that he's helped many troubled youth take control of their lives, and create their own unique, positive futuresponse. Seeing kids he's mentored graduate from high school and enroll in college, gives art the purpose that Riley so craves.</p><p>A first-year student at the Roux Academy of Art, Media, and Design, Riley is already changing the face of modern art at the university. Riley's exquisite abstract pieces have no intention of ever being understood, but instead beg the viewer to dream, create, pretend, and envision with their mind's eye. Riley will be speaking on the 'Art of Abstract' during Thursday's schedule.</p>",
+            "artwork": [
+                "Riley_Rewington_01_tn.jpg",
+                "Riley_Rewington_02_tn.jpg",
+                "Riley_Rewington_03_tn.jpg",
+                "Riley_Rewington_04_tn.jpg",
+                "Riley_Rewington_05_tn.jpg",
+                "Riley_Rewington_06_tn.jpg"
+            ]
+        }
+    ]
+}
+```
+
+![image](https://github.com/user-attachments/assets/2784800d-c283-4b6d-8aab-f74b2901335b)
+
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/cfd2626f-bd45-4ae5-a84e-dd631c49e75a">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/5825644b-b6ea-4577-a911-3c0640f87b92">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/96fd5f56-a296-4154-97a7-c8db16cc6e5a">
+
+# #END</details>
+
+<details>
+<summary>14. EJS - Create a Speakers List Page </summary>
+
+# EJS - Create a Speakers List Page
 
 ```js
 
