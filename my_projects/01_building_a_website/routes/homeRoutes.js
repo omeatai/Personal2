@@ -6,12 +6,19 @@ const feedbackRoutes = require('./feedbackRoutes');
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get('/', (req, res) => {
+  const { speakersModel } = db;
+
+  router.get('/', async (req, res) => {
+    const topSpeakers = await speakersModel.getList();
+    console.log(topSpeakers);
+
     const context = {
       pageTitle: 'Welcome',
       name: 'Roux Meetups',
+      template: 'index',
+      topSpeakers,
     };
-    res.render('pages/index', context);
+    res.render('layouts/base', context);
   });
 
   router.use('/speakers', speakersRoutes(db));

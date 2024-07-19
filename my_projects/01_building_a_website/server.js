@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const cookieSession = require('cookie-session');
 
 const FeedbackModel = require('./models/FeedbackModel');
 const SpeakerModel = require('./models/SpeakerModel');
@@ -13,6 +14,16 @@ const app = express();
 
 const PORT = 3000;
 
+app.set('trust proxy', 1);
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key14842784278', 'key232423423424'],
+  })
+);
+
+app.locals.siteName = 'Global ROUX Meetups';
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -20,6 +31,19 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, './views'));
 
 app.use(express.static(path.join(__dirname, './static')));
+
+app.use(async (req, res, next) => {
+  res.locals.newGreeting = 'Hello World';
+
+  try {
+    const names = await speakersModel.getNames();
+    res.locals.speakersNames = names;
+    // console.log(res.locals.speakersNames);
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
 
 app.use('/', routes({ feedbackModel, speakersModel }));
 
