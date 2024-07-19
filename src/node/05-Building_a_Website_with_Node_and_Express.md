@@ -3476,9 +3476,9 @@ module.exports = SpeakerModel;
 # #END</details>
 
 <details>
-<summary>16. Error Handling in Express </summary>
+<summary>16. Express Errors - Error Handling in Express </summary>
 
-# Error Handling in Express
+# Express Errors - Error Handling in Express
 
 ### src-AI-Software/my_projects/01_building_a_website/server.js:
 
@@ -3678,10 +3678,331 @@ module.exports = (db) => {
 # #END</details>
 
 <details>
-<summary>17. Create an Error Page </summary>
+<summary>17. Express Errors - Create an Error Page with Error-handling Middleware </summary>
 
-# Create an Error Page
+# Express Errors - Create an Error Page with Error-handling Middleware
 
+## Install http-errors
+
+```x
+npm install http-errors
+```
+
+### src-AI-Software/my_projects/01_building_a_website/server.js:
+
+```js
+const express = require('express');
+const path = require('path');
+const cookieSession = require('cookie-session');
+const createError = require('http-errors');
+
+const FeedbackModel = require('./models/FeedbackModel');
+const SpeakerModel = require('./models/SpeakerModel');
+
+const feedbackModel = new FeedbackModel('./data/feedback.json');
+const speakersModel = new SpeakerModel('./data/speakers.json');
+
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.set('trust proxy', 1);
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key14842784278', 'key232423423424'],
+  })
+);
+
+app.locals.siteName = 'Global ROUX Meetups';
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.use(async (req, res, next) => {
+  res.locals.newGreeting = 'Hello World';
+
+  try {
+    const names = await speakersModel.getNames();
+    res.locals.speakersNames = names;
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
+
+app.use('/', routes({ feedbackModel, speakersModel }));
+
+// createError middleware
+app.use((req, res, next) => {
+  // console.error(err.stack);
+  // res.status(404).send('Page not Found!');
+  return next(createError(404, 'Page not found'));
+});
+
+// Error-handling middleware
+app.use((err, req, res, next) => {
+  res.locals.message = err.message || 'The page you requested was not found.';
+  const status = err.status || 500;
+  res.locals.status = status;
+  return res.status(status).render('404');
+});
+
+app.listen(PORT, () => {
+  try {
+    console.log(`Server running on port ${PORT}`);
+    console.log('Ctrl + C to stop');
+  } catch (err) {
+    console.error(err.stack);
+    throw new Error(`Something broke: ${err}`);
+  }
+});
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/routes/homeRoutes.js:
+
+```js
+const express = require('express');
+
+const speakersRoutes = require('./speakersRoutes');
+const feedbackRoutes = require('./feedbackRoutes');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  const { speakersModel } = db;
+
+  router.get('/', async (req, res, next) => {
+    // return next(new Error('some Error'));
+    try {
+      const topSpeakers = await speakersModel.getList();
+      const context = {
+        pageTitle: 'Welcome',
+        name: 'Roux Meetups',
+        template: 'index',
+        topSpeakers,
+      };
+      return res.render('layouts/base', context);
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  router.use('/speakers', speakersRoutes(db));
+  router.use('/feedback', feedbackRoutes(db));
+
+  // Register the unhandled route middleware
+  function handleUnhandledRoutes(req, res, next) {
+    // res.status(404).send('Page not found');
+    return next(new Error('The Route does not Exist!'));
+  }
+  router.use(handleUnhandledRoutes);
+
+  return router;
+};
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/routes/speakersRoutes.js:
+
+```js
+const express = require('express');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  const { speakersModel } = db;
+
+  router.get('/', async (req, res, next) => {
+    try {
+      const speakers = await speakersModel.getList();
+      const context = {
+        pageTitle: 'Speakers',
+        name: 'Roux Meetups',
+        template: 'speakers',
+        speakers,
+      };
+      return res.render('layouts/base', context);
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  router.get('/:shortname', async (req, res, next) => {
+    try {
+      const speaker = await speakersModel.getSpeaker(req.params.shortname);
+      console.log(speaker);
+      const context = {
+        pageTitle: 'Speaker Detail',
+        name: 'Roux Meetups',
+        template: 'speaker-detail',
+        speaker,
+      };
+      return res.render('layouts/base', context);
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  // Register the unhandled route middleware
+  function handleUnhandledRoutes(req, res, next) {
+    // res.status(404).send('Page not found');
+    return next(new Error('The Route does not Exist!'));
+  }
+  router.use(handleUnhandledRoutes);
+
+  return router;
+};
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/routes/feedbackRoutes.js:
+
+```js
+const express = require('express');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  const { feedbackModel } = db;
+
+  router.get('/', async (req, res, next) => {
+    try {
+      const feedback = await feedbackModel.getList();
+      return res.json({ data: feedback });
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  router.post('/', (req, res, next) => {
+    try {
+      const feedback = req.body.feedback;
+      if (!feedback) {
+        return res.send('You must provide feedback.');
+      }
+      return res.send(`Thanks for your posted feedback: ${feedback}`);
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  // Register the unhandled route middleware
+  function handleUnhandledRoutes(req, res, next) {
+    // res.status(404).send('Page not found');
+    return next(new Error('The Route does not Exist!'));
+  }
+  router.use(handleUnhandledRoutes);
+
+  return router;
+};
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/views/404.ejs:
+
+```ejs
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Error <%= status %> | An error occured!</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f8f9fa;
+      }
+
+      .error-container {
+        text-align: center;
+      }
+
+      .error-code {
+        font-size: 6rem;
+        font-weight: bold;
+        color: #dc3545;
+      }
+
+      .error-message {
+        font-size: 2rem;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="error-container">
+      <h1 class="error-code"><%= status %> | <small>ERROR</small></h1>
+      <p class="error-message"><%= message %></p>
+    </div>
+  </body>
+</html>
+
+```
+
+![image](https://github.com/user-attachments/assets/906a9232-6721-4457-a42b-34873397136b)
+![image](https://github.com/user-attachments/assets/ca528d67-c3b2-4c25-aded-1eec8e021ebf)
+
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/49997815-ce1e-49ae-93c2-33c4f715c154">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/e0865123-6576-455a-b475-70e6a108021a">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/41f22d15-0d68-4d86-a097-0ab3499b2d08">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/2c7cf33d-0092-4efc-87a6-19c1141512d9">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/17c48b84-c9e9-4357-9986-129b76d5ae99">
+
+# #END</details>
+
+<details>
+<summary>18. Express Forms - Create Form Template </summary>
+
+# Express Forms - Create Form Template
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
 
 ```js
 
