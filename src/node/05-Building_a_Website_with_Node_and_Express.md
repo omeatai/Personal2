@@ -3149,29 +3149,336 @@ module.exports = SpeakerModel;
 # #END</details>
 
 <details>
-<summary>15. EJS - Using Parameter Routes - Retrieve Speaker </summary>
+<summary>15. EJS - Create Speaker Details Page </summary>
 
-# EJS - Using Parameter Routes - Retrieve Speaker
+# EJS - Create Speaker Details Page
+
+### src-AI-Software/my_projects/01_building_a_website/server.js:
 
 ```js
+const express = require('express');
+const path = require('path');
+const cookieSession = require('cookie-session');
+
+const FeedbackModel = require('./models/FeedbackModel');
+const SpeakerModel = require('./models/SpeakerModel');
+
+const feedbackModel = new FeedbackModel('./data/feedback.json');
+const speakersModel = new SpeakerModel('./data/speakers.json');
+
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.set('trust proxy', 1);
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key14842784278', 'key232423423424'],
+  })
+);
+
+app.locals.siteName = 'Global ROUX Meetups';
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.use(async (req, res, next) => {
+  res.locals.newGreeting = 'Hello World';
+
+  try {
+    const names = await speakersModel.getNames();
+    res.locals.speakersNames = names;
+    // console.log(res.locals.speakersNames);
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
+
+app.use('/', routes({ feedbackModel, speakersModel }));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log('Ctrl + C to stop');
+});
 
 ```
 
+### src-AI-Software/my_projects/01_building_a_website/routes/speakersRoutes.js
+
 ```js
+const express = require('express');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  const { speakersModel } = db;
+
+  router.get('/', async (req, res) => {
+    const speakers = await speakersModel.getList();
+
+    const context = {
+      pageTitle: 'Speakers',
+      name: 'Roux Meetups',
+      template: 'speakers',
+      speakers,
+    };
+    res.render('layouts/base', context);
+  });
+
+  router.get('/:shortname', async (req, res) => {
+    const speaker = await speakersModel.getSpeaker(req.params.shortname);
+    console.log(speaker);
+    const context = {
+      pageTitle: 'Speaker Detail',
+      name: 'Roux Meetups',
+      template: 'speaker-detail',
+      speaker,
+    };
+    res.render('layouts/base', context);
+    // return res.send(`This is the Speakers Detail Page for speaker: ${req.params.shortname}.`);
+  });
+
+  return router;
+};
 
 ```
 
-```js
+### src-AI-Software/my_projects/01_building_a_website/views/pages/speaker-detail.ejs:
+
+```ejs
+<!--
+  ==================================================
+  block - Features
+  ==================================================
+  -->
+<hr class="featurette-divider" />
+
+<div class="row featurette">
+  <div class="col-md-7">
+    <h2 class="featurette-heading fw-normal lh-1">
+      <%= speaker.name %>
+      <span class="text-body-secondary"><%= speaker.title %>.</span>
+    </h2>
+    <p class="lead"><%- speaker.description %>.</p>
+  </div>
+  <div class="col-md-5">
+    <img
+      src="/images/<%= speaker.shortname %>.jpg"
+      alt="carousel 1"
+      width="500"
+      height="500"
+      class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+    />
+  </div>
+</div>
+
+<hr class="featurette-divider" />
+
+<!--
+  ==================================================
+  endblock - Features
+  ==================================================
+  -->
 
 ```
 
+### src-AI-Software/my_projects/01_building_a_website/models/SpeakerModel.js:
+
 ```js
+const fs = require('fs');
+const util = require('util');
+
+/**
+ * We want to use async/await with fs.readFile - util.promisfy gives us that
+ */
+const readFile = util.promisify(fs.readFile);
+
+/**
+ * Logic for fetching speakers information
+ */
+class SpeakerModel {
+  /**
+   * Constructor
+   * @param {*} datafile Path to a JSOn file that contains the speakers data
+   */
+  constructor(datafile) {
+    this.datafile = datafile;
+  }
+
+  /**
+   * Returns a list of speakers name and short name
+   */
+  async getNames() {
+    const data = await this.getData();
+
+    // We are using map() to transform the array we get into another one
+    return data.map((speaker) => {
+      return { name: speaker.name, shortname: speaker.shortname };
+    });
+  }
+
+  /**
+   * Get all artwork
+   */
+  async getAllArtwork() {
+    const data = await this.getData();
+
+    // Array.reduce() is used to traverse all speakers and
+    // create an array that contains all artwork
+    const artwork = data.reduce((acc, elm) => {
+      if (elm.artwork) {
+        // eslint-disable-next-line no-param-reassign
+        acc = [...acc, ...elm.artwork];
+      }
+      return acc;
+    }, []);
+    return artwork;
+  }
+
+  /**
+   * Get all artwork of a given speaker
+   * @param {*} shortname The speakers short name
+   */
+  async getArtworkForSpeaker(shortname) {
+    const data = await this.getData();
+    const speaker = data.find((elm) => {
+      return elm.shortname === shortname;
+    });
+    if (!speaker || !speaker.artwork) return null;
+    return speaker.artwork;
+  }
+
+  /**
+   * Get speaker information provided a shortname
+   * @param {*} shortname
+   */
+  async getSpeaker(shortname) {
+    const data = await this.getData();
+    const speaker = data.find((elm) => {
+      return elm.shortname === shortname;
+    });
+    if (!speaker) return null;
+    return {
+      title: speaker.title,
+      name: speaker.name,
+      shortname: speaker.shortname,
+      description: speaker.description,
+    };
+  }
+
+  /**
+   * Returns a list of speakers with only the basic information
+   */
+  async getListShort() {
+    const data = await this.getData();
+    return data.map((speaker) => {
+      return {
+        name: speaker.name,
+        shortname: speaker.shortname,
+        title: speaker.title,
+      };
+    });
+  }
+
+  /**
+   * Get a list of speakers
+   */
+  async getList() {
+    const data = await this.getData();
+    return data.map((speaker) => {
+      return {
+        name: speaker.name,
+        shortname: speaker.shortname,
+        title: speaker.title,
+        summary: speaker.summary,
+      };
+    });
+  }
+
+  /**
+   * Fetches speakers data from the JSON file provided to the constructor
+   */
+  async getData() {
+    const data = await readFile(this.datafile, 'utf8');
+    return JSON.parse(data).speakers;
+  }
+}
+
+module.exports = SpeakerModel;
 
 ```
 
-```js
+### src-AI-Software/my_projects/01_building_a_website/data/speakers.json:
 
+```js
+{
+    "speakers": [
+        {
+            "title": "Art in Full Bloom",
+            "name": "Lorenzo Garcia III",
+            "shortname": "Lorenzo_Garcia",
+            "summary": "Drawing and painting flowers may seem like a first-year art student's assignment, but Lorenzo Garcia brings depth, shadows, light, form and color to new heights with his unique and revolutionary technique of painting on canvas with ceramic glaze. This session is sure to be a hit with mixed media buffs.",
+            "description": "<p>Lorenzo was born in Mexico, but grew up in Southern California after his mother immigrated to Los Angeles when he was a year old. His mother worked as a seamstress in the Fashion District and brought home scrap materials for Lorenzo to create his early mixed media art. From that point on, Lorenzo became hooked on creating art from scrap metals, fabrics, wood, canvas, and many others. During his junior year at Bischon Art School in Los Angeles, he perfected his own proprietary method of painting on canvas with ceramic glaze, which he will demonstrate on Monday in his session, 'Art in Full Bloom'.</p><p>Lorenzo paints with an extraordinary amount of color, and prefers to create art centered around nature, animals, and science. Now in his senior year at Bischon, Lorenzo has been creating mixed media totem poles made from old telephone poles, and other recycled materials, and is already planning his next new technique that will likely inspire a trend for years to come.</p>",
+            "artwork": [
+                "Lorenzo_Garcia_01_tn.jpg",
+                "Lorenzo_Garcia_02_tn.jpg",
+                "Lorenzo_Garcia_03_tn.jpg",
+                "Lorenzo_Garcia_04_tn.jpg"
+            ]
+        },
+        {
+            "title": "Deep Sea Wonders",
+            "name": "Hilary Goldywynn Post",
+            "shortname": "Hillary_Goldwynn",
+            "summary": "Hillary is a sophomore art sculpture student at New York University, and has won the major international prizes for painters, including the Divinity Circle and the International Painter's Medal. Hillary's exhibit features paintings that contain only water including waves, deep sea, and river.",
+            "description": "<p>Hillary is a sophomore art sculpture student at New York University, and has already won all the major international prizes for new painters, including the Divinity Circle, the International Painter's Medal, and the Academy of Paris Award. Hillary's CAC exhibit features paintings that contain only water images including waves, deep sea, and river.</p><p>An avid water sports participant, Hillary understands the water in many ways in which others do not, or may not ever have the opportunity. Her goal in creating the CAC exhibit was to share with others the beauty, power, and flow of natural bodies of water throughout the world. In addition to the display, Hilary also hosts a session on Tuesday called Deep Sea Wonders, which combines her love of deep sea diving and snorkeling, with instruction for capturing the beauty of underwater explorations on canvas.</p>",
+            "artwork": [
+                "Hillary_Goldwynn_01_tn.jpg",
+                "Hillary_Goldwynn_02_tn.jpg",
+                "Hillary_Goldwynn_03_tn.jpg",
+                "Hillary_Goldwynn_04_tn.jpg"
+            ]
+        },
+        {
+            "title": "The Art of Abstract",
+            "name": "Riley Rudolph Rewington",
+            "shortname": "Riley_Rewington",
+            "summary": "The leader of the MMA artistic movement in his hometown of Portland, Riley Rudolph Rewington draws a crowd wherever he goes. Mixing street performance, video, music, and traditional art, Riley has created some of the most unique and deeply poignant abstract works of his generation.",
+            "description": "<p>Riley started out as musician and street performance artist, and now blends painting and photography with audio, video, and computer multimedia to create what he calls 'Music and Multimedia Artworks.' Riley's innovations in using multimedia to express art have created a youth culture movement in his town of Portland, in which he remains at the forefront. In his role as the founder of the MMA art form, Riley has become an inspiration to many up and coming artists. However, the part Riley insists is most important to him, is that he's helped many troubled youth take control of their lives, and create their own unique, positive futuresponse. Seeing kids he's mentored graduate from high school and enroll in college, gives art the purpose that Riley so craves.</p><p>A first-year student at the Roux Academy of Art, Media, and Design, Riley is already changing the face of modern art at the university. Riley's exquisite abstract pieces have no intention of ever being understood, but instead beg the viewer to dream, create, pretend, and envision with their mind's eye. Riley will be speaking on the 'Art of Abstract' during Thursday's schedule.</p>",
+            "artwork": [
+                "Riley_Rewington_01_tn.jpg",
+                "Riley_Rewington_02_tn.jpg",
+                "Riley_Rewington_03_tn.jpg",
+                "Riley_Rewington_04_tn.jpg",
+                "Riley_Rewington_05_tn.jpg"
+            ]
+        }
+    ]
+}
 ```
+
+![image](https://github.com/user-attachments/assets/8eb39bcc-4395-4bd4-8ee8-0575995e17cd)
+![image](https://github.com/user-attachments/assets/f2091722-5e40-4925-89a9-90bb33516acb)
+![image](https://github.com/user-attachments/assets/b6456dd5-7b91-4f35-90ad-f031eb2c128c)
+
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/97b9e5c5-ace3-4631-bb42-ad406c318d22">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/0c55c09c-34c4-4a03-9399-a5043edd4662">
+
+# #END</details>
+
+<details>
+<summary>16. Error Handling in Express </summary>
+
+# Error Handling in Express
 
 ```js
 
