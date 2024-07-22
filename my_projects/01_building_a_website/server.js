@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cookieSession = require('cookie-session');
+const createError = require('http-errors');
 
 const FeedbackModel = require('./models/FeedbackModel');
 const SpeakerModel = require('./models/SpeakerModel');
@@ -38,7 +39,6 @@ app.use(async (req, res, next) => {
   try {
     const names = await speakersModel.getNames();
     res.locals.speakersNames = names;
-    // console.log(res.locals.speakersNames);
     return next();
   } catch (err) {
     return next(err);
@@ -47,7 +47,27 @@ app.use(async (req, res, next) => {
 
 app.use('/', routes({ feedbackModel, speakersModel }));
 
+// createError middleware
+app.use((req, res, next) => {
+  // console.error(err.stack);
+  // res.status(404).send('Page not Found!');
+  return next(createError(404, 'Page not found'));
+});
+
+// Error-handling middleware
+app.use((err, req, res, next) => {
+  res.locals.message = err.message || 'The page you requested was not found.';
+  const status = err.status || 500;
+  res.locals.status = status;
+  return res.status(status).render('404');
+});
+
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log('Ctrl + C to stop');
+  try {
+    console.log(`Server running on port ${PORT}`);
+    console.log('Ctrl + C to stop');
+  } catch (err) {
+    console.error(err.stack);
+    throw new Error(`Something broke: ${err}`);
+  }
 });

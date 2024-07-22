@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Error <%= status %> | An error occured!</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f8f9fa;
+      }
+
+      .error-container {
+        text-align: center;
+      }
+
+      .error-code {
+        font-size: 6rem;
+        font-weight: bold;
+        color: #dc3545;
+      }
+
+      .error-message {
+        font-size: 2rem;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="error-container">
+      <h1 class="error-code"><%= status %> | <small>ERROR</small></h1>
+      <p class="error-message"><%= message %></p>
+    </div>
+  </body>
+</html>

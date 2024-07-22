@@ -1,0 +1,33 @@
+<!--
+  ==================================================
+  block - Features
+  ==================================================
+  -->
+<hr class="featurette-divider" />
+
+<div class="row featurette">
+  <div class="col-md-7">
+    <h2 class="featurette-heading fw-normal lh-1">
+      <%= speaker.name %>
+      <span class="text-body-secondary"><%= speaker.title %>.</span>
+    </h2>
+    <p class="lead"><%- speaker.description %>.</p>
+  </div>
+  <div class="col-md-5">
+    <img
+      src="/images/<%= speaker.shortname %>.jpg"
+      alt="carousel 1"
+      width="500"
+      height="500"
+      class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+    />
+  </div>
+</div>
+
+<hr class="featurette-divider" />
+
+<!--
+  ==================================================
+  endblock - Features
+  ==================================================
+  -->
