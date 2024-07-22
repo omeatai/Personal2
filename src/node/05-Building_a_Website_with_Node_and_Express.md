@@ -4274,6 +4274,40 @@ module.exports = (db) => {
 npm install body-parser
 ```
 
+### src-AI-Software/my_projects/01_building_a_website/package.json:
+
+```json
+{
+  "name": "01_building_a_website",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --ignore feedback.json server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cookie-session": "^2.1.0",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "http-errors": "^2.0.0",
+    "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.7.0",
+    "eslint": "^9.7.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.8.0",
+    "prettier": "^3.3.3"
+  }
+}
+
+```
+
 ### src-AI-Software/my_projects/01_building_a_website/server.js:
 
 ```js
@@ -4478,9 +4512,325 @@ module.exports = (db) => {
 # #END</details>
 
 <details>
-<summary>20. Express Forms - Validating and Sanitizing User Input </summary>
+<summary>20. Express Forms - Validating and Sanitizing User Input with Error Display </summary>
 
-# Express Forms - Validating and Sanitizing User Input
+# Express Forms - Validating and Sanitizing User Input with Error Display 
+
+## Install Express Validator
+
+```js
+npm install express-validator
+```
+
+### src-AI-Software/my_projects/01_building_a_website/package.json:
+
+```json
+{
+  "name": "01_building_a_website",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --ignore feedback.json server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cookie-session": "^2.1.0",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-validator": "^7.1.0",
+    "http-errors": "^2.0.0",
+    "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.7.0",
+    "eslint": "^9.7.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.8.0",
+    "prettier": "^3.3.3"
+  }
+}
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/server.js:
+
+```js
+const express = require('express');
+const path = require('path');
+const cookieSession = require('cookie-session');
+const createError = require('http-errors');
+const bodyParser = require('body-parser');
+
+const FeedbackModel = require('./models/FeedbackModel');
+const SpeakerModel = require('./models/SpeakerModel');
+
+const feedbackModel = new FeedbackModel('./data/feedback.json');
+const speakersModel = new SpeakerModel('./data/speakers.json');
+
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.set('trust proxy', 1);
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key14842784278', 'key232423423424'],
+  })
+);
+
+app.locals.siteName = 'Global ROUX Meetups';
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.use(async (req, res, next) => {
+  res.locals.newGreeting = 'Hello World';
+
+  try {
+    const names = await speakersModel.getNames();
+    res.locals.speakersNames = names;
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
+
+app.use('/', routes({ feedbackModel, speakersModel }));
+
+// createError middleware
+app.use((req, res, next) => {
+  // console.error(err.stack);
+  // res.status(404).send('Page not Found!');
+  return next(createError(404, 'Page not found'));
+});
+
+// Error-handling middleware
+app.use((err, req, res, next) => {
+  res.locals.message = err.message || 'The page you requested was not found.';
+  const status = err.status || 500;
+  res.locals.status = status;
+  return res.status(status).render('404');
+});
+
+app.listen(PORT, () => {
+  try {
+    console.log(`Server running on port ${PORT}`);
+    console.log('Ctrl + C to stop');
+  } catch (err) {
+    console.error(err.stack);
+    throw new Error(`Something broke: ${err}`);
+  }
+});
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/routes/feedbackRoutes.js:
+
+```js
+const express = require('express');
+const router = express.Router();
+const { check, validationResult } = require('express-validator');
+
+module.exports = (db) => {
+  const { feedbackModel } = db;
+
+  router.get('/', async (req, res, next) => {
+    try {
+      const feedback = await feedbackModel.getList();
+
+      const errors = req.session.feedback ? req.session.feedback.errors : false;
+      req.session.feedback = {};
+
+      const context = {
+        pageTitle: 'Feedback',
+        name: 'Roux Meetups',
+        template: 'feedback',
+        feedback,
+        errors,
+      };
+      return res.render('layouts/base', context);
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  const feedbackPOSTValidator = [
+    check('name').trim().isLength({ min: 3 }).escape().withMessage('A name is required'),
+    check('email')
+      .trim()
+      .isEmail()
+      .normalizeEmail()
+      .withMessage('A valid email address is required'),
+    check('title').trim().isLength({ min: 3 }).escape().withMessage('A title is required'),
+    check('message').trim().isLength({ min: 5 }).escape().withMessage('A message is required'),
+  ];
+
+  router.post('/', feedbackPOSTValidator, (req, res, next) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        req.session.feedback = {
+          errors: errors.array(),
+        };
+        return res.redirect('/feedback');
+      }
+      return res.send(`Thanks for your posted feedback:\n\n ${JSON.stringify(req.body)}`);
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  // Register the unhandled route middleware
+  function handleUnhandledRoutes(req, res, next) {
+    // res.status(404).send('Page not found');
+    return next(new Error('The Route does not Exist!'));
+  }
+  router.use(handleUnhandledRoutes);
+
+  return router;
+};
+
+```
+
+### src-AI-Software/my_projects/01_building_a_website/views/pages/feedback.ejs:
+
+```js
+<div class="container">
+
+<div class="row my-5">
+  <div class="col-6">
+    <h2>Enter a Feedback</h2>
+
+    <% if(locals.errors) {%>
+      <div class="alert alert-danger" role="alert">
+        <% errors.forEach(function (error) {%>
+          <li><%= error.msg %></li>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <form method="POST" action="/feedback">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" name="name" aria-describedby="textHelp">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">Message</label>
+        <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <div class="col-6">
+    <h2>Feedbacks</h2>
+    <div class="accordion" id="accordionExample">
+      <% feedback.forEach(function (items) { %>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#<%= items.name %>"
+              aria-expanded="false"
+              aria-controls="collapseThree"
+            >
+              <%= items.name %> | <%= items.email %>
+            </button>
+          </h2>
+        </div>
+        <div id="<%= items.name %>" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <h3><strong><%= items.title %></strong></h3>
+            <p><%= items.message %></p>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</div>
+
+```
+
+![image](https://github.com/user-attachments/assets/e4e106ae-ecfd-4d40-b21d-6f636b49c9d0)
+![image](https://github.com/user-attachments/assets/7227bd2c-7c9e-47fd-9008-6397da32a5e4)
+![image](https://github.com/user-attachments/assets/4335a96a-c768-47a1-83e2-13950dfeb516)
+
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/f56b6e60-5ad4-446a-b499-44c1ea87aac4">
+<img width="1442" alt="image" src="https://github.com/user-attachments/assets/d399e057-b6f1-438e-bbdd-fbee7a84346f">
+
+# #END</details>
+
+<details>
+<summary>21. Express Forms - Storing Data </summary>
+
+# Express Forms - Storing Data
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
 
 ```js
 
