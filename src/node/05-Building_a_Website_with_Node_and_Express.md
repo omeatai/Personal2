@@ -3968,29 +3968,305 @@ module.exports = (db) => {
 # #END</details>
 
 <details>
-<summary>18. Express Forms - Create Form Template </summary>
+<summary>18. Express Forms - Create Feedback Form and Message Template </summary>
 
-# Express Forms - Create Form Template
+# Express Forms - Create Feedback Form and Message Template 
+
+### src-AI-Software/my_projects/01_building_a_website/server.js:
 
 ```js
+const express = require('express');
+const path = require('path');
+const cookieSession = require('cookie-session');
+const createError = require('http-errors');
+
+const FeedbackModel = require('./models/FeedbackModel');
+const SpeakerModel = require('./models/SpeakerModel');
+
+const feedbackModel = new FeedbackModel('./data/feedback.json');
+const speakersModel = new SpeakerModel('./data/speakers.json');
+
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.set('trust proxy', 1);
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key14842784278', 'key232423423424'],
+  })
+);
+
+app.locals.siteName = 'Global ROUX Meetups';
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.use(async (req, res, next) => {
+  res.locals.newGreeting = 'Hello World';
+
+  try {
+    const names = await speakersModel.getNames();
+    res.locals.speakersNames = names;
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
+
+app.use('/', routes({ feedbackModel, speakersModel }));
+
+// createError middleware
+app.use((req, res, next) => {
+  // console.error(err.stack);
+  // res.status(404).send('Page not Found!');
+  return next(createError(404, 'Page not found'));
+});
+
+// Error-handling middleware
+app.use((err, req, res, next) => {
+  res.locals.message = err.message || 'The page you requested was not found.';
+  const status = err.status || 500;
+  res.locals.status = status;
+  return res.status(status).render('404');
+});
+
+app.listen(PORT, () => {
+  try {
+    console.log(`Server running on port ${PORT}`);
+    console.log('Ctrl + C to stop');
+  } catch (err) {
+    console.error(err.stack);
+    throw new Error(`Something broke: ${err}`);
+  }
+});
 
 ```
 
+### src-AI-Software/my_projects/01_building_a_website/routes/feedbackRoutes.js:
+
 ```js
+const express = require('express');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  const { feedbackModel } = db;
+
+  router.get('/', async (req, res, next) => {
+   try {
+      const feedback = await feedbackModel.getList();
+      const context = {
+        pageTitle: 'Feedback',
+        name: 'Roux Meetups',
+        template: 'feedback',
+        feedback
+      };
+      return res.render('layouts/base', context);
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  router.post('/', (req, res, next) => {
+    try {
+      const feedback = req.body.feedback;
+      if (!feedback) {
+        return res.send('You must provide feedback.');
+      }
+      return res.send(`Thanks for your posted feedback: ${feedback}`);
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  // Register the unhandled route middleware
+  function handleUnhandledRoutes(req, res, next) {
+    // res.status(404).send('Page not found');
+    return next(new Error('The Route does not Exist!'));
+  }
+  router.use(handleUnhandledRoutes);
+
+  return router;
+};
 
 ```
 
-```js
+### src-AI-Software/my_projects/01_building_a_website/views/layouts/base__partials/base__nav.ejs:
+
+```ejs
+<!--
+    ==================================================
+    block - Navbar
+    ==================================================
+    -->
+
+<header data-bs-theme="dark">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"><%= name %></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+        aria-controls="navbarCollapse"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Speakers
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/speakers">All Speakers</a></li>
+              <li><hr class="dropdown-divider" /></li>
+
+              <% speakersNames.forEach(speaker => { %>
+                <li><a class="dropdown-item" href="/speakers/<%= speaker.shortname %>"><%= speaker.name %></a></li>
+              <% }) %>
+
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/feedback">Feedback</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+<!--
+    ==================================================
+    endblock - Navbar
+    ==================================================
+    -->
 
 ```
 
-```js
+### src-AI-Software/my_projects/01_building_a_website/views/pages/feedback.ejs:
+
+```ejs
+<div class="container">
+
+<div class="row my-5">
+  <div class="col-6">
+    <h2>Enter a Feedback</h2>
+    <form>
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" name="name" aria-describedby="textHelp">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">Message</label>
+        <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <div class="col-6">
+    <h2>Feedbacks</h2>
+    <div class="accordion" id="accordionExample">
+      <% feedback.forEach(function (items) { %>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#<%= items.name %>"
+              aria-expanded="false"
+              aria-controls="collapseThree"
+            >
+              <%= items.name %> | <%= items.email %>
+            </button>
+          </h2>
+        </div>
+        <div id="<%= items.name %>" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <h3><strong><%= items.title %></strong></h3>
+            <p><%= items.message %></p>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</div>
 
 ```
 
-```js
+### src-AI-Software/my_projects/01_building_a_website/data/feedback.json:
 
+```json
+[
+    {
+        "name": "Frank",
+        "email": "frank-smith@gmail.com",
+        "title": "Best Meetup Ever",
+        "message": "I really love this meetup. Please don't let it end."
+    },
+    {
+        "name": "Jane",
+        "email": "jane-miller@gmail.com",
+        "title": "Meeting Time",
+        "message": "Would you consider moving the meeting time 30 minutes to about 6pm. It's tough to make it to the meetings on time right after work."
+    },
+    {
+        "name": "Roy",
+        "email": "roy-jones@gmail.com",
+        "title": "Great Speaker",
+        "message": "I really enjoyed the speaker this month. Would love to hear another presentation."
+    }
+]
 ```
+
+![image](https://github.com/user-attachments/assets/b809b3e4-5883-41b7-82af-329d401809d1)
+
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/f2556fa5-bedc-4312-8df5-69be20f7d818">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/578eec09-f212-4b88-bfea-4044e6270eef">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/07f14f95-1e0b-459a-9a26-af7d75988852">
+
+# #END</details>
+
+<details>
+<summary>19. Express Forms - Handling POST requests </summary>
+
+# Express Forms - Handling POST requests
 
 ```js
 
