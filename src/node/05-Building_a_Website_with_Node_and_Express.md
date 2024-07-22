@@ -4268,21 +4268,219 @@ module.exports = (db) => {
 
 # Express Forms - Handling POST requests
 
+## Install body-parser
+
 ```js
+npm install body-parser
+```
+
+### src-AI-Software/my_projects/01_building_a_website/server.js:
+
+```js
+const express = require('express');
+const path = require('path');
+const cookieSession = require('cookie-session');
+const createError = require('http-errors');
+const bodyParser = require('body-parser');
+
+const FeedbackModel = require('./models/FeedbackModel');
+const SpeakerModel = require('./models/SpeakerModel');
+
+const feedbackModel = new FeedbackModel('./data/feedback.json');
+const speakersModel = new SpeakerModel('./data/speakers.json');
+
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.set('trust proxy', 1);
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key14842784278', 'key232423423424'],
+  })
+);
+
+app.locals.siteName = 'Global ROUX Meetups';
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.use(async (req, res, next) => {
+  res.locals.newGreeting = 'Hello World';
+
+  try {
+    const names = await speakersModel.getNames();
+    res.locals.speakersNames = names;
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
+
+app.use('/', routes({ feedbackModel, speakersModel }));
+
+// createError middleware
+app.use((req, res, next) => {
+  // console.error(err.stack);
+  // res.status(404).send('Page not Found!');
+  return next(createError(404, 'Page not found'));
+});
+
+// Error-handling middleware
+app.use((err, req, res, next) => {
+  res.locals.message = err.message || 'The page you requested was not found.';
+  const status = err.status || 500;
+  res.locals.status = status;
+  return res.status(status).render('404');
+});
+
+app.listen(PORT, () => {
+  try {
+    console.log(`Server running on port ${PORT}`);
+    console.log('Ctrl + C to stop');
+  } catch (err) {
+    console.error(err.stack);
+    throw new Error(`Something broke: ${err}`);
+  }
+});
 
 ```
 
+### src-AI-Software/my_projects/01_building_a_website/routes/feedbackRoutes.js:
+
 ```js
+const express = require('express');
+
+const router = express.Router();
+
+module.exports = (db) => {
+  const { feedbackModel } = db;
+
+  router.get('/', async (req, res, next) => {
+    try {
+      const feedback = await feedbackModel.getList();
+      const context = {
+        pageTitle: 'Feedback',
+        name: 'Roux Meetups',
+        template: 'feedback',
+        feedback,
+      };
+      return res.render('layouts/base', context);
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  router.post('/', (req, res, next) => {
+    try {
+      const message = req.body.message;
+      if (!message) {
+        return res.send('You must provide feedback.');
+      }
+      console.log(req.body);
+      return res.send(`Thanks for your posted feedback:\n\n ${message}`);
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  // Register the unhandled route middleware
+  function handleUnhandledRoutes(req, res, next) {
+    // res.status(404).send('Page not found');
+    return next(new Error('The Route does not Exist!'));
+  }
+  router.use(handleUnhandledRoutes);
+
+  return router;
+};
 
 ```
 
-```js
+### src-AI-Software/my_projects/01_building_a_website/views/pages/feedback.ejs:
+
+```ejs
+<div class="container">
+
+<div class="row my-5">
+  <div class="col-6">
+    <h2>Enter a Feedback</h2>
+    <form method="POST" action="/feedback">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" name="name" aria-describedby="textHelp">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">Message</label>
+        <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <div class="col-6">
+    <h2>Feedbacks</h2>
+    <div class="accordion" id="accordionExample">
+      <% feedback.forEach(function (items) { %>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#<%= items.name %>"
+              aria-expanded="false"
+              aria-controls="collapseThree"
+            >
+              <%= items.name %> | <%= items.email %>
+            </button>
+          </h2>
+        </div>
+        <div id="<%= items.name %>" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <h3><strong><%= items.title %></strong></h3>
+            <p><%= items.message %></p>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</div>
 
 ```
 
-```js
+![image](https://github.com/user-attachments/assets/ebac367b-96c2-43be-8f01-6c7e93552cf9)
+![image](https://github.com/user-attachments/assets/90c7a210-57f8-49e6-9ec5-949508d3d53d)
+![image](https://github.com/user-attachments/assets/52302546-46e5-4728-9f38-786cb713a69e)
 
-```
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/869d87eb-918f-49ce-a693-b799652f8464">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/d3f3a0ee-36c0-4fa7-8d86-6abcfda5577d">
+
+# #END</details>
+
+<details>
+<summary>20. Express Forms - Validating and Sanitizing User Input </summary>
+
+# Express Forms - Validating and Sanitizing User Input
 
 ```js
 
