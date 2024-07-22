@@ -4788,29 +4788,327 @@ module.exports = (db) => {
 # #END</details>
 
 <details>
-<summary>21. Express Forms - Storing Data </summary>
+<summary>21. Express Forms - Storing Data with Success Message </summary>
 
-# Express Forms - Storing Data
+# Express Forms - Storing Data with Success Message 
+
+### src-AI-Software/my_projects/01_building_a_website/server.js:
 
 ```js
+const express = require('express');
+const path = require('path');
+const cookieSession = require('cookie-session');
+const createError = require('http-errors');
+const bodyParser = require('body-parser');
+
+const FeedbackModel = require('./models/FeedbackModel');
+const SpeakerModel = require('./models/SpeakerModel');
+
+const feedbackModel = new FeedbackModel('./data/feedback.json');
+const speakersModel = new SpeakerModel('./data/speakers.json');
+
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.set('trust proxy', 1);
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key14842784278', 'key232423423424'],
+  })
+);
+
+app.locals.siteName = 'Global ROUX Meetups';
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.use(async (req, res, next) => {
+  res.locals.newGreeting = 'Hello World';
+
+  try {
+    const names = await speakersModel.getNames();
+    res.locals.speakersNames = names;
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
+
+app.use('/', routes({ feedbackModel, speakersModel }));
+
+// createError middleware
+app.use((req, res, next) => {
+  // console.error(err.stack);
+  // res.status(404).send('Page not Found!');
+  return next(createError(404, 'Page not found'));
+});
+
+// Error-handling middleware
+app.use((err, req, res, next) => {
+  res.locals.message = err.message || 'The page you requested was not found.';
+  const status = err.status || 500;
+  res.locals.status = status;
+  return res.status(status).render('404');
+});
+
+app.listen(PORT, () => {
+  try {
+    console.log(`Server running on port ${PORT}`);
+    console.log('Ctrl + C to stop');
+  } catch (err) {
+    console.error(err.stack);
+    throw new Error(`Something broke: ${err}`);
+  }
+});
 
 ```
 
+### src-AI-Software/my_projects/01_building_a_website/routes/feedbackRoutes.js:
+
 ```js
+const express = require('express');
+const router = express.Router();
+const { check, validationResult } = require('express-validator');
+
+module.exports = (db) => {
+  const { feedbackModel } = db;
+
+  router.get('/', async (req, res, next) => {
+    try {
+      const feedback = await feedbackModel.getList();
+
+      const errors = req.session.feedback ? req.session.feedback.errors : false;
+      const message = req.session.feedback ? req.session.feedback.message : false;
+      req.session.feedback = {};
+
+      const context = {
+        pageTitle: 'Feedback',
+        name: 'Roux Meetups',
+        template: 'feedback',
+        feedback,
+        errors,
+        message,
+      };
+      return res.render('layouts/base', context);
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  const feedbackPOSTValidator = [
+    check('name').trim().isLength({ min: 3 }).escape().withMessage('A name is required'),
+    check('email')
+      .trim()
+      .isEmail()
+      .normalizeEmail()
+      .withMessage('A valid email address is required'),
+    check('title').trim().isLength({ min: 3 }).escape().withMessage('A title is required'),
+    check('message').trim().isLength({ min: 5 }).escape().withMessage('A message is required'),
+  ];
+
+  router.post('/', feedbackPOSTValidator, async (req, res, next) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        req.session.feedback = {
+          errors: errors.array(),
+        };
+        return res.redirect('/feedback');
+      }
+
+      const { name, email, title, message } = req.body;
+      await feedbackModel.addEntry(name, email, title, message);
+      req.session.feedback = {
+        message: 'Thank you for your feedback!',
+      };
+      console.log(req.body);
+      return res.redirect('/feedback');
+      // return res.send(`Thanks for your posted feedback:\n\n ${JSON.stringify(req.body)}`);
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  // Register the unhandled route middleware
+  function handleUnhandledRoutes(req, res, next) {
+    // res.status(404).send('Page not found');
+    return next(new Error('The Route does not Exist!'));
+  }
+  router.use(handleUnhandledRoutes);
+
+  return router;
+};
 
 ```
 
-```js
+### src-AI-Software/my_projects/01_building_a_website/views/pages/feedback.ejs:
+
+```ejs
+<div class="container">
+
+<div class="row my-5">
+  <div class="col-6">
+    <h2>Enter a Feedback</h2>
+
+    <% if(locals.errors) {%>
+      <div class="alert alert-danger" role="alert">
+        <% errors.forEach(function (error) {%>
+          <li><%= error.msg %></li>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <% if(locals.message) {%>
+      <div class="alert alert-success" role="alert">
+        <li><%= message %></li>
+      </div>
+    <% } %>
+
+    <form method="POST" action="/feedback">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" name="name" aria-describedby="textHelp">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">Message</label>
+        <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <div class="col-6">
+    <h2>Feedbacks</h2>
+    <div class="accordion" id="accordionExample">
+      <% feedback.forEach(function (items) { %>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#<%= items.name %>"
+              aria-expanded="false"
+              aria-controls="collapseThree"
+            >
+              <%= items.name %> | <%= items.email %>
+            </button>
+          </h2>
+        </div>
+        <div id="<%= items.name %>" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <h3><strong><%= items.title %></strong></h3>
+            <p><%= items.message %></p>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</div>
 
 ```
 
+### src-AI-Software/my_projects/01_building_a_website/models/FeedbackModel.js:
+
 ```js
+const fs = require('fs');
+const util = require('util');
+
+const readFile = util.promisify(fs.readFile);
+const writeFile = util.promisify(fs.writeFile);
+
+/**
+ * Logic for reading and writing feedback data
+ */
+class FeedbackModel {
+  /**
+   * Constructor
+   * @param {*} datafile Path to a JSOn file that contains the feedback data
+   */
+  constructor(datafile) {
+    this.datafile = datafile;
+  }
+
+  /**
+   * Get all feedback items
+   */
+  async getList() {
+    const data = await this.getData();
+    return data;
+  }
+
+  /**
+   * Add a new feedback item
+   * @param {*} name The name of the user
+   * @param {*} title The title of the feedback message
+   * @param {*} message The feedback message
+   */
+  async addEntry(name, email, title, message) {
+    const data = (await this.getData()) || [];
+    data.unshift({ name, email, title, message });
+    return writeFile(this.datafile, JSON.stringify(data));
+  }
+
+  /**
+   * Fetches feedback data from the JSON file provided to the constructor
+   */
+  async getData() {
+    const data = await readFile(this.datafile, 'utf8');
+    if (!data) return [];
+    return JSON.parse(data);
+  }
+}
+
+module.exports = FeedbackModel;
 
 ```
 
-```js
-
+```x
+[nodemon] starting `node server.js`
+Server running on port 3000
+Ctrl + C to stop
+{
+  name: 'Ifeanyi',
+  email: 'ifeanyio@gmail.com',
+  title: 'My Story',
+  message: 'This is my Story!'
+}
 ```
+
+![image](https://github.com/user-attachments/assets/56edb912-4218-4963-a047-fd98e8b9bc05)
+![image](https://github.com/user-attachments/assets/d32e4737-b08b-4bb0-907f-1c860736eb80)
+
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/d0536000-c3c4-4ea4-bae5-a499024e67ca">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/21df6cb2-5772-4bc5-a001-b395c050f8e4">
+<img width="1486" alt="image" src="https://github.com/user-attachments/assets/a8eed92f-35c1-4d43-b32c-de33af36587d">
+
+# #END</details>
+
+<details>
+<summary>22. REST API - Creating and Testing API Endpoints </summary>
+
+# REST API - Creating and Testing API Endpoints
 
 ```js
 
