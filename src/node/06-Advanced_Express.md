@@ -395,7 +395,7 @@ Connected to MongoDB...
 
 ## Install Email Validator
 
-```js
+```x
 npm install --save email-validator
 ```
 
@@ -460,7 +460,290 @@ const UserSchema = mongoose.Schema(
       trim: true,
       // unique: true,
       index: { unique: true },
-      match: /^[a-zA-Z0-9]+$/,
+    },
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true,
+      index: { unique: true },
+      validate: {
+        validator: (email) => emailValidator.validate(email),
+        message: (props) => `${props.value} is not a valid email address!`,
+      },
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: 8,
+      maxlength: 50,
+      trim: true,
+      index: { unique: true },
+      // match: /^[a-zA-Z0-9]+$/,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+module.exports = mongoose.model("User", UserSchema);
+
+```
+
+<img width="1379" alt="image" src="https://github.com/user-attachments/assets/0e6dc3d4-2ecf-465f-91db-fa56b89da21f">
+
+
+# #END</details>
+
+<details>
+<summary>7. Using bcrypt to hash and validate passwords (password encryption) </summary>
+
+# Using bcrypt to hash and validate passwords
+
+## Install Bcrypt
+
+```js
+npm install --save bcrypt
+```
+
+### src-AI-Software/my_projects/03_advanced_express/APP/server.js:
+
+```js
+const dotenv = require("dotenv");
+dotenv.config();
+
+const express = require("express");
+const fs = require("fs");
+const util = require("util");
+const { marked } = require("marked");
+
+const app = express();
+const PORT = 3000;
+const db = require("./lib/db");
+
+const fsreadfile = util.promisify(fs.readFile);
+
+app.engine("md", async (filePath, options, callback) => {
+  try {
+    const content = await fsreadfile(filePath, "utf-8");
+    const rendered = content.toString().replace(`{headline}`, options.headline);
+    return callback(null, marked(rendered));
+  } catch (err) {
+    return callback(err);
+  }
+});
+
+app.set("views", "views");
+app.set("view engine", "md");
+
+function handler(req, res) {
+  //   return res.send("<h1>Hello World</h1>");
+  return res.render("index", { headline: "Hello World" });
+}
+
+app.get("/", handler);
+
+app.listen(PORT, () => {
+  db(); // Connect to mongo database
+  console.log(`Server is running on port ${PORT}`);
+  console.log("Press Ctrl-C to stop the server");
+});
+
+```
+
+### src-AI-Software/my_projects/03_advanced_express/APP/models/UserModel.js:
+
+```js
+const mongoose = require("mongoose");
+const emailValidator = require("email-validator");
+const bcrypt = require("bcrypt");
+const SALT_ROUNDS = 12;
+
+const UserSchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      minlength: 3,
+      maxlength: 50,
+      trim: true,
+      // unique: true,
+      index: { unique: true },
+    },
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true,
+      index: { unique: true },
+      validate: {
+        validator: (email) => emailValidator.validate(email),
+        message: (props) => `${props.value} is not a valid email address!`,
+      },
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: 8,
+      maxlength: 50,
+      trim: true,
+      index: { unique: true },
+      // match: /^[a-zA-Z0-9]+$/,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+UserSchema.pre("save", async function preSave(next) {
+  const user = this;
+  if (!user.isModified("password")) return next();
+  try {
+    const salt = await bcrypt.genSalt(SALT_ROUNDS);
+    const hash = await bcrypt.hash(user.password, salt);
+    user.password = hash;
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
+UserSchema.methods.comparePassword = async function comparePassword(
+  candidatePassword
+) {
+  return await bcrypt.compare(candidatePassword, this.password);
+};
+
+module.exports = mongoose.model("User", UserSchema);
+
+```
+
+![image](https://github.com/user-attachments/assets/4a08fa69-346c-4379-9886-65aab54aeb06)
+![image](https://github.com/user-attachments/assets/2e961187-6003-4de2-b5ed-1d618534afdb)
+
+<img width="1379" alt="image" src="https://github.com/user-attachments/assets/1a93ab22-cf3e-4b60-92ac-9520ae898ba1">
+
+# #END</details>
+
+<details>
+<summary>8. Creating User Registration Form and Route </summary>
+
+# Creating User Registration Form and Route
+
+## Install EJS
+
+```x
+npm install ejs
+```
+
+### src-AI-Software/my_projects/03_advanced_express/APP/server.js:
+
+```js
+const dotenv = require("dotenv");
+dotenv.config();
+
+const path = require("path");
+const express = require("express");
+const fs = require("fs");
+const util = require("util");
+const fsreadfile = util.promisify(fs.readFile);
+
+const app = express();
+const PORT = 3000;
+const db = require("./lib/db");
+const User = require("./models/UserModel");
+const { error } = require("console");
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "./views"));
+
+function handler(req, res) {
+  //   return res.send("<h1>Hello World</h1>");
+  return res.render("base", {
+    template: "index",
+    headline: "This is the Home Page!",
+  });
+}
+
+app.get("/", handler);
+
+app
+  .route("/register")
+  .get((req, res) => {
+    return res.render("base", {
+      template: "register",
+      headline: "Register Now!",
+      error: null,
+      message: null,
+    });
+  })
+  .post(async (req, res, next) => {
+    try {
+      const { name, email, password, confirm_password } = req.body;
+      const data = {
+        template: "register",
+        headline: "Register Now!",
+        error: null,
+        message: null,
+      };
+
+      if (password !== confirm_password) {
+        return res.render("base", { ...data, error: "Passwords do not match" });
+      }
+
+      const user = new User({ name, email, password });
+      const savedUser = await user.save();
+
+      if (savedUser) {
+        return res.render("base", {
+          ...data,
+          message: "User registered successfully!",
+        });
+      } else {
+        return res.render("base", {
+          ...data,
+          error: "Failed to register user!",
+        });
+        // return next(new Error("Couldn't register user!"));
+      }
+    } catch (err) {
+      console.log(err);
+      next(err);
+    }
+  });
+
+app.listen(PORT, () => {
+  db(); // Connect to mongo database
+  console.log(`Server is running on port ${PORT}`);
+  console.log("Press Ctrl-C to stop the server");
+});
+
+```
+
+### src-AI-Software/my_projects/03_advanced_express/APP/models/UserModel.js:
+
+```js
+const mongoose = require("mongoose");
+const emailValidator = require("email-validator");
+const bcrypt = require("bcrypt");
+const SALT_ROUNDS = 12;
+
+const UserSchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      minlength: 3,
+      maxlength: 50,
+      trim: true,
+      // unique: true,
+      index: { unique: true },
+      //   match: /^[a-zA-Z0-9]+$/,
     },
     email: {
       type: String,
@@ -487,39 +770,175 @@ const UserSchema = mongoose.Schema(
   }
 );
 
+UserSchema.pre("save", async function preSave(next) {
+  const user = this;
+  if (!user.isModified("password")) return next();
+  try {
+    const salt = await bcrypt.genSalt(SALT_ROUNDS);
+    const hash = await bcrypt.hash(user.password, salt);
+    user.password = hash;
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
+UserSchema.methods.comparePassword = async function comparePassword(
+  candidatePassword
+) {
+  return await bcrypt.compare(candidatePassword, this.password);
+};
+
 module.exports = mongoose.model("User", UserSchema);
 
 ```
 
-<img width="1379" alt="image" src="https://github.com/user-attachments/assets/0e6dc3d4-2ecf-465f-91db-fa56b89da21f">
+### src-AI-Software/my_projects/03_advanced_express/APP/views/register.ejs:
 
+```ejs
+<!--
+    ==================================================
+    block - Content
+    ==================================================
+    -->
+
+<h2><%= headline %></h2>
+
+<% if(error) {%>
+<div class="alert alert-danger" role="alert">
+  <li><%= error %></li>
+</div>
+<% } %> <% if(message) {%>
+<div class="alert alert-success" role="alert">
+  <li><%= message %></li>
+</div>
+<% } %>
+
+<form action="/register" method="POST">
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      name="name"
+      placeholder="Bob White"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      placeholder="name@example.com"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      name="password"
+      placeholder="*********"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="confirm_password" class="form-label">Confirm Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="confirm_password"
+      name="confirm_password"
+      placeholder="*********"
+    />
+  </div>
+  <button type="submit" class="btn btn-success btn-lg">Submit</button>
+</form>
+<!--
+    ==================================================
+    endblock - Content
+    ==================================================
+    -->
+
+```
+
+### src-AI-Software/my_projects/03_advanced_express/APP/views/base.ejs:
+
+```ejs
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My App</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <main class="container py-4">
+      <h1>Welcome to my App!</h1>
+      <hr />
+      <!--
+    ==================================================
+    block - Content
+    ==================================================
+    -->
+
+      <%- include(`./${template}`) %>
+
+      <!--
+    ==================================================
+    endblock - Content
+    ==================================================
+    --></main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
+
+```
+
+### src-AI-Software/my_projects/03_advanced_express/APP/views/index.ejs:
+
+```ejs
+<!--
+    ==================================================
+    block - Content
+    ==================================================
+    -->
+
+<h2><%= headline %></h2>
+<!--
+    ==================================================
+    endblock - Content
+    ==================================================
+    -->
+
+```
+
+![image](https://github.com/user-attachments/assets/183764c5-9ff1-4383-a22b-17f1c8ebd6ce)
+![image](https://github.com/user-attachments/assets/46ba8c32-24a7-4c92-9707-f52938d18b22)
+![image](https://github.com/user-attachments/assets/d9700e0e-c8b5-49b7-a672-4a54bbfa1ff7)
+![image](https://github.com/user-attachments/assets/7222feef-18ce-4ee5-88d4-d2e170397910)
+![image](https://github.com/user-attachments/assets/a979d145-a99f-41c1-a181-0abe6d4e2126)
 
 # #END</details>
 
 <details>
-<summary>7. Using bcrypt to hash and validate passwords </summary>
+<summary>9. Adding Cookies and Sessions to Express </summary>
 
-# Using bcrypt to hash and validate passwords
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
+# Adding Cookies and Sessions to Express
 
 ```js
 
