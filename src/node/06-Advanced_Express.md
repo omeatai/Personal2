@@ -196,21 +196,104 @@ app.listen(PORT, () => {
 # #END</details>
 
 <details>
-<summary>4. Connecting to MongoDB </summary>
+<summary>4. Setting up MongoDB </summary>
+
+# Setting up MongoDB
+
+## Install dotenv
+
+```x
+npm install dotenv
+```
+
+```json
+{
+  "name": "app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "marked": "^13.0.2",
+    "nodemon": "^3.1.4"
+  }
+}
+
+```
+
+### src-AI-Software/my_projects/03_advanced_express/APP/.env:
+
+```js
+DEVELOPMENT_DB_URL=mongodb+srv://<username>:<password>@cluster0.vrabuaf.mongodb.net/development?retryWrites=true&w=majority&appName=Cluster0
+PRODUCTION_DB_URL=mongodb+srv://<username>:<password>@cluster0.vrabuaf.mongodb.net/production?retryWrites=true&w=majority&appName=Cluster0
+TEST_DB_URL=mongodb+srv://<username>:<password>@cluster0.vrabuaf.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster0
+```
+
+### src-AI-Software/my_projects/03_advanced_express/APP/server.js:
+
+```js
+const dotenv = require("dotenv");
+dotenv.config();
+
+const express = require("express");
+const fs = require("fs");
+const util = require("util");
+const { marked } = require("marked");
+
+const app = express();
+const PORT = 3000;
+
+const fsreadfile = util.promisify(fs.readFile);
+
+app.engine("md", async (filePath, options, callback) => {
+  try {
+    const content = await fsreadfile(filePath, "utf-8");
+    const rendered = content.toString().replace(`{headline}`, options.headline);
+    return callback(null, marked(rendered));
+  } catch (err) {
+    return callback(err);
+  }
+});
+
+app.set("views", "views");
+app.set("view engine", "md");
+
+function handler(req, res) {
+  //   return res.send("<h1>Hello World</h1>");
+  return res.render("index", { headline: "Hello World" });
+}
+
+app.get("/", handler);
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+  console.log("Press Ctrl-C to stop the server");
+});
+
+```
+
+![image](https://github.com/user-attachments/assets/4ac18238-48cb-43cb-a1ed-5e03196f077e)
+![image](https://github.com/user-attachments/assets/0d272e60-7832-4745-9539-f1e90022e4b3)
+![image](https://github.com/user-attachments/assets/ed799881-b62e-48aa-92d1-7cebc16b3ff2)
+![image](https://github.com/user-attachments/assets/8af52616-cdc3-4a94-91e8-1822a40b49e4)
+![image](https://github.com/user-attachments/assets/39bf9663-c4ea-4d64-8659-326de364355f)
+
+<img width="1379" alt="image" src="https://github.com/user-attachments/assets/0fddfcc4-e09b-4b2c-b0dc-17f400ce66f7">
+
+# #END</details>
+
+<details>
+<summary>5. Connecting to MongoDB </summary>
 
 # Connecting to MongoDB
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
 
 ```js
 
