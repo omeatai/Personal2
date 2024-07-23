@@ -291,9 +291,35 @@ app.listen(PORT, () => {
 # #END</details>
 
 <details>
-<summary>5. Connecting to MongoDB </summary>
+<summary>5. Connecting to MongoDB with mongoose </summary>
 
-# Connecting to MongoDB
+# Connecting to MongoDB with mongoose
+
+## Install Mongoose
+
+```js
+npm install mongoose
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
 
 ```js
 
