@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cookieSession = require('cookie-session');
 const createError = require('http-errors');
+const bodyParser = require('body-parser');
 
 const FeedbackModel = require('./models/FeedbackModel');
 const SpeakerModel = require('./models/SpeakerModel');
@@ -25,8 +26,8 @@ app.use(
 
 app.locals.siteName = 'Global ROUX Meetups';
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, './views'));
@@ -49,8 +50,6 @@ app.use('/', routes({ feedbackModel, speakersModel }));
 
 // createError middleware
 app.use((req, res, next) => {
-  // console.error(err.stack);
-  // res.status(404).send('Page not Found!');
   return next(createError(404, 'Page not found'));
 });
 

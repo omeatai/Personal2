@@ -1,5 +1,17 @@
 [
     {
+        "name": "Bob",
+        "email": "bob@gmail.com",
+        "title": "REST API Test",
+        "message": "This is the REST API Test."
+    },
+    {
+        "name": "Ifeanyi",
+        "email": "ifeanyio@gmail.com",
+        "title": "My Story",
+        "message": "This is my Story!"
+    },
+    {
         "name": "Frank",
         "email": "frank-smith@gmail.com",
         "title": "Best Meetup Ever",
