@@ -5377,41 +5377,4 @@ module.exports = FeedbackModel;
 
 # #END</details>
 
-<details>
-<summary>23. REST API - Add Client Side Javascript </summary>
-
-# REST API - Add Client Side Javascript
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-```js
-
-```
-
-# #END<details>
+# #END
