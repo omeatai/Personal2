@@ -39,7 +39,7 @@
 
 ### [05-Building a Website with Node.js and Express.js*](https://github.com/omeatai/src-AI-Software/blob/main/src/node/05-Building_a_Website_with_Node_and_Express.md)
 
-### [06-Advanced Express*](https://github.com/omeatai/src-AI-Software/blob/main/src/node/06-Advanced_Express.md)
+### [06-Advanced Express](https://github.com/omeatai/src-AI-Software/blob/main/src/node/06-Advanced_Express.md)
 
 </details>
 
