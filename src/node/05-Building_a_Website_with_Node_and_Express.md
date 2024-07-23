@@ -5110,17 +5110,277 @@ Ctrl + C to stop
 
 # REST API - Creating and Testing API Endpoints
 
+### src-AI-Software/my_projects/01_building_a_website/server.js:
+
 ```js
+const express = require('express');
+const path = require('path');
+const cookieSession = require('cookie-session');
+const createError = require('http-errors');
+const bodyParser = require('body-parser');
+
+const FeedbackModel = require('./models/FeedbackModel');
+const SpeakerModel = require('./models/SpeakerModel');
+
+const feedbackModel = new FeedbackModel('./data/feedback.json');
+const speakersModel = new SpeakerModel('./data/speakers.json');
+
+const routes = require('./routes/homeRoutes');
+
+const app = express();
+
+const PORT = 3000;
+
+app.set('trust proxy', 1);
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['key14842784278', 'key232423423424'],
+  })
+);
+
+app.locals.siteName = 'Global ROUX Meetups';
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+
+app.use(express.static(path.join(__dirname, './static')));
+
+app.use(async (req, res, next) => {
+  res.locals.newGreeting = 'Hello World';
+
+  try {
+    const names = await speakersModel.getNames();
+    res.locals.speakersNames = names;
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
+
+app.use('/', routes({ feedbackModel, speakersModel }));
+
+// createError middleware
+app.use((req, res, next) => {
+  return next(createError(404, 'Page not found'));
+});
+
+// Error-handling middleware
+app.use((err, req, res, next) => {
+  res.locals.message = err.message || 'The page you requested was not found.';
+  const status = err.status || 500;
+  res.locals.status = status;
+  return res.status(status).render('404');
+});
+
+app.listen(PORT, () => {
+  try {
+    console.log(`Server running on port ${PORT}`);
+    console.log('Ctrl + C to stop');
+  } catch (err) {
+    console.error(err.stack);
+    throw new Error(`Something broke: ${err}`);
+  }
+});
 
 ```
 
+### src-AI-Software/my_projects/01_building_a_website/routes/feedbackRoutes.js:
+
 ```js
+const express = require('express');
+const router = express.Router();
+const { check, validationResult } = require('express-validator');
+
+const feedbackPOSTValidator = [
+  check('name').trim().isLength({ min: 3 }).escape().withMessage('A name is required'),
+  check('email').trim().isEmail().normalizeEmail().withMessage('A valid email address is required'),
+  check('title').trim().isLength({ min: 3 }).escape().withMessage('A title is required'),
+  check('message').trim().isLength({ min: 5 }).escape().withMessage('A message is required'),
+];
+
+module.exports = (db) => {
+  const { feedbackModel } = db;
+
+  router.get('/', async (req, res, next) => {
+    try {
+      const feedback = await feedbackModel.getList();
+
+      const errors = req.session.feedback ? req.session.feedback.errors : false;
+      const message = req.session.feedback ? req.session.feedback.message : false;
+      req.session.feedback = {};
+
+      const context = {
+        pageTitle: 'Feedback',
+        name: 'Roux Meetups',
+        template: 'feedback',
+        feedback,
+        errors,
+        message,
+      };
+      return res.render('layouts/base', context);
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  router.post('/', feedbackPOSTValidator, async (req, res, next) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        req.session.feedback = {
+          errors: errors.array(),
+        };
+        return res.redirect('/feedback');
+      }
+
+      const { name, email, title, message } = req.body;
+      await feedbackModel.addEntry(name, email, title, message);
+      req.session.feedback = {
+        message: 'Thank you for your feedback!',
+      };
+      console.log(req.body);
+      return res.redirect('/feedback');
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  // API Endpoint for feedback
+  router.post('/api', feedbackPOSTValidator, async (req, res, next) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.json({ errors: errors.array() });
+      }
+      const { name, email, title, message } = req.body;
+      await feedbackModel.addEntry(name, email, title, message);
+      const feedback = await feedbackModel.getList();
+      return res.json({ feedback, successMessage: 'Thank you for your feedback!' });
+    } catch (err) {
+      return next(err);
+    }
+  });
+
+  // Register the unhandled route middleware
+  function handleUnhandledRoutes(req, res, next) {
+    return next(new Error('The Route does not Exist!'));
+  }
+  router.use(handleUnhandledRoutes);
+
+  return router;
+};
 
 ```
 
+### src-AI-Software/my_projects/01_building_a_website/models/FeedbackModel.js:
+
 ```js
+const fs = require('fs');
+const util = require('util');
+
+const readFile = util.promisify(fs.readFile);
+const writeFile = util.promisify(fs.writeFile);
+
+/**
+ * Logic for reading and writing feedback data
+ */
+class FeedbackModel {
+  /**
+   * Constructor
+   * @param {*} datafile Path to a JSOn file that contains the feedback data
+   */
+  constructor(datafile) {
+    this.datafile = datafile;
+  }
+
+  /**
+   * Get all feedback items
+   */
+  async getList() {
+    const data = await this.getData();
+    return data;
+  }
+
+  /**
+   * Add a new feedback item
+   * @param {*} name The name of the user
+   * @param {*} title The title of the feedback message
+   * @param {*} message The feedback message
+   */
+  async addEntry(name, email, title, message) {
+    const data = (await this.getData()) || [];
+    data.unshift({ name, email, title, message });
+    return writeFile(this.datafile, JSON.stringify(data));
+  }
+
+  /**
+   * Fetches feedback data from the JSON file provided to the constructor
+   */
+  async getData() {
+    const data = await readFile(this.datafile, 'utf8');
+    if (!data) return [];
+    return JSON.parse(data);
+  }
+}
+
+module.exports = FeedbackModel;
 
 ```
+
+### src-AI-Software/my_projects/01_building_a_website/data/feedback.json:
+
+```json
+[
+    {
+        "name": "Bob",
+        "email": "bob@gmail.com",
+        "title": "REST API Test",
+        "message": "This is the REST API Test."
+    },
+    {
+        "name": "Ifeanyi",
+        "email": "ifeanyio@gmail.com",
+        "title": "My Story",
+        "message": "This is my Story!"
+    },
+    {
+        "name": "Frank",
+        "email": "frank-smith@gmail.com",
+        "title": "Best Meetup Ever",
+        "message": "I really love this meetup. Please don't let it end."
+    },
+    {
+        "name": "Jane",
+        "email": "jane-miller@gmail.com",
+        "title": "Meeting Time",
+        "message": "Would you consider moving the meeting time 30 minutes to about 6pm. It's tough to make it to the meetings on time right after work."
+    },
+    {
+        "name": "Roy",
+        "email": "roy-jones@gmail.com",
+        "title": "Great Speaker",
+        "message": "I really enjoyed the speaker this month. Would love to hear another presentation."
+    }
+]
+```
+
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/b0b23705-0ba8-44fa-a64a-6c5354a55f25">
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/bbf214c6-5dbb-483e-b57d-0b78080aba30">
+
+![image](https://github.com/user-attachments/assets/a1094be2-32ae-4ede-9a08-aa22db597f75)
+
+<img width="1379" alt="image" src="https://github.com/user-attachments/assets/b74f9333-de98-415c-96af-7447d0bbf262">
+
+# #END</details>
+
+<details>
+<summary>23. REST API - Add Client Side Javascript </summary>
+
+# REST API - Add Client Side Javascript
 
 ```js
 
