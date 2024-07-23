@@ -298,7 +298,235 @@ app.listen(PORT, () => {
 ## Install Mongoose
 
 ```js
-npm install mongoose
+npm install --save mongoose
+```
+
+### src-AI-Software/my_projects/03_advanced_express/APP/.env:
+
+```js
+DEVELOPMENT_DB_URL=mongodb+srv://<username>:<password>@cluster0.vrabuaf.mongodb.net/development?retryWrites=true&w=majority&appName=Cluster0
+PRODUCTION_DB_URL=mongodb+srv://<username>:<password>@cluster0.vrabuaf.mongodb.net/production?retryWrites=true&w=majority&appName=Cluster0
+TEST_DB_URL=mongodb+srv://<username>:<password>@cluster0.vrabuaf.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster0
+```
+
+### src-AI-Software/my_projects/03_advanced_express/APP/server.js:
+
+```js
+const dotenv = require("dotenv");
+dotenv.config();
+
+const express = require("express");
+const fs = require("fs");
+const util = require("util");
+const { marked } = require("marked");
+
+const app = express();
+const PORT = 3000;
+const db = require("./lib/db");
+
+const fsreadfile = util.promisify(fs.readFile);
+
+app.engine("md", async (filePath, options, callback) => {
+  try {
+    const content = await fsreadfile(filePath, "utf-8");
+    const rendered = content.toString().replace(`{headline}`, options.headline);
+    return callback(null, marked(rendered));
+  } catch (err) {
+    return callback(err);
+  }
+});
+
+app.set("views", "views");
+app.set("view engine", "md");
+
+function handler(req, res) {
+  //   return res.send("<h1>Hello World</h1>");
+  return res.render("index", { headline: "Hello World" });
+}
+
+app.get("/", handler);
+
+app.listen(PORT, () => {
+  db(); // Connect to mongo database
+  console.log(`Server is running on port ${PORT}`);
+  console.log("Press Ctrl-C to stop the server");
+});
+
+```
+
+### src-AI-Software/my_projects/03_advanced_express/APP/lib/db.js:
+
+```js
+const mongoose = require("mongoose");
+
+module.exports = async function () {
+  try {
+    await mongoose
+      .connect(process.env.DEVELOPMENT_DB_URL, {})
+      .then(() => console.log("Connected to MongoDB..."))
+      .catch((err) => console.error("Could not connect to MongoDB...", err));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+```
+
+```x
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+Server is running on port 3000
+Press Ctrl-C to stop the server
+Connected to MongoDB...
+
+```
+
+![image](https://github.com/user-attachments/assets/e5592c97-ce31-444f-9413-56b799850ef7)
+
+<img width="1379" alt="image" src="https://github.com/user-attachments/assets/918adb4b-354e-41c0-bc8a-7d82dd43cc6b">
+<img width="1379" alt="image" src="https://github.com/user-attachments/assets/07772138-f24d-4de6-8f54-29863ba1e9cb">
+
+# #END</details>
+
+<details>
+<summary>6. Creating mongoose User Schema </summary>
+
+# Creating mongoose User Schema
+
+## Install Email Validator
+
+```js
+npm install --save email-validator
+```
+
+### src-AI-Software/my_projects/03_advanced_express/APP/server.js:
+
+```js
+const dotenv = require("dotenv");
+dotenv.config();
+
+const express = require("express");
+const fs = require("fs");
+const util = require("util");
+const { marked } = require("marked");
+
+const app = express();
+const PORT = 3000;
+const db = require("./lib/db");
+
+const fsreadfile = util.promisify(fs.readFile);
+
+app.engine("md", async (filePath, options, callback) => {
+  try {
+    const content = await fsreadfile(filePath, "utf-8");
+    const rendered = content.toString().replace(`{headline}`, options.headline);
+    return callback(null, marked(rendered));
+  } catch (err) {
+    return callback(err);
+  }
+});
+
+app.set("views", "views");
+app.set("view engine", "md");
+
+function handler(req, res) {
+  //   return res.send("<h1>Hello World</h1>");
+  return res.render("index", { headline: "Hello World" });
+}
+
+app.get("/", handler);
+
+app.listen(PORT, () => {
+  db(); // Connect to mongo database
+  console.log(`Server is running on port ${PORT}`);
+  console.log("Press Ctrl-C to stop the server");
+});
+
+```
+
+### src-AI-Software/my_projects/03_advanced_express/APP/models/UserModel.js:
+
+```js
+const mongoose = require("mongoose");
+const emailValidator = require("email-validator");
+
+const UserSchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      minlength: 3,
+      maxlength: 50,
+      trim: true,
+      // unique: true,
+      index: { unique: true },
+      match: /^[a-zA-Z0-9]+$/,
+    },
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true,
+      index: { unique: true },
+      validate: {
+        validator: (email) => emailValidator.validate(email),
+        message: (props) => `${props.value} is not a valid email address!`,
+      },
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: 8,
+      maxlength: 50,
+      trim: true,
+      index: { unique: true },
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+module.exports = mongoose.model("User", UserSchema);
+
+```
+
+<img width="1379" alt="image" src="https://github.com/user-attachments/assets/0e6dc3d4-2ecf-465f-91db-fa56b89da21f">
+
+
+# #END</details>
+
+<details>
+<summary>7. Using bcrypt to hash and validate passwords </summary>
+
+# Using bcrypt to hash and validate passwords
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
 ```
 
 ```js
