@@ -1019,6 +1019,7 @@ app.use(
     saveUninitialized: false,
     store: MongoStore.create({
       mongoUrl: process.env.DEVELOPMENT_DB_URL,
+      ttl: 14 * 24 * 60 * 60 // = 14 days. Default
     }),
   })
 );
