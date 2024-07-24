@@ -1139,7 +1139,7 @@ visits: 8
 npm install --save passport passport-local
 ```
 
-```x
+```json
 {
   "name": "app",
   "version": "1.0.0",
