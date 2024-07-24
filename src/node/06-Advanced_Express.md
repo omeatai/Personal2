@@ -1129,21 +1129,324 @@ visits: 8
 # #END</details>
 
 <details>
-<summary>10. Adding Passport to Express </summary>
+<summary>10. Adding Passport to Express - Authentication with LocalStrategy </summary>
 
-# Adding Passport to Express
+# Adding Passport to Express - Authentication with LocalStrategy
 
-```js
+## Install Passport, passport-local 
+
+```x
+npm install --save passport passport-local
+```
+
+```x
+{
+  "name": "app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "connect-mongo": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "email-validator": "^2.0.4",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "marked": "^13.0.2",
+    "mongoose": "^8.5.1",
+    "nodemon": "^3.1.4",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0"
+  }
+}
 
 ```
 
+### src-AI-Software/my_projects/03_advanced_express/APP/server.js:
+
 ```js
+const dotenv = require("dotenv");
+dotenv.config();
+
+const path = require("path");
+const express = require("express");
+const fs = require("fs");
+const util = require("util");
+const fsreadfile = util.promisify(fs.readFile);
+
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const mongoose = require("mongoose");
+const MongoStore = require("connect-mongo");
+
+const app = express();
+const PORT = 3000;
+const db = require("./lib/db");
+const User = require("./models/UserModel");
+const auth = require("./lib/auth");
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "./views"));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(cookieParser());
+app.use(
+  session({
+    secret: "my_secret_key123",
+    resave: true,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.DEVELOPMENT_DB_URL,
+      ttl: 14 * 24 * 60 * 60, // = 14 days. Default
+    }),
+  })
+);
+
+app.use(auth.initialize);
+app.use(auth.session);
+app.use(auth.setUser);
+
+app.use(async (req, res, next) => {
+  try {
+    req.session.visits = req.session.visits ? req.session.visits + 1 : 1;
+    console.log("visits: " + req.session.visits);
+    return next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+function handler(req, res) {
+  return res.render("base", {
+    template: "index",
+    headline: "This is the Home Page!",
+  });
+}
+
+app.get("/", handler);
+
+app
+  .route("/register")
+  .get((req, res) => {
+    return res.render("base", {
+      template: "register",
+      headline: "Register Now!",
+      error: null,
+      message: null,
+    });
+  })
+  .post(async (req, res, next) => {
+    try {
+      const { name, email, password, confirm_password } = req.body;
+      const data = {
+        template: "register",
+        headline: "Register Now!",
+        error: null,
+        message: null,
+      };
+
+      if (password !== confirm_password) {
+        return res.render("base", { ...data, error: "Passwords do not match" });
+      }
+
+      const user = new User({ name, email, password });
+      const savedUser = await user.save();
+
+      if (savedUser) {
+        return res.render("base", {
+          ...data,
+          message: "User registered successfully!",
+        });
+      } else {
+        return res.render("base", {
+          ...data,
+          error: "Failed to register user!",
+        });
+        // return next(new Error("Couldn't register user!"));
+      }
+    } catch (err) {
+      console.log(err);
+      next(err);
+    }
+  });
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  var err = new Error("Not Found");
+  err.status = 404;
+  next(err);
+});
+
+// *** error handlers *** //
+
+// development error handler
+// will print stacktrace
+if (app.get("env") === "development") {
+  app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render("error", {
+      message: err.message,
+      error: err,
+    });
+  });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function (err, req, res, next) {
+  res.status(err.status || 500);
+  res.render("error", {
+    message: err.message,
+    error: {},
+  });
+});
+
+app.listen(PORT, () => {
+  db(); // Connect to mongo database
+  console.log(`Server is running on port ${PORT}`);
+  console.log("Press Ctrl-C to stop the server");
+});
 
 ```
 
+### src-AI-Software/my_projects/03_advanced_express/APP/lib/auth.js:
+
 ```js
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const UserModel = require("../models/UserModel");
+
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: "email",
+      passwordField: "password",
+    },
+    async (username, password, done) => {
+      try {
+        const user = await UserModel.findOne({ email: username }).exec();
+        if (!user) {
+          return done(null, false, {
+            message: "Invalid username or password.",
+          });
+        }
+
+        const isMatch = await user.comparePassword(password);
+        if (!isMatch) {
+          return done(null, false, {
+            message: "Invalid username or password.",
+          });
+        }
+
+        return done(null, user);
+      } catch (err) {
+        return done(err);
+      }
+    }
+  )
+);
+
+module.exports = {
+  initialize: passport.initialize(),
+  session: passport.session(),
+  setUser: (req, res, next) => {
+    res.locals.user = req.user;
+    return next();
+  },
+};
 
 ```
+
+### src-AI-Software/my_projects/03_advanced_express/APP/models/UserModel.js:
+
+```js
+const mongoose = require("mongoose");
+const emailValidator = require("email-validator");
+const bcrypt = require("bcrypt");
+const SALT_ROUNDS = 12;
+
+const UserSchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      minlength: 3,
+      maxlength: 50,
+      trim: true,
+      // unique: true,
+      index: { unique: true },
+    },
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true,
+      index: { unique: true },
+      validate: {
+        validator: (email) => emailValidator.validate(email),
+        message: (props) => `${props.value} is not a valid email address!`,
+      },
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: 8,
+      maxlength: 50,
+      trim: true,
+      index: { unique: true },
+      //   match: /^[a-zA-Z0-9]+$/,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+UserSchema.pre("save", async function preSave(next) {
+  const user = this;
+  if (!user.isModified("password")) return next();
+  try {
+    const salt = await bcrypt.genSalt(SALT_ROUNDS);
+    const hash = await bcrypt.hash(user.password, salt);
+    user.password = hash;
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
+UserSchema.methods.comparePassword = async function comparePassword(
+  candidatePassword
+) {
+  return await bcrypt.compare(candidatePassword, this.password);
+};
+
+module.exports = mongoose.model("User", UserSchema);
+
+```
+
+![image](https://github.com/user-attachments/assets/c86686ab-0cd6-4c83-a7c0-eac540736b3e)
+![image](https://github.com/user-attachments/assets/6ddffb49-4cfa-4da2-a3bd-7eeaaff1c119)
+
+<img width="1450" alt="image" src="https://github.com/user-attachments/assets/097673db-257f-49b4-b8e2-962c680b9d24">
+
+# #END</details>
+
+<details>
+<summary>11. Adding Passport to Express - Serializing and Deserializing Users </summary>
+
+# Adding Passport to Express - Serializing and Deserializing Users
 
 ```js
 
