@@ -95,11 +95,10 @@
 </details>
 
 <details>
-<summary> HTML </summary>
+<summary> HTML & CSS </summary>
+
+### [01-Udemy - Complete Web & Mobile Designer: UI/UX, Figma](https://github.com/omeatai/src-AI-Software/blob/main/src/sql/01_complete_web_mobile_designer.md)
+
 
 </details>
 
-<details>
-<summary> CSS </summary>
-
-</details>
