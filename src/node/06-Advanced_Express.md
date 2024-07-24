@@ -940,17 +940,196 @@ module.exports = mongoose.model("User", UserSchema);
 
 # Adding Cookies and Sessions to Express
 
-```js
+## Install cookie-parser
+
+```x
+npm install cookie-parser
+```
+
+## Install express-session, connect-mongo, mongoose
+
+```x
+npm install express-session connect-mongo mongoose
+```
+
+```json
+{
+  "name": "app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "connect-mongo": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "email-validator": "^2.0.4",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "marked": "^13.0.2",
+    "mongoose": "^8.5.1",
+    "nodemon": "^3.1.4"
+  }
+}
 
 ```
 
+### src-AI-Software/my_projects/03_advanced_express/APP/server.js:
+
 ```js
+const dotenv = require("dotenv");
+dotenv.config();
+
+const path = require("path");
+const express = require("express");
+const fs = require("fs");
+const util = require("util");
+const fsreadfile = util.promisify(fs.readFile);
+
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const mongoose = require("mongoose");
+const MongoStore = require("connect-mongo");
+
+const app = express();
+const PORT = 3000;
+const db = require("./lib/db");
+const User = require("./models/UserModel");
+const { error } = require("console");
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "./views"));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(cookieParser());
+app.use(
+  session({
+    secret: "my_secret_key123",
+    resave: true,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.DEVELOPMENT_DB_URL,
+      collectionName: "sessions",
+    }),
+  })
+);
+
+app.use(async (req, res, next) => {
+  try {
+    req.session.visits = req.session.visits ? req.session.visits + 1 : 1;
+    console.log("visits: " + req.session.visits);
+    return next();
+    // if (req.session.user) {
+    //   const user = await User.findById(req.session.user);
+    //   req.user = user;
+    // }
+    // next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+function handler(req, res) {
+  //   return res.send("<h1>Hello World</h1>");
+  return res.render("base", {
+    template: "index",
+    headline: "This is the Home Page!",
+  });
+}
+
+app.get("/", handler);
+
+app
+  .route("/register")
+  .get((req, res) => {
+    return res.render("base", {
+      template: "register",
+      headline: "Register Now!",
+      error: null,
+      message: null,
+    });
+  })
+  .post(async (req, res, next) => {
+    try {
+      const { name, email, password, confirm_password } = req.body;
+      const data = {
+        template: "register",
+        headline: "Register Now!",
+        error: null,
+        message: null,
+      };
+
+      if (password !== confirm_password) {
+        return res.render("base", { ...data, error: "Passwords do not match" });
+      }
+
+      const user = new User({ name, email, password });
+      const savedUser = await user.save();
+
+      if (savedUser) {
+        return res.render("base", {
+          ...data,
+          message: "User registered successfully!",
+        });
+      } else {
+        return res.render("base", {
+          ...data,
+          error: "Failed to register user!",
+        });
+        // return next(new Error("Couldn't register user!"));
+      }
+    } catch (err) {
+      console.log(err);
+      next(err);
+    }
+  });
+
+app.listen(PORT, () => {
+  db(); // Connect to mongo database
+  console.log(`Server is running on port ${PORT}`);
+  console.log("Press Ctrl-C to stop the server");
+});
 
 ```
 
-```js
-
+```x
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+Server is running on port 3000
+Press Ctrl-C to stop the server
+Connected to MongoDB...
+visits: 1
+visits: 2
+visits: 3
+visits: 4
+visits: 5
+visits: 6
+visits: 7
+visits: 8
 ```
+
+![image](https://github.com/user-attachments/assets/70b03b87-a8af-434b-b464-4fb253d916fa)
+![image](https://github.com/user-attachments/assets/f1b952df-875e-4f01-ae32-f100bbc21c43)
+![image](https://github.com/user-attachments/assets/7d348989-ecd9-407e-af7e-ea489bce06f9)
+![image](https://github.com/user-attachments/assets/f891aa85-9099-4e50-9c25-abc32bd4d664)
+![image](https://github.com/user-attachments/assets/a9db5f67-c22d-4437-a94e-e8d31240fc03)
+
+# #END</details>
+
+<details>
+<summary>10. Adding Passport to Express </summary>
+
+# Adding Passport to Express
 
 ```js
 
