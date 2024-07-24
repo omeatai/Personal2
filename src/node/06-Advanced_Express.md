@@ -1448,6 +1448,100 @@ module.exports = mongoose.model("User", UserSchema);
 
 # Adding Passport to Express - Serializing and Deserializing Users
 
+### src-AI-Software/my_projects/03_advanced_express/APP/lib/auth.js:
+
+```js
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const UserModel = require("../models/UserModel");
+
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: "email",
+      passwordField: "password",
+    },
+    async (username, password, done) => {
+      try {
+        const user = await UserModel.findOne({ email: username }).exec();
+        if (!user) {
+          return done(null, false, {
+            message: "Invalid username or password.",
+          });
+        }
+
+        const isMatch = await user.comparePassword(password);
+        if (!isMatch) {
+          return done(null, false, {
+            message: "Invalid username or password.",
+          });
+        }
+
+        return done(null, user);
+      } catch (err) {
+        return done(err);
+      }
+    }
+  )
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user._id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await UserModel.findById(id).exec();
+    return done(null, user);
+  } catch (err) {
+    return done(err);
+  }
+});
+
+module.exports = {
+  initialize: passport.initialize(),
+  session: passport.session(),
+  setUser: (req, res, next) => {
+    res.locals.user = req.user;
+    return next();
+  },
+};
+
+```
+
+<img width="1348" alt="image" src="https://github.com/user-attachments/assets/e1255d34-8b53-4f70-a157-a659fc079c2b">
+
+# #END</details>
+
+<details>
+<summary>12. Adding Passport to Express - Create Login Form with passport </summary>
+
+# Adding Passport to Express - Create Login Form with passport
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
+```js
+
+```
+
 ```js
 
 ```
