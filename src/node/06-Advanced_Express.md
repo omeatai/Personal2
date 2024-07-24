@@ -1019,7 +1019,6 @@ app.use(
     saveUninitialized: false,
     store: MongoStore.create({
       mongoUrl: process.env.DEVELOPMENT_DB_URL,
-      collectionName: "sessions",
     }),
   })
 );
@@ -1123,6 +1122,8 @@ visits: 8
 ![image](https://github.com/user-attachments/assets/7d348989-ecd9-407e-af7e-ea489bce06f9)
 ![image](https://github.com/user-attachments/assets/f891aa85-9099-4e50-9c25-abc32bd4d664)
 ![image](https://github.com/user-attachments/assets/a9db5f67-c22d-4437-a94e-e8d31240fc03)
+
+<img width="1406" alt="image" src="https://github.com/user-attachments/assets/28fb522b-75d3-4d75-b0cc-b14a4d87dfc0">
 
 # #END</details>
 
