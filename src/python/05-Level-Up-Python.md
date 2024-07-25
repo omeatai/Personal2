@@ -18,6 +18,21 @@
 # #END</details>
 
 <details>
+<summary>1. Solution 1: Find Prime Factors </summary>
+
+# Find Prime Factors
+
+```py
+
+```
+
+```py
+
+```
+
+# #END</details>
+
+<details>
 <summary>2. Challenge 2: Identify a Palindrome </summary>
 
 # Identify a Palindrome
