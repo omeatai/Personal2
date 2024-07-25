@@ -59,7 +59,10 @@
 
 ### [04-LinkedIn - Pandas Exercises](https://github.com/omeatai/src-AI-Software/blob/main/src/python/04-Pandas-Exercises.md)
 
+### [05-LinkedIn - Level Up Python](https://github.com/omeatai/src-AI-Software/blob/main/src/python/05-Level-Up-Python.md)
+
 ### [20-Youtube - Dave Gray Python-Flask Training](https://github.com/omeatai/src-AI-Software/blob/main/src/python/20-Dave-Gray-Python-Flask.md)
+
 
 </details>
 
