@@ -20,10 +20,37 @@
 # Find Prime Factors
 
 ```py
+def get_prime_factors(value):
+    factors = []
+    divisor = 2
+
+    while divisor <= value:
+        if value % divisor == 0:
+            factors.append(divisor)
+            value = value // divisor
+        else:
+            divisor += 1
+    return factors
+
+
+print(get_prime_factors(630))
 
 ```
 
 ```py
+def get_prime_factors(value):
+    factors = []
+
+    while value > 2:
+        for x in range(2, value + 1):
+            if value % x == 0:
+                factors.append(x)
+                value = value//x
+
+    return (sorted(factors))
+
+
+print(get_prime_factors(630))
 
 ```
 
