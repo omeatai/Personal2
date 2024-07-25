@@ -97,7 +97,7 @@
 <details>
 <summary> HTML & CSS </summary>
 
-### [01-Udemy - Complete Web & Mobile Designer: UI/UX, Figma](https://github.com/omeatai/src-AI-Software/blob/main/src/html_01-complete-web-mobile.mdcss/01-complete-web-mobile.md)
+### [01-Udemy - Complete Web & Mobile Designer: UI/UX, Figma](https://github.com/omeatai/src-AI-Software/blob/main/src/html_css/01-complete-web-mobile.md)
 
 
 </details>
