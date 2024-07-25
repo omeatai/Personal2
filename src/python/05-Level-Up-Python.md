@@ -61,6 +61,18 @@ print(get_prime_factors(630))
 
 # Identify a Palindrome
 
+![image](https://github.com/user-attachments/assets/c86dc625-488c-4388-9cba-476b816a163f)
+![image](https://github.com/user-attachments/assets/9089b019-6c42-480c-80a3-05b8aca046cf)
+![image](https://github.com/user-attachments/assets/48507f2c-3ac6-4b07-9bbb-c750a9ea64b3)
+![image](https://github.com/user-attachments/assets/26327c2d-827d-41f6-9110-c5a8d604a9c2)
+
+# #END</details>
+
+<details>
+<summary>Solution 2: Identify a Palindrome </summary>
+
+# Identify a Palindrome
+
 ```py
 
 ```
