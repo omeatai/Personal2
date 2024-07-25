@@ -158,9 +158,13 @@ print(sort_words("string of words"))
 
 # Fill all List Items
 
-```py
+![image](https://github.com/user-attachments/assets/040ec54e-d80a-4b99-8dc6-39dc45382a43)
+![image](https://github.com/user-attachments/assets/f698433d-41f6-4b3c-9742-0dc289a0b2e4)
+![image](https://github.com/user-attachments/assets/d81fd556-7f7e-4b5a-a770-ae2f7f6f425e)
+![image](https://github.com/user-attachments/assets/ef59b0bb-581c-4a48-a57f-2e7c57b6d1ec)
+![image](https://github.com/user-attachments/assets/c1821a0a-58b9-4d33-a354-763091435646)
+![image](https://github.com/user-attachments/assets/238d32d6-0a97-4ee6-bbb7-264144756c9e)
 
-```
 
 # #END</details>
 
