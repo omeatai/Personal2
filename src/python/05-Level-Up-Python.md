@@ -128,16 +128,46 @@ print(is_palindrome("Go hang a salami - I'm a lasagna hog."))
 # Sort a String
 
 ```py
+def sort_words(word):
+    word_list = word.split(" ")
+    return " ".join(sorted(word_list, key=lambda x: x.lower()))
+    # return " ".join(sorted(word_list, key=str.casefold))
+
+print(sort_words("banana ORANGE apple"))
+print(sort_words("string of words"))
+```
+
+```py
+def sort_words(input):
+    words = input.split()
+    print(words)
+    words = [w.lower() + w for w in words]
+    words.sort()
+    words = [w[len(w)//2:] for w in words]
+    return ' '.join(words)
+
+print(sort_words("banana ORANGE apple"))
+print(sort_words("string of words"))
 
 ```
+
+# #END</details>
+
+<details>
+<summary>Challenge 4: Fill all List Items </summary>
+
+# Fill all List Items
 
 ```py
 
 ```
 
-```py
+# #END</details>
 
-```
+<details>
+<summary>Solution 4: Fill all List Items </summary>
+
+# Fill all List Items
 
 ```py
 
