@@ -7,13 +7,10 @@
 
 # Find Prime Factors
 
-```py
+![image](https://github.com/user-attachments/assets/b798789f-2e75-4f86-abb6-f6ede2b94079)
+![image](https://github.com/user-attachments/assets/970f05c3-43f7-43f8-85a6-1aff2ce245cd)
+![image](https://github.com/user-attachments/assets/2f118f58-bd07-4eb3-9a1e-356bfb5601cf)
 
-```
-
-```py
-
-```
 
 # #END</details>
 
