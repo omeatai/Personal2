@@ -74,12 +74,58 @@ print(get_prime_factors(630))
 # Identify a Palindrome
 
 ```py
+import re
+
+
+def is_palindrome(word):
+    cleaned_word = re.findall(r"[a-z]", word.lower())
+    forwards = ''.join(cleaned_word)
+    backwards = forwards[::-1]
+    return forwards == backwards
+
+
+print(is_palindrome("Go hang a salami - I'm a lasagna hog."))
 
 ```
 
 ```py
+def is_palindrome(word):
+    cleaned_word = [char for char in word.lower() if char.isalnum()]
+
+    left = 0
+    right = len(cleaned_word) - 1
+
+    while left <= right:
+        if cleaned_word[left] != cleaned_word[right]:
+            return False
+        left += 1
+        right -= 1
+    return True
+
+
+print(is_palindrome("Go hang a salami - I'm a lasagna hog."))
 
 ```
+
+# #END</details>
+
+<details>
+<summary>Challenge 3: Sort a String </summary>
+
+# Sort a String
+
+![image](https://github.com/user-attachments/assets/f35ac470-a36e-4ab6-af07-71fc8b6b58ac)
+![image](https://github.com/user-attachments/assets/a3c94885-6fe4-4748-999b-09fd31e01789)
+![image](https://github.com/user-attachments/assets/0d244dc3-f78f-4c31-a1a0-539b92b56761)
+![image](https://github.com/user-attachments/assets/b17b9eae-2e37-4d03-a69c-4604660bdd29)
+
+
+# #END</details>
+
+<details>
+<summary>Solution 3: Sort a String </summary>
+
+# Sort a String
 
 ```py
 
