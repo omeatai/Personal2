@@ -4140,13 +4140,225 @@ class RoleSerializer(serializers.ModelSerializer):
 
 # Display user Permissions as Text 
 
+### my_projects/07_react_django_practical/users_app/urls.py:
+
 ```py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('users/info', views.ProfileInfoAPIView.as_view(),
+         name='users-profile-info'),
+    path('users/password', views.ProfilePasswordAPIView.as_view(),
+         name='users-profile-password'),
+    path('users', views.UserGenericAPIView.as_view(), name='users'),
+    path('users/<str:pk>', views.UserGenericAPIView.as_view(), name='users-detail'),
+    path('register', views.register, name='register'),
+    path('login', views.login, name='login'),
+    path('auth', views.AuthUser.as_view(), name='auth'),
+    path('logout', views.logout, name='logout'),
+    path('permissions', views.PermissionAPIView.as_view(), name='permissions'),
+    path('roles', views.RoleViewSet.as_view(
+        {'get': 'list', 'post': 'create'}), name='roles'),
+    path('roles/<int:pk>', views.RoleViewSet.as_view(
+        {'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='roles-detail'),
+
+]
 
 ```
 
+### my_projects/07_react_django_practical/users_app/views.py:
+
 ```py
+from rest_framework import exceptions, viewsets, status, generics, mixins
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+
+from .serializers import PermissionSerializer, UserSerializer, RoleSerializer
+from .models import User, Permission, Role
+from .auth import generate_access_token, JWTAuth
+from .pagination import CustomPagination
+
+
+class ProfileInfoAPIView(APIView):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request, pk=None):
+        user = request.user
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+
+class ProfilePasswordAPIView(APIView):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request, pk=None):
+        user = request.user
+        data = request.data
+
+        if data['password'] != data['password_confirm']:
+            raise exceptions.ValidationError('Passwords do not match')
+
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+        # user.set_password(data['password'])
+        # user.save()
+        # return Response({'message': 'Password updated successfully!'})
+
+
+class UserGenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.RetrieveModelMixin,
+                         mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    pagination_class = CustomPagination
+
+    def get(self, request, pk=None):
+        if pk:
+            return Response({"data": self.retrieve(request, pk).data})
+        return Response({"data": self.list(request).data})
+
+    def post(self, request):
+        request.data.update({
+            "password": 1234,
+            "password_confirm": 1234,
+            "role": request.data["role_id"]
+        })
+        return Response({"data": self.create(request).data})
+
+    def put(self, request, pk=None):
+        if (request.data['role_id']):
+            request.data.update({
+                "role": request.data["role_id"]
+            })
+        # return Response({"data": self.update(request, pk).data})
+        return Response({"data": self.partial_update(request, pk).data})
+
+    def delete(self, request, pk=None):
+        return self.destroy(request, pk)
+
+
+class AuthUser(APIView):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        data = serializer.data
+        data["permissions"] = [
+            permission['name'] for permission in data['role']['permissions']]
+        return Response({'data': data})
+
+
+class PermissionAPIView(APIView):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = PermissionSerializer(Permission.objects.all(), many=True)
+        return Response({'data': serializer.data})
+
+
+class RoleViewSet(viewsets.ViewSet):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def list(self, request):
+        queryset = Role.objects.all()
+        serializer = RoleSerializer(queryset, many=True)
+        return Response({"data": serializer.data})
+
+    def create(self, request):
+        serializer = RoleSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"data": serializer.data}, status=status.HTTP_201_CREATED)
+
+    def retrieve(self, request, pk=None):
+        role = Role.objects.get(id=pk)
+        serializer = RoleSerializer(role)
+        return Response({"data": serializer.data})
+
+    def update(self, request, pk=None):
+        role = Role.objects.get(id=pk)
+        serializer = RoleSerializer(instance=role, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"data": serializer.data}, status=status.HTTP_202_ACCEPTED)
+
+    def destroy(self, request, pk=None):
+        role = Role.objects.get(id=pk)
+        role.delete()
+        return Response({'message': 'Role deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['POST'])
+def register(request):
+    data = request.data
+    if data['password'] != data['password_confirm']:
+        raise exceptions.ValidationError('Passwords do not match')
+
+    if User.objects.filter(email=data['email']).exists():
+        raise exceptions.ValidationError('Email already exists')
+
+    serializer = UserSerializer(data=data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def login(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    user = User.objects.filter(email=email).first()
+    if user is None:
+        raise exceptions.AuthenticationFailed('User not found')
+    if not user.check_password(password):
+        raise exceptions.AuthenticationFailed('Incorrect password')
+
+    token = generate_access_token(user)
+    # set token to http-only cookie
+    response = Response()
+    response.set_cookie(key='jwt', value=token, httponly=True)
+    response.data = {
+        'jwt': token
+    }
+    return response
+
+
+@api_view(['POST'])
+def logout(request):
+    response = Response()
+    response.delete_cookie('jwt')
+    response.data = {
+        'message': 'success'
+    }
+    return response
 
 ```
+
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/09fc8c71-5aef-4f4a-969f-a5810138e31a">
+<img width="1360" alt="image" src="https://github.com/user-attachments/assets/7d05dcbf-dfc8-46cb-b6a5-2c90bf77c28d">
+<img width="1392" alt="image" src="https://github.com/user-attachments/assets/1e3fad15-6ba5-4ded-bb7a-31bb931280f0">
+
+# #END</details>
+
+<details>
+<summary>23. Setup Product Model, URL and View </summary>
+
+# Setup Product Model, URL and View
 
 ```py
 
