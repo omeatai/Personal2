@@ -3662,9 +3662,162 @@ def logout(request):
 
 # Update User with Partial Update
 
+### my_projects/07_react_django_practical/users_app/views.py:
+
 ```py
+from rest_framework import exceptions, viewsets, status, generics, mixins
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+
+from .serializers import PermissionSerializer, UserSerializer, RoleSerializer
+from .models import User, Permission, Role
+from .auth import generate_access_token, JWTAuth
+from .pagination import CustomPagination
+
+
+class UserGenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.RetrieveModelMixin,
+                         mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    pagination_class = CustomPagination
+
+    def get(self, request, pk=None):
+        if pk:
+            return Response({"data": self.retrieve(request, pk).data})
+        return Response({"data": self.list(request).data})
+
+    def post(self, request):
+        request.data.update({
+            "password": 1234,
+            "password_confirm": 1234,
+            "role": request.data["role_id"]
+        })
+        return Response({"data": self.create(request).data})
+
+    def put(self, request, pk=None):
+        if (request.data['role_id']):
+            request.data.update({
+                "role": request.data["role_id"]
+            })
+        # return Response({"data": self.update(request, pk).data})
+        return Response({"data": self.partial_update(request, pk).data})
+
+    def delete(self, request, pk=None):
+        return self.destroy(request, pk)
+
+
+class AuthUser(APIView):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response({'data': serializer.data})
+
+
+class PermissionAPIView(APIView):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = PermissionSerializer(Permission.objects.all(), many=True)
+        return Response({'data': serializer.data})
+
+
+class RoleViewSet(viewsets.ViewSet):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def list(self, request):
+        queryset = Role.objects.all()
+        serializer = RoleSerializer(queryset, many=True)
+        return Response({"data": serializer.data})
+
+    def create(self, request):
+        serializer = RoleSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"data": serializer.data}, status=status.HTTP_201_CREATED)
+
+    def retrieve(self, request, pk=None):
+        role = Role.objects.get(id=pk)
+        serializer = RoleSerializer(role)
+        return Response({"data": serializer.data})
+
+    def update(self, request, pk=None):
+        role = Role.objects.get(id=pk)
+        serializer = RoleSerializer(instance=role, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"data": serializer.data}, status=status.HTTP_202_ACCEPTED)
+
+    def destroy(self, request, pk=None):
+        role = Role.objects.get(id=pk)
+        role.delete()
+        return Response({'message': 'Role deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['POST'])
+def register(request):
+    data = request.data
+    if data['password'] != data['password_confirm']:
+        raise exceptions.ValidationError('Passwords do not match')
+
+    if User.objects.filter(email=data['email']).exists():
+        raise exceptions.ValidationError('Email already exists')
+
+    serializer = UserSerializer(data=data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def login(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    user = User.objects.filter(email=email).first()
+    if user is None:
+        raise exceptions.AuthenticationFailed('User not found')
+    if not user.check_password(password):
+        raise exceptions.AuthenticationFailed('Incorrect password')
+
+    token = generate_access_token(user)
+    # set token to http-only cookie
+    response = Response()
+    response.set_cookie(key='jwt', value=token, httponly=True)
+    response.data = {
+        'jwt': token
+    }
+    return response
+
+
+@api_view(['POST'])
+def logout(request):
+    response = Response()
+    response.delete_cookie('jwt')
+    response.data = {
+        'message': 'success'
+    }
+    return response
 
 ```
+
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/141eb3c4-cfea-45eb-a027-00f60d610a8c">
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/890fec55-d9ec-4404-ab39-dab31df1c5e1">
+<img width="1348" alt="image" src="https://github.com/user-attachments/assets/2c789b59-2eb4-4bb2-87b7-7dcd819752fd">
+
+# #END</details>
+
+<details>
+<summary>21. Setup Profile API View for updating User Info </summary>
+
+# Setup Profile API View for updating User Info
 
 ```py
 
