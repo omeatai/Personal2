@@ -4356,9 +4356,212 @@ def logout(request):
 # #END</details>
 
 <details>
-<summary>23. Setup Product Model, URL and View </summary>
+<summary>23. Setup Product Model, URL, View and Serializer </summary>
 
-# Setup Product Model, URL and View
+# Setup Product Model, URL, View and Serializer
+
+### Create App - Products
+
+```py
+docker-compose exec admin_project sh
+python manage.py startapp products_app
+```
+
+### my_projects/07_react_django_practical/products_app/models.py:
+
+```py
+from django.db import models
+
+
+class Product(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField(max_length=1000)
+    image = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = 'products'
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
+        ordering = ['-created_at']
+
+
+```
+
+### my_projects/07_react_django_practical/admin_project/settings.py:
+
+```py
+# Application definition
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # apps
+    'rest_framework',
+    'users_app',
+    'products_app'
+]
+```
+
+### my_projects/07_react_django_practical/admin_project/urls.py:
+
+```py
+"""
+URL configuration for admin_project project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.0/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/v1/', include('users_app.urls')),
+    path('api/v1/', include('products_app.urls')),
+]
+
+```
+
+### my_projects/07_react_django_practical/products_app/urls.py:
+
+```py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('products', views.ProductGenericAPIView.as_view(), name='products-list'),
+    path('products/<str:pk>', views.ProductGenericAPIView.as_view(),
+         name='product-detail')
+]
+
+```
+
+### my_projects/07_react_django_practical/products_app/views.py:
+
+```py
+from django.shortcuts import render
+from rest_framework import generics, mixins, status, exceptions
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
+from users_app.auth import generate_access_token, JWTAuth
+from users_app.pagination import CustomPagination
+from .models import Product
+from .serializers import ProductSerializer
+
+
+class ProductGenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.RetrieveModelMixin,
+                            mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    pagination_class = CustomPagination
+
+    def get(self, request, pk=None):
+        if pk:
+            return Response({"data": self.retrieve(request, pk).data})
+        return Response({"data": self.list(request).data})
+
+    def post(self, request):
+        return Response({"data": self.create(request).data})
+
+    def put(self, request, pk=None):
+        return Response({"data": self.partial_update(request, pk).data})
+
+    def delete(self, request, pk=None):
+        return self.destroy(request, pk)
+
+```
+
+### my_projects/07_react_django_practical/products_app/serializers.py:
+
+```py
+
+from rest_framework import serializers
+
+from .models import Product
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+```
+
+## Make Migrations
+
+```py
+python manage.py makemigrations
+python manage.py migrate
+```
+
+```x
+POST PRODUCTS - http://localhost:8000/api/v1/products
+```
+
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/b47bb38c-6f3e-4790-bc57-98d11092c530">
+
+
+```x
+GET PRODUCTS - http://localhost:8000/api/v1/products
+```
+
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/a1e9eeaf-419a-4a5b-adb4-d01fde4f4c0a">
+
+```x
+PUT PRODUCTS - http://localhost:8000/api/v1/products/1
+```
+
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/377b4456-09c3-4439-af21-754d58c8886f">
+
+```x
+DELETE PRODUCTS - http://localhost:8000/api/v1/products/1
+```
+
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/9550ab36-2103-460b-a51b-d0606387dd5a">
+
+<img width="1392" alt="image" src="https://github.com/user-attachments/assets/b91d6430-7967-42df-ba1b-fa13c6e394fe">
+<img width="1392" alt="image" src="https://github.com/user-attachments/assets/6720f9aa-6829-49b7-978f-82315bc4e901">
+<img width="1392" alt="image" src="https://github.com/user-attachments/assets/098dcf81-8fff-465d-9428-96d04a4d72a9">
+<img width="1392" alt="image" src="https://github.com/user-attachments/assets/63a7cdd0-2528-4601-8390-15ac1bfae7e6">
+
+# #END</details>
+
+<details>
+<summary>24. Setup Uploading Images </summary>
+
+# Setup Uploading Images
+
+```py
+
+```
+
+```py
+
+```
 
 ```py
 
