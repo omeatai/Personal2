@@ -4688,9 +4688,299 @@ class Product(models.Model):
 # #END</details>
 
 <details>
-<summary>25. Setup Route to View Images </summary>
+<summary>25. Setup Route to View Uploaded Images </summary>
 
-# Setup Route to View Images
+# Setup Route to View Uploaded Images
+
+### my_projects/07_react_django_practical/admin_project/settings.py:
+
+```py
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': [
+#        'rest_framework.permissions.IsAuthenticated',
+#     ],
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#        'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     ],
+# }
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.0/howto/static-files/
+
+STATIC_URL = 'static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")  # BASE_DIR /'media'
+
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users_app.User'
+```
+
+### my_projects/07_react_django_practical/products_app/urls.py:
+
+```py
+from django.conf import settings
+from django.conf.urls.static import static
+from django.urls import path
+from . import views
+
+
+urlpatterns = [
+    path('products', views.ProductGenericAPIView.as_view(), name='products-list'),
+    path('products/<str:pk>', views.ProductGenericAPIView.as_view(),
+         name='product-detail'),
+    path('upload', views.FileUploadView.as_view(), name='upload-file')
+]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+```
+
+### my_projects/07_react_django_practical/products_app/views.py:
+
+```py
+
+from random import randint, randrange, choice
+from string import ascii_letters, digits
+from django.shortcuts import render
+from django.core.files.storage import default_storage
+from rest_framework import generics, mixins, status, exceptions
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.parsers import MultiPartParser
+
+from users_app.auth import generate_access_token, JWTAuth
+from users_app.pagination import CustomPagination
+from .models import Product
+from .serializers import ProductSerializer
+
+
+class ProductGenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.RetrieveModelMixin,
+                            mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    pagination_class = CustomPagination
+
+    def get(self, request, pk=None):
+        if pk:
+            return Response({"data": self.retrieve(request, pk).data})
+        return Response({"data": self.list(request).data})
+
+    def post(self, request):
+        return Response({"data": self.create(request).data})
+
+    def put(self, request, pk=None):
+        return Response({"data": self.partial_update(request, pk).data})
+
+    def delete(self, request, pk=None):
+        return self.destroy(request, pk)
+
+
+class FileUploadView(APIView):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser]
+
+    def post(self, request):
+        file = request.FILES.get('image')
+        if not file:
+            raise exceptions.ValidationError(
+                {"file": "Image file is required."})
+        letters_and_digits = ascii_letters + digits
+        random_value = ''.join(choice(letters_and_digits)
+                               for _ in range(6)) or randrange(100000, 1000000)
+        file.name = f"{random_value.lower()}-" + file.name.replace(" ", "_")
+        file_name = default_storage.save(file.name, file)
+        url = default_storage.url(file_name)
+        return Response({"data": {"file": file.name, "url": "http://localhost:8000/api/v1" + url}})
+
+```
+
+### my_projects/07_react_django_practical/products_app/models.py:
+
+```py
+from django.db import models
+
+
+class Product(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField(max_length=1000)
+    image = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = 'products'
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
+        ordering = ['-created_at']
+
+```
+
+
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/6fa178d5-4c75-48de-ae86-44ffbe1ddec7">
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/4c2f3948-43ae-4e16-b189-e5ef688edc5e">
+
+<img width="1392" alt="image" src="https://github.com/user-attachments/assets/a5b2d6b7-3c56-4f1e-9931-e4a0852756b5">
+<img width="1392" alt="image" src="https://github.com/user-attachments/assets/dbd1e6b1-f170-4f03-8267-9812fa49251d">
+
+# #END</details>
+
+<details>
+<summary>26. Create Orders App </summary>
+
+# Create Orders App
+
+```py
+python manage.py startapp orders_app
+```
+
+### my_projects/07_react_django_practical/admin_project/settings.py:
+
+```py
+# Application definition
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # apps
+    'rest_framework',
+    'users_app',
+    'products_app',
+    'orders_app',
+]
+
+```
+
+### my_projects/07_react_django_practical/admin_project/urls.py:
+
+```py
+"""
+URL configuration for admin_project project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.0/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/v1/', include('users_app.urls')),
+    path('api/v1/', include('products_app.urls')),
+    path('api/v1/', include('orders_app.urls')),
+]
+
+```
+
+### my_projects/07_react_django_practical/orders_app/urls.py:
+
+```py
+from django.urls import path
+from . import views
+
+
+urlpatterns = [
+    # path('orders', views.ProductGenericAPIView.as_view(), name='orders-list'),
+    # path('orders/<str:pk>', views.ProductGenericAPIView.as_view(),
+    #      name='order-detail'),
+]
+
+```
+
+### my_projects/07_react_django_practical/orders_app/models.py:
+
+```py
+from django.db import models
+
+
+class Order(models.Model):
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+class OrderItem(models.Model):
+    product_title = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.IntegerField()
+    order = models.ForeignKey(
+        Order, on_delete=models.CASCADE, related_name='order_items')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+```
+
+## Run Migrations:
+
+```py
+python manage.py makemigrations
+python manage.py migrate
+```
+
+<img width="1392" alt="image" src="https://github.com/user-attachments/assets/e00a9604-3506-43bd-ba34-ce2f0be651dc">
+<img width="1392" alt="image" src="https://github.com/user-attachments/assets/01d9b701-a80d-49f6-88c0-dfcf89b10e48">
+<img width="1392" alt="image" src="https://github.com/user-attachments/assets/6ff04a4c-60cd-46b8-84fa-ad4b9bfb74af">
+
+# #END</details>
+
+<details>
+<summary>27. Setup URLs, Views and Serializer for Orders App </summary>
+
+# Setup URLs, Views and Serializer for Orders App
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
 
 ```py
 
