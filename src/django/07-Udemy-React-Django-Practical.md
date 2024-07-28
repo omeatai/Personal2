@@ -5214,13 +5214,49 @@ python manage.py loaddata fixtures/orders.json
 # #END</details>
 
 <details>
-<summary>29. Setup Serializer Method Fields for Orders App </summary>
+<summary>29. Calculate Total cost of items with Serializer Method Fields for Orders Serializer </summary>
 
-# Setup Serializer Method Fields for Orders App
+# Calculate Total cost of items with Serializer Method Fields for Orders Serializer
+
+### my_projects/07_react_django_practical/orders_app/serializers.py:
 
 ```py
+from rest_framework import serializers
+
+from .models import OrderItem, Order
+
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderItem
+        fields = '__all__'
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    order_items = OrderItemSerializer(many=True, read_only=True)
+    total = serializers.SerializerMethodField('get_total')
+
+    def get_total(self, obj):
+        items = OrderItem.objects.filter(order_id=obj.id)
+        return sum((item.price * item.quantity) for item in items)
+
+    class Meta:
+        model = Order
+        fields = '__all__'
 
 ```
+
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/bf73403b-47a5-40ac-b872-1d97fc20f2eb">
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/ff3c99f7-557a-465a-a4d5-727c0751094c">
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/5d121b77-df93-46d1-83ee-22c512fedd50">
+<img width="1392" alt="image" src="https://github.com/user-attachments/assets/f871a5ca-87b3-4544-9a56-f96fc7101a31">
+
+# #END</details>
+
+<details>
+<summary>30. Export CSV with Data </summary>
+
+# Export CSV with Data
 
 ```py
 
