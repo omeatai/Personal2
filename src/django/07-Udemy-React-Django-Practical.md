@@ -5060,17 +5060,163 @@ class OrderSerializer(serializers.ModelSerializer):
 
 # Load Data into Orders App Model using Fixtures
 
+### my_projects/07_react_django_practical/orders_app/models.py:
+
 ```py
+from django.db import models
+
+
+class Order(models.Model):
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+class OrderItem(models.Model):
+    product_title = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.IntegerField()
+    order = models.ForeignKey(
+        Order, on_delete=models.CASCADE, related_name='order_items')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 ```
 
-```py
+### my_projects/07_react_django_practical/fixtures/orders.json:
 
+```json
+[
+    {
+        "model": "orders_app.order",
+        "pk": 1,
+        "fields": {
+            "first_name": "First Name #1",
+            "last_name": "Last Name #1",
+            "email": "Email #1",
+            "created_at": "2020-1-1 00:00:00",
+            "updated_at": "2020-1-1 00:00:00"
+        }
+    },
+    {
+        "model": "orders_app.order",
+        "pk": 2,
+        "fields": {
+            "first_name": "First Name #2",
+            "last_name": "Last Name #2",
+            "email": "Email #2",
+            "created_at": "2020-2-1 00:00:00",
+            "updated_at": "2020-2-1 00:00:00"
+        }
+    },
+    {
+        "model": "orders_app.order",
+        "pk": 3,
+        "fields": {
+            "first_name": "First Name #3",
+            "last_name": "Last Name #3",
+            "email": "Email #3",
+            "created_at": "2020-3-1 00:00:00",
+            "updated_at": "2020-3-1 00:00:00"
+        }
+    },
+    {
+        "model": "orders_app.orderitem",
+        "pk": 1,
+        "fields": {
+            "order_id": 1,
+            "product_title": "Title #1",
+            "price": 10,
+            "quantity": 2,
+            "created_at": "2020-1-1 00:00:00",
+            "updated_at": "2020-1-1 00:00:00"
+        }
+    },
+    {
+        "model": "orders_app.orderitem",
+        "pk": 2,
+        "fields": {
+            "order_id": 1,
+            "product_title": "Title #2",
+            "price": 20,
+            "quantity": 3,
+            "created_at": "2020-1-1 00:00:00",
+            "updated_at": "2020-1-1 00:00:00"
+        }
+    },
+    {
+        "model": "orders_app.orderitem",
+        "pk": 3,
+        "fields": {
+            "order_id": 2,
+            "product_title": "Title #3",
+            "price": 30,
+            "quantity": 3,
+            "created_at": "2020-2-1 00:00:00",
+            "updated_at": "2020-2-1 00:00:00"
+        }
+    },
+    {
+        "model": "orders_app.orderitem",
+        "pk": 4,
+        "fields": {
+            "order_id": 2,
+            "product_title": "Title #4",
+            "price": 40,
+            "quantity": 4,
+            "created_at": "2020-2-1 00:00:00",
+            "updated_at": "2020-2-1 00:00:00"
+        }
+    },
+    {
+        "model": "orders_app.orderitem",
+        "pk": 5,
+        "fields": {
+            "order_id": 3,
+            "product_title": "Title #5",
+            "price": 50,
+            "quantity": 5,
+            "created_at": "2020-3-1 00:00:00",
+            "updated_at": "2020-3-1 00:00:00"
+        }
+    },
+    {
+        "model": "orders_app.orderitem",
+        "pk": 6,
+        "fields": {
+            "order_id": 3,
+            "product_title": "Title #6",
+            "price": 60,
+            "quantity": 6,
+            "created_at": "2020-3-1 00:00:00",
+            "updated_at": "2020-3-1 00:00:00"
+        }
+    }
+]
 ```
 
-```py
+## Load Data into Model:
 
+```x
+python manage.py loaddata fixtures/orders.json
 ```
+
+![image](https://github.com/user-attachments/assets/2facf028-e04f-453f-a6ec-fdf6cae113a4)
+![image](https://github.com/user-attachments/assets/c6a7a281-3ad2-4a26-9460-729cbba11a30)
+![image](https://github.com/user-attachments/assets/e032bff4-19c3-4d35-a964-509bc6c624fe)
+
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/ff950c35-25ea-4f9d-adb9-d5ce4ea4a8a0">
+<img width="1360" alt="image" src="https://github.com/user-attachments/assets/38346fdc-ad57-4496-97ca-a6ce4c30bd5e">
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/3d220f34-765c-4a56-8580-886e965bb5a9">
+
+# #END</details>
+
+<details>
+<summary>29. Setup Serializer Method Fields for Orders App </summary>
+
+# Setup Serializer Method Fields for Orders App
 
 ```py
 
