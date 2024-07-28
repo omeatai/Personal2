@@ -4958,21 +4958,107 @@ python manage.py migrate
 
 # Setup URLs, Views and Serializer for Orders App
 
+### my_projects/07_react_django_practical/orders_app/models.py:
+
 ```py
+from django.db import models
+
+
+class Order(models.Model):
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+class OrderItem(models.Model):
+    product_title = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.IntegerField()
+    order = models.ForeignKey(
+        Order, on_delete=models.CASCADE, related_name='order_items')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 ```
 
+### my_projects/07_react_django_practical/orders_app/urls.py:
+
 ```py
+from django.urls import path
+from . import views
+
+
+urlpatterns = [
+    path('orders', views.OrderGenericAPIView.as_view(), name='orders-list'),
+    path('orders/<str:pk>', views.OrderGenericAPIView.as_view(),
+         name='order-detail'),
+]
 
 ```
 
+### my_projects/07_react_django_practical/orders_app/views.py:
+
 ```py
+from rest_framework import generics, mixins, status, exceptions
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
+from users_app.auth import generate_access_token, JWTAuth
+from users_app.pagination import CustomPagination
+from .models import Order
+from .serializers import OrderSerializer
+
+
+class OrderGenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.RetrieveModelMixin):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    pagination_class = CustomPagination
+
+    def get(self, request, pk=None):
+        if pk:
+            return Response({"data": self.retrieve(request, pk).data})
+        return Response({"data": self.list(request).data})
 
 ```
 
+### my_projects/07_react_django_practical/orders_app/serializers.py:
+
 ```py
+from rest_framework import serializers
+
+from .models import OrderItem, Order
+
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderItem
+        fields = '__all__'
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    order_items = OrderItemSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Order
+        fields = '__all__'
 
 ```
+
+<img width="1392" alt="image" src="https://github.com/user-attachments/assets/a7181b4e-1ca1-465f-8469-278776f575b4">
+<img width="1392" alt="image" src="https://github.com/user-attachments/assets/867c1830-9e7b-4af6-b7b0-919b2dacc28a">
+<img width="1392" alt="image" src="https://github.com/user-attachments/assets/5a5618ac-40d1-421d-9cd4-30c014f9fcc1">
+<img width="1392" alt="image" src="https://github.com/user-attachments/assets/f7716362-7c35-4c03-85b1-3bd2bd22f02b">
+
+# #END</details>
+
+<details>
+<summary>28. Load Data into Orders App Model using Fixtures </summary>
+
+# Load Data into Orders App Model using Fixtures
 
 ```py
 
