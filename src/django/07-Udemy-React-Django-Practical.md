@@ -5258,21 +5258,128 @@ class OrderSerializer(serializers.ModelSerializer):
 
 # Export CSV with Data
 
+### my_projects/07_react_django_practical/orders_app/models.py:
+
 ```py
+from django.db import models
+
+
+class Order(models.Model):
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def name(self):
+        return f'{self.first_name} {self.last_name}'
+
+
+class OrderItem(models.Model):
+    product_title = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.IntegerField()
+    order = models.ForeignKey(
+        Order, on_delete=models.CASCADE, related_name='order_items')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 ```
 
+### my_projects/07_react_django_practical/orders_app/urls.py:
+
 ```py
+from django.urls import path
+from . import views
+
+
+urlpatterns = [
+    path('orders', views.OrderGenericAPIView.as_view(), name='orders-list'),
+    path('orders/export', views.ExportAPIView.as_view(), name='export-orders'),
+    path('orders/<str:pk>', views.OrderGenericAPIView.as_view(),
+         name='order-detail'),
+]
 
 ```
 
+### my_projects/07_react_django_practical/orders_app/views.py:
+
 ```py
+import csv
+from django.http import JsonResponse, HttpResponse
+from rest_framework import generics, mixins, status, exceptions
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from users_app.auth import generate_access_token, JWTAuth
+from users_app.pagination import CustomPagination
+from .models import Order, OrderItem
+from .serializers import OrderSerializer
+
+
+class OrderGenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.RetrieveModelMixin):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    pagination_class = CustomPagination
+
+    def get(self, request, pk=None):
+        if pk:
+            return Response({"data": self.retrieve(request, pk).data})
+        return Response({"data": self.list(request).data})
+
+
+class ExportAPIView(APIView):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="orders.csv"'
+
+        orders = Order.objects.all()
+        writer = csv.writer(response)
+
+        writer.writerow(
+            ['ID', 'Name', 'Email', 'Product Title', 'Price', 'Quantity'])
+
+        for order in orders:
+            for item in order.order_items.all():
+                writer.writerow([order.id, order.name, order.email,
+                                item.product_title, item.price, item.quantity])
+
+        # for order in orders:
+        #     writer.writerow([order.id, order.name, order.email, '', '', ''])
+        #     orderItems = OrderItem.objects.all().filter(order_id=order.id)
+
+        #     for item in orderItems:
+        #         writer.writerow(
+        #             ['', '', '', item.product_title, item.price, item.quantity])
+
+        return response
 
 ```
 
-```py
-
+```x
+http://localhost:8000/api/v1/orders/export
 ```
+
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/de929d6f-347f-4a3b-8507-90f02eec36b8">
+<img width="1392" alt="image" src="https://github.com/user-attachments/assets/caa6d1e9-9603-4e89-8bb2-ae40fd28f568">
+<img width="1392" alt="image" src="https://github.com/user-attachments/assets/9f0faa8a-15a3-45fd-a4aa-fb799a02b991">
+<img width="1392" alt="image" src="https://github.com/user-attachments/assets/e5de69db-760a-4c9f-85cc-9a35fc390115">
+
+# #END</details>
+
+<details>
+<summary>31. Create ChartAPIView with Raw SQL Queries </summary>
+
+# Create ChartAPIView with Raw SQL Queries
+
+
 
 ```py
 
