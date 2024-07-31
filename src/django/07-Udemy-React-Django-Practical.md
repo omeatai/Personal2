@@ -5744,7 +5744,7 @@ def logout(request):
 
 # Setup Cors
 
-```py
+```x
 pip install django-cors-headers
 ```
 
