@@ -5527,7 +5527,7 @@ class ChartAPIView(APIView):
 
 ```py
 from rest_framework import permissions
-from users_app import UserSerializer
+from users_app.serializers import UserSerializer
 
 
 class ViewPermissions(permissions.BasePermission):
@@ -5744,14 +5744,61 @@ def logout(request):
 
 # Setup Cors
 
-
 ```py
-
+pip install django-cors-headers
 ```
 
-```py
+### my_projects/07_react_django_practical/admin_project/settings.py:
 
+```py
+# Application definition
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # apps
+    'rest_framework',
+    'corsheaders', # added
+    'users_app',
+    'products_app',
+    'orders_app',
+]
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # added
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users_app.User'
+
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 ```
+
+<img width="1329" alt="image" src="https://github.com/user-attachments/assets/8b082e10-cbb1-4ef7-b50e-a1c8238d45d8">
+
+# #END</details>
+
+<details>
+<summary>34. Frontend - Install React App </summary>
+
+# Frontend - Install React App
 
 ```py
 
