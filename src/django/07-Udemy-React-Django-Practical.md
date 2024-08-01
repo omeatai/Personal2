@@ -6001,7 +6001,7 @@ reportWebVitals();
 
 ### my_projects/07_react_django_practical/react-admin/src/App.tsx:
 
-```py
+```tsx
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
@@ -6467,7 +6467,7 @@ export default App;
 
 ### my_projects/07_react_django_practical/react-admin/src/App.css:
 
-```py
+```css
 .bi {
   display: inline-block;
   width: 1rem;
