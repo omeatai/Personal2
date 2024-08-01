@@ -5860,9 +5860,15 @@ export default App;
 # #END</details>
 
 <details>
-<summary>35. Frontend - Setup Bootstrap Template </summary>
+<summary>35. Frontend - Setup Bootstrap Dashboard Template </summary>
 
-# Frontend - Setup Bootstrap Template
+# Frontend - Setup Bootstrap Dashboard Template
+
+## [https://getbootstrap.com/docs/5.3/examples/](https://getbootstrap.com/docs/5.3/examples/)
+
+![image](https://github.com/user-attachments/assets/5478985c-5c82-47e8-8afa-42c803645a4e)
+![image](https://github.com/user-attachments/assets/d975bce8-ba16-444b-9138-d0c46cf3ed25)
+![image](https://github.com/user-attachments/assets/f0b69830-97b6-4f12-b8bc-fd9ab7477ebc)
 
 ```py
 
