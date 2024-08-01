@@ -5800,21 +5800,69 @@ CORS_ALLOW_CREDENTIALS = True
 
 # Frontend - Install React App
 
-```py
+## Check Node Version
+
+```x
+node -v
+npm -v
+```
+
+## Create React app - react-admin
+
+```x
+npx create-react-app react-admin --template typescript
+```
+
+## Run React App
+
+```x
+cd react-admin
+npm run start
+```
+
+### my_projects/07_react_django_practical/react-admin/src/App.tsx:
+
+```tsx
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.tsx</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
+}
+
+export default App;
 
 ```
 
-```py
+![image](https://github.com/user-attachments/assets/8861cdeb-08a7-42cd-a64d-5edef6554439)
 
-```
+<img width="1329" alt="image" src="https://github.com/user-attachments/assets/39a7a025-0dc5-4bc7-b4da-572a3dc41727">
+<img width="1329" alt="image" src="https://github.com/user-attachments/assets/3421dc61-1b6a-49a7-9ec7-4c71cd5343fc">
 
-```py
+# #END</details>
 
-```
+<details>
+<summary>35. Frontend - Setup Bootstrap Template </summary>
 
-```py
-
-```
+# Frontend - Setup Bootstrap Template
 
 ```py
 
