@@ -6918,6 +6918,148 @@ export default Dashboard;
 
 # Frontend - Setup Routes
 
+### Install React-Router-DOM
+
+```x
+npm install react-router-dom @types/react-router-dom
+```
+
+### my_projects/07_react_django_practical/react-admin/src/index.tsx:
+
+```tsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+```
+
+### my_projects/07_react_django_practical/react-admin/src/App.tsx:
+
+```tsx
+import "./App.css";
+import Nav from "./components/Nav";
+import Menu from "./components/Menu";
+import Dashboard from "./components/Dashboard";
+import Users from "./components/secure/Users";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Nav />
+        <div className="container-fluid">
+          <div className="row">
+            <Menu />
+            <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+              <Routes>
+                <Route path="/" index element={<Dashboard />} />
+                <Route path="/users" element={<Users />} />
+              </Routes>
+            </main>
+          </div>
+        </div>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
+
+```
+
+### my_projects/07_react_django_practical/react-admin/src/components/secure/Users.tsx:
+
+```tsx
+import React from "react";
+
+const Users = () => {
+  return (
+    <div>
+      <h1>Users List</h1>
+    </div>
+  );
+};
+
+export default Users;
+
+```
+
+```x
+http://localhost:3000/
+```
+
+![image](https://github.com/user-attachments/assets/e86c3c32-3687-4a37-a50e-814f2903f773)
+
+
+```tsx
+http://localhost:3000/users
+```
+
+![image](https://github.com/user-attachments/assets/3802f772-23e3-4c3f-8c3a-11b3544ab971)
+
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/a091fafd-1490-4c8b-bb23-0895a3dad2f7">
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/126070c8-f63e-4ff2-866e-21f32e83d48e">
+
+# #END</details>
+
+<details>
+<summary>38. Frontend - Setup Child Props </summary>
+
+# Frontend - Setup Child Props
+
+```tsx
+
+```
+
+```tsx
+
+```
+
+```tsx
+
+```
+
+```tsx
+
+```
+
+```tsx
+
+```
+
+```tsx
+
+```
+
+```tsx
+
+```
+
+```tsx
+
+```
+
+```tsx
+
+```
+
 ```tsx
 
 ```
