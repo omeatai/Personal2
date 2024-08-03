@@ -7024,47 +7024,260 @@ GET: http://localhost:3000/users
 
 # Frontend - Setup Layout for components as Child Props, including Login Form
 
+### my_projects/07_react_django_practical/react-admin/src/App.tsx:
+
+```tsx
+import "./App.css";
+import Dashboard from "./components/Dashboard";
+import Users from "./components/secure/Users";
+import Login from "./components/public/Login";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" index element={<Dashboard />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
+
+```
+
+### my_projects/07_react_django_practical/react-admin/src/components/Layout.tsx:
+
+```tsx
+import React, { Component } from "react";
+import Nav from "./Nav";
+import Menu from "./Menu";
+
+class Layout extends Component {
+  render() {
+    return (
+      <>
+        <Nav />
+        <div className="container-fluid">
+          <div className="row">
+            <Menu />
+            <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+              {(this.props as { children: React.ReactNode }).children}
+            </main>
+          </div>
+        </div>
+      </>
+    );
+  }
+}
+
+export default Layout;
+
+```
+
+### my_projects/07_react_django_practical/react-admin/src/components/Dashboard.tsx:
+
+```tsx
+import React from "react";
+import Layout from "./Layout";
+
+const Dashboard = () => (
+  <Layout>
+    <h2>Section title</h2>
+    <div className="table-responsive small">
+      <table className="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Header</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1,001</td>
+            <td>random</td>
+            <td>data</td>
+            <td>placeholder</td>
+            <td>text</td>
+          </tr>
+          <tr>
+            <td>1,015</td>
+            <td>random</td>
+            <td>tabular</td>
+            <td>information</td>
+            <td>text</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    {/* Chart  */}
+    <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 className="h2">Dashboard</h1>
+      <div className="btn-toolbar mb-2 mb-md-0">
+        <div className="btn-group me-2">
+          <button type="button" className="btn btn-sm btn-outline-secondary">
+            Share
+          </button>
+          <button type="button" className="btn btn-sm btn-outline-secondary">
+            Export
+          </button>
+        </div>
+        <button
+          type="button"
+          className="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1"
+        >
+          <svg className="bi">
+            <use xlinkHref="#calendar3" />
+          </svg>
+          This week
+        </button>
+      </div>
+    </div>
+
+    <canvas
+      className="my-4 w-100"
+      id="myChart"
+      width="900"
+      height="380"
+    ></canvas>
+  </Layout>
+);
+
+export default Dashboard;
+
+```
+
+### my_projects/07_react_django_practical/react-admin/src/components/secure/Users.tsx:
+
+```tsx
+import React from "react";
+import Layout from "../Layout";
+
+const Users = () => {
+  return (
+    <Layout>
+      <h1>Users List</h1>
+    </Layout>
+  );
+};
+
+export default Users;
+
+```
+
+### my_projects/07_react_django_practical/react-admin/src/components/public/Login.tsx:
+
+```tsx
+import React, { Component } from "react";
+import "./Login.css";
+
+class Login extends Component {
+  render() {
+    return (
+      <>
+        <section className="container my-5 form-signin w-100 m-auto">
+          <form>
+            <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+
+            <div className="form-floating">
+              <input
+                type="email"
+                className="form-control"
+                id="floatingInput"
+                placeholder="name@example.com"
+              />
+              <label htmlFor="floatingInput">Email address</label>
+            </div>
+            <div className="form-floating">
+              <input
+                type="password"
+                className="form-control"
+                id="floatingPassword"
+                placeholder="Password"
+              />
+              <label htmlFor="floatingPassword">Password</label>
+            </div>
+
+            <button className="btn btn-primary w-100 py-2" type="submit">
+              Sign in
+            </button>
+          </form>
+        </section>
+      </>
+    );
+  }
+}
+
+export default Login;
+
+```
+
+### my_projects/07_react_django_practical/react-admin/src/components/public/Login.css:
+
+```css
+.form-signin {
+    max-width: 330px;
+    padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+```
+
 [Bootstrap Login Form - https://getbootstrap.com/docs/5.3/examples/](https://getbootstrap.com/docs/5.3/examples/)
 
 ![image](https://github.com/user-attachments/assets/2c126804-0760-46e5-8e92-50bd8a057423)
 ![image](https://github.com/user-attachments/assets/ed9d1459-3acd-44d1-b0ac-a656ea2a1b9a)
 ![image](https://github.com/user-attachments/assets/a1132ad2-2012-40af-892c-6ded72ff6a4e)
 
-```tsx
-
+```x
+GET: http://localhost:3000/login
 ```
 
-```tsx
+![image](https://github.com/user-attachments/assets/6b35023a-2aa0-4646-a52e-6114a550207f)
 
+```x
+GET: http://localhost:3000/users
 ```
 
-```tsx
+![image](https://github.com/user-attachments/assets/f97d51f5-1fb9-4b35-823c-dfa8442a5dcb)
 
+```x
+GET: http://localhost:3000/
 ```
 
-```tsx
+![image](https://github.com/user-attachments/assets/eb0346ec-501f-482c-b090-bfaadd675d28)
 
-```
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/aceb5b2d-0f90-4f52-8a5f-2266700265c0">
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/6e9a496f-919a-496d-81e3-b4771be7588e">
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/4c6f073b-336e-4699-91fb-595b55225078">
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/5b0beec1-fdfa-465f-bcc7-9c942b8f36af">
 
-```tsx
+# #END</details>
 
-```
+<details>
+<summary>39. Frontend - Setup Register Form </summary>
 
-```tsx
-
-```
-
-```tsx
-
-```
-
-```tsx
-
-```
-
-```tsx
-
-```
+# Frontend - Setup Register Form
 
 ```tsx
 
