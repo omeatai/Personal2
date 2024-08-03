@@ -7002,14 +7002,14 @@ export default Users;
 ```
 
 ```x
-http://localhost:3000/
+GET: http://localhost:3000/
 ```
 
 ![image](https://github.com/user-attachments/assets/e86c3c32-3687-4a37-a50e-814f2903f773)
 
 
-```tsx
-http://localhost:3000/users
+```x
+GET: http://localhost:3000/users
 ```
 
 ![image](https://github.com/user-attachments/assets/3802f772-23e3-4c3f-8c3a-11b3544ab971)
@@ -7020,9 +7020,15 @@ http://localhost:3000/users
 # #END</details>
 
 <details>
-<summary>38. Frontend - Setup Child Props </summary>
+<summary>38. Frontend - Setup Layout for components as Child Props, including Login Form </summary>
 
-# Frontend - Setup Child Props
+# Frontend - Setup Layout for components as Child Props, including Login Form
+
+[Bootstrap Login Form - https://getbootstrap.com/docs/5.3/examples/](https://getbootstrap.com/docs/5.3/examples/)
+
+![image](https://github.com/user-attachments/assets/2c126804-0760-46e5-8e92-50bd8a057423)
+![image](https://github.com/user-attachments/assets/ed9d1459-3acd-44d1-b0ac-a656ea2a1b9a)
+![image](https://github.com/user-attachments/assets/a1132ad2-2012-40af-892c-6ded72ff6a4e)
 
 ```tsx
 
