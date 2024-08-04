@@ -7427,7 +7427,7 @@ export default Register;
 
 ### my_projects/07_react_django_practical/react-admin/src/components/public/Register.css:
 
-```tsx
+```css
 .form-signin {
     max-width: 330px;
     padding: 1rem;
