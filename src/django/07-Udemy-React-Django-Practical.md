@@ -9117,9 +9117,9 @@ export default withNavigation(Menu);
 # #END</details>
 
 <details>
-<summary>46. Frontend - Setup Users Page </summary>
+<summary>46. Frontend - Setup Users Component </summary>
 
-# Frontend - Setup Users Page
+# Frontend - Setup Users Component
 
 ```tsx
 
