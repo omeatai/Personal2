@@ -8472,9 +8472,9 @@ export default withNavigation(Login);
 # #END</details>
 
 <details>
-<summary>44. Frontend - GET User details in Layout after Login </summary>
+<summary>44. Frontend - GET all Users details in Layout after Login </summary>
 
-# Frontend - GET User details in Layout after Login
+# Frontend - GET all Users details in Layout after Login
 
 ## Update Backend Permissions file to include users_apps
 
@@ -8598,7 +8598,7 @@ class Layout extends Component {
       console.log(response);
       console.log("Response: " + JSON.stringify(response.data));
     } catch (e) {
-      console.log(`${e}. The User does not exist.`);
+      console.log(`${e}. The Users could not be fetched. Authentication is required.`);
       (this.props as { navigate: (path: string) => void }).navigate("/login");
     }
 
@@ -8648,6 +8648,514 @@ export default withNavigation(Layout);
 
 # Frontend - Setup Logout Functionality 
 
+### my_projects/07_react_django_practical/react-admin/src/index.tsx:
+
+```tsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:8000/api/v1/";
+axios.defaults.withCredentials = true;
+
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+```
+
+### my_projects/07_react_django_practical/react-admin/src/App.tsx:
+
+```tsx
+import "./App.css";
+import Dashboard from "./components/Dashboard";
+import Users from "./components/secure/Users";
+import Login from "./components/public/Login";
+import Register from "./components/public/Register";
+
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" index element={<Dashboard />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
+
+```
+
+### my_projects/07_react_django_practical/react-admin/src/components/Layout.tsx:
+
+```tsx
+import React, { Component } from "react";
+import Nav from "./Nav";
+import Menu from "./Menu";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+function withNavigation(Component: any) {
+  return function WrappedComponent(props: any) {
+    const navigate = useNavigate();
+    return <Component {...props} navigate={navigate} />;
+  };
+}
+
+class Layout extends Component {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      user: null,
+    };
+  }
+
+  componentDidMount = async () => {
+    try {
+      const response = await axios.get("users");
+      // console.log(response);
+      console.log("Response: " + JSON.stringify(response.data));
+    } catch (e) {
+      console.log(
+        `${e}. The Users could not be fetched. Authentication is required.`
+      );
+      (this.props as { navigate: (path: string) => void }).navigate("/login");
+    }
+
+    // fetch("http://localhost:8000/api/v1/users", {
+    //   credentials: "include",
+    // })
+    //   .then((res) => res.json())
+    //   .then((user) => {
+    //     this.setState({
+    //       user: user.data,
+    //     });
+    //   });
+  };
+
+  render() {
+    return (
+      <>
+        <Nav />
+        <div className="container-fluid">
+          <div className="row">
+            <Menu />
+            <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+              {(this.props as { children: React.ReactNode }).children}
+            </main>
+          </div>
+        </div>
+      </>
+    );
+  }
+}
+
+export default withNavigation(Layout);
+
+```
+
+### my_projects/07_react_django_practical/react-admin/src/components/Nav.tsx:
+
+```tsx
+import React, { Component } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+function withNavigation(Component: any) {
+  return function WrappedComponent(props: any) {
+    const navigate = useNavigate();
+    return <Component {...props} navigate={navigate} />;
+  };
+}
+
+class Nav extends Component {
+  handleLogout = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("logout", {});
+      console.log("User is logged out.");
+      console.log(response);
+      (this.props as { navigate: (path: string) => void }).navigate("/login");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  render() {
+    return (
+      <nav>
+        {/* SVG SYMBOLS */}
+        <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
+          <symbol id="cart" viewBox="0 0 16 16">
+            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+          </symbol>
+          <symbol id="door-closed" viewBox="0 0 16 16">
+            <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z" />
+            <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z" />
+          </symbol>
+          <symbol id="file-earmark" viewBox="0 0 16 16">
+            <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
+          </symbol>
+          <symbol id="file-earmark-text" viewBox="0 0 16 16">
+            <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z" />
+            <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z" />
+          </symbol>
+          <symbol id="gear-wide-connected" viewBox="0 0 16 16">
+            <path d="M7.068.727c.243-.97 1.62-.97 1.864 0l.071.286a.96.96 0 0 0 1.622.434l.205-.211c.695-.719 1.888-.03 1.613.931l-.08.284a.96.96 0 0 0 1.187 1.187l.283-.081c.96-.275 1.65.918.931 1.613l-.211.205a.96.96 0 0 0 .434 1.622l.286.071c.97.243.97 1.62 0 1.864l-.286.071a.96.96 0 0 0-.434 1.622l.211.205c.719.695.03 1.888-.931 1.613l-.284-.08a.96.96 0 0 0-1.187 1.187l.081.283c.275.96-.918 1.65-1.613.931l-.205-.211a.96.96 0 0 0-1.622.434l-.071.286c-.243.97-1.62.97-1.864 0l-.071-.286a.96.96 0 0 0-1.622-.434l-.205.211c-.695.719-1.888.03-1.613-.931l.08-.284a.96.96 0 0 0-1.186-1.187l-.284.081c-.96.275-1.65-.918-.931-1.613l.211-.205a.96.96 0 0 0-.434-1.622l-.286-.071c-.97-.243-.97-1.62 0-1.864l.286-.071a.96.96 0 0 0 .434-1.622l-.211-.205c-.719-.695-.03-1.888.931-1.613l.284.08a.96.96 0 0 0 1.187-1.186l-.081-.284c-.275-.96.918-1.65 1.613-.931l.205.211a.96.96 0 0 0 1.622-.434l.071-.286zM12.973 8.5H8.25l-2.834 3.779A4.998 4.998 0 0 0 12.973 8.5zm0-1a4.998 4.998 0 0 0-7.557-3.779l2.834 3.78h4.723zM5.048 3.967c-.03.021-.058.043-.087.065l.087-.065zm-.431.355A4.984 4.984 0 0 0 3.002 8c0 1.455.622 2.765 1.615 3.678L7.375 8 4.617 4.322zm.344 7.646.087.065-.087-.065z" />
+          </symbol>
+          <symbol id="graph-up" viewBox="0 0 16 16">
+            <path
+              fillRule="evenodd"
+              d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"
+            />
+          </symbol>
+          <symbol id="house-fill" viewBox="0 0 16 16">
+            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z" />
+            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z" />
+          </symbol>
+          <symbol id="list" viewBox="0 0 16 16">
+            <path
+              fillRule="evenodd"
+              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+            />
+          </symbol>
+          <symbol id="people" viewBox="0 0 16 16">
+            <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" />
+          </symbol>
+          <symbol id="plus-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+          </symbol>
+          <symbol id="search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+          </symbol>
+        </svg>
+
+        <header
+          className="navbar sticky-top bg-secondary flex-md-nowrap p-0 shadow"
+          data-bs-theme="dark"
+        >
+          <a
+            className="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white"
+            href="/"
+          >
+            Company name
+          </a>
+
+          <ul className="navbar-nav flex-row d-md-none">
+            {/* SEARCH BUTTON */}
+            <li className="nav-item text-nowrap">
+              <button
+                className="nav-link px-3 text-white"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSearch"
+                aria-controls="navbarSearch"
+                aria-expanded="false"
+                aria-label="Toggle search"
+              >
+                <svg className="bi">
+                  <use xlinkHref="#search" />
+                </svg>
+              </button>
+            </li>
+            {/* MENU BUTTON */}
+            <li className="nav-item text-nowrap">
+              <button
+                className="nav-link px-3 text-white"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#sidebarMenu"
+                aria-controls="sidebarMenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <svg className="bi">
+                  <use xlinkHref="#list" />
+                </svg>
+              </button>
+            </li>
+            {/* LOGOUT BUTTON */}
+            <li className="nav-item text-nowrap">
+              <a href="#" onClick={this.handleLogout}>
+                <button
+                  className="nav-link px-3 text-white"
+                  type="button"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#sidebarMenu"
+                  aria-controls="sidebarMenu"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <svg className="bi">
+                    <use xlinkHref="#door-closed" />
+                  </svg>
+                </button>
+              </a>
+            </li>
+          </ul>
+
+          <div id="navbarSearch" className="navbar-search w-100 collapse">
+            <input
+              className="form-control w-100 rounded-0 border-0"
+              type="text"
+              placeholder="Search"
+              aria-label="Search"
+            />
+          </div>
+        </header>
+      </nav>
+    );
+  }
+}
+
+export default withNavigation(Nav);
+
+```
+
+### my_projects/07_react_django_practical/react-admin/src/components/Menu.tsx:
+
+```tsx
+import React, { Component } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+function withNavigation(Component: any) {
+  return function WrappedComponent(props: any) {
+    const navigate = useNavigate();
+    return <Component {...props} navigate={navigate} />;
+  };
+}
+
+class Menu extends Component {
+  handleLogout = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("logout", {});
+      console.log("User is logged out.");
+      console.log(response);
+      (this.props as { navigate: (path: string) => void }).navigate("/login");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  render() {
+    return (
+      <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+        <div
+          className="offcanvas-md offcanvas-end bg-body-tertiary"
+          tabIndex={-1}
+          id="sidebarMenu"
+          aria-labelledby="sidebarMenuLabel"
+        >
+          <div className="offcanvas-header">
+            <h5 className="offcanvas-title" id="sidebarMenuLabel">
+              Company name
+            </h5>
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="offcanvas"
+              data-bs-target="#sidebarMenu"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div className="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+            <ul className="nav flex-column">
+              <li className="nav-item">
+                <a
+                  className="nav-link d-flex align-items-center gap-2 active"
+                  aria-current="page"
+                  href="#"
+                >
+                  <svg className="bi">
+                    <use xlinkHref="#house-fill" />
+                  </svg>
+                  Dashboard
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link d-flex align-items-center gap-2"
+                  href="#"
+                >
+                  <svg className="bi">
+                    <use xlinkHref="#file-earmark" />
+                  </svg>
+                  Orders
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link d-flex align-items-center gap-2"
+                  href="#"
+                >
+                  <svg className="bi">
+                    <use xlinkHref="#cart" />
+                  </svg>
+                  Products
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link d-flex align-items-center gap-2"
+                  href="#"
+                >
+                  <svg className="bi">
+                    <use xlinkHref="#people" />
+                  </svg>
+                  Customers
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link d-flex align-items-center gap-2"
+                  href="#"
+                >
+                  <svg className="bi">
+                    <use xlinkHref="#graph-up" />
+                  </svg>
+                  Reports
+                </a>
+              </li>
+            </ul>
+
+            <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+              <span>Saved reports</span>
+              <a
+                className="link-secondary"
+                href="#"
+                aria-label="Add a new report"
+              >
+                <svg className="bi">
+                  <use xlinkHref="#plus-circle" />
+                </svg>
+              </a>
+            </h6>
+            <ul className="nav flex-column mb-auto">
+              <li className="nav-item">
+                <a
+                  className="nav-link d-flex align-items-center gap-2"
+                  href="#"
+                >
+                  <svg className="bi">
+                    <use xlinkHref="#file-earmark-text" />
+                  </svg>
+                  Current month
+                </a>
+              </li>
+            </ul>
+
+            <hr className="my-3" />
+
+            <ul className="nav flex-column mb-auto">
+              <li className="nav-item">
+                <a
+                  className="nav-link d-flex align-items-center gap-2"
+                  href="#"
+                >
+                  <svg className="bi">
+                    <use xlinkHref="#gear-wide-connected" />
+                  </svg>
+                  Settings
+                </a>
+              </li>
+              {/* LOGOUT BUTTON */}
+              <li className="nav-item">
+                <a
+                  className="nav-link d-flex align-items-center gap-2"
+                  href="#"
+                  onClick={this.handleLogout}
+                >
+                  <svg className="bi">
+                    <use xlinkHref="#door-closed" />
+                  </svg>
+                  Sign out
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default withNavigation(Menu);
+
+```
+
+![image](https://github.com/user-attachments/assets/74f5a983-c304-4bee-9bd8-bbe909299c0a)
+![image](https://github.com/user-attachments/assets/8c7e6ccb-a65b-4264-b1a9-46ff37e7bc09)
+![image](https://github.com/user-attachments/assets/c014fdbe-3bdc-41a2-8f2d-66082bfd9c6a)
+
+<img width="1439" alt="image" src="https://github.com/user-attachments/assets/a879da3a-7b4c-4f28-911d-9b44dd8feb88">
+<img width="1439" alt="image" src="https://github.com/user-attachments/assets/8e0dc365-c86b-4c35-86c6-4511c7a5e039">
+<img width="1439" alt="image" src="https://github.com/user-attachments/assets/9c4e5503-c01a-44b4-b4a6-d083e7f109f2">
+
+# #END</details>
+
+<details>
+<summary>46. Frontend - Setup Users Page </summary>
+
+# Frontend - Setup Users Page
+
+```tsx
+
+```
+
+```tsx
+
+```
+
+```tsx
+
+```
+
+```tsx
+
+```
+
+```tsx
+
+```
+
+```tsx
+
+```
+
+```tsx
+
+```
+
+```tsx
+
+```
+
+```tsx
+
+```
 
 ```tsx
 
