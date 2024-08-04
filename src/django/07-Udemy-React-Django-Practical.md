@@ -5919,7 +5919,7 @@ export default App;
       crossorigin="anonymous"
     ></script>
     <!-- Custom script for this template -->
-    <script src="../src/dashboard.js"></script>
+    <script type="text/jsx" src="../src/dashboard.js"></script>
   </body>
 </html>
 
@@ -7279,17 +7279,189 @@ GET: http://localhost:3000/
 
 # Frontend - Setup Register Form
 
+### my_projects/07_react_django_practical/react-admin/src/App.tsx:
+
 ```tsx
+import "./App.css";
+import Dashboard from "./components/Dashboard";
+import Users from "./components/secure/Users";
+import Login from "./components/public/Login";
+import Register from "./components/public/Register";
+
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" index element={<Dashboard />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
 
 ```
 
+### my_projects/07_react_django_practical/react-admin/src/components/public/Register.tsx:
+
 ```tsx
+import React, { useState, useEffect } from "react";
+import "./Register.css";
+
+const Register = () => {
+  const INITIAL_STATE = {
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    password_confirm: "",
+  };
+  const [registerUser, setRegisterUser] = useState(INITIAL_STATE);
+
+  const handleChange = (e: any) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setRegisterUser((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    if (Object.values(registerUser).some((value) => !value)) {
+      alert("Please fill in all fields...");
+      return;
+    }
+    if (registerUser.password !== registerUser.password_confirm) {
+      alert("Passwords do not match...");
+      return;
+    }
+    console.log("Form submitted: " + JSON.stringify(registerUser));
+    // setRegisterUser(INITIAL_STATE);
+  };
+
+  useEffect(() => {
+    // console.log("User: " + JSON.stringify(registerUser));
+    console.log("Change made...");
+  }, [registerUser]);
+
+  return (
+    <>
+      <section className="container my-5 form-signin w-100 m-auto">
+        <form onSubmit={handleSubmit}>
+          <h1 className="h3 mb-3 fw-normal">Please register</h1>
+
+          <div className="form-floating">
+            <input
+              type="text"
+              className="form-control"
+              id="first_name"
+              name="first_name"
+              placeholder="bob"
+              onChange={(e) => handleChange(e)}
+            />
+            <label htmlFor="first_name">First Name</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type="text"
+              className="form-control"
+              id="last_name"
+              name="last_name"
+              placeholder="Smith..."
+              onChange={(e) => handleChange(e)}
+            />
+            <label htmlFor="last_name">Last Name</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              name="email"
+              placeholder="bobsmith@gmail.com..."
+              onChange={(e) => handleChange(e)}
+            />
+            <label htmlFor="first_name">Email Address</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              name="password"
+              placeholder="***************"
+              onChange={(e) => handleChange(e)}
+            />
+            <label htmlFor="floatingPassword">Password</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type="password"
+              className="form-control"
+              id="password_confirm"
+              name="password_confirm"
+              placeholder="***************"
+              onChange={(e) => handleChange(e)}
+            />
+            <label htmlFor="floatingPassword">Confirm Password</label>
+          </div>
+
+          <button className="btn btn-primary w-100 py-2" type="submit">
+            Sign up
+          </button>
+        </form>
+      </section>
+    </>
+  );
+};
+
+export default Register;
 
 ```
 
-```tsx
+### my_projects/07_react_django_practical/react-admin/src/components/public/Register.css:
 
+```tsx
+.form-signin {
+    max-width: 330px;
+    padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
 ```
+
+![image](https://github.com/user-attachments/assets/26f50101-8e50-40e2-bc92-4b95f294ef7c)
+
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/a3556be6-2715-478a-b8ea-9c21bf7b6565">
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/b5ac8667-c57b-4be5-8c76-b6c569c5c8b7">
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/7a2c2c74-0e7a-466f-922b-8971d0bac6b5">
+
+# #END</details>
+
+<details>
+<summary>40. Frontend - Send Data to Server with Async Calls on Axios </summary>
+
+# Frontend - Send Data to Server with Async Calls on Axios
 
 ```tsx
 
