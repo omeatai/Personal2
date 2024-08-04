@@ -8472,25 +8472,182 @@ export default withNavigation(Login);
 # #END</details>
 
 <details>
-<summary>44. Frontend - Setup User details in Layout after Login </summary>
+<summary>44. Frontend - GET User details in Layout after Login </summary>
 
-# Frontend - Setup User details in Layout after Login
+# Frontend - GET User details in Layout after Login
 
-```tsx
+## Update Backend Permissions file to include users_apps
+
+### my_projects/07_react_django_practical/users_app/permissions.py:
+
+```py
+from rest_framework import permissions
+from users_app.serializers import UserSerializer
+
+
+class ViewPermissions(permissions.BasePermission):
+    def has_permission(self, request, view):
+        # if request.method == 'GET':
+        #     return True
+        # return False
+
+        data = UserSerializer(request.user).data
+        if view.permission_object == 'users':
+            view.permission_object = 'users_apps'
+
+        # print(data)
+        # print(view.permission_object)
+
+        view_access = any(
+            p['name'] == 'view_' + view.permission_object for p in data['role']['permissions'])
+        edit_access = any(
+            p['name'] == 'edit_' + view.permission_object for p in data['role']['permissions'])
+
+        if request.method == 'GET':
+            return view_access or edit_access
+        return edit_access
 
 ```
 
+### my_projects/07_react_django_practical/react-admin/src/index.tsx:
+
 ```tsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:8000/api/v1/";
+axios.defaults.withCredentials = true;
+
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
 
 ```
 
+### my_projects/07_react_django_practical/react-admin/src/App.tsx:
+
 ```tsx
+import "./App.css";
+import Dashboard from "./components/Dashboard";
+import Users from "./components/secure/Users";
+import Login from "./components/public/Login";
+import Register from "./components/public/Register";
+
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" index element={<Dashboard />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
 
 ```
 
+### my_projects/07_react_django_practical/react-admin/src/components/Layout.tsx:
+
 ```tsx
+import React, { Component } from "react";
+import Nav from "./Nav";
+import Menu from "./Menu";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+function withNavigation(Component: any) {
+  return function WrappedComponent(props: any) {
+    const navigate = useNavigate();
+    return <Component {...props} navigate={navigate} />;
+  };
+}
+
+class Layout extends Component {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      user: null,
+    };
+  }
+
+  componentDidMount = async () => {
+    try {
+      const response = await axios.get("users");
+      console.log(response);
+      console.log("Response: " + JSON.stringify(response.data));
+    } catch (e) {
+      console.log(`${e}. The User does not exist.`);
+      (this.props as { navigate: (path: string) => void }).navigate("/login");
+    }
+
+    // fetch("http://localhost:8000/api/v1/users", {
+    //   credentials: "include",
+    // })
+    //   .then((res) => res.json())
+    //   .then((user) => {
+    //     this.setState({
+    //       user: user.data,
+    //     });
+    //   });
+  };
+
+  render() {
+    return (
+      <>
+        <Nav />
+        <div className="container-fluid">
+          <div className="row">
+            <Menu />
+            <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+              {(this.props as { children: React.ReactNode }).children}
+            </main>
+          </div>
+        </div>
+      </>
+    );
+  }
+}
+
+export default withNavigation(Layout);
 
 ```
+
+![image](https://github.com/user-attachments/assets/301eab05-4a39-48b0-91f2-862aee19634f)
+
+<img width="1439" alt="image" src="https://github.com/user-attachments/assets/afe215a6-a2fb-4a99-a57f-0753ce1a7c34">
+<img width="1439" alt="image" src="https://github.com/user-attachments/assets/67fe19a9-ed59-4798-9407-24013a0176aa">
+<img width="1439" alt="image" src="https://github.com/user-attachments/assets/5d2f2025-7d34-49bd-83b5-f33a9b11cc58">
+<img width="1439" alt="image" src="https://github.com/user-attachments/assets/84f69cd4-f22b-4873-8338-624e67bbb9b0">
+
+# #END</details>
+
+<details>
+<summary>45. Frontend - Setup Logout Functionality </summary>
+
+# Frontend - Setup Logout Functionality 
+
 
 ```tsx
 
