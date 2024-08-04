@@ -8275,6 +8275,223 @@ export default Register;
 
 # Frontend - Setup Login Functionality
 
+### my_projects/07_react_django_practical/react-admin/src/index.tsx:
+
+```tsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:8000/api/v1/";
+axios.defaults.withCredentials = true;
+
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+```
+
+### my_projects/07_react_django_practical/react-admin/src/App.tsx:
+
+```tsx
+import "./App.css";
+import Dashboard from "./components/Dashboard";
+import Users from "./components/secure/Users";
+import Login from "./components/public/Login";
+import Register from "./components/public/Register";
+
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" index element={<Dashboard />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
+
+```
+
+### my_projects/07_react_django_practical/react-admin/src/components/public/Login.tsx:
+
+```tsx
+import React, { Component } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./Login.css";
+
+function withNavigation(Component: any) {
+  return function WrappedComponent(props: any) {
+    const navigate = useNavigate();
+    return <Component {...props} navigate={navigate} />;
+  };
+}
+
+class Login extends Component {
+  INITIAL_STATE = {
+    email: "",
+    password: "",
+  };
+
+  constructor(props: any) {
+    super(props);
+    // Initialize state
+    this.state = {
+      email: "",
+      password: "",
+    };
+
+    // Bind the event handler
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleButtonClick = this.handleButtonClick.bind(this);
+  }
+
+  // Event handler for input change
+  handleInputChange(e: any) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  // Event handler for button click
+  async handleButtonClick(e: any) {
+    e.preventDefault();
+    if (Object.values(this.state).some((value) => !value)) {
+      alert("Please fill in all fields...");
+      return;
+    }
+
+    try {
+      const response = await axios.post("login", this.state);
+      console.log("Response: " + JSON.stringify(response.data));
+      // this.setState(this.INITIAL_STATE);
+      (this.props as { navigate: (path: string) => void }).navigate("/");
+    } catch (err) {
+      console.error("Error: " + err);
+    }
+  }
+
+  componentDidUpdate(
+    prevProps: any,
+    prevState: { email: string; password: string }
+  ) {
+    // Check if the email or password has changed
+    if (
+      prevState.email !==
+        (this.state as { email: string; password: string }).email ||
+      prevState.password !==
+        (this.state as { email: string; password: string }).password
+    ) {
+      console.log(
+        `Email: ${
+          (this.state as { email: string; password: string }).email
+        }, Password: ${
+          (this.state as { email: string; password: string }).password
+        }`
+      );
+    }
+  }
+
+  render() {
+    return (
+      <>
+        <section className="container my-5 form-signin w-100 m-auto">
+          <form onSubmit={(e) => this.handleButtonClick(e)}>
+            <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+
+            <div className="form-floating">
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                name="email"
+                placeholder="name@example.com..."
+                onChange={(e) => this.handleInputChange(e)}
+              />
+              <label htmlFor="email">Email address</label>
+            </div>
+            <div className="form-floating">
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                name="password"
+                placeholder="**************"
+                onChange={(e) => this.handleInputChange(e)}
+              />
+              <label htmlFor="password">Password</label>
+            </div>
+
+            <button className="btn btn-primary w-100 py-2" type="submit">
+              Sign in
+            </button>
+          </form>
+        </section>
+      </>
+    );
+  }
+}
+
+export default withNavigation(Login);
+
+```
+
+```x
+(WEB) POST: http://localhost:3000/login
+```
+
+![image](https://github.com/user-attachments/assets/3e43c96c-cebc-4b39-82fd-2772f4120613)
+![image](https://github.com/user-attachments/assets/7e2abd0d-64f8-48bc-b44c-01ba29ae0df1)
+![image](https://github.com/user-attachments/assets/11f0451a-8f69-44d6-8e9f-4f168cb94101)
+![image](https://github.com/user-attachments/assets/2ad479f0-3097-4c68-9a73-de73f5c09089)
+
+<img width="1439" alt="image" src="https://github.com/user-attachments/assets/15608f43-dfe4-450f-9168-01c61c3d259e">
+<img width="1439" alt="image" src="https://github.com/user-attachments/assets/77681e85-2bce-4e2f-aec2-b14a6d78fb30">
+<img width="1439" alt="image" src="https://github.com/user-attachments/assets/eaf8fba4-77f5-43f7-a9d8-d5c8f494cf3c">
+
+# #END</details>
+
+<details>
+<summary>44. Frontend - Setup User details in Layout after Login </summary>
+
+# Frontend - Setup User details in Layout after Login
+
+```tsx
+
+```
+
+```tsx
+
+```
+
+```tsx
+
+```
+
+```tsx
+
+```
+
 ```tsx
 
 ```
