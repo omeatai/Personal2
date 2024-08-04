@@ -7459,15 +7459,452 @@ export default Register;
 # #END</details>
 
 <details>
-<summary>40. Frontend - Send Data to Server with Async Calls on Axios </summary>
+<summary>40. Frontend - Setup register backend to accept data with default role=3 (Viewer) </summary>
 
-# Frontend - Send Data to Server with Async Calls on Axios
+# Frontend - Setup register backend to accept data with default role=3 (Viewer)
 
-```tsx
+### my_projects/07_react_django_practical/users_app/models.py:
+
+```py
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+
+class Permission(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    code = models.CharField(max_length=200, null=True, blank=True)
+
+    class Meta:
+        verbose_name_plural = 'Permissions'
+        verbose_name = 'Permission'
+
+    def __str__(self):
+        return self.name
+
+
+class Role(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    code = models.CharField(max_length=200, null=True, blank=True)
+    permissions = models.ManyToManyField(Permission)
+
+    class Meta:
+        verbose_name_plural = 'Roles'
+        verbose_name = 'Role'
+
+    def __str__(self):
+        return self.name
+
+
+class User(AbstractUser):
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200, unique=True)
+    password = models.CharField(max_length=200)
+    role = models.ForeignKey(
+        Role, on_delete=models.SET_NULL, null=True, blank=True, default=3)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+    username = None
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
+
+    class Meta:
+        verbose_name_plural = 'Users'
+        verbose_name = 'User'
+
+    def __str__(self):
+        return "{} {}".format(self.first_name, self.last_name)
 
 ```
 
-```tsx
+### my_projects/07_react_django_practical/users_app/urls.py:
+
+```py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('users/info', views.ProfileInfoAPIView.as_view(),
+         name='users-profile-info'),
+    path('users/password', views.ProfilePasswordAPIView.as_view(),
+         name='users-profile-password'),
+    path('users', views.UserGenericAPIView.as_view(), name='users'),
+    path('users/<str:pk>', views.UserGenericAPIView.as_view(), name='users-detail'),
+    path('register', views.register, name='register'),
+    path('login', views.login, name='login'),
+    path('auth', views.AuthUser.as_view(), name='auth'),
+    path('logout', views.logout, name='logout'),
+    path('permissions', views.PermissionAPIView.as_view(), name='permissions'),
+    path('roles', views.RoleViewSet.as_view(
+        {'get': 'list', 'post': 'create'}), name='roles'),
+    path('roles/<int:pk>', views.RoleViewSet.as_view(
+        {'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='roles-detail'),
+
+]
+
+```
+
+### my_projects/07_react_django_practical/users_app/views.py:
+
+```py
+from rest_framework import exceptions, viewsets, status, generics, mixins
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+
+from .serializers import PermissionSerializer, UserSerializer, RoleSerializer
+from .models import User, Permission, Role
+from .auth import generate_access_token, JWTAuth
+from .pagination import CustomPagination
+from .permissions import ViewPermissions
+
+
+class ProfileInfoAPIView(APIView):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request, pk=None):
+        user = request.user
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+
+class ProfilePasswordAPIView(APIView):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request, pk=None):
+        user = request.user
+        data = request.data
+
+        if data['password'] != data['password_confirm']:
+            raise exceptions.ValidationError('Passwords do not match')
+
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+        # user.set_password(data['password'])
+        # user.save()
+        # return Response({'message': 'Password updated successfully!'})
+
+
+class UserGenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.RetrieveModelMixin,
+                         mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated & ViewPermissions]
+    permission_object = 'users'
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    pagination_class = CustomPagination
+
+    def get(self, request, pk=None):
+        if pk:
+            return Response({"data": self.retrieve(request, pk).data})
+        return Response({"data": self.list(request).data})
+
+    def post(self, request):
+        request.data.update({
+            "password": 1234,
+            "password_confirm": 1234,
+            "role": request.data["role_id"]
+        })
+        return Response({"data": self.create(request).data})
+
+    def put(self, request, pk=None):
+        if (request.data['role_id']):
+            request.data.update({
+                "role": request.data["role_id"]
+            })
+        # return Response({"data": self.update(request, pk).data})
+        return Response({"data": self.partial_update(request, pk).data})
+
+    def delete(self, request, pk=None):
+        return self.destroy(request, pk)
+
+
+class AuthUser(APIView):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        data = serializer.data
+        data["permissions"] = [
+            permission['name'] for permission in data['role']['permissions']]
+        return Response({'data': data})
+
+
+class PermissionAPIView(APIView):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = PermissionSerializer(Permission.objects.all(), many=True)
+        return Response({'data': serializer.data})
+
+
+class RoleViewSet(viewsets.ViewSet):
+    authentication_classes = [JWTAuth]
+    permission_classes = [IsAuthenticated & ViewPermissions]
+    permission_object = 'roles'
+
+    def list(self, request):
+        queryset = Role.objects.all()
+        serializer = RoleSerializer(queryset, many=True)
+        return Response({"data": serializer.data})
+
+    def create(self, request):
+        serializer = RoleSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"data": serializer.data}, status=status.HTTP_201_CREATED)
+
+    def retrieve(self, request, pk=None):
+        role = Role.objects.get(id=pk)
+        serializer = RoleSerializer(role)
+        return Response({"data": serializer.data})
+
+    def update(self, request, pk=None):
+        role = Role.objects.get(id=pk)
+        serializer = RoleSerializer(instance=role, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"data": serializer.data}, status=status.HTTP_202_ACCEPTED)
+
+    def destroy(self, request, pk=None):
+        role = Role.objects.get(id=pk)
+        role.delete()
+        return Response({'message': 'Role deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['POST'])
+def register(request):
+    data = request.data
+    if data['password'] != data['password_confirm']:
+        raise exceptions.ValidationError('Passwords do not match')
+
+    if User.objects.filter(email=data['email']).exists():
+        raise exceptions.ValidationError('Email already exists')
+
+    serializer = UserSerializer(data=data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def login(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    user = User.objects.filter(email=email).first()
+    if user is None:
+        raise exceptions.AuthenticationFailed('User not found')
+    if not user.check_password(password):
+        raise exceptions.AuthenticationFailed('Incorrect password')
+
+    token = generate_access_token(user)
+    # set token to http-only cookie
+    response = Response()
+    response.set_cookie(key='jwt', value=token, httponly=True)
+    response.data = {
+        'jwt': token
+    }
+    return response
+
+
+@api_view(['POST'])
+def logout(request):
+    response = Response()
+    response.delete_cookie('jwt')
+    response.data = {
+        'message': 'success'
+    }
+    return response
+
+```
+
+### my_projects/07_react_django_practical/users_app/serializers.py:
+
+```py
+from rest_framework import serializers
+from .models import User, Permission, Role
+
+
+class RoleRelatedField(serializers.RelatedField):
+    def to_representation(self, instance):
+        return RoleSerializer(instance).data
+
+    def to_internal_value(self, data):
+        return self.queryset.get(pk=data)
+
+
+class UserSerializer(serializers.ModelSerializer):
+    password_confirm = serializers.CharField(
+        style={'input_type': 'password'}, write_only=True)
+
+    role = RoleRelatedField(read_only=True)
+
+    class Meta:
+        model = User
+        fields = ['id', 'first_name', 'last_name',
+                  'email', 'password', 'password_confirm', 'role']  # '__all__'
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        password_confirm = validated_data.pop('password_confirm')
+
+        if password != password_confirm:
+            raise serializers.ValidationError("Passwords do not match")
+
+        # Set default role
+        validated_data['role'] = Role.objects.get(pk=3)
+
+        # user = User.objects.create(**validated_data)
+        instance = self.Meta.model(**validated_data)
+        if password is not None:
+            instance.set_password(password)  # Need to hash Password
+        instance.save()
+        return instance
+
+    def update(self, instance, validated_data):
+        password = validated_data.pop('password', None)
+        password_confirm = validated_data.pop('password_confirm', None)
+
+        if password and password_confirm and password != password_confirm:
+            raise serializers.ValidationError("Passwords do not match")
+
+        for key, value in validated_data.items():
+            setattr(instance, key, value)
+
+        if password:
+            instance.set_password(password)
+
+        instance.save()
+        return instance
+
+
+class PermissionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Permission
+        fields = "__all__"
+
+
+class PermissionRelatedField(serializers.StringRelatedField):
+    def to_representation(self, value):
+        return PermissionSerializer(value).data
+
+    def to_internal_value(self, data):
+        return data
+
+
+class RoleSerializer(serializers.ModelSerializer):
+    # permissions = PermissionSerializer(many=True)
+    permissions = PermissionRelatedField(many=True)
+
+    class Meta:
+        model = Role
+        fields = "__all__"
+
+    def create(self, validated_data):
+        permissions = validated_data.pop('permissions', None)
+
+        if permissions == None:
+            raise serializers.ValidationError(
+                "You must set Permissions for the Role.")
+
+        instance = self.Meta.model(**validated_data)
+        instance.save()
+        instance.permissions.add(*permissions)
+        instance.save()
+        return instance
+
+```
+
+```x
+POST: http://localhost:8000/api/v1/register
+```
+
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/c324af41-6928-490f-80f9-53a676d4fd5d">
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/88aff654-b56a-4b4b-93ed-45ec1772f5f2">
+
+![image](https://github.com/user-attachments/assets/d270b227-c04c-4f99-8ac4-f61f7a01eba9)
+![image](https://github.com/user-attachments/assets/8c346701-f931-44b9-8a33-ad776cf2a6a4)
+
+<img width="1439" alt="image" src="https://github.com/user-attachments/assets/038cdc10-dab8-4972-acaf-8b941c40aaad">
+<img width="1439" alt="image" src="https://github.com/user-attachments/assets/cbc2a0c3-9694-46ae-be13-a3e619fc9ffb">
+
+# #END</details>
+
+<details>
+<summary>41. Frontend - Send Data to Server with Async Calls on Axios </summary>
+
+# Frontend - Send Data to Server with Async Calls on Axios
+
+## Install Axios
+
+```x
+npm install axios
+```
+
+### my_projects/07_react_django_practical/react-admin/package.json:
+
+```json
+{
+  "name": "react-admin",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.104",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/react-router-dom": "^5.3.3",
+    "axios": "^1.7.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.0",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
 
 ```
 
