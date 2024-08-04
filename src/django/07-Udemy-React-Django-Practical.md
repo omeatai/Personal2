@@ -7908,17 +7908,372 @@ npm install axios
 
 ```
 
+### my_projects/07_react_django_practical/react-admin/src/App.tsx:
+
 ```tsx
+import "./App.css";
+import Dashboard from "./components/Dashboard";
+import Users from "./components/secure/Users";
+import Login from "./components/public/Login";
+import Register from "./components/public/Register";
+
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" index element={<Dashboard />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
 
 ```
 
+### my_projects/07_react_django_practical/react-admin/src/components/public/Register.tsx:
+
 ```tsx
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./Register.css";
+
+const Register = () => {
+  const INITIAL_STATE = {
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    password_confirm: "",
+  };
+  const [registerUser, setRegisterUser] = useState(INITIAL_STATE);
+
+  const handleChange = (e: any) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setRegisterUser((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    if (Object.values(registerUser).some((value) => !value)) {
+      alert("Please fill in all fields...");
+      return;
+    }
+    if (registerUser.password !== registerUser.password_confirm) {
+      alert("Passwords do not match...");
+      return;
+    }
+
+    // axios
+    //   .post("http://localhost:8000/api/v1/register/", registerUser)
+    //   .then((response) => {
+    //     console.log("Response: " + JSON.stringify(response.data));
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error: " + error);
+    //   });
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/register",
+        registerUser
+      );
+      console.log("Response: " + JSON.stringify(response.data));
+      // setRegisterUser(INITIAL_STATE);
+    } catch (err) {
+      console.error("Error: " + err);
+    }
+  };
+
+  useEffect(() => {
+    // console.log("User: " + JSON.stringify(registerUser));
+    console.log("Change made...");
+  }, [registerUser]);
+
+  return (
+    <>
+      <section className="container my-5 form-signin w-100 m-auto">
+        <form onSubmit={handleSubmit}>
+          <h1 className="h3 mb-3 fw-normal">Please register</h1>
+
+          <div className="form-floating">
+            <input
+              type="text"
+              className="form-control"
+              id="first_name"
+              name="first_name"
+              placeholder="bob"
+              onChange={(e) => handleChange(e)}
+            />
+            <label htmlFor="first_name">First Name</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type="text"
+              className="form-control"
+              id="last_name"
+              name="last_name"
+              placeholder="Smith..."
+              onChange={(e) => handleChange(e)}
+            />
+            <label htmlFor="last_name">Last Name</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              name="email"
+              placeholder="bobsmith@gmail.com..."
+              onChange={(e) => handleChange(e)}
+            />
+            <label htmlFor="first_name">Email Address</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              name="password"
+              placeholder="***************"
+              onChange={(e) => handleChange(e)}
+            />
+            <label htmlFor="floatingPassword">Password</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type="password"
+              className="form-control"
+              id="password_confirm"
+              name="password_confirm"
+              placeholder="***************"
+              onChange={(e) => handleChange(e)}
+            />
+            <label htmlFor="floatingPassword">Confirm Password</label>
+          </div>
+
+          <button className="btn btn-primary w-100 py-2" type="submit">
+            Sign up
+          </button>
+        </form>
+      </section>
+    </>
+  );
+};
+
+export default Register;
 
 ```
 
+```x
+(WEB) POST: http://localhost:3000/register
+```
+
+![image](https://github.com/user-attachments/assets/71941670-ed64-4bb6-9601-6a660c124ca9)
+![image](https://github.com/user-attachments/assets/ede523fc-04bb-47ac-9a78-eb45d424df20)
+![image](https://github.com/user-attachments/assets/bdc49274-8419-4fa5-8d2d-edb099a9fd10)
+
+<img width="1439" alt="image" src="https://github.com/user-attachments/assets/80361039-a416-43a6-9eae-176adc1272b8">
+<img width="1395" alt="image" src="https://github.com/user-attachments/assets/1dad8cee-5038-469a-ac3b-a1f4b544e060">
+
+# #END</details>
+
+<details>
+<summary>42. Frontend - Redirect User after registration </summary>
+
+# Frontend - Redirect User after registration
+
+### my_projects/07_react_django_practical/react-admin/src/App.tsx:
+
 ```tsx
+import "./App.css";
+import Dashboard from "./components/Dashboard";
+import Users from "./components/secure/Users";
+import Login from "./components/public/Login";
+import Register from "./components/public/Register";
+
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" index element={<Dashboard />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
 
 ```
+
+### my_projects/07_react_django_practical/react-admin/src/components/public/Register.tsx:
+
+```tsx
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./Register.css";
+
+const Register = () => {
+  const INITIAL_STATE = {
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    password_confirm: "",
+  };
+  const [registerUser, setRegisterUser] = useState(INITIAL_STATE);
+
+  const navigate = useNavigate();
+
+  const handleChange = (e: any) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setRegisterUser((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    if (Object.values(registerUser).some((value) => !value)) {
+      alert("Please fill in all fields...");
+      return;
+    }
+    if (registerUser.password !== registerUser.password_confirm) {
+      alert("Passwords do not match...");
+      return;
+    }
+
+    // axios
+    //   .post("http://localhost:8000/api/v1/register/", registerUser)
+    //   .then((response) => {
+    //     console.log("Response: " + JSON.stringify(response.data));
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error: " + error);
+    //   });
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/register",
+        registerUser
+      );
+      console.log("Response: " + JSON.stringify(response.data));
+      // setRegisterUser(INITIAL_STATE);
+      return navigate("/login");
+    } catch (err) {
+      console.error("Error: " + err);
+    }
+  };
+
+  useEffect(() => {
+    // console.log("User: " + JSON.stringify(registerUser));
+    console.log("Change made...");
+  }, [registerUser]);
+
+  return (
+    <>
+      <section className="container my-5 form-signin w-100 m-auto">
+        <form onSubmit={handleSubmit}>
+          <h1 className="h3 mb-3 fw-normal">Please register</h1>
+
+          <div className="form-floating">
+            <input
+              type="text"
+              className="form-control"
+              id="first_name"
+              name="first_name"
+              placeholder="bob"
+              onChange={(e) => handleChange(e)}
+            />
+            <label htmlFor="first_name">First Name</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type="text"
+              className="form-control"
+              id="last_name"
+              name="last_name"
+              placeholder="Smith..."
+              onChange={(e) => handleChange(e)}
+            />
+            <label htmlFor="last_name">Last Name</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              name="email"
+              placeholder="bobsmith@gmail.com..."
+              onChange={(e) => handleChange(e)}
+            />
+            <label htmlFor="first_name">Email Address</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              name="password"
+              placeholder="***************"
+              onChange={(e) => handleChange(e)}
+            />
+            <label htmlFor="floatingPassword">Password</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type="password"
+              className="form-control"
+              id="password_confirm"
+              name="password_confirm"
+              placeholder="***************"
+              onChange={(e) => handleChange(e)}
+            />
+            <label htmlFor="floatingPassword">Confirm Password</label>
+          </div>
+
+          <button className="btn btn-primary w-100 py-2" type="submit">
+            Sign up
+          </button>
+        </form>
+      </section>
+    </>
+  );
+};
+
+export default Register;
+
+```
+
+![image](https://github.com/user-attachments/assets/4a7b0a0c-f99d-40e4-8178-3ea72d325937)
+![image](https://github.com/user-attachments/assets/b950e58c-bc5d-4677-bcb2-94ff6953be27)
+![image](https://github.com/user-attachments/assets/4e39aa30-7755-4823-ad8d-182a96be52da)
+![image](https://github.com/user-attachments/assets/275459c9-1a30-43c6-acf8-da602b147108)
+
+<img width="1439" alt="image" src="https://github.com/user-attachments/assets/53b5cbf8-9a67-46c9-8f3a-efb6f9a24629">
+<img width="1439" alt="image" src="https://github.com/user-attachments/assets/d4490fe9-9344-4f9f-aa24-1b71a412c8fd">
+
+# #END</details>
+
+<details>
+<summary>43. Frontend - Setup Login Functionality </summary>
+
+# Frontend - Setup Login Functionality
 
 ```tsx
 
