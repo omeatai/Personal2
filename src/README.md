@@ -61,6 +61,12 @@
 
 ### [05-LinkedIn - Level Up Python](https://github.com/omeatai/src-AI-Software/blob/main/src/python/05-Level-Up-Python.md)
 
+### [06-Udemy-Complete-Python-Developer-Course-ZTM](https://github.com/omeatai/src-AI-Software/blob/main/src/python/06-Udemy-Complete-Python-Developer-Course-ZTM.md)
+
+### [07-Udemy-100-Days-of-Code-Angela-Yu](https://github.com/omeatai/src-AI-Software/blob/main/src/python/07-Udemy-100-Days-of-Code-Angela-Yu.md)
+
+
+
 ### [20-Youtube - Dave Gray Python-Flask Training](https://github.com/omeatai/src-AI-Software/blob/main/src/python/20-Dave-Gray-Python-Flask.md)
 
 
@@ -88,6 +94,10 @@
 ### [09-Udemy-React-Nextjs-and-Django-Practical-Guide](https://github.com/omeatai/src-AI-Software/blob/main/src/django/09-Udemy-React-Nextjs-and-Django-Practical-Guide.md)
 
 ### [10-Youtube-Deploy-on-Docker-and-Kubernetes](https://github.com/omeatai/src-AI-Software/blob/main/src/django/10-Youtube-Deploy-on-Docker-and-Kubernetes.md)
+
+### [11-Udemy-Django-REST-Framework-with-React-Frontend](https://github.com/omeatai/src-AI-Software/blob/main/src/django/11-Udemy-Django-REST-Framework-with-React-Frontend.md)
+
+### [12-Youtube-Django-Course-for-absolute-beginners](https://github.com/omeatai/src-AI-Software/blob/main/src/django/12-Youtube-Django-Course-for-absolute-beginners.md)
 
 </details>
 
