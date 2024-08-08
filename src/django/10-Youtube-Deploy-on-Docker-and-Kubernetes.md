@@ -1,6 +1,6 @@
 ## +Youtube-Deploy-on-Docker-and-Kubernetes
 
-## [COURSE](https://www.udemy.com/course/react-django-admin/)
+## [COURSE](https://www.youtube.com/watch?v=-ANCcFQBk6I) - Deploy 12 apps to AWS, Azure, & Google Cloud
 
 <details>
 <summary>1. Creating a New Django Project: admin_project </summary>
