@@ -1,6 +1,6 @@
 ## +Udemy-React-Nextjs-and-Django-Practical-Guide
 
-## [COURSE](https://www.udemy.com/course/react-django-admin/)
+## [COURSE](https://www.udemy.com/course/react-django-advanced/)
 
 <details>
 <summary>1. Creating a New Django Project: admin_project </summary>
