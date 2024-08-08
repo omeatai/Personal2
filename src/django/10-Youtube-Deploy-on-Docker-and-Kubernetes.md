@@ -1,4 +1,4 @@
-## +Udemy-React and Django: A Practical Guide with Docker
+## +Youtube-Deploy-on-Docker-and-Kubernetes
 
 ## [COURSE](https://www.udemy.com/course/react-django-admin/)
 
