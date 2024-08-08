@@ -3,137 +3,68 @@
 ## [COURSE](https://www.youtube.com/watch?v=-ANCcFQBk6I) - Deploy 12 apps to AWS, Azure, & Google Cloud
 
 <details>
-<summary>1. Creating a New Django Project: admin_project </summary>
+<summary>1. Create React App </summary>
 
-# Creating a New Django Project: admin_project
-
-## Install venv
+# Create React App
 
 ```x
-python -m venv venv
+npx create-react-app my_demo_app
 ```
 
-## Activate venv
+## Run React App
 
 ```x
-# venv\Scripts\activate
-source venv/bin/activate
+npm run start
 ```
 
-## Install Django
+### my_projects/10_deploy_on_docker/my_demo_app/src/index.js:
 
-```x
-python -m pip install Django
-pip install django
-pip install django==5.0
+```js
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
 ```
 
-## Install Other Project Dependencies: djangorestframework, markdown, django-filter, mock, Pillow, mysqlclient, django-mysql, python-decouple
+### my_projects/10_deploy_on_docker/my_demo_app/src/App.js:
 
-```x
-pip install djangorestframework markdown django-filter mock pillow django-mysql python-decouple
+```js
+import logo from "./logo.svg";
+import "./App.css";
+
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <h1>Welcome to REACT!</h1>
+      </header>
+    </div>
+  );
+}
+
+export default App;
+
 ```
 
-```x
-brew install mysql
-xcode-select --install
-pip install mysqlclient
-```
+![image](https://github.com/user-attachments/assets/32522335-cc71-48d4-97e1-c2c93686ca25)
 
-## Get dependencies
-
-```x
-pip freeze
-```
-
-```x
-asgiref==3.8.1
-Django==5.0.6
-django-filter==24.2
-django-mysql==4.14.0
-djangorestframework==3.15.2
-Markdown==3.6
-mock==5.1.0
-mysqlclient==2.2.4
-pillow==10.4.0
-python-decouple==3.8
-sqlparse==0.5.0
-```
-
-## Save Dependencies to Requirements.txt
-
-```x
-pip freeze > requirements.txt
-```
-
-## Install requirements from Requirements.txt
-
-```x
-pip install -r requirements.txt
-```
-
-## Deactivate a virtual environment
-
-```x
-deactivate
-```
-
-## Create Django Project
-
-```x
-django-admin startproject admin_project .
-```
-
-## Create Django App - users
-
-```x
-python manage.py startapp users_app
-```
-
-### src-AI-Software/my_projects/07_react_django_practical/admin_project/settings.py:
-
-```py
-# Application definition
-
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    # apps
-    'rest_framework',
-    'users_app'
-]
-```
-
-## Run Migrations
-
-```x
-python manage.py makemigrations
-python manage.py migrate
-```
-
-## Start Local Server
-
-```x
-python manage.py runserver
-```
-
-```x
-(venv) ➜  07_react_django_practical git:(main) ✗ python manage.py runserver
-Watching for file changes with StatReloader
-Performing system checks...
-
-System check identified no issues (0 silenced).
-July 10, 2024 - 19:44:10
-Django version 5.0.7, using settings 'admin_project.settings'
-Starting development server at http://127.0.0.1:8000/
-Quit the server with CONTROL-C.
-```
-
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/e39eef9e-8179-4904-83ba-c12faed70e02)
+<img width="1439" alt="image" src="https://github.com/user-attachments/assets/004d4aa9-0408-4d87-8b3a-bd5d1129a7fd">
+<img width="1439" alt="image" src="https://github.com/user-attachments/assets/66257601-8df5-4313-a97e-a2757d0f0022">
 
 # #END</details>
 
