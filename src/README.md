@@ -99,6 +99,8 @@
 
 ### [07-Udemy-Complete-Node-Developer-ZTM](https://github.com/omeatai/src-AI-Software/blob/main/src/node/07-Udemy-Complete-Node-Developer-ZTM.md)
 
+### [08-Youtube-Using-MySQL-with-Nodejs-Travesy-Media](https://github.com/omeatai/src-AI-Software/blob/main/src/node/08-Youtube-Using-MySQL-with-Nodejs-Travesy-Media.md)
+
 
 </details>
 
