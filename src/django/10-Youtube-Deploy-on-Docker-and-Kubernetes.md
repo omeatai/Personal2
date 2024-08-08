@@ -118,25 +118,90 @@ npm run build
 # #END</details>
 
 <details>
-<summary>3. React on Docker - Setup Nginx </summary>
+<summary>3. React on Docker - Setup Nginx for Docker </summary>
 
-# React on Docker - Setup Nginx
+# React on Docker - Setup Nginx for Docker
+
+### my_projects/10_deploy_on_docker/my_demo_app/Dockerfile:
 
 ```x
+FROM node:15.4 as build
+
+WORKDIR /app
+
+COPY package*.json .
+RUN npm install
+COPY . .
+RUN npm run build
+
+FROM nginx:1.19
+
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /app/build /usr/share/nginx/html
 
 ```
 
-```x
+### my_projects/10_deploy_on_docker/my_demo_app/nginx/nginx.conf:
 
+```x
+worker_processes 1;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    server {
+        listen 80;
+        server_name localhost;
+
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+        include /etc/nginx/mime.types;
+
+        gzip on;
+        gzip_min_length 1000;
+        gzip_proxied expired no-cache no-store private auth;
+        gzip_types text/plain text/css application/json application/javascript application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+        location / {
+            try_files $uri $uri/ /index.html;
+        }
+    }
+}
+```
+
+## Build Dockerfile
+
+```x
+docker build -t app .
+```
+
+<img width="1306" alt="image" src="https://github.com/user-attachments/assets/66e4f0e5-af66-49e8-95b0-9dd7db866aac">
+
+## Run Docker Container
+
+```x
+docker run -p 8888:80 app
 ```
 
 ```x
-
+http://localhost:8888/
 ```
 
-```x
+![image](https://github.com/user-attachments/assets/e0fc21b8-53c6-4ac6-b3a6-cfeb3f65c3c3)
 
-```
+<img width="1443" alt="image" src="https://github.com/user-attachments/assets/bbc7da8f-2614-4d34-8aab-c42bf31710f8">
+<img width="1443" alt="image" src="https://github.com/user-attachments/assets/e74c46b8-82a3-4332-a101-d35c753b07d5">
+<img width="1349" alt="image" src="https://github.com/user-attachments/assets/df5e23ce-0816-44e1-bf1d-1df6b7352d66">
+<img width="1349" alt="image" src="https://github.com/user-attachments/assets/b1d241cf-742a-4dd8-ad5a-15058caeca72">
+
+# #END</details>
+
+<details>
+<summary>4. Django on Docker - Create Django App </summary>
+
+# Django on Docker - Create Django App
 
 ```x
 
