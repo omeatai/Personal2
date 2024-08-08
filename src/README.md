@@ -31,6 +31,8 @@
 
 ### [02-Linkedin-Javascript Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src/js/02-js-ess-training.md)
 
+### [03-Youtube-JS-Tutorial-Dave-Gray](https://github.com/omeatai/src-AI-Software/blob/main/src/js/03-Youtube-JS-Tutorial-Dave-Gray.md)
+
 </details>
 
 <details>
@@ -56,6 +58,9 @@
 ### [07-Youtube-React-Typescript-Tutorial-CodeEvolution](https://github.com/omeatai/src-AI-Software/blob/main/src/react/07-Youtube-React-Typescript-Tutorial-CodeEvolution.md)
 
 ### [08-Youtube-React-Nodejs-Crash-Course-NetNinja](https://github.com/omeatai/src-AI-Software/blob/main/src/react/08-Youtube-React-Nodejs-Crash-Course-NetNinja.md)
+
+### [09-Youtube-React-Node-Express-Dave-Gray](https://github.com/omeatai/src-AI-Software/blob/main/src/react/09-Youtube-React-Node-Express-Dave-Gray.md)
+
 
 </details>
 
