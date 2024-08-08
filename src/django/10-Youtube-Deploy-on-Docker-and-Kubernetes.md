@@ -224,18 +224,6 @@ pip install django
 pip install django==5.0
 ```
 
-## Install Other Project Dependencies: djangorestframework, markdown, django-filter, mock, Pillow, mysqlclient, django-mysql, python-decouple
-
-```x
-pip install djangorestframework markdown django-filter mock pillow django-mysql python-decouple
-```
-
-```x
-brew install mysql
-xcode-select --install
-pip install mysqlclient
-```
-
 ## Get dependencies
 
 ```x
@@ -244,16 +232,8 @@ pip freeze
 
 ```x
 asgiref==3.8.1
-Django==5.0.6
-django-filter==24.2
-django-mysql==4.14.0
-djangorestframework==3.15.2
-Markdown==3.6
-mock==5.1.0
-mysqlclient==2.2.4
-pillow==10.4.0
-python-decouple==3.8
-sqlparse==0.5.0
+Django==5.1
+sqlparse==0.5.1
 ```
 
 ## Save Dependencies to Requirements.txt
@@ -277,13 +257,13 @@ deactivate
 ## Create Django Project
 
 ```x
-django-admin startproject admin_project .
+django-admin startproject my_project .
 ```
 
-## Create Django App - users
+## Create Django App - my_app
 
 ```x
-python manage.py startapp users_app
+python manage.py startapp my_app
 ```
 
 ### src-AI-Software/my_projects/07_react_django_practical/admin_project/settings.py:
@@ -299,8 +279,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # apps
-    'rest_framework',
-    'users_app'
+    'my_app'
 ]
 ```
 
@@ -318,18 +297,19 @@ python manage.py runserver
 ```
 
 ```x
-(venv) ➜  07_react_django_practical git:(main) ✗ python manage.py runserver
+(venv) ➜  my_django_app python manage.py runserver
 Watching for file changes with StatReloader
 Performing system checks...
 
 System check identified no issues (0 silenced).
-July 10, 2024 - 19:44:10
-Django version 5.0.7, using settings 'admin_project.settings'
+August 08, 2024 - 03:28:00
+Django version 5.1, using settings 'my_project.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
 
-![image](https://github.com/omeatai/src-AI-Software/assets/32337103/e39eef9e-8179-4904-83ba-c12faed70e02)
+![image](https://github.com/user-attachments/assets/1e8e8043-fee4-465c-82c9-87c1ae80705a)
+
 
 # #END</details>
 
