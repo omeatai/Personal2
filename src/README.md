@@ -1,6 +1,30 @@
 # SRC-SOFTWARE-DEVELOPMENT
 
 <details>
+<summary> ALGO </summary>
+
+### [01-Udemy-Master-the-Coding-interview-Data-Structures-ZTM](https://github.com/omeatai/src-AI-Software/blob/main/src/algo/01-Udemy-Master-the-Coding-interview-Data-Structures-ZTM.md)
+
+
+</details>
+
+<details>
+<summary> HTML & CSS </summary>
+
+### [01-Udemy - Complete Web & Mobile Designer: UI/UX, Figma](https://github.com/omeatai/src-AI-Software/blob/main/src/html_css/01-complete-web-mobile.md)
+
+
+</details>
+
+
+<details>
+<summary> SQL </summary>
+
+### [01-LinkedIn - SQL Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src/sql/01_sql_essential_training.md)
+
+</details>
+
+<details>
 <summary> JAVASCRIPT </summary>
 
 ### [01-Linkedin-Learning Javascript Language](https://github.com/omeatai/src-AI-Software/blob/main/src/js/01-js-learning-js-lang.md)
@@ -25,6 +49,14 @@
 
 ### [04-Udemy-Beginner-to-advanced-Redux-Ecommerce-Zino](https://github.com/omeatai/src-AI-Software/blob/main/src/react/04-Udemy-Beginner-to-advanced-Redux-Ecommerce-Zino.md)
 
+### [05-Youtube-ReactJS-Tutorial-for-beginners-CodeEvolution](https://github.com/omeatai/src-AI-Software/blob/main/src/react/05-Youtube-ReactJS-Tutorial-for-beginners-CodeEvolution.md)
+
+### [06-Youtube-React-Redux-Tutorial](https://github.com/omeatai/src-AI-Software/blob/main/src/react/06-Youtube-React-Redux-Tutorial.md)
+
+### [07-Youtube-React-Typescript-Tutorial-CodeEvolution](https://github.com/omeatai/src-AI-Software/blob/main/src/react/07-Youtube-React-Typescript-Tutorial-CodeEvolution.md)
+
+### [08-Youtube-React-Nodejs-Crash-Course-NetNinja](https://github.com/omeatai/src-AI-Software/blob/main/src/react/08-Youtube-React-Nodejs-Crash-Course-NetNinja.md)
+
 </details>
 
 <details>
@@ -42,9 +74,9 @@
 <details>
 <summary> NODEJS </summary>
 
-### [01-Building APIs with Node and Express\*](https://github.com/omeatai/src-AI-Software/blob/main/src/node/01-Linkedin-APIs-with-Node-Express.md)
+### [01-Building APIs with Node and Express*](https://github.com/omeatai/src-AI-Software/blob/main/src/node/01-Linkedin-APIs-with-Node-Express.md)
 
-### [02-Node Essential Training\*](https://github.com/omeatai/src-AI-Software/blob/main/src/node/02-Node-Essential-Training.md)
+### [02-Node Essential Training*](https://github.com/omeatai/src-AI-Software/blob/main/src/node/02-Node-Essential-Training.md)
 
 ### [03-Learning NPM - A Package Manager*](https://github.com/omeatai/src-AI-Software/blob/main/src/node/03-Learning_npm_package_manager.md)
 
@@ -57,11 +89,12 @@
 ### [07-Udemy-Complete-Node-Developer-ZTM](https://github.com/omeatai/src-AI-Software/blob/main/src/node/07-Udemy-Complete-Node-Developer-ZTM.md)
 
 
-
 </details>
 
 <details>
 <summary> NEXTJS </summary>
+
+### [01-Nextjs-Tutorial-CodeEvolution](https://github.com/omeatai/src-AI-Software/blob/main/src/nextjs/01-Nextjs-Tutorial-CodeEvolution.md)
 
 </details>
 
@@ -81,8 +114,6 @@
 ### [06-Udemy-Complete-Python-Developer-Course-ZTM](https://github.com/omeatai/src-AI-Software/blob/main/src/python/06-Udemy-Complete-Python-Developer-Course-ZTM.md)
 
 ### [07-Udemy-100-Days-of-Code-Angela-Yu](https://github.com/omeatai/src-AI-Software/blob/main/src/python/07-Udemy-100-Days-of-Code-Angela-Yu.md)
-
-
 
 ### [20-Youtube - Dave Gray Python-Flask Training](https://github.com/omeatai/src-AI-Software/blob/main/src/python/20-Dave-Gray-Python-Flask.md)
 
@@ -124,17 +155,12 @@
 </details>
 
 <details>
-<summary> SQL </summary>
+<summary> OTHERS </summary>
 
-### [01-LinkedIn - SQL Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src/sql/01_sql_essential_training.md)
-
-</details>
-
-<details>
-<summary> HTML & CSS </summary>
-
-### [01-Udemy - Complete Web & Mobile Designer: UI/UX, Figma](https://github.com/omeatai/src-AI-Software/blob/main/src/html_css/01-complete-web-mobile.md)
-
+### [01-Youtube-Firebase9-Tutorial-NetNinja](https://github.com/omeatai/src-AI-Software/blob/main/src/others/01-Youtube-Firebase9-Tutorial-NetNinja.md)
 
 </details>
+
+
+
 
