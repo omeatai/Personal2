@@ -313,7 +313,7 @@ Quit the server with CONTROL-C.
 # #END</details>
 
 <details>
-<summary>4. Django on Docker - Setup Django App Url, View and Template </summary>
+<summary>5. Django on Docker - Setup Django App Url, View and Template </summary>
 
 # Django on Docker - Setup Django App Url, View and Template
 
@@ -336,7 +336,7 @@ Quit the server with CONTROL-C.
 # #END</details>
 
 <details>
-<summary>5. Django on Docker - Setup Docker for Django App </summary>
+<summary>6. Django on Docker - Setup Docker for Django App </summary>
 
 # Django on Docker - Setup Docker for Django App 
 
