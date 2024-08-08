@@ -3,9 +3,9 @@
 ## [COURSE](https://www.youtube.com/watch?v=-ANCcFQBk6I) - Deploy 12 apps to AWS, Azure, & Google Cloud
 
 <details>
-<summary>1. Create React App </summary>
+<summary>1. React on Docker - Create React App </summary>
 
-# Create React App
+# React on Docker - Create React App
 
 ```x
 npx create-react-app my_demo_app
@@ -69,14 +69,81 @@ export default App;
 # #END</details>
 
 <details>
-<summary>2. Install and Configure Mysql for Django </summary>
+<summary>2. React on Docker - Setup Docker for React App </summary>
 
-# Install and Configure Mysql for Django
+# React on Docker - Setup Docker for React App
 
-## Install Xampp for MAC
+## Install Docker
 
 ```x
-python manage.py runserver
+https://docs.docker.com/desktop/install/mac-install/
+```
+
+<img width="788" alt="image" src="https://github.com/user-attachments/assets/722d073d-025f-4271-a282-89040f006298">
+
+## Check Docker Versions
+
+```x
+docker
+docker --version
+docker-compose --version
+```
+
+<img width="970" alt="image" src="https://github.com/user-attachments/assets/23f48e1f-7cf9-494e-a1d8-443520ab5a69">
+<img width="1443" alt="image" src="https://github.com/user-attachments/assets/f6273484-bfd6-4515-83be-da1c66d24aa0">
+
+### my_projects/10_deploy_on_docker/my_demo_app/Dockerfile:
+
+```x
+FROM node:15.4 as build
+
+WORKDIR /app
+
+COPY package*.json .
+RUN npm install
+COPY . .
+RUN npm run build
+
+```
+
+### Run NPM Build
+
+```x
+npm run build
+```
+
+<img width="1350" alt="image" src="https://github.com/user-attachments/assets/0d1a0e86-10e9-4f51-a093-f210f6cdab21">
+<img width="1350" alt="image" src="https://github.com/user-attachments/assets/51348bc1-301d-48bb-b273-39efe56726b0">
+
+# #END</details>
+
+<details>
+<summary>3. React on Docker - Setup Nginx </summary>
+
+# React on Docker - Setup Nginx
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
 ```
 
 # #END</details>
