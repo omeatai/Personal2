@@ -83,6 +83,12 @@
 
 ### [07-Udemy-React-Django-Practical](https://github.com/omeatai/src-AI-Software/blob/main/src/django/07-Udemy-React-Django-Practical.md)
 
+### [08-Udemy-Ultimate-Authentication-Course-with-Django-and-React](https://github.com/omeatai/src-AI-Software/blob/main/src/django/08-Udemy-Ultimate-Authentication-Course-with-Django-and-React.md)
+
+### [09-Udemy-React-Nextjs-and-Django-Practical-Guide](https://github.com/omeatai/src-AI-Software/blob/main/src/django/09-Udemy-React-Nextjs-and-Django-Practical-Guide.md)
+
+### [10-Youtube-Deploy-on-Docker-and-Kubernetes](https://github.com/omeatai/src-AI-Software/blob/main/src/django/10-Youtube-Deploy-on-Docker-and-Kubernetes.md)
+
 </details>
 
 <details>
