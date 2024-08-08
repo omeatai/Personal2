@@ -33,10 +33,14 @@
 
 ### [03-Youtube-JS-Tutorial-Dave-Gray](https://github.com/omeatai/src-AI-Software/blob/main/src/js/03-Youtube-JS-Tutorial-Dave-Gray.md)
 
+### [04-Youtube-JS-Object-Oriented-Programming](https://github.com/omeatai/src-AI-Software/blob/main/src/js/04-Youtube-JS-Object-Oriented-Programming.md)
+
 </details>
 
 <details>
 <summary> TYPESCRIPT </summary>
+
+### [01-Typescript-Tutorial-Travesy-Media](https://github.com/omeatai/src-AI-Software/blob/main/src/typescript/01-Typescript-Tutorial-Travesy-Media.md)
 
 </details>
 
@@ -60,6 +64,8 @@
 ### [08-Youtube-React-Nodejs-Crash-Course-NetNinja](https://github.com/omeatai/src-AI-Software/blob/main/src/react/08-Youtube-React-Nodejs-Crash-Course-NetNinja.md)
 
 ### [09-Youtube-React-Node-Express-Dave-Gray](https://github.com/omeatai/src-AI-Software/blob/main/src/react/09-Youtube-React-Node-Express-Dave-Gray.md)
+
+### [10-Youtube-Reactjs-Crash-Course-Pedrotech](https://github.com/omeatai/src-AI-Software/blob/main/src/react/10-Youtube-Reactjs-Crash-Course-Pedrotech.md)
 
 
 </details>
@@ -102,6 +108,8 @@
 ### [01-Nextjs-Tutorial-CodeEvolution](https://github.com/omeatai/src-AI-Software/blob/main/src/nextjs/01-Nextjs-Tutorial-CodeEvolution.md)
 
 ### [02-Udemy-Complete-Nextjs-Developer-ZTM](https://github.com/omeatai/src-AI-Software/blob/main/src/nextjs/02-Udemy-Complete-Nextjs-Developer-ZTM.md)
+
+### [03-Youtube-Build-and-Deploy-a-full-stack-app-jsmastery](https://github.com/omeatai/src-AI-Software/blob/main/src/nextjs/03-Youtube-Build-and-Deploy-a-full-stack-app-jsmastery.md)
 
 </details>
 

@@ -1,6 +1,6 @@
 # JAVASCRIPT TUTORIALS FOR BEGINNERS - DAVE GRAY
 
-## [4-](https://www.youtube.com/playlist?list=PL0Zuz27SZ-6Oi6xNtL_fwCrwpuqylMsgT)
+## [COURSE](https://www.youtube.com/playlist?list=PL0Zuz27SZ-6Oi6xNtL_fwCrwpuqylMsgT)
 
 
 +INTRODUCTION

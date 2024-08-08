@@ -1,6 +1,6 @@
 # REACT-NODE-EXPRESS-TUTORIAL - DAVE GRAY
 
-## [COURSE](https://www.youtube.com/playlist?list=PL0Zuz27SZ-6PrE9srvEn8nbhOOyxnWXfp) | [[LAB]](/courses/dave/8.md)
+## [COURSE](https://www.youtube.com/playlist?list=PL0Zuz27SZ-6PrE9srvEn8nbhOOyxnWXfp)
 
 # REACT
 
