@@ -266,7 +266,7 @@ django-admin startproject my_project .
 python manage.py startapp my_app
 ```
 
-### src-AI-Software/my_projects/07_react_django_practical/admin_project/settings.py:
+### my_projects/10_deploy_on_docker/my_django_app/my_project/settings.py:
 
 ```py
 # Application definition
@@ -310,11 +310,33 @@ Quit the server with CONTROL-C.
 
 ![image](https://github.com/user-attachments/assets/1e8e8043-fee4-465c-82c9-87c1ae80705a)
 
+# #END</details>
+
+<details>
+<summary>4. Django on Docker - Setup Django App Url, View and Template </summary>
+
+# Django on Docker - Setup Django App Url, View and Template
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
 
 # #END</details>
 
 <details>
-<summary>4. Django on Docker - Setup Docker for Django App </summary>
+<summary>5. Django on Docker - Setup Docker for Django App </summary>
 
 # Django on Docker - Setup Docker for Django App 
 
