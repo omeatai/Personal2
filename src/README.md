@@ -96,6 +96,8 @@
 
 ### [01-Nextjs-Tutorial-CodeEvolution](https://github.com/omeatai/src-AI-Software/blob/main/src/nextjs/01-Nextjs-Tutorial-CodeEvolution.md)
 
+### [02-Udemy-Complete-Nextjs-Developer-ZTM](https://github.com/omeatai/src-AI-Software/blob/main/src/nextjs/02-Udemy-Complete-Nextjs-Developer-ZTM.md)
+
 </details>
 
 <details>
