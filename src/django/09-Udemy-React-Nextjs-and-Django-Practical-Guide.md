@@ -1,4 +1,4 @@
-## +Udemy-React and Django: A Practical Guide with Docker
+## +Udemy-React-Nextjs-and-Django-Practical-Guide
 
 ## [COURSE](https://www.udemy.com/course/react-django-admin/)
 
