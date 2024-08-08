@@ -19,6 +19,12 @@
 
 ### [01-React Essential Training](https://github.com/omeatai/src-AI-Software/blob/main/src/react/01-react-ess-training.md)
 
+### [02-Udemy-Complete-react-Developer-ZTM](https://github.com/omeatai/src-AI-Software/blob/main/src/react/02-Udemy-Complete-react-Developer-ZTM.md)
+
+### [03-Udemy-Full-Stack-Web-Development-Odafe](https://github.com/omeatai/src-AI-Software/blob/main/src/react/03-Udemy-Full-Stack-Web-Development-Odafe.md)
+
+### [04-Udemy-Beginner-to-advanced-Redux-Ecommerce-Zino](https://github.com/omeatai/src-AI-Software/blob/main/src/react/04-Udemy-Beginner-to-advanced-Redux-Ecommerce-Zino.md)
+
 </details>
 
 <details>
@@ -47,6 +53,10 @@
 ### [05-Building a Website with Node.js and Express.js*](https://github.com/omeatai/src-AI-Software/blob/main/src/node/05-Building_a_Website_with_Node_and_Express.md)
 
 ### [06-Advanced Express](https://github.com/omeatai/src-AI-Software/blob/main/src/node/06-Advanced_Express.md)
+
+### [07-Udemy-Complete-Node-Developer-ZTM](https://github.com/omeatai/src-AI-Software/blob/main/src/node/07-Udemy-Complete-Node-Developer-ZTM.md)
+
+
 
 </details>
 
