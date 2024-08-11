@@ -4,7 +4,7 @@
 ## [COURSE](https://v2.scrimba.com/learn-css-grid-c02k)
 
 <details>
-<summary>1 - Grid of Cards </summary>
+<summary>1. Grid of Cards </summary>
 
 <img width="1365" alt="image" src="https://github.com/user-attachments/assets/00788d86-2f55-4e45-baa0-1452b9ac9932">
 <img width="1287" alt="image" src="https://github.com/user-attachments/assets/5a3cb18f-d140-45f6-bdcf-0c950da207d2">
