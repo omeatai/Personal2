@@ -10,7 +10,11 @@
 
 ###### [SOFTWARE DEVELOPMENT](https://github.com/omeatai/src-AI-Software/tree/main/src)
 
-### PROJECTS
+---
+
+## PROJECTS
+
+---
 
 ###### [1-DJANGO-BLOG-APP](https://github.com/omeatai/Django-Blog-App)
 
