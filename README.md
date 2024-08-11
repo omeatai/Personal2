@@ -34,7 +34,11 @@
 
 ###### [9-MERN-PROJECT-AUTH-REDUX-TOOLKIT-APP](https://github.com/omeatai/mern-project-auth-redux)
 
+---
 
+## TOOLS
+
+---
 
 <details>
   <summary>HOSTS</summary>
