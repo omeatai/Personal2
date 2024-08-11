@@ -10,8 +10,7 @@
 
 ###### [SOFTWARE DEVELOPMENT](https://github.com/omeatai/src-AI-Software/tree/main/src)
 
-<details>
-<summary> PROJECTS </summary>
+### PROJECTS
 
 ###### [1-DJANGO-BLOG-APP](https://github.com/omeatai/Django-Blog-App)
 
@@ -31,7 +30,6 @@
 
 ###### [9-MERN-PROJECT-AUTH-REDUX-TOOLKIT-APP](https://github.com/omeatai/mern-project-auth-redux)
 
-</details>
 
 
 <details>
