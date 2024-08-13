@@ -341,7 +341,7 @@ console.log(Direction2.Down); // Down
 
 # Typescript Objects
 
-### TS/crash-course/src/index.ts:
+### dev_projects/02_ts_proj/src/index.ts:
 
 ```ts
 // Objects
@@ -366,7 +366,7 @@ const user2: User = {
 };
 ```
 
-### TS/crash-course/dist/index.js:
+### dev_projects/02_ts_proj/dist/index.js:
 
 ```ts
 "use strict";
@@ -381,8 +381,7 @@ const user2 = {
 };
 ```
 
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/024a64db-0f11-4e83-bdcf-7d4161dd4751">
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/0d50afe4-4f99-463d-96df-f6555e4d581b">
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/dae85c76-6d4f-46b1-9fe8-0774aed49133">
 
 # #END </details>
 
