@@ -428,6 +428,7 @@ customerId2 = 3;
 ### TS/crash-course/src/index.ts:
 
 ```ts
+// Type Assertion
 // Functions
 function addNum(x: number, y: number): number {
   return x + y;
@@ -439,12 +440,16 @@ console.log(addNum(1, 2));
 function log(message: string | number): void {
   console.log(message);
 }
+
+log("Hello");
+
 ```
 
 ### TS/crash-course/dist/index.js:
 
 ```ts
 "use strict";
+// Type Assertion
 // Functions
 function addNum(x, y) {
     return x + y;
@@ -454,10 +459,13 @@ console.log(addNum(1, 2));
 function log(message) {
     console.log(message);
 }
+log("Hello");
+
 ```
 
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/14d5b40d-0069-478c-93de-c16ba4c79819">
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/7c8c89ba-57d6-4d89-b98a-65c3916fb964">
+![image](https://github.com/user-attachments/assets/93154194-8ab0-48b6-b1dd-accfe054d765)
+
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/669f922c-5da0-40b8-8e23-ddb6e1e7b9a6">
 
 # #END </details>
 
