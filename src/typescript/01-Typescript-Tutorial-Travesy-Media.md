@@ -38,11 +38,9 @@ tsc --watch index
 ### TS/crash-course/index.ts:
 
 ```ts
-let id2: number = 12;
-let name: string = "John";
+let personId: number = 12;
+let firstName: string = "John";
 let isDeleted: boolean = false;
-
-export {};
 ```
 
 ### TS/crash-course/index.js:
@@ -50,10 +48,9 @@ export {};
 ```ts
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var id2 = 12;
-var name = "John";
+var personId = 12;
+var firstName = "John";
 var isDeleted = false;
-
 ```
 
 <img width="1385" alt="image" src="https://github.com/user-attachments/assets/7dd3427d-772f-401f-8aad-ae493362343c">
@@ -66,29 +63,58 @@ var isDeleted = false;
 
 # Setup Typescript Config File
 
-```tsbs
+```x
 tsc --init
+```
+
+```x
+➜  02_ts_proj tsc --init
+
+Created a new tsconfig.json with:                                                                                       
+                                                                                                                     TS 
+  target: es2016
+  module: commonjs
+  strict: true
+  esModuleInterop: true
+  skipLibCheck: true
+  forceConsistentCasingInFileNames: true
+
+You can learn more at https://aka.ms/tsconfig
 ```
 
 # Make changes to Config Options
 
-### TS/crash-course/tsconfig.json:
+### dev_projects/02_ts_proj/tsconfig.json:
 
-```tsbs
+```json
 "target": "ES6" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
 "rootDir": "./src" /* Specify the root folder within your source files. */,
  "outDir": "./dist" /* Specify an output folder for all emitted files. */,
 ```
 
-### TS/crash-course/src/index.ts:
+### dev_projects/02_ts_proj/src/index.ts:
 
 ```ts
-let id: number = 5;
+let personId: number = 12;
+let firstName: string = "John";
+let isDeleted: boolean = false;
+let age: number | null = null;
 
-console.log("ID: ", id);
+console.log({ personId, firstName, isDeleted, age });
 ```
 
-### TS/crash-course/dist/index.html:
+### dev_projects/02_ts_proj/dist/index.js:
+
+```ts
+"use strict";
+let personId = 12;
+let firstName = "John";
+let isDeleted = false;
+let age = null;
+console.log({ personId, firstName, isDeleted, age });
+```
+
+### dev_projects/02_ts_proj/dist/index.html:
 
 ```ts
 <!DOCTYPE html>
@@ -99,7 +125,7 @@ console.log("ID: ", id);
     <title>My Website</title>
   </head>
   <body>
-    <h1>Hello World</h1>
+    <h1>Welcome, World!</h1>
     <script src="./index.js"></script>
   </body>
 </html>
@@ -108,15 +134,13 @@ console.log("ID: ", id);
 # Run to Compile
 
 ```ts
-tsc
 tsc --watch
 ```
 
-<img width="908" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/3c3ef754-0737-48ae-a2e8-0211afa54ad0">
-<img width="906" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/0953fe57-b11f-4fcd-a548-bb0bb79cf295">
-<img width="908" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/0f2ce8d8-7c91-496a-8101-0a71cbb5202f">
-<img width="908" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/1a59b84e-2003-42f1-9cca-bc1bbe161353">
-<img width="1214" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/fbcc5ca6-09bc-4a30-b4af-d34c91b3a8a5">
+![image](https://github.com/user-attachments/assets/3e5756c6-d765-4df8-a043-2c9929c8b6a6)
+
+<img width="1341" alt="image" src="https://github.com/user-attachments/assets/266eb74f-2d2e-4db8-81a6-67f8a20edc15">
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/0ff85a6b-5ec7-4b97-b7b1-43e5d5b16a5e">
 
 # #END </details>
 
