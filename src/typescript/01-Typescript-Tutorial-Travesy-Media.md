@@ -151,55 +151,119 @@ tsc --watch
 
 # Basic Typescript Types
 
-### TS/crash-course/src/index.ts:
+### dev_projects/02_ts_proj/src/index.ts:
 
 ```ts
-// Basic Types
-let id: number = 5;
-let company: string = "Traversy Media";
-let isPublished: boolean = true;
+// TS Simple Variables
+let personId: number = 5;
+let firstName: string = "John";
+let isDeleted: boolean = false;
+let age: number | null = null;
 let x: any = "Hello";
 
-let ids: number[] = [1, 2, 3, 4, 5];
-let arr: any[] = [1, true, "Hello"];
+// TS Objects
+let personObj: {
+  personId: number;
+  firstName: string;
+  isDeleted: boolean;
+  age: number | null;
+} = {
+  personId: 1,
+  firstName: "John",
+  isDeleted: false,
+  age: null,
+};
 
-// Tuple
-let person: [number, string, boolean] = [1, "Brad", true];
-
-// Tuple Array
-let employee: [number, string][];
-
-employee = [
-  [1, "Brad"],
-  [2, "John"],
-  [3, "Jill"],
+// TS Arrays/Lists
+let peopleArr: Array<string> = ["John", "Jane", "Jenny"];
+let peopleArr2: string[] = ["John", "Jane", "Jenny"];
+let personArr: [number, string, boolean, number | null] = [
+  5,
+  "John",
+  false,
+  null,
 ];
+
+// TS Arrays/Lists of Objects
+let peopleArr3: {
+  personId: number;
+  firstName: string;
+  isDeleted: boolean;
+  age: number | null;
+}[] = [
+  {
+    personId: 1,
+    firstName: "John",
+    isDeleted: false,
+    age: null,
+  },
+  {
+    personId: 2,
+    firstName: "Jane",
+    isDeleted: false,
+    age: null,
+  },
+];
+
+// TS Arrays/Lists of Arrays (Tuple Array)
+let peopleArr4: [number, string, boolean, number | null][] = [
+  [5, "John", false, null],
+  [6, "Jane", false, null],
+];
+
 ```
 
-### TS/crash-course/dist/index.js:
+### dev_projects/02_ts_proj/dist/index.js:
 
-```ts
+```js
 "use strict";
-// Basic Types
-let id = 5;
-let company = "Traversy Media";
-let isPublished = true;
+// TS Simple Variables
+let personId = 5;
+let firstName = "John";
+let isDeleted = false;
+let age = null;
 let x = "Hello";
-let ids = [1, 2, 3, 4, 5];
-let arr = [1, true, "Hello"];
-// Tuple
-let person = [1, "Brad", true];
-// Tuple Array
-let employee;
-employee = [
-    [1, "Brad"],
-    [2, "John"],
-    [3, "Jill"],
+// TS Objects
+let personObj = {
+    personId: 1,
+    firstName: "John",
+    isDeleted: false,
+    age: null,
+};
+// TS Arrays/Lists
+let peopleArr = ["John", "Jane", "Jenny"];
+let peopleArr2 = ["John", "Jane", "Jenny"];
+let personArr = [
+    5,
+    "John",
+    false,
+    null,
 ];
+// TS Arrays/Lists of Objects
+let peopleArr3 = [
+    {
+        personId: 1,
+        firstName: "John",
+        isDeleted: false,
+        age: null,
+    },
+    {
+        personId: 2,
+        firstName: "Jane",
+        isDeleted: false,
+        age: null,
+    },
+];
+// TS Arrays/Lists of Arrays (Tuple Array)
+let peopleArr4 = [
+    [5, "John", false, null],
+    [6, "Jane", false, null],
+];
+
 ```
 
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/c8e881be-50a7-44af-bc7e-206386182cb5">
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/fd0cb2ff-27e9-4e89-9c51-64479a59ba98">
+<img width="1341" alt="image" src="https://github.com/user-attachments/assets/9ed9d74f-fda6-4a6c-a5d1-5247a9dfc732">
+
 
 # #END </details>
 
