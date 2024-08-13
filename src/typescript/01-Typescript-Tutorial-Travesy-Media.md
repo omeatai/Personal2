@@ -63,6 +63,8 @@ var isDeleted = false;
 
 # Setup Typescript Config File
 
+## Initialize File
+
 ```x
 tsc --init
 ```
