@@ -268,11 +268,11 @@ let peopleArr4 = [
 # #END </details>
 
 <details>
-  <summary>5. Typescript Unions and Enum </summary>
+  <summary>5. Using TS Unions and Enums </summary>
 
-# Typescript Unions and Enum
+# Using TS Unions and Enums
 
-### TS/crash-course/src/index.ts:
+### dev_projects/02_ts_proj/src/index.ts:
 
 ```ts
 // Union
@@ -318,8 +318,8 @@ var Direction1;
     Direction1[Direction1["Left"] = 3] = "Left";
     Direction1[Direction1["Right"] = 4] = "Right";
 })(Direction1 || (Direction1 = {}));
-console.log(Direction1.Up);
-console.log(Direction1.Down);
+console.log(Direction1.Up); // 1
+console.log(Direction1.Down); // 2
 var Direction2;
 (function (Direction2) {
     Direction2["Up"] = "Up";
@@ -327,12 +327,12 @@ var Direction2;
     Direction2["Left"] = "Left";
     Direction2["Right"] = "Right";
 })(Direction2 || (Direction2 = {}));
-console.log(Direction2.Up);
-console.log(Direction2.Down);
+console.log(Direction2.Up); // Up
+console.log(Direction2.Down); // Down
 ```
 
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/f5c6e107-a89d-42f4-8687-022aad43a976">
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/3282f9a7-5a4a-4adf-a88e-4d16d8bf99d1">
+![image](https://github.com/user-attachments/assets/fb93ec8d-b0e1-4285-86c4-1576f9eeeb9a)
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/94a6bcb8-a031-4080-92e2-5941a5e777d5">
 
 # #END </details>
 
