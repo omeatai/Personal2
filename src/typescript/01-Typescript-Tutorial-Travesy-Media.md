@@ -386,11 +386,11 @@ const user2 = {
 # #END </details>
 
 <details>
-  <summary>7. Typescript Type Assertion </summary>
+  <summary>7. Type Assertion on Any-Type </summary>
 
-# Typescript Type Assertion
+# Type Assertion on Any-Type
 
-### TS/crash-course/src/index.ts:
+### dev_projects/02_ts_proj/src/index.ts:
 
 ```ts
 // Type Assertion
@@ -403,7 +403,7 @@ customerId1 = 2;
 customerId2 = 3;
 ```
 
-### TS/crash-course/dist/index.js:
+### dev_projects/02_ts_proj/dist/index.js:
 
 ```ts
 "use strict";
@@ -415,8 +415,8 @@ customerId1 = 2;
 customerId2 = 3;
 ```
 
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/e37eb1b6-26cd-433b-b490-8a5a0ba6b2ac">
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/eafb0eb4-68da-4f8a-832f-e2d41f49f86a">
+<img width="1341" alt="image" src="https://github.com/user-attachments/assets/e798ae1e-aec8-4054-b2ed-683f1c6237c1">
+
 
 # #END </details>
 
