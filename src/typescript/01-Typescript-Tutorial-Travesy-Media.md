@@ -107,7 +107,7 @@ console.log({ personId, firstName, isDeleted, age });
 
 ### dev_projects/02_ts_proj/dist/index.js:
 
-```ts
+```js
 "use strict";
 let personId = 12;
 let firstName = "John";
@@ -118,7 +118,7 @@ console.log({ personId, firstName, isDeleted, age });
 
 ### dev_projects/02_ts_proj/dist/index.html:
 
-```ts
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -135,7 +135,7 @@ console.log({ personId, firstName, isDeleted, age });
 
 # Run to Compile
 
-```ts
+```x
 tsc --watch
 ```
 
