@@ -7,9 +7,6 @@
 
 # Introduction
 
-<img width="1211" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/058ab52d-783f-4cfc-8961-5a4dacee5f5a">
-<img width="1211" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/721c660a-353a-4112-ab67-e952b85c84a2">
-
 # Install Typescript globally
 
 ```x
@@ -21,6 +18,10 @@ sudo npm i -g typescript
 ```x
 tsc -v
 ```
+
+<img width="1211" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/058ab52d-783f-4cfc-8961-5a4dacee5f5a">
+<img width="1211" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/721c660a-353a-4112-ab67-e952b85c84a2">
+
 
 # #END </details>
 
