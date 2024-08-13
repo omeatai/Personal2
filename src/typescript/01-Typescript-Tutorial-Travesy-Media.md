@@ -38,20 +38,26 @@ tsc --watch index
 ### TS/crash-course/index.ts:
 
 ```ts
-let id: number = 5;
+let id2: number = 12;
+let name: string = "John";
+let isDeleted: boolean = false;
 
-id = 5;
+export {};
 ```
 
 ### TS/crash-course/index.js:
 
 ```ts
-var id = 5;
-id = 5;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var id2 = 12;
+var name = "John";
+var isDeleted = false;
+
 ```
 
-<img width="908" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/2b70751a-7762-42ac-b700-4204b1681712">
-<img width="908" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/087d8c81-9258-4dce-935a-8153dae154fe">
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/7dd3427d-772f-401f-8aad-ae493362343c">
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/33cb7d56-9060-4f3e-beda-7b46db55f170">
 
 # #END </details>
 
