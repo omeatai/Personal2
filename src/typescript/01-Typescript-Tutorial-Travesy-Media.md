@@ -7,9 +7,6 @@
 
 # Introduction
 
-<img width="1211" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/058ab52d-783f-4cfc-8961-5a4dacee5f5a">
-<img width="1211" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/721c660a-353a-4112-ab67-e952b85c84a2">
-
 # Install Typescript globally
 
 ```x
@@ -21,6 +18,10 @@ sudo npm i -g typescript
 ```x
 tsc -v
 ```
+
+<img width="1211" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/058ab52d-783f-4cfc-8961-5a4dacee5f5a">
+<img width="1211" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/721c660a-353a-4112-ab67-e952b85c84a2">
+
 
 # #END </details>
 
@@ -37,20 +38,23 @@ tsc --watch index
 ### TS/crash-course/index.ts:
 
 ```ts
-let id: number = 5;
-
-id = 5;
+let personId: number = 12;
+let firstName: string = "John";
+let isDeleted: boolean = false;
 ```
 
 ### TS/crash-course/index.js:
 
 ```ts
-var id = 5;
-id = 5;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var personId = 12;
+var firstName = "John";
+var isDeleted = false;
 ```
 
-<img width="908" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/2b70751a-7762-42ac-b700-4204b1681712">
-<img width="908" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/087d8c81-9258-4dce-935a-8153dae154fe">
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/7dd3427d-772f-401f-8aad-ae493362343c">
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/33cb7d56-9060-4f3e-beda-7b46db55f170">
 
 # #END </details>
 
@@ -59,31 +63,62 @@ id = 5;
 
 # Setup Typescript Config File
 
-```tsbs
+## Initialize File
+
+```x
 tsc --init
+```
+
+```x
+➜  02_ts_proj tsc --init
+
+Created a new tsconfig.json with:                                                                                       
+                                                                                                                     TS 
+  target: es2016
+  module: commonjs
+  strict: true
+  esModuleInterop: true
+  skipLibCheck: true
+  forceConsistentCasingInFileNames: true
+
+You can learn more at https://aka.ms/tsconfig
 ```
 
 # Make changes to Config Options
 
-### TS/crash-course/tsconfig.json:
+### dev_projects/02_ts_proj/tsconfig.json:
 
-```tsbs
+```json
 "target": "ES6" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
 "rootDir": "./src" /* Specify the root folder within your source files. */,
  "outDir": "./dist" /* Specify an output folder for all emitted files. */,
 ```
 
-### TS/crash-course/src/index.ts:
+### dev_projects/02_ts_proj/src/index.ts:
 
 ```ts
-let id: number = 5;
+let personId: number = 12;
+let firstName: string = "John";
+let isDeleted: boolean = false;
+let age: number | null = null;
 
-console.log("ID: ", id);
+console.log({ personId, firstName, isDeleted, age });
 ```
 
-### TS/crash-course/dist/index.html:
+### dev_projects/02_ts_proj/dist/index.js:
 
-```ts
+```js
+"use strict";
+let personId = 12;
+let firstName = "John";
+let isDeleted = false;
+let age = null;
+console.log({ personId, firstName, isDeleted, age });
+```
+
+### dev_projects/02_ts_proj/dist/index.html:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -92,7 +127,7 @@ console.log("ID: ", id);
     <title>My Website</title>
   </head>
   <body>
-    <h1>Hello World</h1>
+    <h1>Welcome, World!</h1>
     <script src="./index.js"></script>
   </body>
 </html>
@@ -100,16 +135,14 @@ console.log("ID: ", id);
 
 # Run to Compile
 
-```ts
-tsc
+```x
 tsc --watch
 ```
 
-<img width="908" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/3c3ef754-0737-48ae-a2e8-0211afa54ad0">
-<img width="906" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/0953fe57-b11f-4fcd-a548-bb0bb79cf295">
-<img width="908" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/0f2ce8d8-7c91-496a-8101-0a71cbb5202f">
-<img width="908" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/1a59b84e-2003-42f1-9cca-bc1bbe161353">
-<img width="1214" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/fbcc5ca6-09bc-4a30-b4af-d34c91b3a8a5">
+![image](https://github.com/user-attachments/assets/3e5756c6-d765-4df8-a043-2c9929c8b6a6)
+
+<img width="1341" alt="image" src="https://github.com/user-attachments/assets/266eb74f-2d2e-4db8-81a6-67f8a20edc15">
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/0ff85a6b-5ec7-4b97-b7b1-43e5d5b16a5e">
 
 # #END </details>
 
@@ -118,64 +151,128 @@ tsc --watch
 
 # Basic Typescript Types
 
-### TS/crash-course/src/index.ts:
+### dev_projects/02_ts_proj/src/index.ts:
 
 ```ts
-// Basic Types
-let id: number = 5;
-let company: string = "Traversy Media";
-let isPublished: boolean = true;
+// TS Simple Variables
+let personId: number = 5;
+let firstName: string = "John";
+let isDeleted: boolean = false;
+let age: number | null = null;
 let x: any = "Hello";
 
-let ids: number[] = [1, 2, 3, 4, 5];
-let arr: any[] = [1, true, "Hello"];
+// TS Objects
+let personObj: {
+  personId: number;
+  firstName: string;
+  isDeleted: boolean;
+  age: number | null;
+} = {
+  personId: 1,
+  firstName: "John",
+  isDeleted: false,
+  age: null,
+};
 
-// Tuple
-let person: [number, string, boolean] = [1, "Brad", true];
-
-// Tuple Array
-let employee: [number, string][];
-
-employee = [
-  [1, "Brad"],
-  [2, "John"],
-  [3, "Jill"],
+// TS Arrays/Lists
+let peopleArr: Array<string> = ["John", "Jane", "Jenny"];
+let peopleArr2: string[] = ["John", "Jane", "Jenny"];
+let personArr: [number, string, boolean, number | null] = [
+  5,
+  "John",
+  false,
+  null,
 ];
+
+// TS Arrays/Lists of Objects
+let peopleArr3: {
+  personId: number;
+  firstName: string;
+  isDeleted: boolean;
+  age: number | null;
+}[] = [
+  {
+    personId: 1,
+    firstName: "John",
+    isDeleted: false,
+    age: null,
+  },
+  {
+    personId: 2,
+    firstName: "Jane",
+    isDeleted: false,
+    age: null,
+  },
+];
+
+// TS Arrays/Lists of Arrays (Tuple Array)
+let peopleArr4: [number, string, boolean, number | null][] = [
+  [5, "John", false, null],
+  [6, "Jane", false, null],
+];
+
 ```
 
-### TS/crash-course/dist/index.js:
+### dev_projects/02_ts_proj/dist/index.js:
 
-```ts
+```js
 "use strict";
-// Basic Types
-let id = 5;
-let company = "Traversy Media";
-let isPublished = true;
+// TS Simple Variables
+let personId = 5;
+let firstName = "John";
+let isDeleted = false;
+let age = null;
 let x = "Hello";
-let ids = [1, 2, 3, 4, 5];
-let arr = [1, true, "Hello"];
-// Tuple
-let person = [1, "Brad", true];
-// Tuple Array
-let employee;
-employee = [
-    [1, "Brad"],
-    [2, "John"],
-    [3, "Jill"],
+// TS Objects
+let personObj = {
+    personId: 1,
+    firstName: "John",
+    isDeleted: false,
+    age: null,
+};
+// TS Arrays/Lists
+let peopleArr = ["John", "Jane", "Jenny"];
+let peopleArr2 = ["John", "Jane", "Jenny"];
+let personArr = [
+    5,
+    "John",
+    false,
+    null,
 ];
+// TS Arrays/Lists of Objects
+let peopleArr3 = [
+    {
+        personId: 1,
+        firstName: "John",
+        isDeleted: false,
+        age: null,
+    },
+    {
+        personId: 2,
+        firstName: "Jane",
+        isDeleted: false,
+        age: null,
+    },
+];
+// TS Arrays/Lists of Arrays (Tuple Array)
+let peopleArr4 = [
+    [5, "John", false, null],
+    [6, "Jane", false, null],
+];
+
 ```
 
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/c8e881be-50a7-44af-bc7e-206386182cb5">
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/fd0cb2ff-27e9-4e89-9c51-64479a59ba98">
+<img width="1341" alt="image" src="https://github.com/user-attachments/assets/9ed9d74f-fda6-4a6c-a5d1-5247a9dfc732">
+
 
 # #END </details>
 
 <details>
-  <summary>5. Typescript Unions and Enum </summary>
+  <summary>5. Using TS Unions and Enums </summary>
 
-# Typescript Unions and Enum
+# Using TS Unions and Enums
 
-### TS/crash-course/src/index.ts:
+### dev_projects/02_ts_proj/src/index.ts:
 
 ```ts
 // Union
@@ -221,8 +318,8 @@ var Direction1;
     Direction1[Direction1["Left"] = 3] = "Left";
     Direction1[Direction1["Right"] = 4] = "Right";
 })(Direction1 || (Direction1 = {}));
-console.log(Direction1.Up);
-console.log(Direction1.Down);
+console.log(Direction1.Up); // 1
+console.log(Direction1.Down); // 2
 var Direction2;
 (function (Direction2) {
     Direction2["Up"] = "Up";
@@ -230,12 +327,12 @@ var Direction2;
     Direction2["Left"] = "Left";
     Direction2["Right"] = "Right";
 })(Direction2 || (Direction2 = {}));
-console.log(Direction2.Up);
-console.log(Direction2.Down);
+console.log(Direction2.Up); // Up
+console.log(Direction2.Down); // Down
 ```
 
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/f5c6e107-a89d-42f4-8687-022aad43a976">
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/3282f9a7-5a4a-4adf-a88e-4d16d8bf99d1">
+![image](https://github.com/user-attachments/assets/fb93ec8d-b0e1-4285-86c4-1576f9eeeb9a)
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/94a6bcb8-a031-4080-92e2-5941a5e777d5">
 
 # #END </details>
 
@@ -244,7 +341,7 @@ console.log(Direction2.Down);
 
 # Typescript Objects
 
-### TS/crash-course/src/index.ts:
+### dev_projects/02_ts_proj/src/index.ts:
 
 ```ts
 // Objects
@@ -269,7 +366,7 @@ const user2: User = {
 };
 ```
 
-### TS/crash-course/dist/index.js:
+### dev_projects/02_ts_proj/dist/index.js:
 
 ```ts
 "use strict";
@@ -284,17 +381,16 @@ const user2 = {
 };
 ```
 
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/024a64db-0f11-4e83-bdcf-7d4161dd4751">
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/0d50afe4-4f99-463d-96df-f6555e4d581b">
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/dae85c76-6d4f-46b1-9fe8-0774aed49133">
 
 # #END </details>
 
 <details>
-  <summary>7. Typescript Type Assertion </summary>
+  <summary>7. Type Assertion on Any-Type </summary>
 
-# Typescript Type Assertion
+# Type Assertion on Any-Type
 
-### TS/crash-course/src/index.ts:
+### dev_projects/02_ts_proj/src/index.ts:
 
 ```ts
 // Type Assertion
@@ -307,7 +403,7 @@ customerId1 = 2;
 customerId2 = 3;
 ```
 
-### TS/crash-course/dist/index.js:
+### dev_projects/02_ts_proj/dist/index.js:
 
 ```ts
 "use strict";
@@ -319,8 +415,8 @@ customerId1 = 2;
 customerId2 = 3;
 ```
 
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/e37eb1b6-26cd-433b-b490-8a5a0ba6b2ac">
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/eafb0eb4-68da-4f8a-832f-e2d41f49f86a">
+<img width="1341" alt="image" src="https://github.com/user-attachments/assets/e798ae1e-aec8-4054-b2ed-683f1c6237c1">
+
 
 # #END </details>
 
@@ -332,6 +428,7 @@ customerId2 = 3;
 ### TS/crash-course/src/index.ts:
 
 ```ts
+// Type Assertion
 // Functions
 function addNum(x: number, y: number): number {
   return x + y;
@@ -343,12 +440,16 @@ console.log(addNum(1, 2));
 function log(message: string | number): void {
   console.log(message);
 }
+
+log("Hello");
+
 ```
 
 ### TS/crash-course/dist/index.js:
 
 ```ts
 "use strict";
+// Type Assertion
 // Functions
 function addNum(x, y) {
     return x + y;
@@ -358,10 +459,13 @@ console.log(addNum(1, 2));
 function log(message) {
     console.log(message);
 }
+log("Hello");
+
 ```
 
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/14d5b40d-0069-478c-93de-c16ba4c79819">
-<img width="910" alt="image" src="https://github.com/omeatai/My-Tutorials/assets/32337103/7c8c89ba-57d6-4d89-b98a-65c3916fb964">
+![image](https://github.com/user-attachments/assets/93154194-8ab0-48b6-b1dd-accfe054d765)
+
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/669f922c-5da0-40b8-8e23-ddb6e1e7b9a6">
 
 # #END </details>
 
