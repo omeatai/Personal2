@@ -13,6 +13,7 @@
 
 ### [01-Udemy - Complete Web & Mobile Designer: UI/UX, Figma](https://github.com/omeatai/src-AI-Software/blob/main/src/html_css/01-complete-web-mobile.md)
 
+### [02-Scrimba-Learn-CSS-Grid](https://github.com/omeatai/src-AI-Software/blob/main/src/html_css/02-Scrimba-Learn-CSS-Grid.md)
 
 </details>
 
