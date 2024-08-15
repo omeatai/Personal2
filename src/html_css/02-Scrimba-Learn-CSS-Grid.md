@@ -209,10 +209,10 @@ import "./GridStyles.css";
 const Grid = () => {
   return (
     <section className="container">
-      <div class="header">HEADER</div>
-      <div class="menu">MENU</div>
-      <div class="content">CONTENT</div>
-      <div class="footer">FOOTER</div>
+      <div className="header">HEADER</div>
+      <div className="menu">MENU</div>
+      <div className="content">CONTENT</div>
+      <div className="footer">FOOTER</div>
     </section>
   );
 };
@@ -418,12 +418,440 @@ export default Grid;
 
 # 5-positioning-items-in-grid-with grid-template-areas
 
-```css
+### github_projects/project-css-grid-flex/my_app/src/components/Grid/Grid.jsx:
+
+```jsx
+import React from "react";
+import "./GridStyles.css";
+
+const Grid = () => {
+  return (
+    <section className="container">
+      <div className="header">HEADER</div>
+      <div className="menu">MENU</div>
+      <div className="content">CONTENT</div>
+      <div className="footer">FOOTER</div>
+    </section>
+  );
+};
+
+export default Grid;
 
 ```
+
+### github_projects/project-css-grid-flex/my_app/src/App.css:
+
+```css
+html,
+body {
+  overflow: hidden;
+  box-sizing: border-box;
+  height: 100vh;
+  padding: 10px;
+  background-color: #ffeead;
+}
+```
+
+### github_projects/project-css-grid-flex/my_app/src/components/Grid/GridStyles.css:
+
+```css
+.container>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: #ffeead;
+    background-color: #ffeead;
+}
+
+.container {
+    overflow: hidden;
+    min-height: 95vh;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 40px auto 40px;
+    grid-template-areas:
+        ". h h h h h h h h h h h"
+        "m c c c c c c c c c c c"
+        "m f f f f f f f f f f f";
+}
+
+.header {
+    grid-area: h;
+}
+
+.menu {
+    grid-area: m;
+}
+
+.content {
+    grid-area: c;
+}
+
+.footer {
+    grid-area: f;
+}
+
+.container>div:nth-child(1n) {
+    background-color: #96ceb4;
+}
+
+.container>div:nth-child(3n) {
+    background-color: #88d8b0;
+}
+
+.container>div:nth-child(2n) {
+    background-color: #ff6f69;
+}
+
+.container>div:nth-child(4n) {
+    background-color: #ffcc5c;
+}
+```
+
+<img width="1149" alt="image" src="https://github.com/user-attachments/assets/dc2121e8-4433-49b3-89e6-d83093cf5142">
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/0ccccd00-7641-4200-bc87-a38b357653ad">
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/cae960ce-52df-4672-9799-3160f9584fb1">
+
+</details>
+
+<details>
+<summary>6-auto-fit and minmax </summary>
+
+# 6-auto-fit and minmax 
+
+### github_projects/project-css-grid-flex/my_app/src/components/Grid/Grid.jsx:
+
+```jsx
+import React from "react";
+import "./GridStyles.css";
+
+const Grid = () => {
+  return (
+    <section className="container">
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+      <div>5</div>
+      <div>6</div>
+      <div>7</div>
+      <div>8</div>
+      <div>9</div>
+      <div>10</div>
+      <div>11</div>
+      <div>12</div>
+    </section>
+  );
+};
+
+export default Grid;
+
+```
+
+### github_projects/project-css-grid-flex/my_app/src/App.css:
+
+```css
+html,
+body {
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: #ffeead;
+  margin: 10px;
+}
+```
+
+### github_projects/project-css-grid-flex/my_app/src/components/Grid/GridStyles.css:
+
+```css
+.container>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: #ffeead;
+}
+
+.container {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-rows: repeat(12, 200px);
+}
+
+.container>div:nth-child(1n) {
+    background-color: #96ceb4;
+}
+
+.container>div:nth-child(3n) {
+    background-color: #88d8b0;
+}
+
+.container>div:nth-child(2n) {
+    background-color: #ff6f69;
+}
+
+.container>div:nth-child(4n) {
+    background-color: #ffcc5c;
+}
+```
+
+![image](https://github.com/user-attachments/assets/280f31eb-c11c-4bc1-80fc-62a3396b221e)
+
+<img width="1341" alt="image" src="https://github.com/user-attachments/assets/465f8811-7ede-4ef2-9315-7dd720ffe84e">
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/1c5e0f57-da29-47cf-abb2-768718464f10">
+<img width="1341" alt="image" src="https://github.com/user-attachments/assets/61859dee-baee-42fe-896f-2d44248aea9b">
+
+</details>
+
+<details>
+<summary>7-implicit-rows with grid-auto-row </summary>
+
+# 7-implicit-rows with grid-auto-row 
+
+### github_projects/project-css-grid-flex/my_app/src/components/Grid/Grid.jsx:
+
+```jsx
+import React from "react";
+import "./GridStyles.css";
+
+const Grid = () => {
+  return (
+    <section className="container">
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+      <div>5</div>
+      <div>6</div>
+      <div>7</div>
+      <div>8</div>
+      <div>9</div>
+      <div>10</div>
+      <div>11</div>
+      <div>12</div>
+    </section>
+  );
+};
+
+export default Grid;
+
+```
+
+### github_projects/project-css-grid-flex/my_app/src/App.css:
+
+```css
+html,
+body {
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: #ffeead;
+  margin: 10px;
+}
+```
+
+### github_projects/project-css-grid-flex/my_app/src/components/Grid/GridStyles.css:
+
+```css
+.container>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: #ffeead;
+}
+
+.container {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* grid-template-rows: repeat(12, 200px); */
+    grid-auto-rows: 300px;
+}
+
+.container>div:nth-child(1n) {
+    background-color: #96ceb4;
+}
+
+.container>div:nth-child(3n) {
+    background-color: #88d8b0;
+}
+
+.container>div:nth-child(2n) {
+    background-color: #ff6f69;
+}
+
+.container>div:nth-child(4n) {
+    background-color: #ffcc5c;
+}
+```
+
+![image](https://github.com/user-attachments/assets/8beda3e9-624f-420f-b81f-548f68c40d1a)
+
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/6b4d84d6-974c-4340-b5a3-a48c46775aa3">
+
+</details>
+
+<details>
+<summary>8-complex-rows with grid-auto-flow </summary>
+
+# 8-complex-rows with grid-auto-flow
+
+### github_projects/project-css-grid-flex/my_app/src/components/Grid/Grid.jsx:
+
+```jsx
+import React from "react";
+import "./GridStyles.css";
+
+import normal1 from "./img/normal1.jpg";
+import normal2 from "./img/normal2.jpg";
+import normal3 from "./img/normal3.jpg";
+import normal4 from "./img/normal4.jpg";
+import normal5 from "./img/normal5.jpg";
+import normal6 from "./img/normal6.jpg";
+import normal7 from "./img/normal7.jpg";
+import normal8 from "./img/normal8.jpg";
+import normal9 from "./img/normal9.jpg";
+import big1 from "./img/big1.jpg";
+import big2 from "./img/big2.jpg";
+import big3 from "./img/big3.jpg";
+import vertical1 from "./img/vertical1.jpg";
+import vertical2 from "./img/vertical2.jpg";
+import vertical3 from "./img/vertical3.jpg";
+import horizontal1 from "./img/horizontal1.jpg";
+import horizontal2 from "./img/horizontal2.jpg";
+import horizontal3 from "./img/horizontal3.jpg";
+
+const Grid = () => {
+  return (
+    <section className="container">
+      <div>
+        <img src={normal1} alt="" />
+      </div>
+      <div class="vertical">
+        <img src={vertical1} alt="" />
+      </div>
+      <div class="horizontal">
+        <img src={horizontal1} alt="" />
+      </div>
+      <div>
+        <img src={normal2} alt="" />
+      </div>
+      <div>
+        <img src={normal3} alt="" />
+      </div>
+      <div class="big">
+        <img src={big1} alt="" />
+      </div>
+      <div>
+        <img src={normal4} alt="" />
+      </div>
+      <div class="vertical">
+        <img src={vertical2} alt="" />
+      </div>
+      <div>
+        <img src={normal5} alt="" />
+      </div>
+      <div class="horizontal">
+        <img src={horizontal2} alt="" />
+      </div>
+      <div>
+        <img src={normal6} alt="" />
+      </div>
+      <div class="big">
+        <img src={big2} alt="" />
+      </div>
+      <div>
+        <img src={normal7} alt="" />
+      </div>
+      <div class="horizontal">
+        <img src={horizontal3} alt="" />
+      </div>
+      <div>
+        <img src={normal8} alt="" />
+      </div>
+      <div class="big">
+        <img src={big3} alt="" />
+      </div>
+      <div>
+        <img src={normal9} alt="" />
+      </div>
+      <div class="vertical">
+        <img src={vertical3} alt="" />
+      </div>
+    </section>
+  );
+};
+
+export default Grid;
+
+```
+
+### github_projects/project-css-grid-flex/my_app/src/App.css:
+
+```css
+html,
+body {
+  box-sizing: border-box;
+  background-color: #ffeead;
+  margin: 10px;
+}
+```
+
+### github_projects/project-css-grid-flex/my_app/src/components/Grid/GridStyles.css:
+
+```css
+.container>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: #ffeead;
+}
+
+.container {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-auto-rows: 150px;
+    grid-auto-flow: dense;
+}
+
+.container>div>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.horizontal {
+    grid-column: auto / span 2;
+}
+
+.vertical {
+    grid-row: auto / span 2;
+}
+
+.big {
+    grid-column: auto / span 2;
+    grid-row: auto / span 2;
+}
+```
+
+![image](https://github.com/user-attachments/assets/b928d0e5-df11-45a9-88cd-db767ef4ffc6)
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/01691d4b-de54-45ae-9880-a0faeff6b1a8">
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/92a0e7be-b3c4-4008-be39-a545506767ce">
+
+</details>
+
+<details>
+<summary>9-named-lines </summary>
+
+# 9-named-lines
 
 ```css
 
 ```
 
 </details>
+
