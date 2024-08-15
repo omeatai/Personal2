@@ -132,7 +132,6 @@
 ### [06-Udemy-Complete-Python-Developer-Course-ZTM](https://github.com/omeatai/src-AI-Software/blob/main/src/python/06-Udemy-Complete-Python-Developer-Course-ZTM.md)
 
 ### [07-Udemy-100-Days-of-Code-Angela-Yu](https://github.com/omeatai/src-AI-Software/blob/main/src/python/07-Udemy-100-Days-of-Code-Angela-Yu.md)
-
 ### [20-Youtube - Dave Gray Python-Flask Training](https://github.com/omeatai/src-AI-Software/blob/main/src/python/20-Dave-Gray-Python-Flask.md)
 
 
@@ -164,6 +163,8 @@
 ### [11-Udemy-Django-REST-Framework-with-React-Frontend](https://github.com/omeatai/src-AI-Software/blob/main/src/django/11-Udemy-Django-REST-Framework-with-React-Frontend.md)
 
 ### [12-Youtube-Django-Course-for-absolute-beginners](https://github.com/omeatai/src-AI-Software/blob/main/src/django/12-Youtube-Django-Course-for-absolute-beginners.md)
+
+### [13-Youtube-Python Django REST API Framework - DRF](https://github.com/omeatai/src-AI-Software/blob/main/src/django/13-Python-Django-REST-Framework.md)
 
 </details>
 
