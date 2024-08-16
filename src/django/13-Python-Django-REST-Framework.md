@@ -5,8 +5,11 @@
 <details>
   <summary>1. I </summary>
 
-```py
+```x
+pip install virtualenv
+virtualenv env
 
+python -m venv env
 ```
 
 ```py
