@@ -23,13 +23,13 @@ pip install django djangorestframework django-cors-headers
 
 ## Create Django Project - journal_project
 
-```py
+```x
 django-admin startproject journal_project .
 ```
 
 ## Create Django App - users
 
-```py
+```x
 django-admin startapp users
 python manage.py startapp users
 ```
