@@ -3,78 +3,22 @@
 ## [COURSE](https://www.youtube.com/watch?v=-LVXBuYzi00) - Django and React Authentication
 
 <details>
-  <summary>1. I </summary>
+  <summary>1. Install Django Dependencies </summary>
 
+## Setup Django Environment
 ```x
 pip install virtualenv
 virtualenv env
+source env/bin/activate
 
 python -m venv env
+source env/bin/activate
 ```
 
-```py
-
-```
-
-```py
-
-```
-
-```py
-
-```
-
-```py
-
-```
-
-```py
-
-```
-
-# #END </details>
-
-<details>
-  <summary>2. N </summary>
-
-```py
-
-```
-
-```py
-
-```
-
-```py
-
-```  
-
-```py
-
-```
-
-```py
-
-```
-
-# #END </details>
-
-# #END 
-
-## [COURSE](https://www.youtube.com/watch?v=-LVXBuYzi00) - Django and Django Rest Framework
-
-<details>
-  <summary>1. I </summary>
+## Install Dependencies - Django, DjangoRestFramework, DjangoCorsHeaders
 
 ```x
-pip install virtualenv
-virtualenv env
-
-python -m venv env
-```
-
-```py
-
+pip install django djangorestframework django-cors-headers
 ```
 
 ```py
@@ -180,6 +124,70 @@ python -m venv env
 ```
 
 # #END </details>
+
+# #END
+
+## [COURSE](https://www.youtube.com/watch?v=-LVXBuYzi00) - Django and Django Rest Framework
+
+<details>
+  <summary>1. I </summary>
+
+```x
+pip install virtualenv
+virtualenv env
+
+python -m venv env
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+# #END </details>
+
+<details>
+  <summary>2. N </summary>
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```  
+
+```py
+
+```
+
+```py
+
+```
+
+# #END </details>
+
+# #END 
+
 
 
 
