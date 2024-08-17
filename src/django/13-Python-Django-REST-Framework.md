@@ -1,6 +1,6 @@
 # Youtube-Python Django REST API Framework - DRF
 
-## [COURSE](https://www.youtube.com/watch?v=-LVXBuYzi00) - Django and React Authenticatio
+## [COURSE](https://www.youtube.com/watch?v=-LVXBuYzi00) - Django and React Authentication
 
 <details>
   <summary>1. I </summary>
