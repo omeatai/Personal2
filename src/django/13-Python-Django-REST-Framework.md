@@ -220,14 +220,14 @@ CORS_ALLOW_ORIGINS = [
 
 ### dev_projects/03_drf_auth_project/backend/.env:
 
-```py
+```x
 SECRET_KEY=django-insecure-eq6-nya3g3)eci^)ugik2%3ili=)o2ly^r!_wqq
 DEBUG=True
 ```
 
 ### dev_projects/03_drf_auth_project/backend/.env-example:
 
-```py
+```x
 SECRET_KEY=
 DEBUG=
 ```
@@ -407,33 +407,119 @@ class CustomUserChangeForm(UserChangeForm):
 
 # Setup Admin Configurations
 
+### dev_projects/03_drf_auth_project/backend/users/admin.py:
+
 ```py
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.utils.translation import gettext as _
+from .forms import CustomUserChangeForm, CustomUserCreationForm
+from .models import User
+
+
+class UserAdmin(BaseUserAdmin):
+    ordering = ['email']
+    form = CustomUserChangeForm
+    add_form = CustomUserCreationForm
+
+    list_display = ('email', 'first_name', 'last_name',
+                    'is_staff', 'is_active')
+    list_display_links = ['email']
+    list_filter = ('email', 'first_name', 'last_name',
+                   'is_staff', 'is_active')
+    search_fields = ('email', 'first_name', 'last_name')
+
+    fieldsets = (
+        (_('Login Credentials'), {'fields': ('email', 'password',)}),
+        (_('Personal information'), {
+         'fields': ('first_name', 'last_name',)}),
+        (_('Permissions and Groups'), {'fields': (
+            'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions',)}),
+        (_('Important dates'), {'fields': ('last_login',)}),
+    )
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('email', 'first_name', 'last_name', 'password1', 'password2',
+                       'is_staff', 'is_active'),
+        }),
+    )
+
+
+admin.site.register(User, UserAdmin)
+
 
 ```
 
+### dev_projects/03_drf_auth_project/backend/journal_project/settings.py:
+
 ```py
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.0/howto/static-files/
+
+STATIC_URL = 'static/'
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.User'  # added
 
 ```
 
-```py
+## Run Migrations
 
+```x
+python manage.py makemigrations
+python manage.py migrate
+```
+## Create Super User
+
+```x
+python manage.py createsuperuser
 ```
 
-```py
+```x
+(env) ➜  backend git:(master) ✗ python manage.py createsuperuser
+Email Address: admin@gmail.com
+First Name: Ifeanyi
+Last Name: Omeata
+Password: 
+Password (again): 
+The password is too similar to the Email Address.
+Bypass password validation and create user anyway? [y/N]: y
+Superuser created successfully.
 
+(env) ➜  backend git:(master) ✗ 
 ```
 
-```py
+### Run Backend Server
 
+```x
+python manage.py runserver
 ```
 
-```py
-
+```x
+http://127.0.0.1:8000/admin/
 ```
 
-```py
+![image](https://github.com/user-attachments/assets/278526c7-340c-4c85-8260-c68f0647b6ac)
+![image](https://github.com/user-attachments/assets/e3507c85-1672-4c81-8b7a-7941c90b0533)
+![image](https://github.com/user-attachments/assets/3b4ec247-33c5-4440-a70e-01f4d58697d4)
+![image](https://github.com/user-attachments/assets/1d6e03e1-2f2a-48f2-81e9-387cf7aac96c)
+![image](https://github.com/user-attachments/assets/c0869fc0-cf13-4a9f-aa90-8c34dca6400b)
+![image](https://github.com/user-attachments/assets/3f3ef430-a4ed-41d5-b73c-c65ac9d16be6)
 
-```
+<img width="1448" alt="image" src="https://github.com/user-attachments/assets/e7665230-8cd4-4415-bcd8-82832da36269">
+<img width="1448" alt="image" src="https://github.com/user-attachments/assets/ec1afc65-5eab-406a-8a00-d73fef3c2605">
+
+# #END </details>
+
+<details>
+  <summary> 6. Setup Djoser for Authentication </summary>
+
+# Setup Djoser for Authentication
 
 ```py
 
