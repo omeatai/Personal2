@@ -21,12 +21,17 @@ source env/bin/activate
 pip install django djangorestframework django-cors-headers
 ```
 
-```py
+## Create Django Project - journal_project
 
+```py
+django-admin startproject journal_project .
 ```
 
-```py
+## Create Django App - users
 
+```py
+django-admin startapp users
+python manage.py startapp users
 ```
 
 ```py
