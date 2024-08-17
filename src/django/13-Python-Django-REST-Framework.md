@@ -376,9 +376,36 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 # Create Custom Django Forms
 
+### dev_projects/03_drf_auth_project/backend/users/forms.py:
+
 ```py
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import User
+
+
+class CustomUserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm):
+        model = User
+        fields = ['email', 'first_name', 'last_name']
+        error_class = "error"
+
+
+class CustomUserChangeForm(UserChangeForm):
+    class Meta(UserChangeForm):
+        model = User
+        fields = ['email', 'first_name', 'last_name']
+        error_class = "error"
 
 ```
+
+<img width="1385" alt="image" src="https://github.com/user-attachments/assets/3e9468ea-8183-4907-a9f7-75ad7e7e6438">
+
+# #END </details>
+
+<details>
+  <summary>5. Setup Admin Configurations </summary>
+
+# Setup Admin Configurations
 
 ```py
 
