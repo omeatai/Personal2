@@ -517,9 +517,155 @@ http://127.0.0.1:8000/admin/
 # #END </details>
 
 <details>
-  <summary> 6. Setup Djoser for Authentication </summary>
+  <summary> 6. Setup Djoser and JWT for Authentication </summary>
 
-# Setup Djoser for Authentication
+# Setup Djoser and JWT for Authentication
+
+## Install dependencies 
+
+```x
+pip install djoser djangorestframework_simplejwt pyjwt
+```
+
+## Add dependecies to requirements.txt file
+
+```x
+pip freeze > requirements.txt
+```
+
+### dev_projects/03_drf_auth_project/backend/journal_project/settings.py:
+
+```py
+from pathlib import Path
+
+from datetime import timedelta
+
+
+# Application definition
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # External Apps
+    'rest_framework',
+    'corsheaders',
+    'djoser',  # added
+    'rest_framework_simplejwt',  # added
+    # Local Apps
+    'users',
+]
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # CORS Middleware added
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+
+AUTH_USER_MODEL = 'users.User'  # added
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+SIMPLE_JWT = {
+    "AUTH_HEADER_TYPES": (
+        "Bearer",
+        "JWT"),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=120),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=60),
+    "SIGNING_KEY": env("SIGNING_KEY"),
+    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+}
+
+DJOSER = {
+    'LOGIN_FIELD': 'email',
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+    'SEND_CONFIRMATION_EMAIL': True,
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
+    'SET_PASSWORD_RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_RETYPE': True,
+    'USERNAME_RESET_CONFIRM_URL': 'username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': True,
+    'SERIALIZERS': {
+        'user_create': 'users.serializers.CreateUserSerializer',
+        'user': 'users.serializers.CreateUserSerializer',
+        'user_delete': 'djoser.serializers.UserDeleteSerializer',
+    },
+}
+
+```
+
+```x
+https://djoser.readthedocs.io/en/latest/getting_started.html
+```
+
+![image](https://github.com/user-attachments/assets/0247cd8c-6327-4b6a-a872-5d7d55e25281)
+![image](https://github.com/user-attachments/assets/4d140e9a-8454-4d5b-819d-57535399a638)
+![image](https://github.com/user-attachments/assets/ab8ce11b-aac2-4f80-9edc-d2b734cf1181)
+![image](https://github.com/user-attachments/assets/28ea4860-d2a0-45a4-9043-6015ed714f84)
+![image](https://github.com/user-attachments/assets/208bcaed-1620-4eba-9cf0-2682ee80cc14)
+![image](https://github.com/user-attachments/assets/9c2e418d-645d-4bc1-9823-3c9f1bc7e6c0)
+
+<img width="1404" alt="image" src="https://github.com/user-attachments/assets/f03259ad-370c-4018-aaf2-9d7ef917427c">
+
+# #END </details>
+
+<details>
+  <summary> 7. Setup Authentication Serializers and EndPoint Configuration </summary>
+
+# Setup Authentication Serializers and EndPoint Configuration
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
+
+```py
+
+```
 
 ```py
 
