@@ -611,6 +611,14 @@ DJOSER = {
 
 ```
 
+### dev_projects/03_drf_auth_project/backend/.env:
+
+```x
+SECRET_KEY=django-insecure-eq6-nya3g3)eci^)ugik2%3ili
+DEBUG=True
+SIGNING_KEY=ZsKeMTDjc3mL3kXdmCJIdj
+```
+
 ```x
 https://djoser.readthedocs.io/en/latest/getting_started.html
 ```
@@ -621,6 +629,7 @@ https://djoser.readthedocs.io/en/latest/getting_started.html
 ![image](https://github.com/user-attachments/assets/28ea4860-d2a0-45a4-9043-6015ed714f84)
 ![image](https://github.com/user-attachments/assets/208bcaed-1620-4eba-9cf0-2682ee80cc14)
 ![image](https://github.com/user-attachments/assets/9c2e418d-645d-4bc1-9823-3c9f1bc7e6c0)
+![image](https://github.com/user-attachments/assets/bcf8a341-2d2f-4e91-9891-f97b62680343)
 
 <img width="1404" alt="image" src="https://github.com/user-attachments/assets/f03259ad-370c-4018-aaf2-9d7ef917427c">
 
