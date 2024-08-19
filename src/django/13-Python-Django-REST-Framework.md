@@ -640,6 +640,63 @@ https://djoser.readthedocs.io/en/latest/getting_started.html
 
 # Setup Authentication Serializers and EndPoint Configuration
 
+### dev_projects/03_drf_auth_project/backend/users/serializers.py:
+
+```py
+from django.contrib.auth import get_user_model
+from djoser.serializers import UserCreateSerializer
+
+User = get_user_model()
+
+
+class CreateUserSerializer(UserCreateSerializer):
+    class Meta(UserCreateSerializer.Meta):
+        model = User
+        fields = ['id', 'email', 'first_name', 'last_name', 'password']
+        # read_only_fields = ('id',)
+
+```
+
+### dev_projects/03_drf_auth_project/backend/journal_project/urls.py:
+
+```py
+"""
+URL configuration for journal_project project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.0/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/v1/auth/', include('djoser.urls')),
+    path('api/v1/auth/', include('djoser.urls.jwt')),
+]
+
+```
+
+<img width="1476" alt="image" src="https://github.com/user-attachments/assets/918c3ee9-6f0d-4591-ba8c-70cec20beca8">
+<img width="1476" alt="image" src="https://github.com/user-attachments/assets/0804eae4-532f-4476-b210-21de34998cf3">
+
+# #END </details>
+
+<details>
+  <summary> 8. Postman API Testing & Email Configuration </summary>
+
+# Postman API Testing & Email Configuration
+
 ```py
 
 ```
@@ -648,13 +705,9 @@ https://djoser.readthedocs.io/en/latest/getting_started.html
 
 ```
 
-```py
+![image](https://github.com/user-attachments/assets/76e7f72c-c774-42da-84f8-4948ef39148e)
+![image](https://github.com/user-attachments/assets/1794d444-5735-4123-9014-930a885a0aff)
 
-```
-
-```py
-
-```
 
 ```py
 
