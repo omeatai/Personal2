@@ -67,9 +67,18 @@
 </details>
 
 <details>
-<summary>7. S </summary>
+<summary>7. What is a Playbook? </summary>
 
-## S
+## What is a Playbook?
+
+- "A playbook is a list of how to go through a certain detection, and what the analyst needs to look at in order to investigate those incidents."
+
+</details>
+
+<details>
+<summary>8. What </summary>
+
+## What 
 
 ```x
 
