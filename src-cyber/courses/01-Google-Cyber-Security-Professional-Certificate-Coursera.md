@@ -35,9 +35,9 @@
 </details>
 
 <details>
-<summary>4. Common job titles </summary>
+<summary>4. Common Job titles </summary>
 
-## Common job titles
+## Common Job titles
   
 - Security analyst or specialist
 - Cybersecurity analyst or specialist
@@ -47,10 +47,34 @@
 </details>
 
 <details>
-<summary>5. C </summary>
+<summary>5. What do Security Analysts do? </summary>
 
-## C
-  
+## What do Security Analysts do?
+
+- Security analysts are responsible for monitoring and protecting information and systems.
+
+</details>
+
+<details>
+<summary>6. Security analyst responsibilities </summary>
+
+## Security analyst responsibilities
+
+. Protecting computer and network systems
+. Installing prevention software
+• Conducting periodic security audits
+
+</details>
+
+<details>
+<summary>7. Security analyst responsibilities </summary>
+
+## Security analyst responsibilities
+
+```x
+
+```
+
 ```x
 
 ```
@@ -59,25 +83,6 @@
 
 ```
 
-```x
-
-```
-
-```x
-
-```
-
-```x
-
-```
-
-```x
-
-```
-
-```x
-
-```
 
 
 # #END</details>
