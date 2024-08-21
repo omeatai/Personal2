@@ -6,7 +6,7 @@
 <details>
 <summary>1. What is Cyber Security? </summary>
 
-# What is Cyber Security?
+## What is Cyber Security?
 
 - The practice of ensuring Confidentiality, Integrity, and Availability (CIA) of Information by protecting networks, devices, people, and data from unauthorized access or criminal exploitation.
 
