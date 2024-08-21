@@ -71,7 +71,7 @@
 
 ## What is a Playbook?
 
-- "A playbook is a list of how to go through a certain detection, and what the analyst needs to look at in order to investigate those incidents."
+"A playbook is a list of how to go through a certain detection, and what the analyst needs to look at in order to investigate those incidents."
 
 </details>
 
