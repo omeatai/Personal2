@@ -60,16 +60,16 @@
 
 ## Security analyst responsibilities
 
-. Protecting computer and network systems
-. Installing prevention software
-• Conducting periodic security audits
+- Protecting computer and network systems
+- Installing prevention software
+- Conducting periodic security audits
 
 </details>
 
 <details>
-<summary>7. Security analyst responsibilities </summary>
+<summary>7. S </summary>
 
-## Security analyst responsibilities
+## S
 
 ```x
 
