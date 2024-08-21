@@ -10,7 +10,7 @@
 
 ###### [SOFTWARE DEVELOPMENT](https://github.com/omeatai/src-AI-Software/tree/main/src)
 
-###### [CYBER SECURITY](https://github.com/omeatai/src-AI-Software/tree/main/cyber)
+###### [CYBER SECURITY](https://github.com/omeatai/src-AI-Software/tree/main/src-cyber)
 
 ---
 
