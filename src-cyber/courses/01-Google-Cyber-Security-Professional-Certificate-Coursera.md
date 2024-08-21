@@ -8,7 +8,7 @@
 
 ## What is Cyber Security?
 
-- The practice of ensuring Confidentiality, Integrity, and Availability (CIA) of Information by protecting networks, devices, people, and data from unauthorized access or criminal exploitation.
+The practice of ensuring Confidentiality, Integrity, and Availability (CIA) of Information by protecting networks, devices, people, and data from unauthorized access or criminal exploitation.
 
 </details>
 
@@ -17,7 +17,7 @@
 
 ## Who is Threat actor?
 
-- Any person or group who presents a security risk.
+Any person or group who presents a security risk.
 
 </details>
 
@@ -51,7 +51,7 @@
 
 ## What do Security Analysts do?
 
-- Security analysts are responsible for monitoring and protecting information and systems.
+Security analysts are responsible for monitoring and protecting information and systems.
 
 </details>
 
