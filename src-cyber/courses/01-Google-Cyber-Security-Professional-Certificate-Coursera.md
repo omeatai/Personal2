@@ -112,6 +112,13 @@ Security analysts are responsible for monitoring and protecting information and 
 - Threat actor: Any person or group who presents a security risk
 - Transferable skills: Skills from other areas that can apply to different careers 
 
+</details>
+
+<details>
+<summary>10. T </summary>
+
+## T
+
 ```x
 
 ```
