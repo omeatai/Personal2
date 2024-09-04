@@ -26,11 +26,11 @@ A special range 100.64.0.0 to 100.127.255.255 with a 255.192.0.0 or /10 network 
 </details>
 
 <details>
-<summary>2. W </summary>
+<summary>2. What is DNS ? </summary>
 
-## W
+## What is DNS ?
 
-
+Domain Name Server (DNS) is a standard protocol that helps Internet users discover websites using human readable addresses. Like a phonebook which lets you look up the name of a person and discover their number, DNS lets you type the address of a website and automatically discover the Internet Protocol (IP) address for that website. 
 
 </details>
 
