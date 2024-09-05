@@ -299,13 +299,24 @@ rm -r myfolder2
 # #END</details>
 
 <details>
-<summary>20. Linux Shortcuts - D </summary>
+<summary>20. Linux Shortcuts - Switching to Sudo Super User </summary>
 
-## Linux Shortcuts - D
+## Linux Shortcuts - Switching to Sudo Super User
 
 ```x
+sudo su
 
+exit
 ```
+
+<img width="995" alt="image" src="https://github.com/user-attachments/assets/9a7cb8fd-7bb2-4eef-aba7-341b299ff096">
+
+# #END</details>
+
+<details>
+<summary>21. Linux Shortcuts - S </summary>
+
+## Linux Shortcuts - S
 
 ```x
 
