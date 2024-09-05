@@ -162,8 +162,10 @@ echo Hello World! >> file1.txt
 cat file1.txt
 ```
 
+```txt
 Today is a really good day!
 Hello World!
+```
 
 # #END</details>
 
