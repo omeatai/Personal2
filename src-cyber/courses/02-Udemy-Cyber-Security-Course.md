@@ -335,7 +335,7 @@ whois etf.bg.ac.rs
 
 <img width="1067" alt="image" src="https://github.com/user-attachments/assets/0a73613e-ba75-42b4-aa1c-517b3696d4fa">
 <img width="1067" alt="image" src="https://github.com/user-attachments/assets/da773dab-e3c2-4c9c-b152-ad6f58cf0dc9">
-<img width="1067" alt="image" src="https://github.com/user-attachments/assets/82803971-8e2b-4fbd-b7e7-1dd6b849b663">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/8396128a-8f56-4b32-b24e-250b4a614299">
 <img width="1067" alt="image" src="https://github.com/user-attachments/assets/a6342c87-6006-4c9e-a793-07f3c61d8172">
 <img width="1067" alt="image" src="https://github.com/user-attachments/assets/879358a6-9779-460e-9a55-2736bb597895">
 
