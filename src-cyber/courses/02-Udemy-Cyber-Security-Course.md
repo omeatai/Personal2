@@ -84,13 +84,24 @@ pwd
 
 /home/whitehacker/Documents
 
-```x
-
-```
+## 4. Go one step back
 
 ```x
-
+cd ..
+pwd
 ```
+
+/home/whitehacker
+
+## 5. Create a File
+
+```x
+cd Desktop
+touch file1.txt
+ls
+```
+
+file1.txt
 
 ```x
 
