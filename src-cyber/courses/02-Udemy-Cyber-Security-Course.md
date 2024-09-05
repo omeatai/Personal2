@@ -372,14 +372,21 @@ whatweb arh.bg.ac.rs -v
 ```x
 ifconfig
 --> 10.0.2.4
+
+whatweb 10.0.2.1-10.0.2.255 --aggression 3 -v --no-errors
 ```
 
 ```x
-whatweb 10.0.2.1-10.0.2.255 --aggression 3 -v --no-errors
+nslookup facebook.com
+whois facebook.com
+--> 157.240.3.35
+
+whatweb 157.240.3.30-157.240.3.40 --aggression 1 -v --no-errors
 ```
 
 <img width="1067" alt="image" src="https://github.com/user-attachments/assets/1655b188-6c1b-48ad-b28d-cdcb5f31601d">
 <img width="1067" alt="image" src="https://github.com/user-attachments/assets/9c85f88f-9df2-4dd6-81a1-895eb959f436">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/06736936-6103-4aec-9308-ad3710e6fad3">
 
 # #END</details>
 
@@ -389,8 +396,23 @@ whatweb 10.0.2.1-10.0.2.255 --aggression 3 -v --no-errors
 ## Information Gathering - Using Whatweb for saving output in File
 
 ```x
+whatweb --help
 
+whatweb 157.240.3.30-157.240.3.40 --aggression 1 -v --no-errors --log-verbose=output
+whatweb 10.0.0.1-10.0.0.255 --aggression 3 -v --no-errors --log-verbose=outputhome
 ```
+
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/888c6f13-fdcb-4066-9218-f010d53c63f8">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/28f6854e-ab79-40bb-8358-21bd8ff4a29b">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/bc713b0b-9ff0-4d44-b7fd-796df3e71ee8">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/5b1731c1-6b07-4b9c-ab0b-8a88b73ef470">
+
+# #END</details>
+
+<details>
+<summary>25. Information Gathering - Gathering Emails Using theHavester & Hunter.io </summary>
+
+## Information Gathering - Gathering Emails Using theHavester & Hunter.io
 
 ```x
 
