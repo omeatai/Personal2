@@ -329,7 +329,55 @@ nslookup etf.bg.ac.rs
 ```
 
 <img width="1067" alt="image" src="https://github.com/user-attachments/assets/0a73613e-ba75-42b4-aa1c-517b3696d4fa">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/da773dab-e3c2-4c9c-b152-ad6f58cf0dc9">
 
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
 
 ```x
 
