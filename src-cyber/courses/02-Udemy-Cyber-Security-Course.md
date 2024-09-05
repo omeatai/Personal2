@@ -314,9 +314,9 @@ exit
 # #END</details>
 
 <details>
-<summary>21. Information Gathering - Using nslookup and ping </summary>
+<summary>21. Information Gathering - Using nslookup, whois and ping </summary>
 
-## Information Gathering - Using nslookup and ping
+## Information Gathering - Using nslookup, whois and ping
 
 ```x
 ping facebook.com
@@ -328,8 +328,23 @@ nslookup facebook.com
 nslookup etf.bg.ac.rs
 ```
 
+```x
+whois facebook.com
+whois etf.bg.ac.rs
+```
+
 <img width="1067" alt="image" src="https://github.com/user-attachments/assets/0a73613e-ba75-42b4-aa1c-517b3696d4fa">
 <img width="1067" alt="image" src="https://github.com/user-attachments/assets/da773dab-e3c2-4c9c-b152-ad6f58cf0dc9">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/82803971-8e2b-4fbd-b7e7-1dd6b849b663">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/a6342c87-6006-4c9e-a793-07f3c61d8172">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/879358a6-9779-460e-9a55-2736bb597895">
+
+# #END</details>
+
+<details>
+<summary>22. Information Gathering - Using Whatweb Stealth Scan </summary>
+
+## Information Gathering - Using Whatweb Stealth Scan
 
 ```x
 
