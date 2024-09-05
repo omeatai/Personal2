@@ -225,13 +225,25 @@ python3 greeting.py
 # #END</details>
 
 <details>
-<summary>15. Linux Shortcuts - C </summary>
+<summary>15. Linux Shortcuts - Create New Directory </summary>
 
-## Linux Shortcuts - C
+## Linux Shortcuts - Create New Directory
 
 ```x
-
+mkdir myfolder
+ls
 ```
+
+file1.txt  file2.txt  greeting.py  myfolder
+
+<img width="1131" alt="image" src="https://github.com/user-attachments/assets/e4b0c859-083a-49ca-91b8-5b883c035f69">
+
+# #END</details>
+
+<details>
+<summary>16. Linux Shortcuts - C </summary>
+
+## Linux Shortcuts - C
 
 ```x
 
