@@ -365,13 +365,28 @@ whatweb arh.bg.ac.rs -v
 # #END</details>
 
 <details>
-<summary>23. Information Gathering - Using Whatweb for discovering on IP Range </summary>
+<summary>23. Information Gathering - Using Whatweb for range of IP Addresses </summary>
 
-## Information Gathering - Using Whatweb for discovering on IP Range
+## Information Gathering - Using Whatweb for range of IP Addresses
 
 ```x
-
+ifconfig
+--> 10.0.2.4
 ```
+
+```x
+whatweb 10.0.2.1-10.0.2.255 --aggression 3 -v --no-errors
+```
+
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/1655b188-6c1b-48ad-b28d-cdcb5f31601d">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/9c85f88f-9df2-4dd6-81a1-895eb959f436">
+
+# #END</details>
+
+<details>
+<summary>24. Information Gathering - Using Whatweb for saving output in File </summary>
+
+## Information Gathering - Using Whatweb for saving output in File
 
 ```x
 
