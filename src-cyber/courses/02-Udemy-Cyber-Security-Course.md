@@ -314,17 +314,22 @@ exit
 # #END</details>
 
 <details>
-<summary>21. Linux Shortcuts - S </summary>
+<summary>21. Information Gathering - Using nslookup and ping </summary>
 
-## Linux Shortcuts - S
+## Information Gathering - Using nslookup and ping
 
 ```x
-
+ping facebook.com
+ping etf.bg.ac.rs
 ```
 
 ```x
-
+nslookup facebook.com
+nslookup etf.bg.ac.rs
 ```
+
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/0a73613e-ba75-42b4-aa1c-517b3696d4fa">
+
 
 ```x
 
