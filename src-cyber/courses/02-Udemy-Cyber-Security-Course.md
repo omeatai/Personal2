@@ -204,17 +204,30 @@ I love the Summers more
 # #END</details>
 
 <details>
-<summary>14. Linux Shortcuts - U </summary>
+<summary>14. Linux Shortcuts - Create and Run python File with Nano </summary>
 
-## Linux Shortcuts - U
-
-```x
-
-```
+## Linux Shortcuts - Create and Run python File with Nano
 
 ```x
-
+nano greeting.py
 ```
+
+<img width="1131" alt="image" src="https://github.com/user-attachments/assets/c649366d-5099-452c-aba4-0ae538b72d32">
+
+## Run Python file
+
+```x
+python3 greeting.py
+```
+
+<img width="1131" alt="image" src="https://github.com/user-attachments/assets/7a04f921-3796-47cc-a86f-52629e3fd627">
+
+# #END</details>
+
+<details>
+<summary>15. Linux Shortcuts - C </summary>
+
+## Linux Shortcuts - C
 
 ```x
 
