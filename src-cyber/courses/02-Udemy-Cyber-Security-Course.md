@@ -241,13 +241,25 @@ file1.txt  file2.txt  greeting.py  myfolder
 # #END</details>
 
 <details>
-<summary>16. Linux Shortcuts - C </summary>
+<summary>16. Linux Shortcuts - Move File into Directory </summary>
 
-## Linux Shortcuts - C
+## Linux Shortcuts - Move File into Directory
 
 ```x
-
+mv greeting.py myfolder
+ls
 ```
+
+file1.txt  file2.txt  myfolder
+
+<img width="1131" alt="image" src="https://github.com/user-attachments/assets/6021d2e2-efc2-4fc5-8798-6e5ec87eb532">
+
+# #END</details>
+
+<details>
+<summary>17. Linux Shortcuts - M </summary>
+
+## Linux Shortcuts - M
 
 ```x
 
