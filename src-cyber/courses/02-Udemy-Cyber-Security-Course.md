@@ -103,17 +103,32 @@ ls
 
 file1.txt
 
-```x
-
-```
+## 6. Write Content into File (Replace all)
 
 ```x
-
+echo Today is a really good day! > file1.txt
+ls
 ```
+
+file1.txt
+
+## 7. Read Content from File
 
 ```x
-
+cat file1.txt
 ```
+
+Today is a really good day!
+
+## 8. Add Content to File (Append new line)
+
+```x
+echo Hello World! >> file1.txt
+cat file1.txt
+```
+
+Today is a really good day!
+Hello World!
 
 ```x
 
