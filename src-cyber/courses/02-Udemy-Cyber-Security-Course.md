@@ -170,25 +170,43 @@ Hello World!
 # #END</details>
 
 <details>
-<summary>13. Linux Shortcuts - A </summary>
+<summary>13. Linux Shortcuts - Use Nano to Create File </summary>
 
-## Linux Shortcuts - A
+## Linux Shortcuts - Use Nano to Create File
 
 ```x
+nano file2.txt
+```
 
+<img width="1131" alt="image" src="https://github.com/user-attachments/assets/cd394c3a-6996-4579-a926-3b0ce9e533f0">
+
+## To Save and Exit Nano
+
+```x
+Ctrl + O
+Enter
+Ctrl + X
+```
+
+## To View created File
+
+```x
+cat file2.txt
 ```
 
 ```x
-
+This is the second File
+I love the Summers more
 ```
 
-```x
+<img width="1131" alt="image" src="https://github.com/user-attachments/assets/4103d555-119f-4f79-b511-7b575e41c8ec">
 
-```
+# #END</details>
 
-```x
+<details>
+<summary>14. Linux Shortcuts - U </summary>
 
-```
+## Linux Shortcuts - U
 
 ```x
 
