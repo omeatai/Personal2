@@ -257,21 +257,51 @@ file1.txt  file2.txt  myfolder
 # #END</details>
 
 <details>
-<summary>17. Linux Shortcuts - M </summary>
+<summary>17. Linux Shortcuts - Copy a File </summary>
 
-## Linux Shortcuts - M
-
-```x
-
-```
+## Linux Shortcuts - Copy a File
 
 ```x
-
+cp file2.txt file3.txt
 ```
+
+<img width="995" alt="image" src="https://github.com/user-attachments/assets/e3dde66b-dfe9-451f-b1f4-b96d62eaf21a">
+
+# #END</details>
+
+<details>
+<summary>18. Linux Shortcuts - Delete a File </summary>
+
+## Linux Shortcuts - Delete a File
 
 ```x
-
+rm file3.txt
 ```
+
+<img width="995" alt="image" src="https://github.com/user-attachments/assets/6bb9f671-0c89-4bbb-a536-105bb32b6e88">
+
+# #END</details>
+
+<details>
+<summary>19. Linux Shortcuts - Delete a Directory </summary>
+
+## Linux Shortcuts - Delete a Directory
+
+```x
+cd myfolder
+mkdir myfolder2
+ls
+rm -r myfolder2
+```
+
+<img width="995" alt="image" src="https://github.com/user-attachments/assets/63ab122d-5303-4eef-b277-1da99eadb419">
+
+# #END</details>
+
+<details>
+<summary>20. Linux Shortcuts - D </summary>
+
+## Linux Shortcuts - D
 
 ```x
 
