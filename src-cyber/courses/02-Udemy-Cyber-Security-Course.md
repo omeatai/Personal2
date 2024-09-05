@@ -348,8 +348,26 @@ whois etf.bg.ac.rs
 ## Information Gathering - Using Whatweb Stealth Scan
 
 ```x
-
+whatweb
+whatweb --help
+whatweb arh.bg.ac.rs
+whatweb arh.bg.ac.rs -v
 ```
+
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/5404d603-0d3e-437e-83e3-4363d56fd8df">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/5b642d1b-4abe-4eb7-8589-c38d0f0b8ddf">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/d0a69b77-5bed-4a3b-96d6-3d2cb1f5e88d">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/3a3a0ac7-3364-4b53-b790-57968aef2944">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/e89dab81-841e-4aeb-9b52-213e12c28bbd">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/8d84b5d3-b956-4a87-a6da-84ff712fe1a1">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/906e4da2-cdbe-4ccf-be41-892b9d2e35e4">
+
+# #END</details>
+
+<details>
+<summary>23. Information Gathering - Using Whatweb for discovering on IP Range </summary>
+
+## Information Gathering - Using Whatweb for discovering on IP Range
 
 ```x
 
