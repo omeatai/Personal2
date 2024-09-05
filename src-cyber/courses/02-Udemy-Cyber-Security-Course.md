@@ -57,13 +57,15 @@ Dynamic Host Configuration Protocol (DHCP) is a network management protocol used
 # #END</details>
 
 <details>
-<summary>5. P </summary>
+<summary>5. Linux Shortcuts </summary>
 
-## P
+## Print working directory
 
 ```x
-
+pwd
 ```
+
+/home/whitehacker
 
 ```x
 
