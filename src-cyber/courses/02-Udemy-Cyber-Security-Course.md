@@ -57,9 +57,9 @@ Dynamic Host Configuration Protocol (DHCP) is a network management protocol used
 # #END</details>
 
 <details>
-<summary>5. Linux Shortcuts </summary>
+<summary>5. Linux Shortcuts - Print working directory </summary>
 
-## 1. Print working directory
+## Linux Shortcuts - Print working directory
 
 ```x
 pwd
@@ -67,7 +67,12 @@ pwd
 
 /home/whitehacker
 
-## 2. List directory Files
+# #END</details>
+
+<details>
+<summary>6. Linux Shortcuts - List directory Files </summary>
+
+## Linux Shortcuts - List directory Files
 
 ```x
 ls
@@ -75,7 +80,12 @@ ls
 
 Desktop Documents Music Pictures Public Templates Videos 
 
-## 3. Open a directory
+# #END</details>
+
+<details>
+<summary>7. Linux Shortcuts - Open a directory </summary>
+
+## Linux Shortcuts - Open a directory
 
 ```x
 cd Documents
@@ -84,7 +94,12 @@ pwd
 
 /home/whitehacker/Documents
 
-## 4. Go one step back
+# #END</details>
+
+<details>
+<summary>8. Linux Shortcuts - Go one step back </summary>
+
+## Linux Shortcuts - Go one step back
 
 ```x
 cd ..
@@ -93,7 +108,12 @@ pwd
 
 /home/whitehacker
 
-## 5. Create a File
+# #END</details>
+
+<details>
+<summary>9. Linux Shortcuts - Create a File </summary>
+
+## Linux Shortcuts - Create a File
 
 ```x
 cd Desktop
@@ -103,7 +123,12 @@ ls
 
 file1.txt
 
-## 6. Write Content into File (Replace all)
+# #END</details>
+
+<details>
+<summary>10. Linux Shortcuts - Write Content into File (Replace all)</summary>
+
+## Linux Shortcuts - Write Content into File (Replace all)
 
 ```x
 echo Today is a really good day! > file1.txt
@@ -112,7 +137,12 @@ ls
 
 file1.txt
 
-## 7. Read Content from File
+# #END</details>
+
+<details>
+<summary>11. Linux Shortcuts - Read Content from File </summary>
+
+## Linux Shortcuts - Read Content from File
 
 ```x
 cat file1.txt
@@ -120,7 +150,12 @@ cat file1.txt
 
 Today is a really good day!
 
-## 8. Add Content to File (Append new line)
+# #END</details>
+
+<details>
+<summary>12. Linux Shortcuts - Add Content to File (Append new line) </summary>
+
+## Linux Shortcuts - Add Content to File (Append new line)
 
 ```x
 echo Hello World! >> file1.txt
@@ -129,6 +164,53 @@ cat file1.txt
 
 Today is a really good day!
 Hello World!
+
+# #END</details>
+
+<details>
+<summary>13. Linux Shortcuts - A </summary>
+
+## Linux Shortcuts - A
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
 
 ```x
 
