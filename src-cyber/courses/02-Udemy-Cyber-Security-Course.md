@@ -67,13 +67,22 @@ pwd
 
 /home/whitehacker
 
-```x
-
-```
+## List directory Files
 
 ```x
-
+ls
 ```
+
+Desktop Documents Music Pictures Public Templates Videos 
+
+## Enter a directory
+
+```x
+cd Documents
+pwd
+```
+
+/home/whitehacker/Documents
 
 ```x
 
