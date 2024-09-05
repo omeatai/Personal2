@@ -44,9 +44,58 @@ Dynamic Host Configuration Protocol (DHCP) is a network management protocol used
 # #END</details>
 
 <details>
-<summary>4. N  </summary>
+<summary>4. Penetration Testing Steps  </summary>
 
-## N
+## Penetration Testing Steps
+
+1. Information Gathering
+2. Scanning
+3. Gaining Access (Exploitation)
+4. Maintaining Access
+5. Covering Tracks
+
+# #END</details>
+
+<details>
+<summary>5. P </summary>
+
+## P
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
+
+```x
+
+```
 
 ```x
 
