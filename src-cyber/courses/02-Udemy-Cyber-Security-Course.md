@@ -437,8 +437,29 @@ www.hunter.io
 ## Information Gathering - Finding Usernames with Sherlock
 
 ```x
-
+git clone https://github.com/Tuhinshubhra/RED_HAWK
+git clone https://github.com/sherlock-project/sherlock
+cd sherlock
+pipx install sherlock_project
+sherlock --version
+sherlock --help
+sherlock PoojaMedia
 ```
+
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/016b21c4-4b15-4871-ae32-75bac54a74dc">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/fe56ba23-b053-4638-ab7c-ca13d7f8374b">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/01a40877-3506-4539-84e1-75c8404db967">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/136b757f-e313-4c86-ab88-4d83c4909cdd">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/7385149e-d4e7-4143-8447-54029010b79b">
+<img width="1094" alt="image" src="https://github.com/user-attachments/assets/3c6d5bdc-ed17-4ce1-90cc-de18af6eecd5">
+<img width="1094" alt="image" src="https://github.com/user-attachments/assets/af9927cd-b4f1-4773-9282-683ae053d2e2">
+
+# #END</details>
+
+<details>
+<summary>27. Information Gathering - Email Scapper Tool </summary>
+
+## Information Gathering - Email Scapper Tool
 
 ```x
 
