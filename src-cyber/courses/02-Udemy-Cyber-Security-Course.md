@@ -415,8 +415,26 @@ whatweb 10.0.0.1-10.0.0.255 --aggression 3 -v --no-errors --log-verbose=outputho
 ## Information Gathering - Gathering Emails Using theHavester & Hunter.io
 
 ```x
-
+theHarvester --help
+theHarvester-d ucalgary.ca -b all
+theHarvester-d ucalgary.ca -b google
+theHarvester-d ucalgary.ca -b all -l 500
 ```
+
+```x
+www.hunter.io
+```
+
+<img width="1094" alt="image" src="https://github.com/user-attachments/assets/9494eb92-5c56-4a06-9658-88da379fea01">
+<img width="1094" alt="image" src="https://github.com/user-attachments/assets/1b321a60-a357-45c0-b93d-e18bf9ec7fd3">
+<img width="1067" alt="image" src="https://github.com/user-attachments/assets/5cbd927a-a0c5-4e13-8d73-049cc9c739c9">
+
+# #END</details>
+
+<details>
+<summary>26. Information Gathering - Finding Usernames with Sherlock </summary>
+
+## Information Gathering - Finding Usernames with Sherlock
 
 ```x
 
