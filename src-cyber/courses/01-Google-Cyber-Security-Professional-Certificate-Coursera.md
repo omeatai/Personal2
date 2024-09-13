@@ -114,33 +114,38 @@ Security analysts are responsible for monitoring and protecting information and 
 </details>
 
 <details>
-<summary>10. T </summary>
+<summary>10. Security frameworks </summary>
 
-## T
+## Security frameworks
 
-```x
+Security frameworks are guidelines used for building plans to help mitigate risk and threats to data and privacy.
 
-```
+</details>
 
-```x
+<details>
+<summary>11. Security controls </summary>
 
-```
+## Security controls
 
-```x
+Security controls are safeguards designed to reduce specific security risks.
 
-```
+</details>
 
-```x
+<details>
+<summary>12. The CIA triad </summary>
 
-```
+## The CIA triad - Confidentiality, integrity, and availability (CIA)
 
-```x
+The CIA triad is a foundational model that helps inform how organizations consider risk when setting up systems and security policies.
 
-```
+</details>
 
-```x
+<details>
+<summary>13. NIST Cybersecurity Framework (CSF) </summary>
 
-```
+## NIST Cybersecurity Framework (CSF)
+
+Security teams use the NIST CSF as a baseline to manage short and long-term risk. The CSF is a voluntary framework that consists of standards, guidelines, and best practices to manage cybersecurity risk.
 
 ```x
 
