@@ -95,9 +95,9 @@ Security analysts are responsible for monitoring and protecting information and 
 </details>
 
 <details>
-<summary>9. Terms and definitions from Course 1, Module 1  </summary>
+<summary>9. Glossary terms from module 1  </summary>
 
-## Terms and definitions from Course 1, Module 1
+## Glossary terms from module 1
 
 - Cybersecurity (or security): The practice of ensuring confidentiality, integrity, and availability of information by protecting networks, devices, people, and data from unauthorized access or criminal exploitation
 - Cloud security: The process of ensuring that assets stored in the cloud are properly configured and access to those assets is limited to authorized users
