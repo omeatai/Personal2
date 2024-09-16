@@ -456,10 +456,14 @@ sherlock PoojaMedia
 
 # #END</details>
 
-<details>
-<summary>27. Information Gathering - Email Scapper Tool </summary>
+# +Light-House-Cyber-Security-Course
 
-## Information Gathering - Email Scapper Tool
+## [COURSE](https://web.compass.lighthouselabs.ca/p/cyber/days/w01d1)
+
+<details>
+<summary>1. Introduction </summary>
+
+## Introduction
 
 ```x
 
