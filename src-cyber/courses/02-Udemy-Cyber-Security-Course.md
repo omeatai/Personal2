@@ -460,6 +460,618 @@ sherlock PoojaMedia
 
 ## [COURSE](https://web.compass.lighthouselabs.ca/p/cyber/days/w01d1)
 
+# Cyber Security Training Course
+
+- Chapter 1 - Introduction to Cyber Security
+    - What is Cyber Security?
+        
+        
+- Chapter 2 - Linux Basics
+    - Linux Commands I
+        - Get all Users in Linux
+            
+            `cat /etc/passwd`
+            
+        - Stop Firewall
+            
+            sudo systemctl stop ufw
+            
+            sudo systemctl stop firewalld
+            
+    - Linux Commands II
+        - Check if Firewall is running
+            
+            sudo ufw status
+            
+            sudo systemctl status ufw
+            
+            sudo systemctl status firewalld
+            
+        - Stop Firewall
+            
+            sudo systemctl stop ufw
+            
+            sudo systemctl stop firewalld
+            
+        - Start Firewall
+            
+            sudo systemctl start ufw
+            
+            sudo systemctl start firewalld
+            
+        - Disable firewall
+            
+            sudo ufw disable
+            
+            sudo systemctl disable ufw
+            
+            sudo systemctl disable firewalld
+            
+        - Enable firewall
+            
+            sudo ufw enable
+            
+            sudo systemctl enable ufw
+            sudo systemctl enable firewalld
+            
+        
+- Chapter 3 - Python Basics
+    - Python Basics I
+        - Comments
+            
+            ```python
+            # This is a comment. Name is a variable. It contains a string
+            name = input("Please, type in your name: ")
+            print("Hello " + name + ", it's very nice to meet you!")
+            ```
+            
+        - Regex
+            - Regex Practice Websites
+                
+                [regex101: build, test, and debug regex](https://regex101.com/)
+                
+                [RegExr: Learn, Build, & Test RegEx](https://regexr.com/3e4a2)
+                
+            - Regex Cheat Sheet
+                
+                [web.mit.edu](https://web.mit.edu/hackl/www/lab/turkshop/slides/regex-cheatsheet.pdf)
+                
+                [Examples of regular expressions - Google Workspace Admin Help](https://support.google.com/a/answer/1371417?hl=en)
+                
+    - Python Basics II
+        - 
+            
+            sudo ufw status
+            
+            sudo systemctl status ufw
+            
+            sudo systemctl status firewalld
+            
+- Chapter 4 - Information Gathering (Reconnaissance)
+    - Linux Commands I
+- Chapter 5 - Scanning
+    - Nmap
+    - Wireshark
+- Chapter 6 - Monitoring
+    - Paessler PRTG
+        - Lighthouse Labs
+            
+            [Understanding Paessler PRTG (Cyber Security Immersive)](https://web.compass.lighthouselabs.ca/p/cyber/days/w02d3/activities/2851)
+            
+            [Setting up PRTG (Cyber Security Immersive)](https://web.compass.lighthouselabs.ca/p/cyber/days/w02d3/activities/2852)
+            
+        - Video 1 - PRTG Introduction
+            
+            [Video: Quick overview of PRTG](https://www.paessler.com/support/videos-and-webinars/videos/quick-overview)
+            
+        - Video 2 - PRTG Architecture and Components
+            
+            [Video: Distributed monitoring with PRTG](https://www.paessler.com/support/videos-and-webinars/videos/distributed_monitoring)
+            
+        - Video 3 - PRTG Device Tree
+            
+            [https://www.youtube.com/watch?v=2YPMKzLSa10&ab_channel=PRTGTutorialsbyPaessler](https://www.youtube.com/watch?v=2YPMKzLSa10&ab_channel=PRTGTutorialsbyPaessler)
+            
+        - Video 4 - PRTG use Auto-Discovery Groups (Create Templates)
+            
+            [https://www.youtube.com/watch?v=jVZR1CbAGSc&ab_channel=PRTGTutorialsbyPaessler](https://www.youtube.com/watch?v=jVZR1CbAGSc&ab_channel=PRTGTutorialsbyPaessler)
+            
+        - **PRTG Tutorials by Paessler (YouTube)**
+            
+            [Overview](https://www.youtube.com/playlist?list=PLo96JbGt1LS-twIdz3By52poqgHEZ9QI3)
+            
+            [PRTG Tutorials by Paessler](https://www.youtube.com/@PRTGtutorials/videos)
+            
+        
+    - Types of Cyber Attacks
+        - Top 20 Most Common Cyber Attacks
+            
+            [Top 20 Most Common Types Of Cyber Attacks | Fortinet](https://www.fortinet.com/resources/cyberglossary/types-of-cyber-attacks)
+            
+    - Risk
+        
+        Risk refers to the potential for loss, damage, or destruction of assets or data resulting from a threat exploiting a vulnerability. 
+        
+        - It's the intersection of assets, threats, and vulnerabilities.
+        - **Components**: Risk is typically assessed based on the likelihood of a threat exploiting a vulnerability and the potential impact on the organization.
+        - **Example**: The risk of a data breach increases if a company's web server has known vulnerabilities and faces frequent cyberattacks.
+    - Vulnerability
+    - Exploit
+    - Threat
+    - Virus-Total Search
+        
+        [VirusTotal](https://www.virustotal.com/gui/home/search)
+        
+    - Virus-Share Hashes
+        
+        [VirusShare.com](https://virusshare.com/hashes)
+        
+- Chapter 7 - Terminologies
+    - Paessler PRTG
+        - Lighthouse Labs
+            
+            [Understanding Paessler PRTG (Cyber Security Immersive)](https://web.compass.lighthouselabs.ca/p/cyber/days/w02d3/activities/2851)
+            
+            [Setting up PRTG (Cyber Security Immersive)](https://web.compass.lighthouselabs.ca/p/cyber/days/w02d3/activities/2852)
+            
+        - Video 1 - PRTG Introduction
+            
+            [Video: Quick overview of PRTG](https://www.paessler.com/support/videos-and-webinars/videos/quick-overview)
+            
+        - Video 2 - PRTG Architecture and Components
+            
+            [Video: Distributed monitoring with PRTG](https://www.paessler.com/support/videos-and-webinars/videos/distributed_monitoring)
+            
+        - Video 3 - PRTG Device Tree
+            
+            [https://www.youtube.com/watch?v=2YPMKzLSa10&ab_channel=PRTGTutorialsbyPaessler](https://www.youtube.com/watch?v=2YPMKzLSa10&ab_channel=PRTGTutorialsbyPaessler)
+            
+        - Video 4 - PRTG use Auto-Discovery Groups (Create Templates)
+            
+            [https://www.youtube.com/watch?v=jVZR1CbAGSc&ab_channel=PRTGTutorialsbyPaessler](https://www.youtube.com/watch?v=jVZR1CbAGSc&ab_channel=PRTGTutorialsbyPaessler)
+            
+        - **PRTG Tutorials by Paessler (YouTube)**
+            
+            [Overview](https://www.youtube.com/playlist?list=PLo96JbGt1LS-twIdz3By52poqgHEZ9QI3)
+            
+            [PRTG Tutorials by Paessler](https://www.youtube.com/@PRTGtutorials/videos)
+            
+        
+    - Types of Cyber Attacks
+        - Top 20 Most Common Cyber Attacks
+            
+            [Top 20 Most Common Types Of Cyber Attacks | Fortinet](https://www.fortinet.com/resources/cyberglossary/types-of-cyber-attacks)
+            
+    - Risk
+        
+        Risk refers to the potential for loss, damage, or destruction of assets or data resulting from a threat exploiting a vulnerability. 
+        
+        - It's the intersection of assets, threats, and vulnerabilities.
+        - **Components**: Risk is typically assessed based on the likelihood of a threat exploiting a vulnerability and the potential impact on the organization.
+        - **Example**: The risk of a data breach increases if a company's web server has known vulnerabilities and faces frequent cyberattacks.
+    - Vulnerability
+    - Exploit
+    - Threat
+    - Virus-Total Search
+        
+        [VirusTotal](https://www.virustotal.com/gui/home/search)
+        
+    - Virus-Share Hashes
+        
+        [VirusShare.com](https://virusshare.com/hashes)
+        
+- Chapter 8 - Frameworks
+    - NIST
+        - Search NIST NVD (National **Vulnerability Database)**
+            
+            [NVD - Search and Statistics](https://nvd.nist.gov/vuln/search)
+            
+    - MITRE ATT&CK ( MITRE Adversarial Tactics, Techniques, and Common Knowledge)
+        - Matrices Website
+            
+            [Matrix - Enterprise - Linux | MITRE ATT&CK®](https://attack.mitre.org/matrices/enterprise/linux/)
+            
+        - Search CVE (**Common Vulnerabilities and Exposures)** List
+            
+            [CVE -
+            
+            Search CVE List](https://cve.mitre.org/cve/search_cve_list.html)
+            
+- Tutorials
+    - python.org
+        
+        [Python For Beginners](https://www.python.org/about/gettingstarted/)
+        
+    - Python Datetime
+        
+        [datetime — Basic date and time types](https://docs.python.org/3/library/datetime.html)
+        
+    - Netacad
+        
+        [Python Essentials 1 – Skills for All](https://www.netacad.com/courses/python-essentials-1?courseLang=en-US&instance_id=d0f08829-e868-4dd0-b7d5-b5efaeb6b1c9)
+        
+    - W3schools
+        
+        [W3Schools.com](https://www.w3schools.com/cybersecurity/index.php)
+        
+        [W3Schools.com](https://www.w3schools.com/python/default.asp)
+        
+    - TutorialTeacher
+        
+        [TutorialsTeacher - Learn Technologies](https://www.tutorialsteacher.com/)
+        
+        [Python Tutorials: Learn Python Step-by-Step](https://www.tutorialsteacher.com/python)
+        
+    - RealPython
+        
+        [Variables in Python – Real Python](https://realpython.com/python-variables/)
+        
+        [Strings and Character Data in Python – Real Python](https://realpython.com/python-strings/)
+        
+        [Lists vs Tuples in Python – Real Python](https://realpython.com/python-lists-tuples/)
+        
+        [Dictionaries in Python – Real Python](https://realpython.com/python-dicts/)
+        
+        [Conditional Statements in Python – Real Python](https://realpython.com/python-conditional-statements/)
+        
+        [Python "while" Loops (Indefinite Iteration) – Real Python](https://realpython.com/python-while-loop/)
+        
+- Interview Questions
+    - Set 1
+        - Question 1 - **What does the `ls` command do?**
+            
+             It lists the contents of a directory.
+            
+        - Question 2 - **How do you view hidden files and directories in Linux?**
+            
+            Use the **`ls -a`** command to view hidden files and directories.
+            
+        - Question 3 - **How do you view file and directory permissions in Linux?**
+            
+            Use the **`ls -al`** command to view permissions.
+            
+        - Question 4 - **How do you represent Linux file permissions of a directory?**
+            
+            Linux File permissions can be represented with read-write-execute commands.
+            
+             `d rwxr-xr-x 15 user user 4096 Nov 11 10:22 user`  
+            
+             `(directory) (user)(group)(others) (No. of files) (owner) (group) (size of dir) (Date/Time of last Access) (dir name)`
+            
+        - Question 5 - **How do you convert Linux file permissions to Numerical format?**
+            
+            r=4, w=2, x=1
+            
+             `rw-r----x = (rw-)(r--)(--x) = (4+2)(4)(1) = 641`  (641)
+            
+             `rwxrwxrwx = (rwx)(rwx)(rwx) = (4+2+1)(4+2+1)(4+2+1) = 777`  (777)
+            
+        - Question 6 - **What command is used to change file or directory permissions in Linux?**
+            
+            The **`chmod`** command is used to change file permissions.
+            
+            Example 1: Change Permissions with Number
+            
+            `sudo chmod 770 ~/Lantern-Labs/development-scripts` 
+            
+            Example 2: Change Permission with r-w-x
+            
+            `sudo chmod rwxrwxrwx ~/Lantern-Labs/development-scripts`  (641)
+            
+            `sudo chmod rw-r----x ~/Lantern-Labs/development-scripts`  (777)
+            
+        - Question 7 - **How do you display the current directory you are in, in Linux?**
+            
+            Use the **`pwd`** command to display the present working directory.
+            
+        - Question 8 - **How do you create a new directory in Linux?**
+            
+            The **`mkdir`** command is used to create a new directory.
+            
+            Example: 
+            
+            `sudo mkdir ~/Lantern-Labs` 
+            
+            `sudo mkdir ~/Lantern-Labs/research-projects` 
+            
+            `sudo mkdir ~/Lantern-Labs/financial-reports` 
+            
+            `sudo mkdir ~/Lantern-Labs/development-scripts` 
+            
+        - Question 9 - **How do you create a User Account in Linux?**
+            
+            The **`sudo useradd <user>`** command is used to create a new User Account.
+            
+            Example: 
+            
+            `sudo useradd aiden` 
+            
+            `sudo useradd bella` 
+            
+            `sudo useradd calvin` 
+            
+            `sudo useradd dana` 
+            
+        - Question 10 - **How do you create a Group Account in Linux?**
+            
+            The **`sudo groupadd <group>`** command is used to create a Group Account.
+            
+            Example: 
+            
+            `sudo groupadd research_team`  
+            
+            `sudo groupadd finance_team`  
+            
+            `sudo groupadd dev_team`  
+            
+        - Question 11 - **How do you assign a User Account to a Group Account in Linux?**
+            
+            The **`sudo usermod -aG <group> <user>`** command is used to create a Group Account.
+            
+            Example: 
+            
+            `sudo usermod -aG research_team aiden`  
+            
+            `sudo usermod -aG finance_team bella`  
+            
+            `sudo usermod -aG dev_team calvin`  
+            
+        - Question 12 - **How do you list all User Accounts in Linux?**
+            
+            The **`/etc/passwd`** contains the User Accounts.
+            
+            Example: 
+            
+            `sudo **cat /etc/passwd**`  
+            
+            `sudo cut -d: -f1 /etc/passwd`  
+            
+        - Question 13 - **How do you list all Group Accounts in Linux?**
+            
+            The **`/etc/group`** contains the Group Accounts.
+            
+            Example: 
+            
+            `sudo **cat /etc/group**`  
+            
+            `sudo cut -d: -f1 /etc/group`  
+            
+        - Question 14 - **How do you assign ownership of Directories to Accounts in Linux?**
+            
+            The **`sudo chown :<account> <directory>`** command assigns a directory to an Account.
+            
+            Example: 
+            
+            `sudo **chown :research_team ~/Lantern_Labs/research**`  
+            
+            `sudo **chown :finance_team ~/Lantern_Labs/financial**`  
+            
+            `sudo **chown :dev_team ~/Lantern_Labs/development**`  
+            
+        - Question 15 - **How do you view ONLY User Processes in Linux?**
+            
+            The **`ps`** command shows the User Processes.
+            
+        - Question 16 - **How do you view all Processes (User and OS) in Linux?**
+            
+            The **`ps -aux`** command shows all Processes.
+            
+            <aside>
+            💡
+            
+            To Get all Processes with a particular process name:
+            
+            </aside>
+            
+            `ps -aux | grep <process name>`  
+            
+            `ps -aux | grep firefox`  
+            
+            <aside>
+            💡
+            
+            To Show the first 15 lines of all Processes:
+            
+            </aside>
+            
+            `ps -aux | head -n 15`
+            
+            <aside>
+            💡
+            
+            To Get all Processes in real-time:
+            
+            </aside>
+            
+            `top` 
+            
+        - Question 17 - **How do you stop/kill processes by their process name in Linux?**
+            
+            The **`sudo pkill <process name>`** command stops the process.
+            
+            Example: 
+            
+            `sudo pkill firefox`  
+            
+            `sudo pkill wireshark`  
+            
+        - Question 18 - **How do you stop/kill processes by their process ID (PID) in Linux?**
+            
+            The **`sudo kill <process ID>`** command stops the process.
+            
+            Example: 
+            
+            `sudo pgrep firefox`  ⇒ (4420)
+            
+            `sudo kill 4420`  
+            
+            <aside>
+            💡
+            
+            To Force kill a process by ID:
+            
+            </aside>
+            
+            `sudo kill -9 4420`  
+            
+    - Set 2
+        - Question 1 - **What is network segmentation and why is it important?**
+            
+            Network segmentation is the practice of dividing a network into smaller, distinct subnetworks to improve performance and increase security by limiting access and reducing the broadcast domain.
+            
+        - Question 2 - **Can you name and briefly describe the 7 layers of the OSI model?**
+            1. **Physical Layer:** Deals with the hardware connections and electrical signals.
+            2. **Data Link Layer:** Manages frame-level communication, including MAC addresses.
+            3. **Network Layer:** Handles packet forwarding and routing (e.g., IP addresses).
+            4. **Transport Layer:** Manages end-to-end communication and error checking (TCP/UDP).
+            5. **Session Layer:** Manages sessions and connections between applications.
+            6. **Presentation Layer:** Translates data between the application layer and the network format.
+            7. **Application Layer:** Interacts directly with end-user software (e.g., HTTP, FTP).
+        
+        ### **TCP/IP concepts and their use on the network**
+        
+        1. **Q: What is the difference between TCP and UDP?**
+            - **A:** TCP (Transmission Control Protocol) is connection-oriented and ensures reliable data transfer with error checking and acknowledgments. UDP (User Datagram Protocol) is connectionless and faster but does not guarantee delivery or order.
+        
+        ### **CIA triad**
+        
+        1. **Q: What does CIA stand for in cybersecurity?**
+            - **A:** CIA stands for Confidentiality, Integrity, and Availability, which are the three core principles to guide information security policies.
+        
+        ### **How changes to a network affect confidentiality, integrity, availability**
+        
+        1. **Q: How can a change to network configuration impact the CIA triad?**
+            - **A:** Changes can potentially expose sensitive data (affecting confidentiality), alter data (compromising integrity), or disrupt services (affecting availability).
+        
+        ### **Adjusting an existing network**
+        
+        1. **Q: What steps would you take to add a new subnet to an existing network?**
+            - **A:** Identify network requirements, update network diagrams, configure network devices like routers and switches, update IP addressing schemes, and test the new subnet for connectivity.
+        
+        ### **Risks, vulnerabilities, exploits, and threats**
+        
+        1. **Q: What is the difference between vulnerabilities, threats, and exploits?**
+            - **A:** A vulnerability is a weakness that can be exploited. A threat is a potential cause of an unwanted incident. An exploit is the actual instance where a vulnerability is used to cause harm.
+        
+        ### **Risk/vulnerability assessment tools**
+        
+        1. **Q: Can you name some common tools used for vulnerability assessment?**
+            - **A:** Common tools include Nessus, OpenVAS, Metasploit, and Nmap.
+        
+        ### **Appropriate mitigations**
+        
+        1. **Q: What are some mitigations for SQL injection attacks?**
+            - **A:** Use parameterized queries, stored procedures, and input validation to prevent SQL injection attacks.
+        
+        ### **The threat landscape**
+        
+        1. **Q: What is the current major threat facing organizations?**
+            - **A:** Ransomware is a significant threat, where attackers encrypt data and demand a ransom for its release.
+        2. **Q: How can phishing attacks be mitigated?**
+            - **A:** Through user training, implementing email filtering solutions, and using multi-factor authentication (MFA).
+        
+        ### **Basic cryptographic processes**
+        
+        1. **Q: What is encryption and why is it important?**
+            - **A:** Encryption is the process of converting plaintext into ciphertext to protect data from unauthorized access during transmission or storage.
+        2. **Q: How does the decryption process work?**
+            - **A:** Decryption converts ciphertext back into plaintext using a specific key.
+        
+        ### **Key exchange**
+        
+        1. **Q: What is key exchange in cryptographic systems?**
+            - **A:** Key exchange is the process of securely exchanging cryptographic keys between parties to enable encrypted communication.
+        
+        ### **Signed certificates**
+        
+        1. **Q: What is the role of a signed certificate in cybersecurity?**
+            - **A:** A signed certificate ensures the authenticity of a public key, confirming the identity of the entity that holds the corresponding private key.
+        
+        ### **Log, system, and network traffic analysis and mapping**
+        
+        1. **Q: Why is log analysis important in cybersecurity?**
+            - **A:** Log analysis helps in identifying security incidents, understanding system behaviors, and ensuring compliance with security policies.
+        2. **Q: What is network traffic analysis and why is it important?**
+            - **A:** Network traffic analysis involves monitoring data flow across a network to detect unusual activities, potential intrusions, or policy violations.
+        
+        ### **Demographic and chronological questioning**
+        
+        1. **Q: How have advancements in technology changed the threat landscape over the past decade?**
+            - **A:** Advancements like IoT, cloud computing, and AI have expanded the attack surface, leading to more sophisticated threats such as advanced persistent threats (APTs) and AI-powered attacks.
+        
+        ### **Threats that may affect various types of organizations**
+        
+        1. **Q: What specific threats might a healthcare organization face?**
+            - **A:** Healthcare organizations are particularly vulnerable to ransomware, data breaches, and insider threats due to valuable personal health information (PHI).
+        
+        ### **Managing single-site networks**
+        
+        1. **Q: What are the best practices for managing a single-site network?**
+            - **A:** Implement strong access controls, use network segmentation, regularly update and patch systems, use firewalls and intrusion detection systems, and perform regular audits.
+        
+        ### **Risks, vulnerabilities, exploits, and threats**
+        
+        1. **Q: How can you prioritize vulnerabilities after a scan?**
+            - **A:** Prioritization is based on the severity of the vulnerabilities (e.g., CVSS score), the criticality of the affected systems, and the potential impact on the business.
+        
+        ### **Network segmentation**
+        
+        1. **Q: What benefits does network segmentation provide for security?**
+            - **A:** It limits the spread of malware, contains breaches, reduces the attack surface, and helps in regulatory compliance.
+        
+        ### **Adjusting an existing network**
+        
+        1. **Q: How would you approach expanding the storage capacity of a network?**
+            - **A:** Assess current and projected storage needs, choose scalable storage solutions (e.g., SAN, NAS, cloud storage), plan for data migration, and ensure redundancy and backups.
+        
+        ### **Basic cryptographic processes**
+        
+        1. **Q: What is the importance of key management in encryption?**
+            - **A:** Proper key management ensures that cryptographic keys are stored, used, and retired securely, preventing unauthorized access to encrypted data.
+        
+        ### **Log, system, and network traffic analysis and mapping**
+        
+        1. **Q: What tools can be used for network traffic analysis?**
+            - **A:** Tools like Wireshark, SolarWinds, and Splunk can be used for analyzing network traffic.
+        
+        ### **Risk/vulnerability assessment tools**
+        
+        1. **Q: What features should a good risk assessment tool have?**
+            - **A:** It should have comprehensive scanning capabilities, a user-friendly interface, detailed reporting, integrated threat intelligence, and support for regulatory compliance.
+- Projects
+    - Create Citation
+        
+        [https://www.citationmachine.net/apa](https://www.citationmachine.net/apa)
+        
+        [Citation Machine®: Format & Generate - APA, MLA, & Chicago](https://www.citationmachine.net/)
+        
+    - Project WK 1
+        
+        https://youtu.be/A3jS6DzteR0
+        
+        [https://youtu.be/A3jS6DzteR0](https://youtu.be/A3jS6DzteR0)
+        
+    - Project WK 2
+        
+        https://youtu.be/A3jS6DzteR0
+        
+        [https://youtu.be/A3jS6DzteR0](https://youtu.be/A3jS6DzteR0)
+        
+- Community Repositories
+    - PyPI
+        
+        [PyPI · The Python Package Index](https://pypi.org/)
+        
+- References & Readings
+    - WK3
+        - **Bash scripting vs Python**
+            
+            [Bash scripting vs Python](https://linuxconfig.org/bash-scripting-vs-python)
+            
+        - Python Escape Characters
+            
+            [Escape Characters — Python Reference (The Right Way) 0.1 documentation](https://python-reference.readthedocs.io/en/latest/docs/str/escapes.html)
+
 <details>
 <summary>1. Introduction </summary>
 
