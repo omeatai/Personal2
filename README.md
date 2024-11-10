@@ -2,14 +2,6 @@
 
 ---
 
-## TOPICS
-
----
-
-###### [ALGORITHM CHALLENGES](https://github.com/omeatai/src-AI-Software/tree/main/src-algorithms)
-
----
-
 ## PROJECTS
 
 ---
