@@ -8,8 +8,6 @@
 
 ###### [ALGORITHM CHALLENGES](https://github.com/omeatai/src-AI-Software/tree/main/src-algorithms)
 
-###### [SOFTWARE DEVELOPMENT](https://github.com/omeatai/src-AI-Software/tree/main/src)
-
 ---
 
 ## PROJECTS
