@@ -1,13 +1,3 @@
-## My Portfolio - [https://ifeanyiomeata.com/](https://ifeanyiomeata.com/)
-
----
-
-## PROJECTS
-
-## TOOLS
-
----
-
 <details>
   <summary>HOSTS</summary>
 
