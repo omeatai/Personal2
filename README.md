@@ -319,43 +319,6 @@
 
 </details>
 
-<details>
-  <summary>YOUTUBE TUTORIALS</summary>
-
-1. [CodingAddict](https://www.codingaddict.io/)
-2. [Codevolution](https://www.youtube.com/@Codevolution/playlists)
-3. [Dave Gray](https://www.youtube.com/@DaveGrayTeachesCode/playlists)
-4. [Net Ninja](https://www.youtube.com/@NetNinja/playlists)
-5. [freeCodeCamp.org](https://www.youtube.com/@freecodecamp/videos)
-6. [Traversy Media](https://www.youtube.com/@TraversyMedia/videos)
-7. [JavaScript Mastery](https://www.youtube.com/@javascriptmastery/videos)
-8. [code with lari](https://www.youtube.com/@codewithlari/videos)
-9. [Jan Marshal](https://www.youtube.com/@janmarshalcoding/videos)
-10. [Coding With Dawid](https://www.youtube.com/@CodingWithDawid/videos)
-11. [TubeGuruji](https://www.youtube.com/@tubeguruji/videos)
-12. [9jaCoder](https://www.youtube.com/@9jaCoder/videos)
-13. [Elliott Chong](https://www.youtube.com/@elliottchong/videos)
-14. [Code With Antonio](https://www.youtube.com/@codewithantonio/videos)
-15. [Kishan Sheth](https://www.youtube.com/@KishanSheth21/videos)
-16. [Code Bootcamp](https://www.youtube.com/@CodeBootcampCom/videos)
-17. [Lama Dev](https://www.youtube.com/@LamaDev/videos)
-18. [Daily Tuition](https://www.youtube.com/@DailyTuition/videos)
-19. [IndGeek](https://www.youtube.com/@indgeek/videos)
-20. [Code With Vini](https://www.youtube.com/@codewithvini1644/videos)
-21. [PedroTech](https://www.youtube.com/@PedroTechnologies/videos)
-22. [Zpunet](https://www.youtube.com/@zpunet/videos)
-23. [NewAwesomeTech](https://www.youtube.com/@NewAwesomeTech/videos)
-24. [Emilian Kasemi](https://www.youtube.com/@the_rings_of_saturn/videos)
-25. [Sonny Sangha](https://www.youtube.com/@SonnySangha/videos)
-26. [Becodemy](https://www.youtube.com/@BecodemyOfficial/videos)
-27. [Sangam Mukherjee](https://www.youtube.com/@sangammukherjee3009/videos)
-28. [Milad Tech](https://www.youtube.com/@miladtech/videos)
-29. [HuXn WebDev](https://www.youtube.com/@huxnwebdev/videos)
-30. [Chaoo Charles](https://www.youtube.com/@ChaooCharles/featured)
-31. [EdRoh](https://www.youtube.com/@EdRohDev/videos)
-
-</details>
-
 
 
 
